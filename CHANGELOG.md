@@ -1,3 +1,10 @@
+# 1.0.0 (2025-07-09)
+
+
+### Features
+
+* auto-deploy docs on main branch pushes ([38ed861](https://github.com/lolvOid/svgfusion/commit/38ed861eb1734200ae447f2530dbc821d397c840))
+
 # [1.0.0-beta.9](https://github.com/lolvOid/svgfusion/compare/v1.0.0-beta.8...v1.0.0-beta.9) (2025-07-09)
 
 
