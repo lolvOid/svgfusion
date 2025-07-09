@@ -10,6 +10,7 @@ import { optimizeSvg } from './utils/svgo.js';
 import { fileURLToPath } from 'url';
 import { dirname, join } from 'path';
 import { readFileSync } from 'fs';
+import figlet from 'figlet';
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
@@ -18,6 +19,26 @@ const __dirname = dirname(__filename);
 const packageJson = JSON.parse(
   readFileSync(join(__dirname, '..', 'package.json'), 'utf-8')
 ) as { version: string };
+
+// Create ASCII art banner
+function createBanner(): string {
+  const title = figlet.textSync('SVGFUSION', {
+    font: 'Train',
+    horizontalLayout: 'fitted',
+    verticalLayout: 'fitted',
+    width: 80,
+    whitespaceBreak: true,
+  });
+
+  return `
+${title}
+
+  Transform SVG files into production-ready components
+            React • Vue 3 • TypeScript
+  
+─────────────────────────────────────────────────────────
+`;
+}
 
 const program = new Command();
 
@@ -50,6 +71,9 @@ program
         optimize: boolean;
       }
     ) => {
+      // eslint-disable-next-line no-console
+      console.log(createBanner());
+
       // eslint-disable-next-line no-console
       console.log('🔄 Processing SVG files...');
 
