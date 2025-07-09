@@ -1,3 +1,10 @@
+# [1.0.0-beta.7](https://github.com/lolvOid/svgfusion/compare/v1.0.0-beta.6...v1.0.0-beta.7) (2025-07-09)
+
+
+### Features
+
+* enhance CLI with colored ASCII art banner and improved output messages ([4e01450](https://github.com/lolvOid/svgfusion/commit/4e014504e19d97b4478aa08f2e6ebe634ef06511))
+
 # [1.0.0-beta.6](https://github.com/lolvOid/svgfusion/compare/v1.0.0-beta.5...v1.0.0-beta.6) (2025-07-09)
 
 
