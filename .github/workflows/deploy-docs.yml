@@ -1,6 +1,13 @@
 name: Deploy Documentation to Netlify
 
 on:
+  push:
+    branches:
+      - main
+    paths:
+      - 'docs/**'
+      - 'src/**'
+      - 'package.json'
   release:
     types: [published]
   workflow_dispatch:
