@@ -1,3 +1,10 @@
+# [1.0.0-beta.8](https://github.com/lolvOid/svgfusion/compare/v1.0.0-beta.7...v1.0.0-beta.8) (2025-07-09)
+
+
+### Features
+
+* Initialize Docusaurus documentation site with essential components and styles ([4356ff1](https://github.com/lolvOid/svgfusion/commit/4356ff16d6579fffe405af58e9af28a3a5e169dc))
+
 # [1.0.0-beta.7](https://github.com/lolvOid/svgfusion/compare/v1.0.0-beta.6...v1.0.0-beta.7) (2025-07-09)
 
 
