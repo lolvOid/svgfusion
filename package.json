@@ -67,7 +67,10 @@
     "prepare": "husky install",
     "prepublishOnly": "npm run clean && npm run build && npm run test",
     "release": "semantic-release",
-    "release:dry": "semantic-release --dry-run"
+    "release:dry": "semantic-release --dry-run",
+    "postinstall": "cd docs && npm ci && cd .. && echo 'Documentation dependencies installed.'",
+    "dev:docs": "cd docs && npm run start",
+    "build:docs": "cd docs && npm run build"
   },
   "dependencies": {
     "@svgr/core": "^8.0.0",
