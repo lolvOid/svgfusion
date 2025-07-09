@@ -2,20 +2,20 @@
   "name": "svgfusion",
   "version": "0.1.0",
   "description": "Transform SVG files into production-ready React and Vue 3 components with TypeScript support, automatic optimization, and intelligent naming.",
-  "main": "dist/index.cjs",
+  "main": "dist/index.js",
   "module": "dist/index.mjs",
   "types": "dist/index.d.ts",
   "bin": {
-    "svgfusion": "dist/cli.cjs"
+    "svgfusion": "dist/cli.js"
   },
   "exports": {
     ".": {
       "import": "./dist/index.mjs",
-      "require": "./dist/index.cjs"
+      "require": "./dist/index.js"
     },
     "./cli": {
       "import": "./dist/cli.mjs",
-      "require": "./dist/cli.cjs"
+      "require": "./dist/cli.js"
     }
   },
   "files": [
@@ -46,7 +46,7 @@
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "https://github.com/lolvoid/svgfusion.git"
+    "url": "git+https://github.com/lolvOid/svgfusion.git"
   },
   "homepage": "https://github.com/lolvoid/svgfusion#readme",
   "bugs": {
