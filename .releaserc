@@ -7,7 +7,23 @@
     },
     {
       "name": "feature/*",
+      "prerelease": true
+    },
+    {
+      "name": "release/*",
       "prerelease": "beta"
+    },
+    {
+      "name": "next",
+      "prerelease": "next"
+    },
+    {
+      "name": "beta",
+      "prerelease": "beta"
+    },
+    {
+      "name": "alpha",
+      "prerelease": "alpha"
     },
     {
       "name": "hotfix/*",

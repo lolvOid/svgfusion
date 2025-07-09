@@ -48,7 +48,7 @@
     "type": "git",
     "url": "git+https://github.com/lolvOid/svgfusion.git"
   },
-  "homepage": "https://github.com/lolvOid/svgfusion#readme",
+  "homepage": "https://svgfusion.netlify.app",
   "bugs": {
     "url": "https://github.com/lolvOid/svgfusion/issues"
   },
