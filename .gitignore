@@ -75,7 +75,7 @@ pids
 .eslintcache
 
 # Prettier cache
-.prettierignore
+.prettiercache
 
 # TypeScript
 *.tsbuildinfo
