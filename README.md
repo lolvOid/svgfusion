@@ -1,13 +1,20 @@
-# SVGFusion
-
-**Transform SVG files into production-ready React and Vue 3 components with TypeScript support and automatic optimization.**
-
-A powerful CLI tool and library that converts SVG files into optimized React and Vue components with built-in TypeScript support, smart naming conventions, and flexible configuration options.
-
-[![npm version](https://badge.fury.io/js/svgfusion.svg)](https://badge.fury.io/js/svgfusion)
-[![TypeScript](https://img.shields.io/badge/TypeScript-007ACC?style=flat&logo=typescript&logoColor=white)](https://www.typescriptlang.org/)
-[![React](https://img.shields.io/badge/React-20232A?style=flat&logo=react&logoColor=61DAFB)](https://reactjs.org/)
-[![Vue.js](https://img.shields.io/badge/Vue.js-35495E?style=flat&logo=vue.js&logoColor=4FC08D)](https://vuejs.org/)
+<div align="center">
+  <img src="./logo.png" alt="SVGFusion Logo" width="120" height="120">
+  
+  # SVGFusion
+  
+  **Transform SVG files into production-ready React and Vue 3 components**
+  
+  A powerful CLI tool and library that converts SVG files into optimized React and Vue components with built-in TypeScript support, smart naming conventions, and flexible configuration options.
+  
+  [![npm version](https://badge.fury.io/js/svgfusion.svg)](https://badge.fury.io/js/svgfusion)
+  [![TypeScript](https://img.shields.io/badge/TypeScript-007ACC?style=flat&logo=typescript&logoColor=white)](https://www.typescriptlang.org/)
+  [![React](https://img.shields.io/badge/React-20232A?style=flat&logo=react&logoColor=61DAFB)](https://reactjs.org/)
+  [![Vue.js](https://img.shields.io/badge/Vue.js-35495E?style=flat&logo=vue.js&logoColor=4FC08D)](https://vuejs.org/)
+  
+  [📚 Documentation](https://svgfusion.netlify.app) • [🎮 Playground](https://svgfusion.netlify.app/playground) • [📦 NPM](https://www.npmjs.com/package/svgfusion)
+  
+</div>
 
 ## Features
 

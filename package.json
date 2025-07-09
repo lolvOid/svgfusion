@@ -48,9 +48,9 @@
     "type": "git",
     "url": "git+https://github.com/lolvOid/svgfusion.git"
   },
-  "homepage": "https://github.com/lolvoid/svgfusion#readme",
+  "homepage": "https://github.com/lolvOid/svgfusion#readme",
   "bugs": {
-    "url": "https://github.com/lolvoid/svgfusion/issues"
+    "url": "https://github.com/lolvOid/svgfusion/issues"
   },
   "scripts": {
     "build": "tsup && chmod +x dist/cli.js",
