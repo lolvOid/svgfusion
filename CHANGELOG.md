@@ -1,3 +1,10 @@
+# [1.0.0-beta.5](https://github.com/lolvOid/svgfusion/compare/v1.0.0-beta.4...v1.0.0-beta.5) (2025-07-09)
+
+
+### Features
+
+* update README and package.json ([13027ba](https://github.com/lolvOid/svgfusion/commit/13027ba40f379225648cd0bedbfcd801b10de26f))
+
 # [1.0.0-beta.4](https://github.com/lolvOid/svgfusion/compare/v1.0.0-beta.3...v1.0.0-beta.4) (2025-07-09)
 
 
