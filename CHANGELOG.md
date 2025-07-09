@@ -1,3 +1,10 @@
+# [1.0.0-beta.3](https://github.com/lolvOid/svgfusion/compare/v1.0.0-beta.2...v1.0.0-beta.3) (2025-07-09)
+
+
+### Features
+
+* add CLI for SVG to React/Vue conversion and configure testing ([1e58863](https://github.com/lolvOid/svgfusion/commit/1e5886398c887f2d989c817d4cf04363bc6d331d))
+
 # [1.0.0-beta.2](https://github.com/lolvOid/svgfusion/compare/v1.0.0-beta.1...v1.0.0-beta.2) (2025-07-09)
 
 
