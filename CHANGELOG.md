@@ -1,3 +1,10 @@
+# [1.0.0-beta.4](https://github.com/lolvOid/svgfusion/compare/v1.0.0-beta.3...v1.0.0-beta.4) (2025-07-09)
+
+
+### Features
+
+* add GitHub Action for bundle size reporting on pull requests ([3049b7e](https://github.com/lolvOid/svgfusion/commit/3049b7e79066454ddddb1595347ea8155dc40e53))
+
 # [1.0.0-beta.3](https://github.com/lolvOid/svgfusion/compare/v1.0.0-beta.2...v1.0.0-beta.3) (2025-07-09)
 
 
