@@ -66,7 +66,8 @@
     "clean": "rm -rf dist",
     "prepare": "husky install",
     "prepublishOnly": "npm run clean && npm run build && npm run test",
-    "release": "npm run prepublishOnly && npm publish"
+    "release": "semantic-release",
+    "release:dry": "semantic-release --dry-run"
   },
   "dependencies": {
     "@svgr/core": "^8.0.0",
@@ -78,6 +79,10 @@
   "devDependencies": {
     "@commitlint/cli": "^17.8.1",
     "@commitlint/config-conventional": "^17.8.1",
+    "@semantic-release/changelog": "^6.0.3",
+    "@semantic-release/git": "^10.0.1",
+    "@semantic-release/github": "^11.0.3",
+    "@semantic-release/npm": "^12.0.2",
     "@types/node": "^20.0.0",
     "@typescript-eslint/eslint-plugin": "^6.21.0",
     "@typescript-eslint/parser": "^6.21.0",
@@ -85,6 +90,7 @@
     "husky": "^8.0.3",
     "lint-staged": "^15.2.2",
     "prettier": "^2.8.8",
+    "semantic-release": "^24.2.6",
     "tsup": "^7.0.0",
     "typescript": "^5.0.0",
     "vitest": "^1.0.0"
