@@ -1,3 +1,10 @@
+# [1.0.0-beta.9](https://github.com/lolvOid/svgfusion/compare/v1.0.0-beta.8...v1.0.0-beta.9) (2025-07-09)
+
+
+### Features
+
+* update permissions in GitHub workflows and enhance README layout ([076de4c](https://github.com/lolvOid/svgfusion/commit/076de4cf3067e217dea48b29e8052a6ec14a88ce))
+
 # [1.0.0-beta.8](https://github.com/lolvOid/svgfusion/compare/v1.0.0-beta.7...v1.0.0-beta.8) (2025-07-09)
 
 
