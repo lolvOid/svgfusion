@@ -1,0 +1,10 @@
+#!/usr/bin/env sh
+. "$(dirname -- "$0")/_/husky.sh"
+
+# Skip commit linting in CI
+if [ -n "$CI" ]; then
+  echo "🔄 Skipping commit lint in CI"
+  exit 0
+fi
+
+npx lint-staged
