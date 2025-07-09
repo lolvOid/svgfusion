@@ -1,0 +1,34 @@
+# Build outputs
+dist/
+build/
+*.d.ts
+
+# Dependencies
+node_modules/
+
+# Generated files
+coverage/
+*.log
+*.tgz
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# IDE files
+.vscode/
+.idea/
+
+# Package files
+package-lock.json
+yarn.lock
+pnpm-lock.yaml
+
+# Git
+.git/
+
+# Changelog (auto-generated)
+CHANGELOG.md
+
+# Husky
+.husky/

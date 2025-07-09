@@ -1,0 +1,218 @@
+/**
+ * Any CSS included here will be global. The classic template
+ * bundles Infima by default. Infima is a CSS framework designed to
+ * work well for content-centric websites.
+ */
+
+/* SVGFusion Cyan Theme */
+:root {
+  --ifm-color-primary: #0891b2;
+  --ifm-color-primary-dark: #0e7490;
+  --ifm-color-primary-darker: #155e75;
+  --ifm-color-primary-darkest: #164e63;
+  --ifm-color-primary-light: #06b6d4;
+  --ifm-color-primary-lighter: #22d3ee;
+  --ifm-color-primary-lightest: #67e8f9;
+  --ifm-code-font-size: 95%;
+  --docusaurus-highlighted-code-line-bg: rgba(8, 145, 178, 0.1);
+}
+
+/* For readability concerns, you should choose a lighter palette in dark mode. */
+[data-theme='dark'] {
+  --ifm-color-primary: #22d3ee;
+  --ifm-color-primary-dark: #06b6d4;
+  --ifm-color-primary-darker: #0891b2;
+  --ifm-color-primary-darkest: #0e7490;
+  --ifm-color-primary-light: #67e8f9;
+  --ifm-color-primary-lighter: #a7f3d0;
+  --ifm-color-primary-lightest: #cffafe;
+  --docusaurus-highlighted-code-line-bg: rgba(34, 211, 238, 0.2);
+}
+
+/* Hero section - Light mode */
+.hero--primary {
+  background-image: linear-gradient(
+      135deg,
+      rgba(8, 145, 178, 0.8) 0%,
+      rgba(6, 182, 212, 0.8) 100%
+    ),
+    url('https://plus.unsplash.com/premium_vector-1737017273815-beca8546f438?w=900&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8NzB8fGZ1c2lvbiUyMHNwYWNlfGVufDB8MHwwfHx8MA%3D%3D');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  position: relative;
+  overflow: hidden;
+}
+
+.hero--primary::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(
+    45deg,
+    transparent 30%,
+    rgba(255, 255, 255, 0.1) 50%,
+    transparent 70%
+  );
+  animation: shimmer 3s ease-in-out infinite;
+}
+
+.hero--primary .container {
+  position: relative;
+  z-index: 1;
+}
+
+.hero--primary .hero__title {
+  color: #ffffff;
+  text-shadow: 0 2px 8px rgba(0, 0, 0, 0.5);
+  font-weight: 800;
+}
+
+.hero--primary .hero__subtitle {
+  color: rgba(255, 255, 255, 0.95);
+  text-shadow: 0 1px 4px rgba(0, 0, 0, 0.5);
+  font-size: 1.2rem;
+  margin-bottom: 2rem;
+}
+
+/* Hero section - Dark mode */
+[data-theme='dark'] .hero--primary {
+  background-image: linear-gradient(
+      135deg,
+      rgba(14, 116, 144, 0.9) 0%,
+      rgba(8, 145, 178, 0.9) 100%
+    ),
+    url('https://plus.unsplash.com/premium_vector-1737017273815-beca8546f438?w=900&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8NzB8fGZ1c2lvbiUyMHNwYWNlfGVufDB8MHwwfHx8MA%3D%3D');
+}
+
+[data-theme='dark'] .hero--primary::before {
+  background: linear-gradient(
+    45deg,
+    transparent 30%,
+    rgba(255, 255, 255, 0.05) 50%,
+    transparent 70%
+  );
+}
+
+@keyframes shimmer {
+  0% {
+    transform: translateX(-100%);
+  }
+  100% {
+    transform: translateX(100%);
+  }
+}
+
+/* Enhance code blocks with cyan accents */
+.theme-code-block {
+  border-left: 3px solid var(--ifm-color-primary);
+}
+
+/* Custom scrollbar for webkit browsers */
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--ifm-color-emphasis-100);
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--ifm-color-primary);
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--ifm-color-primary-dark);
+}
+
+/* Animated gradient buttons */
+.button {
+  position: relative;
+  overflow: hidden;
+  transition: all 0.3s ease;
+  background-size: 200% 200%;
+}
+
+.button--secondary {
+  background: linear-gradient(
+    45deg,
+    var(--ifm-color-primary),
+    var(--ifm-color-primary-light)
+  );
+  background-size: 200% 200%;
+  animation: buttonGradient 3s ease infinite;
+}
+
+.button--secondary:hover {
+  background: linear-gradient(
+    45deg,
+    var(--ifm-color-primary),
+    #10b981,
+    var(--ifm-color-primary-light)
+  );
+  background-size: 300% 300%;
+  animation: buttonGradientHover 1.5s ease infinite;
+  transform: translateY(-2px);
+  box-shadow: 0 8px 25px rgba(8, 145, 178, 0.3);
+}
+
+.button--outline {
+  border: 2px solid var(--ifm-color-primary);
+  background: transparent;
+  position: relative;
+}
+
+.button--outline::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(8, 145, 178, 0.1),
+    transparent
+  );
+  transition: left 0.5s ease;
+}
+
+.button--outline:hover::before {
+  left: 100%;
+}
+
+.button--outline:hover {
+  border-color: #10b981;
+  color: var(--ifm-color-primary-lightest) !important;
+  transform: translateY(-2px);
+  box-shadow: 0 8px 25px rgba(16, 185, 129, 0.2);
+}
+
+@keyframes buttonGradient {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+@keyframes buttonGradientHover {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
