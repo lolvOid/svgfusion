@@ -1,6 +1,8 @@
 # SVGFusion
 
-**Transform SVG files into production-ready React and Vue 3 components with TypeScript support, automatic optimization, and intelligent naming.**
+**Transform SVG files into production-ready React and Vue 3 components with TypeScript support and automatic optimization.**
+
+A powerful CLI tool and library that converts SVG files into optimized React and Vue components with built-in TypeScript support, smart naming conventions, and flexible configuration options.
 
 [![npm version](https://badge.fury.io/js/svgfusion.svg)](https://badge.fury.io/js/svgfusion)
 [![TypeScript](https://img.shields.io/badge/TypeScript-007ACC?style=flat&logo=typescript&logoColor=white)](https://www.typescriptlang.org/)
@@ -17,12 +19,21 @@
 - **Flexible API**: Both CLI and programmatic usage
 - **Batch Processing**: Convert entire directories of SVG files
 - **Complex Filenames**: Handles design system metadata and special characters
+- **Zero Configuration**: Works out of the box with sensible defaults
+- **Production Ready**: Optimized output with proper TypeScript types
 
 ## Quick Start
 
 ### Installation
 
 ```bash
+# Install globally (recommended for CLI usage)
+npm install -g svgfusion
+
+# Or use npx (no installation needed)
+npx svgfusion convert ./icons --output ./components
+
+# Or install locally for programmatic usage
 npm install svgfusion
 # or
 yarn add svgfusion
@@ -33,23 +44,57 @@ pnpm add svgfusion
 ### CLI Usage
 
 ```bash
-# Convert to React components
-svgfusion react ./icons --out ./components/react
+# Convert to React components (default)
+svgfusion convert ./icons --output ./components
 
 # Convert to Vue 3 components
-svgfusion vue ./icons --out ./components/vue
+svgfusion convert ./icons --output ./components --framework vue
 
-# Single file conversion
-svgfusion react ./star.svg --name StarIcon --out ./components
+# Single file conversion with TypeScript
+svgfusion convert ./star.svg --output ./components --typescript
 
-# With optimization and prefix
-svgfusion react ./icons --out ./components --optimize --prefix Icon
+# Skip optimization
+svgfusion convert ./icons --output ./components --no-optimize
+
+# Using npx (no global install needed)
+npx svgfusion convert ./icons --output ./components --framework react
+```
+
+### CLI Options
+
+```bash
+svgfusion convert <input> [options]
+
+Options:
+  -o, --output <output>        Output directory (default: "./components")
+  -f, --framework <framework>  Target framework (react|vue) (default: "react")
+  -t, --typescript             Generate TypeScript files
+  --no-optimize                Skip SVG optimization
+  -h, --help                   Show help
+```
+
+### Using with npx (No Installation Required)
+
+Perfect for trying out SVGFusion or one-time conversions:
+
+```bash
+# Convert React components
+npx svgfusion convert ./assets/icons --output ./src/components/icons
+
+# Convert Vue components with TypeScript
+npx svgfusion convert ./assets/icons --output ./src/components --framework vue --typescript
+
+# Convert single file
+npx svgfusion convert ./logo.svg --output ./src/components --framework react
 ```
 
 ### Programmatic Usage
 
 ```typescript
-import { convertToReact, convertToVue } from 'svgfusion';
+import { convertToReact, convertToVue, readSvgFile } from 'svgfusion';
+
+// Read SVG file
+const svgContent = await readSvgFile('./icons/star.svg');
 
 // React conversion
 const reactResult = await convertToReact(svgContent, {
@@ -60,7 +105,7 @@ const reactResult = await convertToReact(svgContent, {
 });
 
 // Vue conversion
-const vueResult = await convertToVue(svgContent, {
+const vueResult = convertToVue(svgContent, {
   name: 'StarIcon',
   typescript: true,
   scriptSetup: true,
@@ -88,7 +133,7 @@ Convert SVG to React component.
 
 ### `convertToVue(svgContent, options)`
 
-Convert SVG to Vue 3 component.
+Convert SVG to Vue 3 component. **Note: This is a synchronous function.**
 
 **Options:**
 
@@ -102,14 +147,14 @@ Convert SVG to Vue 3 component.
 
 ### `optimizeSvg(svgContent, config?)`
 
-Optimize SVG content using SVGO.
+Optimize SVG content using SVGO. **Note: This is a synchronous function.**
 
 ### File Utilities
 
-- `readSvgFile(filePath)` - Read SVG file
-- `writeSvgFile(filePath, content)` - Write SVG file
-- `readSvgDirectory(dirPath, recursive?)` - Read SVG files from directory
-- `writeComponentFile(filePath, content)` - Write component file
+- `readSvgFile(filePath)` - Read SVG file (async)
+- `writeSvgFile(filePath, content)` - Write SVG file (async)
+- `readSvgDirectory(dirPath, recursive?)` - Read SVG files from directory (async)
+- `writeComponentFile(filePath, content)` - Write component file (async)
 
 ## Examples
 
