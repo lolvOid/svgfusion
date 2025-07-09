@@ -1,3 +1,10 @@
+# [1.0.0-beta.6](https://github.com/lolvOid/svgfusion/compare/v1.0.0-beta.5...v1.0.0-beta.6) (2025-07-09)
+
+
+### Features
+
+* add figlet dependency and create ASCII art banner for CLI ([8c409c5](https://github.com/lolvOid/svgfusion/commit/8c409c5719201bcf9727ac6d61c0ab07eaf5a5aa))
+
 # [1.0.0-beta.5](https://github.com/lolvOid/svgfusion/compare/v1.0.0-beta.4...v1.0.0-beta.5) (2025-07-09)
 
 
