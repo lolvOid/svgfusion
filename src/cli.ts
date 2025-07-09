@@ -12,6 +12,16 @@ import { dirname, join } from 'path';
 import { readFileSync } from 'fs';
 import figlet from 'figlet';
 
+// ANSI color codes
+const colors = {
+  cyan: '\x1b[36m',
+  blue: '\x1b[34m',
+  green: '\x1b[32m',
+  red: '\x1b[31m',
+  gray: '\x1b[90m',
+  reset: '\x1b[0m',
+};
+
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
 
@@ -22,25 +32,31 @@ const packageJson = JSON.parse(
 
 // Create ASCII art banner
 function createBanner(): string {
-  const title = figlet.textSync('SVGFUSION', {
-    font: 'Train',
-    horizontalLayout: 'fitted',
-    verticalLayout: 'fitted',
+  const title = figlet.textSync('SVGfusion', {
+    font: 'Bloody',
+    horizontalLayout: 'default',
+    verticalLayout: 'default',
     width: 80,
     whitespaceBreak: true,
   });
 
   return `
-${title}
+${colors.cyan}${title}${colors.reset}
 
-  Transform SVG files into production-ready components
-            React • Vue 3 • TypeScript
+  ${colors.gray}Transform SVG files into production-ready components${colors.reset}
+            ${colors.blue}React${colors.reset} ${colors.gray}•${colors.reset} ${colors.green}Vue 3${colors.reset} ${colors.gray}•${colors.reset} ${colors.blue}TypeScript${colors.reset}
   
-─────────────────────────────────────────────────────────
+${colors.gray}─────────────────────────────────────────────────────────${colors.reset}
 `;
 }
 
 const program = new Command();
+
+// Show banner when running without arguments
+if (process.argv.length === 2) {
+  // eslint-disable-next-line no-console
+  console.log(createBanner());
+}
 
 program
   .name('svgfusion')
@@ -75,7 +91,7 @@ program
       console.log(createBanner());
 
       // eslint-disable-next-line no-console
-      console.log('🔄 Processing SVG files...');
+      console.log(`${colors.blue}🔄 Processing SVG files...${colors.reset}`);
 
       try {
         const { framework, output, typescript, optimize } = options;
@@ -92,7 +108,9 @@ program
         }
 
         // eslint-disable-next-line no-console
-        console.log(`🔄 Converting ${svgFiles.length} SVG file(s)...`);
+        console.log(
+          `${colors.blue}🔄 Converting ${svgFiles.length} SVG file(s)...${colors.reset}`
+        );
 
         for (const filePath of svgFiles) {
           const svgContent = await readSvgFile(filePath);
@@ -113,14 +131,14 @@ program
 
         // eslint-disable-next-line no-console
         console.log(
-          `✅ Successfully converted ${svgFiles.length} SVG file(s) to ${framework} components`
+          `${colors.green}✅ Successfully converted ${svgFiles.length} SVG file(s) to ${framework} components${colors.reset}`
         );
       } catch (error) {
         // eslint-disable-next-line no-console
         console.error(
-          `❌ Error: ${
+          `${colors.red}❌ Error: ${
             error instanceof Error ? error.message : 'Unknown error'
-          }`
+          }${colors.reset}`
         );
         process.exit(1);
       }
