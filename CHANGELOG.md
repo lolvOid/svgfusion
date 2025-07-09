@@ -1,3 +1,10 @@
+## [1.0.1](https://github.com/lolvOid/svgfusion/compare/v1.0.0...v1.0.1) (2025-07-09)
+
+
+### Bug Fixes
+
+* change export syntax from ES6 to CommonJS in release.config.js ([455805d](https://github.com/lolvOid/svgfusion/commit/455805df8f0422e907a3137f0e0e88932d116342))
+
 # 1.0.0 (2025-07-09)
 
 
