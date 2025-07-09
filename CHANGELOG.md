@@ -1,3 +1,10 @@
+# [1.0.0-beta.2](https://github.com/lolvOid/svgfusion/compare/v1.0.0-beta.1...v1.0.0-beta.2) (2025-07-09)
+
+
+### Features
+
+* publish ([13708ee](https://github.com/lolvOid/svgfusion/commit/13708eedd50f7ff14a50efe03696ceb8de11afae))
+
 # 1.0.0-beta.1 (2025-07-09)
 
 
