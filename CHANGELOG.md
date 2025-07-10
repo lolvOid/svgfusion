@@ -1,3 +1,10 @@
+## [1.0.3](https://github.com/lolvOid/svgfusion/compare/v1.0.2...v1.0.3) (2025-07-10)
+
+
+### Bug Fixes
+
+* reorganize CI workflow to build and upload documentation artifacts after release ([8c38616](https://github.com/lolvOid/svgfusion/commit/8c3861630be2d196f6ebee6a5a7cf4dd32046757))
+
 ## [1.0.2](https://github.com/lolvOid/svgfusion/compare/v1.0.1...v1.0.2) (2025-07-10)
 
 
