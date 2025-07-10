@@ -1,4 +1,3 @@
-// Converted from Vitest to Jest
 import { createSvgoConfig } from '../src/utils/svgo';
 
 describe('createSvgoConfig', () => {
