@@ -34,4 +34,12 @@ module.exports = {
     'no-var': 'error',
   },
   ignorePatterns: ['dist/', 'node_modules/', '*.js', '*.mjs', '*.cjs'],
+  overrides: [
+    {
+      files: ['tests/**/*.test.ts'],
+      rules: {
+        '@typescript-eslint/no-unsafe-member-access': 'off',
+      },
+    },
+  ],
 };
