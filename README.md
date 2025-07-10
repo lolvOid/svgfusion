@@ -1,33 +1,33 @@
 <div align="center">
-  <img src="./logo.png" alt="SVGFusion Logo" width="120" height="120">
+  <img src="https://i.ibb.co/TZFfpFL/logo.png" alt="SVGFusion Logo" width="120" height="120">
 
 # SVGFusion
 
 **Transform SVG files into production-ready React and Vue 3 components**
 
-A powerful CLI tool and library that converts SVG files into optimized React and Vue components with built-in TypeScript support, smart naming conventions, and flexible configuration options.
+A powerful Node.js CLI tool and library that converts SVG files into optimized React and Vue components with complex SVG support, TypeScript integration, and smart optimization for modern development workflows.
 
 [![npm version](https://badge.fury.io/js/svgfusion.svg)](https://badge.fury.io/js/svgfusion)
 [![TypeScript](https://img.shields.io/badge/TypeScript-007ACC?style=flat&logo=typescript&logoColor=white)](https://www.typescriptlang.org/)
 [![React](https://img.shields.io/badge/React-20232A?style=flat&logo=react&logoColor=61DAFB)](https://reactjs.org/)
 [![Vue.js](https://img.shields.io/badge/Vue.js-35495E?style=flat&logo=vue.js&logoColor=4FC08D)](https://vuejs.org/)
 
-[📚 Documentation](https://svgfusion.netlify.app) • [🎮 Playground](https://svgfusion.netlify.app/playground) • [📦 NPM](https://www.npmjs.com/package/svgfusion)
+[📚 Documentation](https://svgfusion.netlify.app) • [⚡ CLI Reference](https://svgfusion.netlify.app/docs/cli-usage) • [📦 NPM](https://www.npmjs.com/package/svgfusion)
 
 </div>
 
 ## Features
 
 - **Dual Framework Support**: Generate both React and Vue 3 components from the same SVG
+- **Complex SVG Support**: Handles gradients, masks, filters, patterns, and Figma exports
+- **ID Collision Prevention**: Automatic unique ID generation for complex SVGs
 - **Optimized Output**: Built-in SVGO optimization with customizable settings
-- **Multi-Color Support**: Preserves gradients, patterns, and complex color schemes
-- **Class-Based Styling**: Supports CSS classes, Tailwind, and framework-specific styling
+- **Icon Builder Ready**: Perfect for design systems and icon libraries
 - **TypeScript Ready**: Full TypeScript support with proper type definitions
 - **Flexible API**: Both CLI and programmatic usage
 - **Batch Processing**: Convert entire directories of SVG files
-- **Complex Filenames**: Handles design system metadata and special characters
+- **Production Ready**: Robust output with proper error handling
 - **Zero Configuration**: Works out of the box with sensible defaults
-- **Production Ready**: Optimized output with proper TypeScript types
 
 ## Quick Start
 
@@ -343,7 +343,3 @@ Contributions are welcome! Please read [CONTRIBUTING.md](./CONTRIBUTING.md) for 
 ## Changelog
 
 See [CHANGELOG.md](./CHANGELOG.md) for details.
-
----
-
-**Made with care for the developer community**

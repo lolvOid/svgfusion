@@ -1,6 +1,6 @@
 # API Reference
 
-SVGFusion provides a programmatic API for converting SVG files to React and Vue components.
+Use SVGFusion in your Node.js applications to convert SVG files into React and Vue components. Works great with complex SVGs, gradients, and Figma exports.
 
 ## Installation
 
@@ -12,7 +12,7 @@ npm install svgfusion
 
 ### convertToReact
 
-Convert SVG content to React component.
+Turn your SVG into a React component with TypeScript support.
 
 ```typescript
 function convertToReact(
@@ -21,24 +21,34 @@ function convertToReact(
 ): Promise<ConversionResult>;
 ```
 
-#### Parameters
+**Parameters:**
 
-- `svgContent` (string): The SVG content to convert
-- `options` (ReactConversionOptions, optional): Conversion options
+- `svgContent` - Your SVG as a string
+- `options` - How you want the component generated (optional)
 
-#### Options
+**Options:**
 
 ```typescript
-interface ReactConversionOptions {
-  name?: string; // Component name (default: "icon")
-  prefix?: string; // Component name prefix
-  suffix?: string; // Component name suffix
-  optimize?: boolean; // Enable SVG optimization (default: true)
-  typescript?: boolean; // Generate TypeScript (default: true)
-  memo?: boolean; // Use React.memo (default: true)
-  ref?: boolean; // Use forwardRef (default: true)
-  titleProp?: boolean; // Add title prop (default: true)
-  descProp?: boolean; // Add desc prop (default: true)
+{
+  name?: string              // Component name like "StarIcon"
+  prefix?: string            // Add prefix like "Icon" → "IconStar"
+  suffix?: string            // Add suffix like "Star" → "StarIcon"
+  optimize?: boolean         // Clean up SVG (default: true)
+  typescript?: boolean       // Generate .tsx file (default: true)
+  memo?: boolean            // Wrap with React.memo (default: true)
+  ref?: boolean             // Add ref support (default: true)
+  titleProp?: boolean       // Add title prop (default: true)
+  descProp?: boolean        // Add description prop (default: true)
+  icon?: boolean            // Optimize for icons (default: true)
+  dimensions?: boolean      // Keep width/height (default: false)
+  nativeProps?: boolean     // Support width, height, style props (default: true)
+  replaceAttrValues?: {...} // Replace colors like { "#000": "currentColor" }
+  svgProps?: {...}          // Add extra props to <svg>
+  expandProps?: boolean     // Where to put ...props
+  // Accessibility (WCAG compliant)
+  ariaLabelledBy?: boolean  // Link title/desc with aria-labelledby (default: true)
+  ariaHidden?: boolean      // Hide decorative SVGs from screen readers
+  role?: string             // ARIA role: 'img', 'graphics-symbol', etc (default: 'img')
 }
 ```
 
@@ -67,9 +77,13 @@ const result = await convertToReact(svgContent, {
   name: 'StarIcon',
   typescript: true,
   memo: true,
+  nativeProps: true, // Enables width, height, style props
+  replaceAttrValues: { '#000': 'currentColor' },
 });
 
 console.log(result.code);
+// Generated component accepts: width, height, style, className, ref, title, desc
+// Includes WCAG-compliant accessibility: role="img", aria-labelledby, title/desc support
 ```
 
 ### convertToVue

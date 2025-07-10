@@ -26,10 +26,10 @@ function HomepageHeader() {
           </Link>
           <Link
             className="button button--outline button--secondary button--md"
-            to="/playground"
+            to="/docs/cli-usage"
             style={{ marginLeft: '1rem' }}
           >
-            Try Playground
+            CLI Reference
           </Link>
         </div>
       </div>

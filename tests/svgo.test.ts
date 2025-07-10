@@ -1,5 +1,5 @@
-import { describe, it, expect } from 'vitest';
-import { createSvgoConfig } from '../src/utils/svgo.js';
+// Converted from Vitest to Jest
+import { createSvgoConfig } from '../src/utils/svgo';
 
 describe('createSvgoConfig', () => {
   it('should create default SVGO configuration', () => {

@@ -1,5 +1,5 @@
-import { describe, it, expect } from 'vitest';
-import { getFileExtension, getComponentFilename } from '../src/utils/files.js';
+// Converted from Vitest to Jest
+import { getFileExtension, getComponentFilename } from '../src/utils/files';
 
 describe('getFileExtension', () => {
   it('should return .tsx for React with TypeScript', () => {

@@ -10,8 +10,8 @@ export type {
   CliOptions,
 } from './types/index.js';
 
-export { convertToReact } from './converters/react.js';
-export { convertToVue } from './converters/vue.js';
+export { convertToReact } from './core/react-converter.js';
+export { convertToVue } from './core/vue-converter.js';
 export { optimizeSvg, createSvgoConfig } from './utils/svgo.js';
 export {
   readSvgFile,

@@ -22,6 +22,30 @@ const config: Config = {
     v4: true, // Improve compatibility with the upcoming Docusaurus v4
   },
 
+  // Configure webpack to disable Node.js polyfills
+  plugins: [
+    function webpackPlugin() {
+      return {
+        name: 'webpack-plugin',
+        configureWebpack(config: any) {
+          return {
+            resolve: {
+              fallback: {
+                fs: false,
+                path: false,
+                os: false,
+                util: false,
+                url: false,
+                module: false,
+                'fs/promises': false,
+              },
+            },
+          };
+        },
+      };
+    },
+  ],
+
   // Set the production url of your site here
   url: 'https://svgfusion.netlify.app',
   // Set the /<baseUrl>/ pathname under which your site is served
@@ -78,7 +102,6 @@ const config: Config = {
           position: 'left',
           label: 'Docs',
         },
-        { to: '/playground', label: 'Playground', position: 'left' },
         {
           type: 'html',
           position: 'right',
@@ -115,12 +138,12 @@ const config: Config = {
           title: 'Tools',
           items: [
             {
-              label: 'Playground',
-              to: '/playground',
-            },
-            {
               label: 'NPM Package',
               href: 'https://www.npmjs.com/package/svgfusion',
+            },
+            {
+              label: 'GitHub Repository',
+              href: 'https://github.com/lolvOid/svgfusion',
             },
           ],
         },
