@@ -1,3 +1,14 @@
+## [1.0.2](https://github.com/lolvOid/svgfusion/compare/v1.0.1...v1.0.2) (2025-07-10)
+
+
+### Bug Fixes
+
+* add overrides for test files in ESLint configuration ([627a942](https://github.com/lolvOid/svgfusion/commit/627a9427b3d989edcfe2de334456811c991ca99b))
+* improve postinstall script to check for docs directory before installation ([db9e933](https://github.com/lolvOid/svgfusion/commit/db9e933a93053e6987614e96ed83cc64ab5dccd1))
+* migrate tests from Vitest to Jest and update tsconfig types ([b5a8025](https://github.com/lolvOid/svgfusion/commit/b5a8025197bcc59259b9749e46c34c50ae3acc70))
+* update build commands in netlify.toml to use pnpm for consistency ([2f6756b](https://github.com/lolvOid/svgfusion/commit/2f6756bdbfb1a6c77b3e3ca0239627b51d1149ce))
+* update CI workflow to use --no-frozen-lockfile for dependency installation ([f0717a3](https://github.com/lolvOid/svgfusion/commit/f0717a38974df446802eb9574c4cdc227df08c71))
+
 ## [1.0.1](https://github.com/lolvOid/svgfusion/compare/v1.0.0...v1.0.1) (2025-07-09)
 
 
