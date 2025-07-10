@@ -74,7 +74,7 @@
     "release:dry": "semantic-release --dry-run",
     "dev:docs": "cd docs && pnpm run start",
     "build:docs": "cd docs && pnpm run build",
-    "postinstall": "cd docs && pnpm install"
+    "postinstall": "if [ -d docs ]; then cd docs && pnpm install; fi"
   },
   "dependencies": {
     "@svgr/core": "^8.0.0",
