@@ -1,4 +1,3 @@
-// Converted from Vitest to Jest
 import { getFileExtension, getComponentFilename } from '../src/utils/files';
 
 describe('getFileExtension', () => {

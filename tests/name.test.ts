@@ -1,4 +1,3 @@
-// Converted from Vitest to Jest
 import { formatComponentName, svgToComponentName } from '../src/utils/name';
 
 describe('formatComponentName', () => {
