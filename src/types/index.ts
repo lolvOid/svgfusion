@@ -12,11 +12,27 @@ export interface ReactConversionOptions extends ConversionOptions {
   ref?: boolean;
   titleProp?: boolean;
   descProp?: boolean;
+  // Advanced SVG handling options
+  icon?: boolean;
+  dimensions?: boolean;
+  replaceAttrValues?: Record<string, string>;
+  svgProps?: Record<string, string>;
+  expandProps?: boolean | 'start' | 'end';
+  // Native SVG props support
+  nativeProps?: boolean;
+  // Accessibility options
+  ariaLabelledBy?: boolean;
+  ariaHidden?: boolean;
+  role?: 'img' | 'graphics-document' | 'graphics-symbol' | 'presentation';
 }
 
 export interface VueConversionOptions extends ConversionOptions {
   compositionApi?: boolean;
   scriptSetup?: boolean;
+  // Advanced SVG handling options
+  props?: boolean;
+  dimensions?: boolean;
+  replaceAttrValues?: Record<string, string>;
 }
 
 export interface ConversionResult {

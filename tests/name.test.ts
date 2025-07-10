@@ -1,5 +1,5 @@
-import { describe, it, expect } from 'vitest';
-import { formatComponentName, svgToComponentName } from '../src/utils/name.js';
+// Converted from Vitest to Jest
+import { formatComponentName, svgToComponentName } from '../src/utils/name';
 
 describe('formatComponentName', () => {
   it('should format basic names to PascalCase', () => {

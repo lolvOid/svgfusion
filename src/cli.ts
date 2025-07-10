@@ -4,8 +4,8 @@ import {
   readSvgDirectory,
   writeComponentFile,
 } from './utils/files.js';
-import { convertToReact } from './converters/react.js';
-import { convertToVue } from './converters/vue.js';
+import { convertToReact } from './core/react-converter.js';
+import { convertToVue } from './core/vue-converter.js';
 import { optimizeSvg } from './utils/svgo.js';
 import { fileURLToPath } from 'url';
 import { dirname, join } from 'path';
@@ -122,7 +122,7 @@ program
           const result =
             framework === 'react'
               ? await convertToReact(optimizedSvg, { typescript })
-              : convertToVue(optimizedSvg, { typescript });
+              : await convertToVue(optimizedSvg, { typescript });
 
           // Write component file
           const outputPath = join(output, result.filename);

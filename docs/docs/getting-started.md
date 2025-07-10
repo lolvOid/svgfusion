@@ -1,6 +1,6 @@
 # Getting Started
 
-SVGFusion is a powerful CLI tool and library that transforms SVG files into production-ready React and Vue 3 components with TypeScript support and automatic optimization.
+SVGFusion is a powerful Node.js CLI tool and library that transforms SVG files into production-ready React and Vue 3 components with complex SVG support, TypeScript integration, and automatic optimization.
 
 ## Installation
 
@@ -62,13 +62,13 @@ console.log(reactComponent.code);
 
 - ✅ **React & Vue 3 Support** - Generate components for both frameworks
 - ✅ **TypeScript Support** - Full TypeScript support with proper typing
+- ✅ **Complex SVG Support** - Handles gradients, masks, filters, and Figma exports
+- ✅ **WCAG Accessibility** - Built-in accessibility features and ARIA support
 - ✅ **SVG Optimization** - Automatic optimization with SVGO
 - ✅ **Batch Processing** - Convert entire directories at once
-- ✅ **Customizable** - Configure output format, naming, and optimization
 - ✅ **Production Ready** - Optimized components for production use
 
 ## Next Steps
 
 - [CLI Usage](./cli-usage) - Learn all CLI commands and options
 - [Library API](./api-reference) - Explore the programmatic API
-- [Playground](/playground) - Try the interactive playground
