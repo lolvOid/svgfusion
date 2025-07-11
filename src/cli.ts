@@ -24,6 +24,7 @@ interface CliOptions {
   output?: string;
   framework?: 'react' | 'vue';
   typescript?: boolean;
+  javascript?: boolean; // For CLI parsing
   splitColors?: boolean;
   fixedStrokeWidth?: boolean;
   memo?: boolean;
@@ -36,10 +37,7 @@ interface CliOptions {
   index?: boolean;
 }
 
-async function convertSvgFile(
-  filePath: string,
-  options: CliOptions
-): Promise<void> {
+function convertSvgFile(filePath: string, options: CliOptions): void {
   try {
     // Read SVG file
     const svgContent = readFileSync(filePath, 'utf8');
@@ -69,7 +67,7 @@ async function convertSvgFile(
 
     // Convert SVG
     const fusion = new SVGFusion();
-    const result = await fusion.convert(svgContent, fusionOptions);
+    const result = fusion.convert(svgContent, fusionOptions);
 
     // Determine output directory
     const outputDir = options.output || './components';
@@ -127,7 +125,7 @@ function findSvgFiles(dirPath: string, recursive: boolean = false): string[] {
   return svgFiles;
 }
 
-async function processInput(input: string, options: CliOptions): Promise<void> {
+function processInput(input: string, options: CliOptions): void {
   const inputPath = resolve(input);
 
   if (!existsSync(inputPath)) {
@@ -142,7 +140,7 @@ async function processInput(input: string, options: CliOptions): Promise<void> {
       console.error('❌ Input file must be an SVG file');
       process.exit(1);
     }
-    await convertSvgFile(inputPath, options);
+    convertSvgFile(inputPath, options);
   } else if (stat.isDirectory()) {
     const svgFiles = findSvgFiles(inputPath, options.recursive);
 
@@ -155,11 +153,11 @@ async function processInput(input: string, options: CliOptions): Promise<void> {
 
     for (const svgFile of svgFiles) {
       console.log(`\n📄 Processing: ${basename(svgFile)}`);
-      await convertSvgFile(svgFile, options);
+      convertSvgFile(svgFile, options);
     }
 
     if (options.index) {
-      await generateIndexFile(options.output || './components', options);
+      generateIndexFile(options.output || './components', options);
     }
 
     console.log(
@@ -168,10 +166,7 @@ async function processInput(input: string, options: CliOptions): Promise<void> {
   }
 }
 
-async function generateIndexFile(
-  outputDir: string,
-  options: CliOptions
-): Promise<void> {
+function generateIndexFile(outputDir: string, _options: CliOptions): void {
   try {
     const files = readdirSync(outputDir);
     const componentFiles = files.filter(
@@ -200,7 +195,7 @@ async function generateIndexFile(
   }
 }
 
-async function main() {
+function main() {
   showBanner();
 
   program
@@ -235,7 +230,9 @@ async function main() {
     .option('--prefix <prefix>', 'Add prefix to component names')
     .option('--suffix <suffix>', 'Add suffix to component names')
     .option('--index', 'Generate index.ts file for directory processing')
-    .action(async (input: string, options: any) => {
+    .action((input: string, rawOptions: Record<string, unknown>) => {
+      const options = rawOptions as CliOptions;
+
       // Process TypeScript/JavaScript option
       if (options.javascript) {
         options.typescript = false;
@@ -244,16 +241,18 @@ async function main() {
       }
 
       // Process the input (file or directory)
-      await processInput(input, options);
+      processInput(input, options);
     });
 
-  await program.parseAsync();
+  program.parse();
 }
 
 // Run CLI
 if (import.meta.url === `file://${process.argv[1]}`) {
-  main().catch(error => {
+  try {
+    main();
+  } catch (error) {
     console.error('❌ Unexpected error:', error);
     process.exit(1);
-  });
+  }
 }
