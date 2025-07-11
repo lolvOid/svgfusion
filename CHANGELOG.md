@@ -1,3 +1,10 @@
+# [1.5.0](https://github.com/lolvOid/svgfusion/compare/v1.4.0...v1.5.0) (2025-07-11)
+
+
+### Features
+
+* add batch conversion for SVG files to React and Vue components ([8f46391](https://github.com/lolvOid/svgfusion/commit/8f463914d897eba80fe67d6093ab58e6cadf33e0))
+
 # [1.4.0](https://github.com/lolvOid/svgfusion/compare/v1.3.0...v1.4.0) (2025-07-11)
 
 
