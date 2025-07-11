@@ -1,0 +1,152 @@
+// Jest Snapshot v1, https://jestjs.io/docs/snapshot-testing
+
+exports[`Split Colors Feature should extract fill and stroke colors separately 1`] = `
+{
+  "colorMap": Map {
+    "#00FF00" => "color1",
+    "#FF0000" => "color2",
+  },
+  "colors": [
+    "#00FF00",
+    "#FF0000",
+  ],
+  "fillColorMap": Map {
+    "#FF0000" => "fillColor1",
+  },
+  "fillColors": [
+    "#FF0000",
+  ],
+  "gradientColorMap": Map {},
+  "gradientColors": [],
+  "strokeColorMap": Map {
+    "#00FF00" => "strokeColor1",
+  },
+  "strokeColors": [
+    "#00FF00",
+  ],
+}
+`;
+
+exports[`Split Colors Feature should extract gradient stop colors 1`] = `
+{
+  "colorMap": Map {
+    "#0000FF" => "color1",
+    "#FF0000" => "color2",
+  },
+  "colors": [
+    "#0000FF",
+    "#FF0000",
+  ],
+  "fillColorMap": Map {},
+  "fillColors": [],
+  "gradientColorMap": Map {
+    "#0000FF" => "gradientColor1",
+    "#FF0000" => "gradientColor2",
+  },
+  "gradientColors": [
+    "#0000FF",
+    "#FF0000",
+  ],
+  "strokeColorMap": Map {},
+  "strokeColors": [],
+}
+`;
+
+exports[`Split Colors Feature should handle complex SVG with mixed fill, stroke, and gradient colors 1`] = `
+{
+  "colorMap": Map {
+    "#0000FF" => "color1",
+    "#00FF00" => "color2",
+    "#FF0000" => "color3",
+    "#FF00FF" => "color4",
+    "#FFFF00" => "color5",
+  },
+  "colors": [
+    "#0000FF",
+    "#00FF00",
+    "#FF0000",
+    "#FF00FF",
+    "#FFFF00",
+  ],
+  "fillColorMap": Map {
+    "#0000FF" => "fillColor1",
+    "#FF0000" => "fillColor2",
+  },
+  "fillColors": [
+    "#0000FF",
+    "#FF0000",
+  ],
+  "gradientColorMap": Map {
+    "#FF00FF" => "gradientColor1",
+    "#FFFF00" => "gradientColor2",
+  },
+  "gradientColors": [
+    "#FF00FF",
+    "#FFFF00",
+  ],
+  "strokeColorMap": Map {
+    "#00FF00" => "strokeColor1",
+    "#FF0000" => "strokeColor2",
+  },
+  "strokeColors": [
+    "#00FF00",
+    "#FF0000",
+  ],
+}
+`;
+
+exports[`Split Colors Feature should handle invalid and special color values 1`] = `
+{
+  "colorMap": Map {
+    "hsl(120, 100%, 50%)" => "color1",
+    "rgb(255, 0, 0)" => "color2",
+  },
+  "colors": [
+    "hsl(120, 100%, 50%)",
+    "rgb(255, 0, 0)",
+  ],
+  "fillColorMap": Map {
+    "rgb(255, 0, 0)" => "fillColor1",
+  },
+  "fillColors": [
+    "rgb(255, 0, 0)",
+  ],
+  "gradientColorMap": Map {},
+  "gradientColors": [],
+  "strokeColorMap": Map {
+    "hsl(120, 100%, 50%)" => "strokeColor1",
+  },
+  "strokeColors": [
+    "hsl(120, 100%, 50%)",
+  ],
+}
+`;
+
+exports[`Split Colors Feature should handle same color in fill and stroke separately 1`] = `
+{
+  "colorMap": Map {
+    "#000000" => "color1",
+  },
+  "colors": [
+    "#000000",
+  ],
+  "fillColorMap": Map {
+    "#000000" => "fillColor1",
+  },
+  "fillColors": [
+    "#000000",
+  ],
+  "gradientColorMap": Map {},
+  "gradientColors": [],
+  "strokeColorMap": Map {
+    "#000000" => "strokeColor1",
+  },
+  "strokeColors": [
+    "#000000",
+  ],
+}
+`;
+
+exports[`Split Colors Feature should replace colors with React props 1`] = `"<path fill={fillColor1} className={fillColor1Class} stroke={strokeColor1} className={strokeColor1Class} />"`;
+
+exports[`Split Colors Feature should replace colors with Vue props 1`] = `"<stop :stop-color="gradientColor1" :class="gradientColor1Class" />"`;

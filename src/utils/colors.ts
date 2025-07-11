@@ -19,7 +19,7 @@ export type Colors = {
 };
 
 // ANSI color codes
-export const colors = {
+export const ansiColors = {
   cyan: '\x1b[36m',
   blue: '\x1b[34m',
   green: '\x1b[32m',

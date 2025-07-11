@@ -1,5 +1,10 @@
 import { VueConversionOptions } from '../../types/index.js';
 import { formatComponentName } from '../../utils/name.js';
+import {
+  extractColors,
+  replaceColorsWithProps,
+  generateColorProps,
+} from '../../utils/color-extractor.js';
 
 /**
  * Generate Vue 3 component from SVG
@@ -29,6 +34,28 @@ export function generateVueComponent(
   // Handle ID collision prevention for complex SVGs
   if (hasComplexFeatures(processedSvg)) {
     processedSvg = addUniqueIds(processedSvg, componentName);
+  }
+
+  // Handle split colors feature
+  if (options.splitColors) {
+    const colorInfo = extractColors(processedSvg);
+    if (colorInfo.colors.length > 0) {
+      processedSvg = replaceColorsWithProps(processedSvg, colorInfo, 'vue');
+    }
+  }
+
+  // Handle fixed stroke width feature
+  if (options.isFixedStrokeWidth) {
+    // Add vector-effect conditionally to stroke elements
+    processedSvg = processedSvg.replace(/(<[^>]+stroke[^>]*>)/g, match => {
+      if (match.includes('vector-effect')) {
+        return match; // Don't add if already present
+      }
+      return match.replace(
+        '>',
+        ' :vector-effect="isFixedStrokeWidth ? \'non-scaling-stroke\' : undefined">'
+      );
+    });
   }
 
   // Add Vue-specific attributes
@@ -128,7 +155,14 @@ function generateVueComponentCode(
   componentName: string,
   options: VueConversionOptions
 ): string {
-  const { typescript, compositionApi, props } = options;
+  const { typescript, compositionApi, props, splitColors, isFixedStrokeWidth } =
+    options;
+
+  // Extract colors if splitColors is enabled
+  const colorInfo = splitColors ? extractColors(svg) : { colors: [] };
+  const colorProps = splitColors
+    ? generateColorProps(colorInfo.colors, 'vue')
+    : '';
 
   // Script section
   const scriptLang = typescript ? ' lang="ts"' : '';
@@ -143,6 +177,15 @@ function generateVueComponentCode(
 interface Props {
   className?: string;
   style?: Record<string, any>;
+${
+  colorProps
+    ? colorProps
+        .split('\n')
+        .map(line => `  ${line.trim()}`)
+        .join('\n')
+    : ''
+}
+${isFixedStrokeWidth ? '  isFixedStrokeWidth?: boolean;' : ''}
 }
 
 defineProps<Props>();
@@ -156,6 +199,12 @@ export default {
   props: {
     className: String,
     style: Object,
+${colorProps}
+${
+  isFixedStrokeWidth
+    ? '    isFixedStrokeWidth: { type: Boolean, default: false },'
+    : ''
+}
   },
 };
 `;

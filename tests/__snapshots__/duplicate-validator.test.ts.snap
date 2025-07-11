@@ -1,0 +1,148 @@
+// Jest Snapshot v1, https://jestjs.io/docs/snapshot-testing
+
+exports[`Duplicate Name Validation should detect duplicates with same file names 1`] = `
+{
+  "duplicates": [
+    {
+      "componentName": "Icon",
+      "count": 3,
+      "files": [
+        "/path/to/icon.svg",
+        "/another/path/icon.svg",
+        "/third/path/icon.svg",
+      ],
+    },
+  ],
+  "hasDuplicates": true,
+  "totalFiles": 3,
+  "uniqueNames": 1,
+}
+`;
+
+exports[`Duplicate Name Validation should detect multiple duplicate groups 1`] = `
+{
+  "duplicates": [
+    {
+      "componentName": "Home",
+      "count": 2,
+      "files": [
+        "/path/to/home.svg",
+        "/another/path/home.svg",
+      ],
+    },
+    {
+      "componentName": "Settings",
+      "count": 2,
+      "files": [
+        "/path/to/settings.svg",
+        "/another/path/settings.svg",
+      ],
+    },
+  ],
+  "hasDuplicates": true,
+  "totalFiles": 5,
+  "uniqueNames": 3,
+}
+`;
+
+exports[`Duplicate Name Validation should detect no duplicates with unique file names 1`] = `
+{
+  "duplicates": [],
+  "hasDuplicates": false,
+  "totalFiles": 3,
+  "uniqueNames": 3,
+}
+`;
+
+exports[`Duplicate Name Validation should format duplicate errors correctly 1`] = `
+"Found 1 duplicate component name(s) in 2 files:
+
+⚠️  Component name "Icon" conflicts:
+   - /path/to/icon.svg
+   - /another/path/icon.svg
+
+Please rename the conflicting SVG files or use different prefix/suffix options to avoid conflicts."
+`;
+
+exports[`Duplicate Name Validation should generate conflict resolutions 1`] = `
+Map {
+  "Icon" => [
+    "icon-1.svg",
+    "icon-2.svg",
+    "icon-3.svg",
+  ],
+}
+`;
+
+exports[`Duplicate Name Validation should handle complex file paths and names 1`] = `
+{
+  "duplicates": [
+    {
+      "componentName": "MyAwesomeIcon",
+      "count": 3,
+      "files": [
+        "/path/to/my-awesome-icon.svg",
+        "/different/path/my_awesome_icon.svg",
+        "/another/path/myAwesomeIcon.svg",
+      ],
+    },
+  ],
+  "hasDuplicates": true,
+  "totalFiles": 3,
+  "uniqueNames": 1,
+}
+`;
+
+exports[`Duplicate Name Validation should handle empty file list 1`] = `
+{
+  "duplicates": [],
+  "hasDuplicates": false,
+  "totalFiles": 0,
+  "uniqueNames": 0,
+}
+`;
+
+exports[`Duplicate Name Validation should handle files with different extensions 1`] = `
+{
+  "duplicates": [
+    {
+      "componentName": "Icon",
+      "count": 2,
+      "files": [
+        "/path/to/icon.svg",
+        "/path/to/icon.SVG",
+      ],
+    },
+  ],
+  "hasDuplicates": true,
+  "totalFiles": 3,
+  "uniqueNames": 2,
+}
+`;
+
+exports[`Duplicate Name Validation should handle prefix and suffix options 1`] = `
+{
+  "duplicates": [
+    {
+      "componentName": "MyIconComponent",
+      "count": 2,
+      "files": [
+        "/path/to/icon.svg",
+        "/another/path/icon.svg",
+      ],
+    },
+  ],
+  "hasDuplicates": true,
+  "totalFiles": 2,
+  "uniqueNames": 1,
+}
+`;
+
+exports[`Duplicate Name Validation should handle single file 1`] = `
+{
+  "duplicates": [],
+  "hasDuplicates": false,
+  "totalFiles": 1,
+  "uniqueNames": 1,
+}
+`;

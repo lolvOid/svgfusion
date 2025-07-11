@@ -5,6 +5,8 @@ export interface ConversionOptions {
   optimize?: boolean;
   typescript?: boolean;
   format?: 'esm' | 'cjs';
+  splitColors?: boolean;
+  isFixedStrokeWidth?: boolean;
 }
 
 export interface ReactConversionOptions extends ConversionOptions {
@@ -39,6 +41,7 @@ export interface ConversionResult {
   code: string;
   filename: string;
   componentName: string;
+  colors?: string[];
 }
 
 export interface BatchConversionOptions extends ConversionOptions {
@@ -85,4 +88,6 @@ export interface CliOptions {
   generateIndex?: boolean;
   indexFormat?: 'ts' | 'js';
   exportType?: 'named' | 'default';
+  splitColors?: boolean;
+  isFixedStrokeWidth?: boolean;
 }

@@ -1,0 +1,94 @@
+// Jest Snapshot v1, https://jestjs.io/docs/snapshot-testing
+
+exports[`BatchConverter Options should handle batch conversion with prefix and suffix affecting duplicates 1`] = `
+{
+  "duplicates": [
+    {
+      "componentName": "AppHomeIcon",
+      "count": 2,
+      "files": [
+        "/path/to/home.svg",
+        "/another/path/home.svg",
+      ],
+    },
+  ],
+  "hasDuplicates": true,
+  "totalFiles": 3,
+  "uniqueNames": 2,
+}
+`;
+
+exports[`BatchConverter Options should have optional splitColors and isFixedStrokeWidth properties 1`] = `
+{
+  "framework": "vue",
+  "inputDir": "/mock/input",
+  "outputDir": "/mock/output",
+}
+`;
+
+exports[`BatchConverter Options should support all framework options with split colors 1`] = `
+{
+  "exportType": "named",
+  "framework": "react",
+  "generateIndex": true,
+  "indexFormat": "ts",
+  "inputDir": "/test/input",
+  "isFixedStrokeWidth": true,
+  "optimize": true,
+  "outputDir": "/test/output",
+  "prefix": "Icon",
+  "splitColors": true,
+  "suffix": "Component",
+  "typescript": true,
+}
+`;
+
+exports[`BatchConverter Options should support all framework options with split colors 2`] = `
+{
+  "exportType": "default",
+  "extensions": [
+    ".svg",
+    ".SVG",
+  ],
+  "framework": "vue",
+  "generateIndex": true,
+  "indexFormat": "js",
+  "inputDir": "/test/input",
+  "isFixedStrokeWidth": false,
+  "outputDir": "/test/output",
+  "recursive": true,
+  "splitColors": true,
+  "typescript": false,
+}
+`;
+
+exports[`BatchConverter Options should support splitColors and isFixedStrokeWidth options 1`] = `
+{
+  "framework": "react",
+  "generateIndex": false,
+  "inputDir": "/mock/input",
+  "isFixedStrokeWidth": true,
+  "outputDir": "/mock/output",
+  "splitColors": true,
+  "typescript": true,
+}
+`;
+
+exports[`BatchConverter Options should validate duplicate names before processing 1`] = `
+{
+  "duplicates": [
+    {
+      "componentName": "Icon",
+      "count": 3,
+      "files": [
+        "/path/to/icon.svg",
+        "/another/path/icon.svg",
+        "/third/path/icon.svg",
+      ],
+    },
+  ],
+  "hasDuplicates": true,
+  "totalFiles": 3,
+  "uniqueNames": 1,
+}
+`;

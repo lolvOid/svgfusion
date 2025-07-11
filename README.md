@@ -30,6 +30,14 @@ A powerful Node.js CLI tool and library that converts SVG files into optimized R
 - **Zero Configuration**: Works out of the box with sensible defaults
 - **Simple CLI**: Direct, intuitive command structure without subcommands
 
+### 🚀 Advanced Features
+
+- **Split Colors Mode**: Extract individual color props for maximum Tailwind CSS compatibility
+- **Fixed Stroke Width**: Add `vector-effect="non-scaling-stroke"` support for consistent strokes
+- **Duplicate Detection**: Automatic validation prevents component name conflicts
+- **Gradient Support**: Full support for linearGradient and radialGradient color extraction
+- **Smart Naming**: Intelligent component naming with conflict resolution suggestions
+
 ## Quick Start
 
 ### Simple as One Command
@@ -40,6 +48,9 @@ npx svgfusion ./icons --output ./components
 
 # Add prefixes, suffixes, and generate index file
 npx svgfusion ./icons --prefix Icon --suffix Component --index
+
+# Advanced: Split colors for Tailwind CSS with fixed stroke width
+npx svgfusion ./icons --split-colors --fixed-stroke-width --prefix Icon
 ```
 
 ### Installation
@@ -129,6 +140,8 @@ Options:
   --no-optimize                Skip SVG optimization
   --prefix <prefix>            Add prefix to component name (sanitized)
   --suffix <suffix>            Add suffix to component name (sanitized)
+  --split-colors              Extract individual color props for each SVG color
+  --fixed-stroke-width        Add support for non-scaling stroke width
   -h, --help                   Show help
 ```
 
@@ -151,6 +164,12 @@ npx svgfusion ./assets/icons --output ./src/components --recursive --index
 
 # Convert with custom naming
 npx svgfusion ./assets/icons --output ./src/components --prefix Icon --suffix Component --index
+
+# Advanced: Split colors for Tailwind CSS compatibility
+npx svgfusion ./assets/icons --output ./src/components --split-colors --prefix Icon
+
+# Advanced: Fixed stroke width with split colors
+npx svgfusion ./assets/icons --output ./src/components --split-colors --fixed-stroke-width
 ```
 
 ### Programmatic Usage
@@ -178,6 +197,14 @@ const vueResult = convertToVue(svgContent, {
   scriptSetup: true,
 });
 
+// Advanced: Split colors for Tailwind CSS
+const reactWithColors = await convertToReact(svgContent, {
+  name: 'StarIcon',
+  splitColors: true,
+  isFixedStrokeWidth: true,
+  typescript: true,
+});
+
 console.log(reactResult.code); // Generated React component
 console.log(vueResult.code); // Generated Vue component
 ```
@@ -201,6 +228,8 @@ const result = await batchConverter.convertBatch({
   suffix: 'Component',
   indexFormat: 'ts',
   exportType: 'named',
+  splitColors: true,
+  isFixedStrokeWidth: true,
 });
 
 // Check results
@@ -232,6 +261,8 @@ Convert SVG to React component.
 - `memo?: boolean` - Wrap with React.memo (default: `true`)
 - `ref?: boolean` - Add forwardRef support (default: `true`)
 - `optimize?: boolean` - Apply SVGO optimization (default: `true`)
+- `splitColors?: boolean` - Extract individual color props (default: `false`)
+- `isFixedStrokeWidth?: boolean` - Add fixed stroke width support (default: `false`)
 
 ### `convertToVue(svgContent, options)`
 
@@ -246,6 +277,8 @@ Convert SVG to Vue 3 component. **Note: This is a synchronous function.**
 - `scriptSetup?: boolean` - Use script setup syntax (default: `true`)
 - `compositionApi?: boolean` - Use Composition API (default: `true`)
 - `optimize?: boolean` - Apply SVGO optimization (default: `true`)
+- `splitColors?: boolean` - Extract individual color props (default: `false`)
+- `isFixedStrokeWidth?: boolean` - Add fixed stroke width support (default: `false`)
 
 ### `BatchConverter`
 
@@ -268,7 +301,11 @@ Convert multiple SVG files to framework components.
 - `prefix?: string` - Add prefix to component names
 - `suffix?: string` - Add suffix to component names
 - `typescript?: boolean` - Generate TypeScript components (default: true)
+- `splitColors?: boolean` - Extract individual color props (default: false)
+- `isFixedStrokeWidth?: boolean` - Add fixed stroke width support (default: false)
 - All other conversion options from `convertToReact`/`convertToVue`
+
+**Note:** The batch converter automatically validates for duplicate component names and throws an error if conflicts are detected.
 
 **Returns:** `Promise<BatchConversionResult>`
 
@@ -331,6 +368,64 @@ export default StarIcon;
 export { StarIcon };
 ```
 
+### Generated React Component with Split Colors
+
+```tsx
+import { SVGProps } from 'react';
+import { memo } from 'react';
+import { forwardRef } from 'react';
+
+interface MultiColorIconProps extends SVGProps<SVGSVGElement> {
+  className?: string;
+  fillColor1?: string;
+  fillColor1Class?: string;
+  strokeColor1?: string;
+  strokeColor1Class?: string;
+  gradientColor1?: string;
+  gradientColor1Class?: string;
+  isFixedStrokeWidth?: boolean;
+}
+
+const MultiColorIcon = memo(
+  forwardRef<SVGSVGElement, MultiColorIconProps>((props, ref) => {
+    const {
+      fillColor1 = '#FF0000',
+      fillColor1Class = '',
+      strokeColor1 = '#00FF00',
+      strokeColor1Class = '',
+      gradientColor1 = '#FFFF00',
+      gradientColor1Class = '',
+      isFixedStrokeWidth = false,
+      ...rest
+    } = props;
+
+    return (
+      <svg
+        ref={ref}
+        viewBox="0 0 24 24"
+        vectorEffect={isFixedStrokeWidth ? 'non-scaling-stroke' : undefined}
+        {...rest}
+      >
+        <path
+          fill={fillColor1}
+          className={fillColor1Class}
+          stroke={strokeColor1}
+          className={strokeColor1Class}
+        />
+        <linearGradient>
+          <stop stopColor={gradientColor1} className={gradientColor1Class} />
+        </linearGradient>
+      </svg>
+    );
+  })
+);
+
+MultiColorIcon.displayName = 'MultiColorIcon';
+
+export default MultiColorIcon;
+export { MultiColorIcon };
+```
+
 ### Generated Vue Component
 
 ```vue
@@ -365,6 +460,77 @@ const __name = 'StarIcon';
 ```
 
 ## Advanced Configuration
+
+### Split Colors for Tailwind CSS
+
+The `splitColors` option extracts individual color properties from SVG elements, making them perfect for Tailwind CSS integration:
+
+```typescript
+// Input SVG with colors
+const svgContent = `
+  <svg viewBox="0 0 24 24">
+    <path fill="#FF0000" stroke="#00FF00" />
+    <circle fill="#0000FF" />
+    <linearGradient>
+      <stop stop-color="#FFFF00" />
+      <stop stop-color="#FF00FF" />
+    </linearGradient>
+  </svg>
+`;
+
+// Convert with split colors
+const result = await convertToReact(svgContent, {
+  name: 'MultiColorIcon',
+  splitColors: true,
+  typescript: true,
+});
+
+// Generated component props:
+// - fillColor1, fillColor2 (for fill colors)
+// - strokeColor1 (for stroke colors)
+// - gradientColor1, gradientColor2 (for gradient colors)
+// - fillColor1Class, strokeColor1Class, etc. (for CSS classes)
+```
+
+### Fixed Stroke Width Support
+
+The `isFixedStrokeWidth` option adds support for non-scaling stroke width:
+
+```typescript
+const result = await convertToReact(svgContent, {
+  name: 'StrokeIcon',
+  isFixedStrokeWidth: true,
+});
+
+// Generated component includes:
+// - isFixedStrokeWidth prop
+// - vector-effect="non-scaling-stroke" when prop is true
+```
+
+### Duplicate Name Detection
+
+The batch converter automatically detects and prevents duplicate component names:
+
+```typescript
+// These files would generate the same component name "Icon"
+const files = ['./icons/icon.svg', './assets/icon.svg', './ui/icon.svg'];
+
+// Batch processing will throw an error with conflict details
+try {
+  await batchConverter.convertBatch({
+    inputDir: './icons',
+    outputDir: './components',
+    // ... other options
+  });
+} catch (error) {
+  console.error(error.message);
+  // Error: Duplicate component names detected:
+  // Component name "Icon" conflicts:
+  //   - ./icons/icon.svg
+  //   - ./assets/icon.svg
+  //   - ./ui/icon.svg
+}
+```
 
 ### Custom SVGO Configuration
 
