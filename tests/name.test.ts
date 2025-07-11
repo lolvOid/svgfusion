@@ -1,99 +1,63 @@
 import { formatComponentName, svgToComponentName } from '../src/utils/name';
 
 describe('formatComponentName', () => {
-  it('should format basic names to PascalCase', () => {
-    expect(formatComponentName('icon')).toBe('Icon');
-    expect(formatComponentName('star')).toBe('Star');
-    expect(formatComponentName('user-profile')).toBe('UserProfile');
-  });
+  const cases = [
+    { name: 'icon', expected: 'Icon' },
+    { name: 'star', expected: 'Star' },
+    { name: 'user-profile', expected: 'UserProfile' },
+    { name: 'user-profile-avatar', expected: 'UserProfileAvatar' },
+    { name: 'icon-star', expected: 'IconStar' },
+    { name: 'user_profile_avatar', expected: 'UserProfileAvatar' },
+    { name: 'icon_star', expected: 'IconStar' },
+    { name: 'user profile avatar', expected: 'UserProfileAvatar' },
+    { name: 'icon star', expected: 'IconStar' },
+    { name: 'user-profile_avatar icon', expected: 'UserProfileAvatarIcon' },
+    { name: 'icon-24', expected: 'Icon24' },
+    { name: 'button-2xl', expected: 'Button2xl' },
+    { name: '', expected: '' },
+    { name: 'a', expected: 'A' },
+    { name: 'IconStar', expected: 'IconStar' },
+    { name: 'UserProfile', expected: 'UserProfile' },
+  ];
 
-  it('should handle names with hyphens', () => {
-    expect(formatComponentName('user-profile-avatar')).toBe(
-      'UserProfileAvatar'
-    );
-    expect(formatComponentName('icon-star')).toBe('IconStar');
-  });
-
-  it('should handle names with underscores', () => {
-    expect(formatComponentName('user_profile_avatar')).toBe(
-      'UserProfileAvatar'
-    );
-    expect(formatComponentName('icon_star')).toBe('IconStar');
-  });
-
-  it('should handle names with spaces', () => {
-    expect(formatComponentName('user profile avatar')).toBe(
-      'UserProfileAvatar'
-    );
-    expect(formatComponentName('icon star')).toBe('IconStar');
-  });
-
-  it('should handle mixed separators', () => {
-    expect(formatComponentName('user-profile_avatar icon')).toBe(
-      'UserProfileAvatarIcon'
-    );
-  });
-
-  it('should handle names with numbers', () => {
-    expect(formatComponentName('icon-24')).toBe('Icon24');
-    expect(formatComponentName('button-2xl')).toBe('Button2xl');
-  });
-
-  it('should handle empty strings', () => {
-    expect(formatComponentName('')).toBe('');
-  });
-
-  it('should handle single character', () => {
-    expect(formatComponentName('a')).toBe('A');
-  });
-
-  it('should handle already PascalCase names', () => {
-    expect(formatComponentName('IconStar')).toBe('Iconstar');
-    expect(formatComponentName('UserProfile')).toBe('Userprofile');
+  cases.forEach(({ name, expected }) => {
+    it(`should convert '${name}' to '${expected}'`, () => {
+      expect(formatComponentName(name)).toBe(expected);
+    });
   });
 });
 
 describe('svgToComponentName', () => {
-  it('should convert basic SVG filenames', () => {
-    expect(svgToComponentName('icon.svg')).toBe('Icon');
-    expect(svgToComponentName('star.svg')).toBe('Star');
+  const cases = [
+    { name: 'icon.svg', expected: 'Icon' },
+    { name: 'star.svg', expected: 'Star' },
+    { name: 'user-profile-avatar.svg', expected: 'UserProfileAvatar' },
+    { name: 'icon_star.svg', expected: 'IconStar' },
+    { name: 'MP3, Type=Solid.svg', expected: 'Mp3TypeSolid' },
+    {
+      name: 'Size=xl, Color=Brand, Type=Glass.svg',
+      expected: 'SizeXlColorBrandTypeGlass',
+    },
+    { name: 'icon-star', expected: 'IconStar' },
+    { name: 'user-profile', expected: 'UserProfile' },
+    { name: '/path/to/icon.svg', expected: 'PathToIcon' },
+    { name: 'icons/star.svg', expected: 'IconsStar' },
+    { name: 'icon.SVG', expected: 'Icon' },
+    { name: 'star.Svg', expected: 'Star' },
+    { name: 'icon@2x.svg', expected: 'Icon2x' },
+    { name: 'user+profile.svg', expected: 'UserProfile' },
+    { name: '', expected: '' },
+  ];
+
+  cases.forEach(({ name }) => {
+    it(`should convert '${name}' and match snapshot`, () => {
+      expect(svgToComponentName(name)).toMatchSnapshot();
+    });
   });
 
-  it('should handle complex filenames', () => {
-    expect(svgToComponentName('user-profile-avatar.svg')).toBe(
-      'UserProfileAvatar'
-    );
-    expect(svgToComponentName('icon_star.svg')).toBe('IconStar');
-  });
-
-  it('should handle design system metadata', () => {
-    expect(svgToComponentName('MP3, Type=Solid.svg')).toBe('Mp3Solid');
-    expect(svgToComponentName('Size=xl, Color=Brand, Type=Glass.svg')).toBe(
-      'GlassBrandXl'
-    );
-  });
-
-  it('should handle filenames without extension', () => {
-    expect(svgToComponentName('icon-star')).toBe('IconStar');
-    expect(svgToComponentName('user-profile')).toBe('UserProfile');
-  });
-
-  it('should handle paths', () => {
-    expect(svgToComponentName('/path/to/icon.svg')).toBe('PathToIcon');
-    expect(svgToComponentName('icons/star.svg')).toBe('IconsStar');
-  });
-
-  it('should handle uppercase extensions', () => {
-    expect(svgToComponentName('icon.SVG')).toBe('Icon');
-    expect(svgToComponentName('star.Svg')).toBe('Star');
-  });
-
-  it('should handle special characters', () => {
-    expect(svgToComponentName('icon@2x.svg')).toBe('Icon2x');
-    expect(svgToComponentName('user+profile.svg')).toBe('UserProfile');
-  });
-
-  it('should handle empty strings', () => {
-    expect(svgToComponentName('')).toBe('');
+  cases.forEach(({ name, expected }) => {
+    it(`should convert '${name}' to '${expected}'`, () => {
+      expect(svgToComponentName(name)).toBe(expected);
+    });
   });
 });

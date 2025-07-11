@@ -1,0 +1,31 @@
+// Jest Snapshot v1, https://jestjs.io/docs/snapshot-testing
+
+exports[`svgToComponentName should convert '' and match snapshot 1`] = `""`;
+
+exports[`svgToComponentName should convert '/path/to/icon.svg' and match snapshot 1`] = `"PathToIcon"`;
+
+exports[`svgToComponentName should convert 'MP3, Type=Solid.svg' and match snapshot 1`] = `"Mp3TypeSolid"`;
+
+exports[`svgToComponentName should convert 'Size=xl, Color=Brand, Type=Glass.svg' and match snapshot 1`] = `"SizeXlColorBrandTypeGlass"`;
+
+exports[`svgToComponentName should convert 'icon.SVG' and match snapshot 1`] = `"Icon"`;
+
+exports[`svgToComponentName should convert 'icon.svg' and match snapshot 1`] = `"Icon"`;
+
+exports[`svgToComponentName should convert 'icon@2x.svg' and match snapshot 1`] = `"Icon2x"`;
+
+exports[`svgToComponentName should convert 'icon_star.svg' and match snapshot 1`] = `"IconStar"`;
+
+exports[`svgToComponentName should convert 'icon-star' and match snapshot 1`] = `"IconStar"`;
+
+exports[`svgToComponentName should convert 'icons/star.svg' and match snapshot 1`] = `"IconsStar"`;
+
+exports[`svgToComponentName should convert 'star.Svg' and match snapshot 1`] = `"Star"`;
+
+exports[`svgToComponentName should convert 'star.svg' and match snapshot 1`] = `"Star"`;
+
+exports[`svgToComponentName should convert 'user+profile.svg' and match snapshot 1`] = `"UserProfile"`;
+
+exports[`svgToComponentName should convert 'user-profile' and match snapshot 1`] = `"UserProfile"`;
+
+exports[`svgToComponentName should convert 'user-profile-avatar.svg' and match snapshot 1`] = `"UserProfileAvatar"`;
