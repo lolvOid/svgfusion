@@ -1,3 +1,10 @@
+## [1.1.1](https://github.com/lolvOid/svgfusion/compare/v1.1.0...v1.1.1) (2025-07-11)
+
+
+### Bug Fixes
+
+* update npm version badge in README to use shield style ([9b50a21](https://github.com/lolvOid/svgfusion/commit/9b50a21e49a24180156a6c30fa0e09f5995f01fa))
+
 # [1.1.0](https://github.com/lolvOid/svgfusion/compare/v1.0.7...v1.1.0) (2025-07-11)
 
 
