@@ -25,3 +25,10 @@ export {
   pascalCase,
   formatComponentName,
 } from './utils/name';
+
+export {
+  generateIndexFile,
+  type IndexGenerationOptions,
+} from './utils/index-generator';
+
+export { BatchConverter } from './core/batch-converter';
