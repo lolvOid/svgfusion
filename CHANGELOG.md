@@ -1,3 +1,10 @@
+## [1.0.6](https://github.com/lolvOid/svgfusion/compare/v1.0.5...v1.0.6) (2025-07-11)
+
+
+### Bug Fixes
+
+* update CI/CD workflow permissions and refine branch triggers ([#3](https://github.com/lolvOid/svgfusion/issues/3)) ([ef7f248](https://github.com/lolvOid/svgfusion/commit/ef7f2488b224233fbd12228f0e781f611de693d9))
+
 ## [1.0.5](https://github.com/lolvOid/svgfusion/compare/v1.0.4...v1.0.5) (2025-07-11)
 
 
