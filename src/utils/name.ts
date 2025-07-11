@@ -82,8 +82,8 @@ export function sanitizeComponentName(name: string): string {
  */
 export function pascalCase(str: string): string {
   return str
-    .replace(/[^a-zA-Z0-9\s-_]/g, ' ') // Remove any symbols, keep spaces, hyphens, underscores
-    .split(/[\s-_]+/) // Split on spaces, hyphens, underscores
+    .replace(/[^a-zA-Z0-9]/g, ' ') // Remove ALL symbols and special characters, keep only letters and numbers
+    .split(/\s+/) // Split on any whitespace
     .filter(word => word.length > 0) // Remove empty strings
     .map(word => word.charAt(0).toUpperCase() + word.slice(1).toLowerCase())
     .join('');
