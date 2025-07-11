@@ -63,6 +63,7 @@
   "scripts": {
     "build": "tsup && chmod +x dist/cli.js",
     "dev": "tsup --watch",
+    "watch": "nodemon --watch src --ext ts --exec 'pnpm run build'",
     "test": "jest",
     "test:coverage": "jest --coverage --json --testLocationInResults --outputFile=./coverage/coverage-summary.json",
     "test:watch": "jest --watch",
@@ -107,6 +108,7 @@
     "husky": "^8.0.3",
     "jest": "^30.0.4",
     "lint-staged": "^15.2.2",
+    "nodemon": "^3.1.10",
     "prettier": "^2.8.8",
     "semantic-release": "^24.2.6",
     "ts-jest": "^29.4.0",
