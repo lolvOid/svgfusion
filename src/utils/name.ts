@@ -1,3 +1,5 @@
+import pascalCase from 'just-pascal-case';
+
 /**
  * Convert SVG filename to a valid React component name
  * @param filename - The SVG filename
@@ -76,18 +78,11 @@ export function sanitizeComponentName(name: string): string {
 }
 
 /**
- * Convert a string to PascalCase
+ * Convert a string to PascalCase using just-pascal-case library
  * @param str - The string to convert
  * @returns PascalCase string
  */
-export function pascalCase(str: string): string {
-  return str
-    .replace(/[^a-zA-Z0-9]/g, ' ') // Remove ALL symbols and special characters, keep only letters and numbers
-    .split(/\s+/) // Split on any whitespace
-    .filter(word => word.length > 0) // Remove empty strings
-    .map(word => word.charAt(0).toUpperCase() + word.slice(1).toLowerCase())
-    .join('');
-}
+export { pascalCase };
 
 /**
  * Add prefix/suffix to component name
