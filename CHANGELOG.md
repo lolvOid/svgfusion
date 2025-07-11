@@ -1,3 +1,10 @@
+# [1.6.0](https://github.com/lolvOid/svgfusion/compare/v1.5.1...v1.6.0) (2025-07-11)
+
+
+### Features
+
+* export generateIndexFile and BatchConverter from respective modules ([07cbf15](https://github.com/lolvOid/svgfusion/commit/07cbf154c18e9a1ce4d09adeecd43be54ab24e35))
+
 ## [1.5.1](https://github.com/lolvOid/svgfusion/compare/v1.5.0...v1.5.1) (2025-07-11)
 
 

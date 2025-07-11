@@ -1,6 +1,6 @@
 {
   "name": "svgfusion",
-  "version": "1.5.1",
+  "version": "1.6.0",
   "description": "A powerful CLI tool and library that converts SVG files into production-ready React and Vue 3 components with TypeScript support and automatic optimization.",
   "main": "dist/index.js",
   "module": "dist/index.mjs",
