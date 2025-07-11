@@ -1,3 +1,10 @@
+## [1.0.5](https://github.com/lolvOid/svgfusion/compare/v1.0.4...v1.0.5) (2025-07-11)
+
+
+### Bug Fixes
+
+* simplify semantic release branches configuration and clean up plugin options ([87759f2](https://github.com/lolvOid/svgfusion/commit/87759f26d00f6f9205e876eeb97ccbbc9fea5413))
+
 ## [1.0.4](https://github.com/lolvOid/svgfusion/compare/v1.0.3...v1.0.4) (2025-07-11)
 
 
