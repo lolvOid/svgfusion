@@ -1,7 +1,7 @@
 [build]
   base = "docs"
   publish = "build"
-  command = "pnpm install --no-frozen-lockfile && pnpm run build"
+  command = "pnpm install --frozen-lockfile && pnpm run build"
 
 [build.environment]
   NODE_VERSION = "20"
@@ -40,11 +40,11 @@
 
 # PR preview context
 [context.deploy-preview]
-  command = "pnpm install --no-frozen-lockfile && pnpm run build"
+  command = "pnpm install --frozen-lockfile && pnpm run build"
 
 [context.branch-deploy]
-  command = "pnpm install --no-frozen-lockfile && pnpm run build"
+  command = "pnpm install --frozen-lockfile && pnpm run build"
 
 # Production context
 [context.production]
-  command = "pnpm install --no-frozen-lockfile && pnpm run build"
+  command = "pnpm install --frozen-lockfile && pnpm run build"

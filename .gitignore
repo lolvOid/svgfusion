@@ -12,7 +12,6 @@ lib/
 *.tsbuildinfo
 
 # Coverage
-coverage/
 .nyc_output/
 
 # Cache

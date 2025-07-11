@@ -64,7 +64,7 @@
     "build": "tsup && chmod +x dist/cli.js",
     "dev": "tsup --watch",
     "test": "jest",
-    "test:coverage": "jest --coverage",
+    "test:coverage": "jest --coverage --json --testLocationInResults --outputFile=./coverage/coverage-summary.json",
     "test:watch": "jest --watch",
     "lint": "eslint src/**/*.ts tests/**/*.ts",
     "lint:fix": "eslint src/**/*.ts tests/**/*.ts --fix",
