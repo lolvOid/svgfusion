@@ -7,6 +7,7 @@ import {
 import { stat } from 'fs/promises';
 import { extname, basename } from 'path';
 import { svgToComponentName } from './utils/name.js';
+import { formatComponentName } from './utils/name.js';
 import { convertToReact } from './core/react-converter.js';
 import { convertToVue } from './core/vue-converter.js';
 import { optimizeSvg } from './utils/svgo.js';
@@ -154,6 +155,8 @@ program
   )
   .option('-t, --typescript', 'Generate TypeScript files', false)
   .option('--no-optimize', 'Skip SVG optimization')
+  .option('--prefix <prefix>', 'Add prefix to component name')
+  .option('--suffix <suffix>', 'Add suffix to component name')
   .action(
     async (
       input: string,
@@ -162,6 +165,8 @@ program
         output: string;
         typescript: boolean;
         optimize: boolean;
+        prefix?: string;
+        suffix?: string;
       }
     ) => {
       // eslint-disable-next-line no-console
@@ -171,7 +176,8 @@ program
       console.log(`${colors.blue}🔄 Processing SVG files...${colors.reset}`);
 
       try {
-        const { framework, output, typescript, optimize } = options;
+        const { framework, output, typescript, optimize, prefix, suffix } =
+          options;
 
         if (framework !== 'react' && framework !== 'vue') {
           throw new Error('Framework must be either "react" or "vue"');
@@ -212,7 +218,11 @@ program
 
           // Generate component name from filename
           const filename = basename(filePath);
-          const componentName = svgToComponentName(filename);
+          const componentName = formatComponentName(
+            svgToComponentName(filename),
+            prefix,
+            suffix
+          );
 
           // Convert based on framework
           const result =

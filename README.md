@@ -41,11 +41,41 @@ npm install -g svgfusion
 npx svgfusion convert ./icons --output ./components
 
 # Or install locally for programmatic usage
+
+# Add prefix and suffix to component names
+svgfusion convert ./icons --output ./components --prefix Icon --suffix Svg
 npm install svgfusion
 # or
 yarn add svgfusion
 # or
 pnpm add svgfusion
+```
+
+## CLI Options
+
+svgfusion convert ./icons --output ./components --prefix Icon --suffix Svg
+
+You can add a prefix and/or suffix to the generated component names using the `--prefix` and `--suffix` options:
+
+```sh
+npx svgfusion convert ./svgs --prefix Icon --suffix Svg
+```
+
+This will generate components like `IconStarSvg`, `IconUserSvg`, etc.
+
+Both options sanitize input to remove symbols and spaces. If omitted, no prefix/suffix is added.
+
+#### Example
+
+```sh
+npx svgfusion convert ./svgs --prefix App --suffix Widget
+# Output: AppStarWidget, AppUserWidget, ...
+```
+
+For more details, run:
+
+```sh
+npx svgfusion --help
 ```
 
 ### CLI Usage
@@ -77,6 +107,8 @@ Options:
   -f, --framework <framework>  Target framework (react|vue) (default: "react")
   -t, --typescript             Generate TypeScript files
   --no-optimize                Skip SVG optimization
+  --prefix <prefix>            Add prefix to component name (sanitized)
+  --suffix <suffix>            Add suffix to component name (sanitized)
   -h, --help                   Show help
 ```
 
