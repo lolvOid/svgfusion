@@ -17,6 +17,7 @@ module.exports = {
     es2020: true,
   },
   rules: {
+    'no-console': 'off',
     '@typescript-eslint/require-await': 'warn',
     '@typescript-eslint/no-unsafe-assignment': 'off',
     '@typescript-eslint/no-var-requires': 'off',

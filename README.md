@@ -53,6 +53,8 @@ pnpm add svgfusion
 
 ## CLI Options
 
+<img src="https://i.ibb.co/8n2b5mtp/cli.png" alt="SVGFusion CLI" width="512" >
+
 svgfusion convert ./icons --output ./components --prefix Icon --suffix Svg
 
 You can add a prefix and/or suffix to the generated component names using the `--prefix` and `--suffix` options:
