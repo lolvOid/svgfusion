@@ -1,3 +1,10 @@
+# [1.1.0](https://github.com/lolvOid/svgfusion/compare/v1.0.7...v1.1.0) (2025-07-11)
+
+
+### Features
+
+* add watch script and enhance color gradients in CLI output ([de5bfeb](https://github.com/lolvOid/svgfusion/commit/de5bfebf0b536686646a4d1c30edb345f99dd91a))
+
 ## [1.0.7](https://github.com/lolvOid/svgfusion/compare/v1.0.6...v1.0.7) (2025-07-11)
 
 
