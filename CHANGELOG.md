@@ -1,3 +1,10 @@
+# [1.3.0](https://github.com/lolvOid/svgfusion/compare/v1.2.1...v1.3.0) (2025-07-11)
+
+
+### Features
+
+* add prefix and suffix options for component name formatting in CLI ([5f5a604](https://github.com/lolvOid/svgfusion/commit/5f5a604bb58586673fe7be83abbfb196025e3cd8))
+
 ## [1.2.1](https://github.com/lolvOid/svgfusion/compare/v1.2.0...v1.2.1) (2025-07-11)
 
 
