@@ -42,5 +42,11 @@ module.exports = {
         '@typescript-eslint/no-unsafe-member-access': 'off',
       },
     },
+    {
+      files: ['src/cli.ts'],
+      rules: {
+        'no-console': 'off',
+      },
+    },
   ],
 };

@@ -41,10 +41,7 @@ export class SVGFusion {
   /**
    * Convert SVG content to component code
    */
-  async convert(
-    svgContent: string,
-    options: SVGFusionOptions
-  ): Promise<ConversionResult> {
+  convert(svgContent: string, options: SVGFusionOptions): ConversionResult {
     try {
       // Parse SVG content into AST
       const ast = this.parser.parse(svgContent);
