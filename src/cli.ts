@@ -230,6 +230,20 @@ function main() {
     .option('--prefix <prefix>', 'Add prefix to component names')
     .option('--suffix <suffix>', 'Add suffix to component names')
     .option('--index', 'Generate index.ts file for directory processing')
+    .addHelpText(
+      'after',
+      `
+${ansiColors.darkBlue}
+Examples:
+  $ svgfusion icon.svg                                    # Convert single file
+  $ svgfusion ./icons --output ./components               # Convert directory
+  $ svgfusion ./icons --framework vue --typescript        # Vue with TypeScript
+  $ svgfusion ./icons --prefix Icon --suffix Component    # Add prefix/suffix
+  $ svgfusion ./icons --split-colors --fixed-stroke-width # Advanced features
+  $ svgfusion ./icons --recursive --index                 # Recursive with index
+${ansiColors.reset}
+`
+    )
     .action((input: string, rawOptions: Record<string, unknown>) => {
       const options = rawOptions as CliOptions;
 
@@ -243,6 +257,11 @@ function main() {
       // Process the input (file or directory)
       processInput(input, options);
     });
+
+  // Show help if no arguments provided
+  if (process.argv.length <= 2) {
+    program.help();
+  }
 
   program.parse();
 }

@@ -133,7 +133,9 @@ export abstract class ComponentGenerator {
 
     // Handle SVG attributes with hyphens (convert to camelCase)
     if (name.includes('-')) {
-      return name.replace(/-([a-z])/g, (match, letter) => (letter as string).toUpperCase());
+      return name.replace(/-([a-z])/g, (match, letter) =>
+        (letter as string).toUpperCase()
+      );
     }
 
     return conversions[name] || name;

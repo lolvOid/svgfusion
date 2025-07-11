@@ -1,3 +1,54 @@
+# [2.0.0](https://github.com/lolvOid/svgfusion/compare/v1.7.0...v2.0.0) (2025-07-12)
+
+## 🚀 Major Architecture Rewrite
+
+### BREAKING CHANGES
+
+* **Complete internal architecture replacement**: Replaced SVGR/SVGO dependencies with custom SVGFusion engine for better control and reliability
+* **API Changes**: Updated programmatic API to use new `SVGFusion` class instead of `convertToReact`/`convertToVue` functions
+* **Enhanced Type Safety**: Stricter TypeScript integration with improved type inference
+
+### Features
+
+* **🏗️ Custom SVGFusion Engine**: Complete rewrite with custom SVG parser and transformation system
+* **🎨 Native SVG Props Support**: Generated React components extend `React.SVGProps<SVGSVGElement>` for full native prop inheritance
+* **🎯 Vue Attributes Support**: Generated Vue components extend `SVGAttributes` with `v-bind="$attrs"` for complete attribute coverage
+* **⚡ Enhanced Performance**: Faster processing with streamlined synchronous architecture
+* **🔧 Feature-Based Transformations**: Modular transformation system with color-splitting, stroke-fixing, and accessibility features
+* **📝 Improved Type Safety**: Better TypeScript integration with proper type definitions and inference
+* **🛡️ Robust Error Handling**: Enhanced error handling and validation throughout the conversion process
+
+### Bug Fixes
+
+* **TypeScript/ESLint Issues**: Resolved all linting issues and improved code quality
+* **Async/Sync Consistency**: Converted to synchronous API for simpler usage patterns
+* **CLI Improvements**: Enhanced CLI with better error handling and user feedback
+
+### Migration Guide
+
+#### Old API (v1.x)
+```typescript
+import { convertToReact, convertToVue } from 'svgfusion';
+
+const reactResult = await convertToReact(svgContent, options);
+const vueResult = convertToVue(svgContent, options);
+```
+
+#### New API (v2.x)
+```typescript
+import { SVGFusion } from 'svgfusion';
+
+const engine = new SVGFusion();
+const reactResult = engine.convert(svgContent, { framework: 'react', ...options });
+const vueResult = engine.convert(svgContent, { framework: 'vue', ...options });
+```
+
+### Component Output Changes
+
+* **React Components**: Now extend `React.SVGProps<SVGSVGElement>` providing all native SVG element props
+* **Vue Components**: Now extend `SVGAttributes` with proper attribute inheritance via `v-bind="$attrs"`
+* **Enhanced TypeScript**: Better type inference and native prop support
+
 # [1.7.0](https://github.com/lolvOid/svgfusion/compare/v1.6.0...v1.7.0) (2025-07-11)
 
 
