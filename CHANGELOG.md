@@ -1,3 +1,10 @@
+# [1.2.0](https://github.com/lolvOid/svgfusion/compare/v1.1.1...v1.2.0) (2025-07-11)
+
+
+### Features
+
+* add just-pascal-case library for improved component name formatting ([8e7a5ef](https://github.com/lolvOid/svgfusion/commit/8e7a5efbf48b9e36d48d37a441151af77c292a96))
+
 ## [1.1.1](https://github.com/lolvOid/svgfusion/compare/v1.1.0...v1.1.1) (2025-07-11)
 
 
