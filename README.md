@@ -5,7 +5,7 @@
 
 **Transform SVG files into production-ready React and Vue 3 components**
 
-A powerful Node.js CLI tool and library that converts SVG files into optimized React and Vue components with complex SVG support, TypeScript integration, and smart optimization for modern development workflows.
+A powerful Node.js CLI tool and library that converts SVG files into optimized React and Vue components with native SVG props inheritance, TypeScript integration, and smart optimization for modern development workflows.
 
 [![npm version](https://img.shields.io/npm/v/svgfusion)](https://www.npmjs.com/package/svgfusion)
 [![TypeScript](https://img.shields.io/badge/TypeScript-007ACC?style=flat&logo=typescript&logoColor=white)](https://www.typescriptlang.org/)
@@ -16,12 +16,22 @@ A powerful Node.js CLI tool and library that converts SVG files into optimized R
 
 </div>
 
+## What's New in v2.0
+
+- **Custom SVGFusion Engine**: Complete rewrite with custom SVG parser replacing SVGR/SVGO
+- **Native SVG Props**: Full React.SVGProps and Vue SVGAttributes support
+- **Enhanced Type Safety**: Better TypeScript integration and type inference
+- **Improved Performance**: Faster processing with streamlined architecture
+- **Better Control**: Fine-grained control over SVG transformations and output
+
 ## Features
 
+- **Native SVG Props**: Generated components extend React.SVGProps<SVGSVGElement> and Vue SVGAttributes
 - **Dual Framework Support**: Generate both React and Vue 3 components from the same SVG
+- **Custom Engine**: Built-in SVGFusion engine for reliable SVG parsing and transformation
 - **Complex SVG Support**: Handles gradients, masks, filters, patterns, and Figma exports
 - **ID Collision Prevention**: Automatic unique ID generation for complex SVGs
-- **Optimized Output**: Built-in SVGO optimization with customizable settings
+- **Optimized Output**: Smart optimization with customizable settings
 - **Icon Builder Ready**: Perfect for design systems and icon libraries
 - **TypeScript Ready**: Full TypeScript support with proper type definitions
 - **Flexible API**: Both CLI and programmatic usage
@@ -30,7 +40,7 @@ A powerful Node.js CLI tool and library that converts SVG files into optimized R
 - **Zero Configuration**: Works out of the box with sensible defaults
 - **Simple CLI**: Direct, intuitive command structure without subcommands
 
-### 🚀 Advanced Features
+### Advanced Features
 
 - **Split Colors Mode**: Extract individual color props for maximum Tailwind CSS compatibility
 - **Fixed Stroke Width**: Add `vector-effect="non-scaling-stroke"` support for consistent strokes
@@ -72,7 +82,7 @@ pnpm add svgfusion
 
 ## CLI Options
 
-<img src="https://i.ibb.co/TD0QP5FC/cli.png" alt="SVGFusion CLI" width="512" >
+<img src="https://i.ibb.co/mfRb84x/cli.png" alt="SVGFusion CLI" width="512" >
 
 svgfusion ./icons --output ./components --prefix Icon --suffix Svg
 
@@ -177,156 +187,163 @@ npx svgfusion ./assets/icons --output ./src/components --split-colors --fixed-st
 #### Single File Conversion
 
 ```typescript
-import { convertToReact, convertToVue, readSvgFile } from 'svgfusion';
+import { SVGFusion, readFileSync } from 'svgfusion';
+
+// Create SVGFusion engine instance
+const engine = new SVGFusion();
 
 // Read SVG file
-const svgContent = await readSvgFile('./icons/star.svg');
+const svgContent = readFileSync('./icons/star.svg', 'utf8');
 
-// React conversion
-const reactResult = await convertToReact(svgContent, {
-  name: 'StarIcon',
+// React conversion with native SVG props
+const reactResult = engine.convert(svgContent, {
+  framework: 'react',
+  componentName: 'StarIcon',
   typescript: true,
-  memo: true,
-  ref: true,
+  features: {
+    colorSplitting: true,
+    strokeFixing: true,
+    accessibility: true,
+  },
 });
 
-// Vue conversion
-const vueResult = convertToVue(svgContent, {
-  name: 'StarIcon',
+// Vue conversion with native SVG attributes
+const vueResult = engine.convert(svgContent, {
+  framework: 'vue',
+  componentName: 'StarIcon',
   typescript: true,
-  scriptSetup: true,
+  features: {
+    colorSplitting: true,
+    strokeFixing: true,
+    accessibility: true,
+  },
 });
 
-// Advanced: Split colors for Tailwind CSS
-const reactWithColors = await convertToReact(svgContent, {
-  name: 'StarIcon',
-  splitColors: true,
-  isFixedStrokeWidth: true,
-  typescript: true,
-});
-
-console.log(reactResult.code); // Generated React component
-console.log(vueResult.code); // Generated Vue component
+console.log(reactResult.code); // Generated React component with React.SVGProps
+console.log(vueResult.code); // Generated Vue component with SVGAttributes
 ```
 
-#### Batch Processing
+#### Batch Processing with CLI
 
 ```typescript
-import { BatchConverter } from 'svgfusion';
-
-const batchConverter = new BatchConverter();
+import { processInput } from 'svgfusion/cli';
 
 // Convert entire directory
-const result = await batchConverter.convertBatch({
-  inputDir: './icons',
-  outputDir: './components',
+processInput('./icons', {
+  output: './components',
   framework: 'react',
   recursive: true,
-  generateIndex: true,
+  index: true,
   typescript: true,
   prefix: 'Icon',
   suffix: 'Component',
-  indexFormat: 'ts',
-  exportType: 'named',
   splitColors: true,
-  isFixedStrokeWidth: true,
+  fixedStrokeWidth: true,
 });
-
-// Check results
-console.log(`Processed ${result.summary.total} files`);
-console.log(`Successful: ${result.summary.successful}`);
-console.log(`Failed: ${result.summary.failed}`);
-
-// Get component names
-const componentNames = batchConverter.getComponentNames(result);
-console.log('Generated components:', componentNames);
-
-// Generate summary report
-const report = batchConverter.generateSummaryReport(result);
-console.log(report);
 ```
 
 ## API Reference
 
-### `convertToReact(svgContent, options)`
+### `SVGFusion`
 
-Convert SVG to React component.
+The main engine class for converting SVG content to framework components.
+
+```typescript
+import { SVGFusion } from 'svgfusion';
+
+const engine = new SVGFusion();
+```
+
+#### `convert(svgContent: string, options: SVGFusionOptions): ConversionResult`
+
+Convert SVG content to React or Vue component.
 
 **Options:**
 
-- `name?: string` - Component name (auto-generated from filename if not provided)
-- `prefix?: string` - Add prefix to component name
-- `suffix?: string` - Add suffix to component name
+- `framework: 'react' | 'vue'` - Target framework
+- `componentName?: string` - Component name (auto-generated from filename if not provided)
 - `typescript?: boolean` - Generate TypeScript component (default: `true`)
-- `memo?: boolean` - Wrap with React.memo (default: `true`)
-- `ref?: boolean` - Add forwardRef support (default: `true`)
-- `optimize?: boolean` - Apply SVGO optimization (default: `true`)
-- `splitColors?: boolean` - Extract individual color props (default: `false`)
-- `isFixedStrokeWidth?: boolean` - Add fixed stroke width support (default: `false`)
+- `features?: FeatureConfig` - Enable/disable transformation features
+  - `colorSplitting?: boolean` - Extract individual color props (default: `false`)
+  - `strokeFixing?: boolean` - Add fixed stroke width support (default: `false`)
+  - `accessibility?: boolean` - Add accessibility enhancements (default: `true`)
 
-### `convertToVue(svgContent, options)`
+**Returns:** `ConversionResult`
 
-Convert SVG to Vue 3 component. **Note: This is a synchronous function.**
+- `code: string` - Generated component code
+- `framework: string` - Target framework
+- `componentName: string` - Final component name
+- `warnings: string[]` - Any conversion warnings
 
-**Options:**
+### React Components
 
-- `name?: string` - Component name (auto-generated from filename if not provided)
-- `prefix?: string` - Add prefix to component name
-- `suffix?: string` - Add suffix to component name
-- `typescript?: boolean` - Generate TypeScript component (default: `true`)
-- `scriptSetup?: boolean` - Use script setup syntax (default: `true`)
-- `compositionApi?: boolean` - Use Composition API (default: `true`)
-- `optimize?: boolean` - Apply SVGO optimization (default: `true`)
-- `splitColors?: boolean` - Extract individual color props (default: `false`)
-- `isFixedStrokeWidth?: boolean` - Add fixed stroke width support (default: `false`)
+Generated React components automatically extend `React.SVGProps<SVGSVGElement>`, providing:
 
-### `BatchConverter`
+- All native SVG element props (onClick, onMouseOver, className, style, etc.)
+- Full TypeScript support with proper type inference
+- Native event handling and accessibility features
 
-Process multiple SVG files in batch operations.
+```tsx
+// Generated component signature
+interface StarIconProps extends React.SVGProps<SVGSVGElement> {
+  // Custom color props if colorSplitting is enabled
+  color1?: string;
+  color2?: string;
+}
 
-#### `convertBatch(options: BatchConversionOptions)`
+const StarIcon: React.FC<StarIconProps> = props => {
+  // Component implementation with native SVG props support
+};
+```
 
-Convert multiple SVG files to framework components.
+### Vue Components
 
-**Options:**
+Generated Vue components extend `SVGAttributes` with `v-bind="$attrs"`, providing:
 
-- `inputDir: string` - Input directory path
-- `outputDir: string` - Output directory path
+- All native SVG element attributes
+- Event handlers (onClick, onMouseover, etc.)
+- Full TypeScript support with proper attribute typing
+
+```vue
+<script setup lang="ts">
+import type { SVGAttributes } from 'vue';
+
+interface StarIconProps extends SVGAttributes {
+  // Custom color props if colorSplitting is enabled
+  color1?: string;
+  color2?: string;
+}
+
+defineOptions({ inheritAttrs: false });
+</script>
+
+<template>
+  <svg v-bind="$attrs" viewBox="0 0 24 24">
+    <!-- SVG content -->
+  </svg>
+</template>
+```
+
+### CLI Integration
+
+```typescript
+import { processInput } from 'svgfusion/cli';
+
+// Process single file or directory
+processInput(inputPath: string, options: CliOptions): void
+```
+
+**CLI Options:**
+
+- `output?: string` - Output directory (default: './components')
 - `framework?: 'react' | 'vue'` - Target framework (default: 'react')
-- `recursive?: boolean` - Recursively scan directories (default: false)
-- `extensions?: string[]` - File extensions to process (default: ['.svg'])
-- `generateIndex?: boolean` - Generate index file (default: false)
-- `indexFormat?: 'ts' | 'js'` - Index file format (default: 'ts')
-- `exportType?: 'named' | 'default'` - Export type (default: 'named')
+- `typescript?: boolean` - Generate TypeScript files (default: true)
+- `recursive?: boolean` - Process directories recursively (default: false)
+- `index?: boolean` - Generate index file (default: false)
 - `prefix?: string` - Add prefix to component names
 - `suffix?: string` - Add suffix to component names
-- `typescript?: boolean` - Generate TypeScript components (default: true)
-- `splitColors?: boolean` - Extract individual color props (default: false)
-- `isFixedStrokeWidth?: boolean` - Add fixed stroke width support (default: false)
-- All other conversion options from `convertToReact`/`convertToVue`
-
-**Note:** The batch converter automatically validates for duplicate component names and throws an error if conflicts are detected.
-
-**Returns:** `Promise<BatchConversionResult>`
-
-#### `getComponentNames(results: BatchConversionResult)`
-
-Get array of generated component names from batch results.
-
-#### `generateSummaryReport(results: BatchConversionResult)`
-
-Generate a detailed summary report of the conversion process.
-
-### `optimizeSvg(svgContent, config?)`
-
-Optimize SVG content using SVGO. **Note: This is a synchronous function.**
-
-### File Utilities
-
-- `readSvgFile(filePath)` - Read SVG file (async)
-- `writeSvgFile(filePath, content)` - Write SVG file (async)
-- `readSvgDirectory(dirPath, recursive?)` - Read SVG files from directory (async)
-- `writeComponentFile(filePath, content)` - Write component file (async)
+- `splitColors?: boolean` - Enable color splitting feature
+- `fixedStrokeWidth?: boolean` - Enable stroke fixing feature
 
 ## Examples
 
@@ -342,106 +359,99 @@ Optimize SVG content using SVGO. **Note: This is a synchronous function.**
 ### Generated React Component
 
 ```tsx
-import { SVGProps } from 'react';
-import { memo } from 'react';
-import { forwardRef } from 'react';
+import type { SVGProps } from 'react';
 
-const StarIcon = memo(
-  forwardRef<SVGSVGElement, SVGProps<SVGSVGElement> & { className?: string }>(
-    props => {
-      return (
-        <svg viewBox="0 0 24 24" {...props}>
-          <path
-            d="m12 2 3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01z"
-            fill="currentColor"
-            className="star-fill"
-          />
-        </svg>
-      );
-    }
-  )
-);
+interface StarIconProps extends SVGProps<SVGSVGElement> {}
 
-StarIcon.displayName = 'StarIcon';
+const StarIcon = (props: StarIconProps) => {
+  return (
+    <svg viewBox="0 0 24 24" {...props}>
+      <path
+        d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"
+        fill="currentColor"
+        className="star-fill"
+      />
+    </svg>
+  );
+};
 
-export default StarIcon;
 export { StarIcon };
 ```
 
-### Generated React Component with Split Colors
+### Generated React Component with Color Splitting
 
 ```tsx
-import { SVGProps } from 'react';
-import { memo } from 'react';
-import { forwardRef } from 'react';
+import type { SVGProps } from 'react';
 
-interface MultiColorIconProps extends SVGProps<SVGSVGElement> {
-  className?: string;
-  fillColor1?: string;
-  fillColor1Class?: string;
-  strokeColor1?: string;
-  strokeColor1Class?: string;
-  gradientColor1?: string;
-  gradientColor1Class?: string;
-  isFixedStrokeWidth?: boolean;
+interface StarIconProps extends SVGProps<SVGSVGElement> {
+  fillColor?: string;
 }
 
-const MultiColorIcon = memo(
-  forwardRef<SVGSVGElement, MultiColorIconProps>((props, ref) => {
-    const {
-      fillColor1 = '#FF0000',
-      fillColor1Class = '',
-      strokeColor1 = '#00FF00',
-      strokeColor1Class = '',
-      gradientColor1 = '#FFFF00',
-      gradientColor1Class = '',
-      isFixedStrokeWidth = false,
-      ...rest
-    } = props;
+const StarIcon = ({ fillColor = 'currentColor', ...props }: StarIconProps) => {
+  return (
+    <svg viewBox="0 0 24 24" {...props}>
+      <path
+        d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"
+        fill={fillColor}
+        className="star-fill"
+      />
+    </svg>
+  );
+};
 
-    return (
-      <svg
-        ref={ref}
-        viewBox="0 0 24 24"
-        vectorEffect={isFixedStrokeWidth ? 'non-scaling-stroke' : undefined}
-        {...rest}
-      >
-        <path
-          fill={fillColor1}
-          className={fillColor1Class}
-          stroke={strokeColor1}
-          className={strokeColor1Class}
-        />
-        <linearGradient>
-          <stop stopColor={gradientColor1} className={gradientColor1Class} />
-        </linearGradient>
-      </svg>
-    );
-  })
-);
-
-MultiColorIcon.displayName = 'MultiColorIcon';
-
-export default MultiColorIcon;
-export { MultiColorIcon };
+export { StarIcon };
 ```
 
 ### Generated Vue Component
 
 ```vue
 <script setup lang="ts">
-interface Props {
-  class?: string;
-  style?: string | Record<string, any>;
+import type { SVGAttributes } from 'vue';
+
+interface StarIconProps extends SVGAttributes {}
+
+defineOptions({ inheritAttrs: false });
+</script>
+
+<template>
+  <svg v-bind="$attrs" viewBox="0 0 24 24">
+    <path
+      d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"
+      fill="currentColor"
+      class="star-fill"
+    />
+  </svg>
+</template>
+```
+
+### Generated Vue Component with Color Splitting
+
+```vue
+<script setup lang="ts">
+import type { SVGAttributes } from 'vue';
+
+interface StarIconProps extends SVGAttributes {
+  fillColor?: string;
 }
 
-const props = withDefaults(defineProps<Props>(), {
-  class: '',
-  style: undefined,
+const props = withDefaults(defineProps<StarIconProps>(), {
+  fillColor: 'currentColor',
 });
 
-// Component name for debugging
-const __name = 'StarIcon';
+defineOptions({ inheritAttrs: false });
+</script>
+
+<template>
+  <svg v-bind="$attrs" viewBox="0 0 24 24">
+    <path
+      d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"
+      :fill="fillColor"
+      class="star-fill"
+    />
+  </svg>
+</template>
+```
+
 </script>
 
 <template>
@@ -457,7 +467,8 @@ const __name = 'StarIcon';
 <style scoped>
 /* Add component-specific styles here */
 </style>
-```
+
+````
 
 ## Advanced Configuration
 
@@ -490,7 +501,7 @@ const result = await convertToReact(svgContent, {
 // - strokeColor1 (for stroke colors)
 // - gradientColor1, gradientColor2 (for gradient colors)
 // - fillColor1Class, strokeColor1Class, etc. (for CSS classes)
-```
+````
 
 ### Fixed Stroke Width Support
 

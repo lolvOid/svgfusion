@@ -93,7 +93,10 @@ export class ReactGenerator extends ComponentGenerator {
   /**
    * Generate TypeScript interfaces or PropTypes
    */
-  private generateInterfaces(colorMappings: ColorMapping[], features: string[]): string {
+  private generateInterfaces(
+    colorMappings: ColorMapping[],
+    features: string[]
+  ): string {
     if (!this.reactOptions.typescript && !this.reactOptions.propTypes) {
       return '';
     }
@@ -139,7 +142,10 @@ export class ReactGenerator extends ComponentGenerator {
   /**
    * Generate PropTypes
    */
-  private generatePropTypes(colorMappings: ColorMapping[], features: string[]): string {
+  private generatePropTypes(
+    colorMappings: ColorMapping[],
+    features: string[]
+  ): string {
     // Implementation for PropTypes (for non-TypeScript projects)
     const componentName = this.getComponentName();
     const props = [
