@@ -6,14 +6,10 @@ env:
 on:
   push:
     branches:
-      - main
-      - develop
-      - 'feature/*'
-      - 'hotfix/*'
+      - '**'
   pull_request:
     branches:
-      - main
-      - develop
+      - '**'
 
 jobs:
   test:
@@ -61,42 +57,10 @@ jobs:
           name: codecov-umbrella
           fail_ci_if_error: false
 
-  build:
-    name: Build
-    runs-on: ubuntu-latest
-    needs: test
-
-    steps:
-      - name: Checkout code
-        uses: actions/checkout@v4
-
-      - name: Install pnpm
-        uses: pnpm/action-setup@v3
-        with:
-          version: 8
-
-      - name: Setup Node.js
-        uses: actions/setup-node@v4
-        with:
-          node-version: '20.x'
-          cache: 'pnpm'
-
-      - name: Install dependencies
-        run: pnpm install --no-frozen-lockfile
-
-      - name: Build project
-        run: pnpm run build
-
-      - name: Upload build artifacts
-        uses: actions/upload-artifact@v4
-        with:
-          name: build-artifacts
-          path: dist/
-
   release:
     name: Release
     runs-on: ubuntu-latest
-    needs: [test, build]
+    needs: [test]
     if: github.event_name == 'push' && (github.ref == 'refs/heads/main' || github.ref == 'refs/heads/develop' || startsWith(github.ref, 'refs/heads/feature/') || startsWith(github.ref, 'refs/heads/hotfix/'))
     permissions:
       contents: write
@@ -125,12 +89,6 @@ jobs:
       - name: Install dependencies
         run: pnpm install --no-frozen-lockfile
 
-      - name: Download build artifacts
-        uses: actions/download-artifact@v4
-        with:
-          name: build-artifacts
-          path: dist/
-
       - name: Release
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
@@ -152,10 +110,10 @@ jobs:
   deploy:
     name: Deployments
     runs-on: ubuntu-latest
-    needs: [release, build]
+    needs: [release]
     if: |
       (github.event_name == 'push' && github.ref == 'refs/heads/main' && needs.release.result == 'success') ||
-      (github.event_name == 'pull_request' && github.event.pull_request.head.repo.full_name == github.repository)
+      (github.event_name == 'pull_request' && (github.event.pull_request && github.event.pull_request.head.repo.full_name == github.repository))
     permissions:
       contents: read
       pull-requests: write
