@@ -9,6 +9,7 @@ import {
   ComponentResult,
 } from '../core/generator';
 import { TransformationResult, ColorMapping } from '../core/transformer';
+import { SVGElement } from '../core/parser';
 
 export interface ReactGeneratorOptions extends GeneratorOptions {
   memo?: boolean;
@@ -120,6 +121,7 @@ export class ReactGenerator extends ComponentGenerator {
       'titleId?: string;',
       'desc?: string;',
       'descId?: string;',
+      'size?: string;',
     ];
 
     // Add color props
@@ -153,6 +155,7 @@ export class ReactGenerator extends ComponentGenerator {
       'titleId: PropTypes.string,',
       'desc: PropTypes.string,',
       'descId: PropTypes.string,',
+      'size: PropTypes.string,',
       'className: PropTypes.string,',
       'style: PropTypes.object,',
       'width: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),',
@@ -179,7 +182,7 @@ export class ReactGenerator extends ComponentGenerator {
     const { colorMappings, metadata } = result;
 
     // Generate props destructuring for custom props only
-    const customProps = ['title', 'titleId', 'desc', 'descId'];
+    const customProps = ['title', 'titleId', 'desc', 'descId', 'size'];
     const colorProps = colorMappings.map(m => m.variableName);
     const colorClassProps = colorMappings.map(m => `${m.variableName}Class`);
 
@@ -189,9 +192,18 @@ export class ReactGenerator extends ComponentGenerator {
       allCustomProps.push('isFixedStrokeWidth');
     }
 
+    // Generate props destructuring with default values
+    const colorDefaults = this.generateColorDefaults(colorMappings);
+    const sizeDefault = 'size = "20"';
+    const allDefaults = [sizeDefault, colorDefaults].filter(Boolean).join(', ');
+    const defaultPropsString = allDefaults ? `, ${allDefaults}` : '';
+
     const customPropsDestructure = `{ ${allCustomProps.join(
       ', '
-    )}, ...svgProps }`;
+    )}${defaultPropsString}, ...svgProps }`;
+
+    // Get root SVG attributes
+    const rootAttributes = this.generateSvgAttributes(result.ast);
 
     // Add title and desc elements if needed
     const titleElement = '{title ? <title id={titleId}>{title}</title> : null}';
@@ -208,28 +220,40 @@ export class ReactGenerator extends ComponentGenerator {
         .map(child => this.elementToJsx(child, 1))
         .join('\n');
 
-      return `const ${componentName} = (${customPropsDestructure}: ${propsType}${refType}) => (
-  <svg
-    ${this.reactOptions.forwardRef ? 'ref={ref}\n    ' : ''}...svgProps
-  >
-    ${titleElement}
-    ${descElement}
+      return `const ${componentName} = (${customPropsDestructure}: ${propsType}${refType}) => {
+  const computedSize = size ? { width: size, height: size } : {};
+  
+  return (
+    <svg
+      ${
+        this.reactOptions.forwardRef ? 'ref={ref}\n      ' : ''
+      }${rootAttributes}
+      {...computedSize}
+      {...svgProps}
+    >
+      ${titleElement}
+      ${descElement}
 ${childrenJsx}
-  </svg>
-);`;
+    </svg>
+  );
+};`;
     } else {
       // For non-TypeScript, generate simpler component
       const childrenJsx = result.ast.root.children
         .map(child => this.elementToJsx(child, 1))
         .join('\n');
 
-      return `const ${componentName} = (${customPropsDestructure}) => (
-  <svg {...svgProps}>
-    ${titleElement}
-    ${descElement}
+      return `const ${componentName} = (${customPropsDestructure}) => {
+  const computedSize = size ? { width: size, height: size } : {};
+  
+  return (
+    <svg ${rootAttributes}{...computedSize} {...svgProps}>
+      ${titleElement}
+      ${descElement}
 ${childrenJsx}
-  </svg>
-);`;
+    </svg>
+  );
+};`;
     }
   }
 
@@ -288,5 +312,120 @@ ${childrenJsx}
     }
 
     return deps;
+  }
+
+  /**
+   * Generate SVG root attributes
+   */
+  private generateSvgAttributes(ast: {
+    root: any;
+    viewBox?: string;
+    width?: string;
+    height?: string;
+    namespace?: string;
+  }): string {
+    const attributes: string[] = [];
+
+    // Add viewBox from root element attributes or AST
+    const viewBox = ast.root.attributes?.viewBox || ast.viewBox;
+    if (viewBox) {
+      attributes.push(`viewBox="${viewBox}"`);
+    }
+
+    // Add xmlns if present
+    const xmlns = ast.root.attributes?.xmlns || ast.namespace;
+    if (xmlns) {
+      attributes.push(`xmlns="${xmlns}"`);
+    }
+
+    // Add width and height if present and no viewBox
+    if (!viewBox) {
+      const width = ast.root.attributes?.width || ast.width;
+      const height = ast.root.attributes?.height || ast.height;
+
+      if (width) {
+        attributes.push(`width="${width}"`);
+      }
+      if (height) {
+        attributes.push(`height="${height}"`);
+      }
+    }
+
+    return attributes.length > 0 ? attributes.join('\n    ') + '\n    ' : '';
+  }
+
+  /**
+   * Override to add color class logic for React
+   */
+  protected elementToJsx(element: SVGElement, depth: number = 0): string {
+    const indent = '  '.repeat(depth + 1);
+    const { tag, attributes, children, content } = element;
+
+    // Convert attributes to JSX format with color class logic
+    const jsxAttributes = this.attributesToJsxWithClasses(attributes);
+    const attributeString =
+      jsxAttributes.length > 0 ? ' ' + jsxAttributes.join(' ') : '';
+
+    // Handle self-closing tags
+    if (children.length === 0 && !content) {
+      return `${indent}<${tag}${attributeString} />`;
+    }
+
+    // Handle tags with content or children
+    let result = `${indent}<${tag}${attributeString}>`;
+
+    if (content) {
+      result += content;
+    }
+
+    if (children.length > 0) {
+      result += '\n';
+      result += children
+        .map(child => this.elementToJsx(child, depth + 1))
+        .join('\n');
+      result += '\n' + indent;
+    }
+
+    result += `</${tag}>`;
+    return result;
+  }
+
+  /**
+   * Convert attributes to JSX with color class logic
+   */
+  private attributesToJsxWithClasses(
+    attributes: Record<string, string>
+  ): string[] {
+    const jsxAttributes: string[] = [];
+
+    // Process all attributes
+    Object.entries(attributes).forEach(([key, value]) => {
+      const jsxKey = this.convertAttributeName(key);
+
+      // Handle dynamic color values and add corresponding class
+      if (
+        (key === 'fill' || key === 'stroke') &&
+        value.startsWith('{') &&
+        value.endsWith('}')
+      ) {
+        const colorVar = value.slice(1, -1); // Remove braces
+
+        // Add the color attribute
+        jsxAttributes.push(`${jsxKey}=${value}`);
+
+        // Add the corresponding class if it exists
+        const classVar = `${colorVar}Class`;
+        jsxAttributes.push(`className={${classVar}}`);
+      } else {
+        // Handle regular attributes
+        if (value.startsWith('{') && value.endsWith('}')) {
+          jsxAttributes.push(`${jsxKey}=${value}`);
+        } else {
+          jsxAttributes.push(`${jsxKey}="${value}"`);
+        }
+      }
+    });
+
+    return jsxAttributes;
   }
 }
