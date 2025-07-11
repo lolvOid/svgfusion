@@ -28,8 +28,19 @@ A powerful Node.js CLI tool and library that converts SVG files into optimized R
 - **Batch Processing**: Convert entire directories of SVG files
 - **Production Ready**: Robust output with proper error handling
 - **Zero Configuration**: Works out of the box with sensible defaults
+- **Simple CLI**: Direct, intuitive command structure without subcommands
 
 ## Quick Start
+
+### Simple as One Command
+
+```bash
+# Convert all SVG files in a directory to React components
+npx svgfusion ./icons --output ./components
+
+# Add prefixes, suffixes, and generate index file
+npx svgfusion ./icons --prefix Icon --suffix Component --index
+```
 
 ### Installation
 
@@ -38,12 +49,9 @@ A powerful Node.js CLI tool and library that converts SVG files into optimized R
 npm install -g svgfusion
 
 # Or use npx (no installation needed)
-npx svgfusion convert ./icons --output ./components
+npx svgfusion ./icons --output ./components
 
 # Or install locally for programmatic usage
-
-# Add prefix and suffix to component names
-svgfusion convert ./icons --output ./components --prefix Icon --suffix Svg
 npm install svgfusion
 # or
 yarn add svgfusion
@@ -55,12 +63,12 @@ pnpm add svgfusion
 
 <img src="https://i.ibb.co/8n2b5mtp/cli.png" alt="SVGFusion CLI" width="512" >
 
-svgfusion convert ./icons --output ./components --prefix Icon --suffix Svg
+svgfusion ./icons --output ./components --prefix Icon --suffix Svg
 
 You can add a prefix and/or suffix to the generated component names using the `--prefix` and `--suffix` options:
 
 ```sh
-npx svgfusion convert ./svgs --prefix Icon --suffix Svg
+npx svgfusion ./svgs --prefix Icon --suffix Svg
 ```
 
 This will generate components like `IconStarSvg`, `IconUserSvg`, etc.
@@ -70,7 +78,7 @@ Both options sanitize input to remove symbols and spaces. If omitted, no prefix/
 #### Example
 
 ```sh
-npx svgfusion convert ./svgs --prefix App --suffix Widget
+npx svgfusion ./svgs --prefix App --suffix Widget
 # Output: AppStarWidget, AppUserWidget, ...
 ```
 
@@ -84,30 +92,40 @@ npx svgfusion --help
 
 ```bash
 # Convert to React components (default)
-svgfusion convert ./icons --output ./components
+svgfusion ./icons --output ./components
 
 # Convert to Vue 3 components
-svgfusion convert ./icons --output ./components --framework vue
+svgfusion ./icons --output ./components --framework vue
 
 # Single file conversion with TypeScript
-svgfusion convert ./star.svg --output ./components --typescript
+svgfusion ./star.svg --output ./components --typescript
+
+# Batch processing with recursive directory scanning
+svgfusion ./icons --output ./components --recursive
+
+# Generate index file for tree-shaking
+svgfusion ./icons --output ./components --index
 
 # Skip optimization
-svgfusion convert ./icons --output ./components --no-optimize
+svgfusion ./icons --output ./components --no-optimize
 
 # Using npx (no global install needed)
-npx svgfusion convert ./icons --output ./components --framework react
+npx svgfusion ./icons --output ./components --framework react
 ```
 
 ### CLI Options
 
 ```bash
-svgfusion convert <input> [options]
+svgfusion <input> [options]
 
 Options:
   -o, --output <output>        Output directory (default: "./components")
   -f, --framework <framework>  Target framework (react|vue) (default: "react")
   -t, --typescript             Generate TypeScript files
+  -r, --recursive              Recursively scan input directory for SVG files
+  --index                      Generate index file for tree-shaking
+  --index-format <format>      Index file format (ts|js) (default: "ts")
+  --export-type <type>         Export type (named|default) (default: "named")
   --no-optimize                Skip SVG optimization
   --prefix <prefix>            Add prefix to component name (sanitized)
   --suffix <suffix>            Add suffix to component name (sanitized)
@@ -120,16 +138,24 @@ Perfect for trying out SVGFusion or one-time conversions:
 
 ```bash
 # Convert React components
-npx svgfusion convert ./assets/icons --output ./src/components/icons
+npx svgfusion ./assets/icons --output ./src/components/icons
 
 # Convert Vue components with TypeScript
-npx svgfusion convert ./assets/icons --output ./src/components --framework vue --typescript
+npx svgfusion ./assets/icons --output ./src/components --framework vue --typescript
 
 # Convert single file
-npx svgfusion convert ./logo.svg --output ./src/components --framework react
+npx svgfusion ./logo.svg --output ./src/components --framework react
+
+# Batch convert with index generation
+npx svgfusion ./assets/icons --output ./src/components --recursive --index
+
+# Convert with custom naming
+npx svgfusion ./assets/icons --output ./src/components --prefix Icon --suffix Component --index
 ```
 
 ### Programmatic Usage
+
+#### Single File Conversion
 
 ```typescript
 import { convertToReact, convertToVue, readSvgFile } from 'svgfusion';
@@ -154,6 +180,41 @@ const vueResult = convertToVue(svgContent, {
 
 console.log(reactResult.code); // Generated React component
 console.log(vueResult.code); // Generated Vue component
+```
+
+#### Batch Processing
+
+```typescript
+import { BatchConverter } from 'svgfusion';
+
+const batchConverter = new BatchConverter();
+
+// Convert entire directory
+const result = await batchConverter.convertBatch({
+  inputDir: './icons',
+  outputDir: './components',
+  framework: 'react',
+  recursive: true,
+  generateIndex: true,
+  typescript: true,
+  prefix: 'Icon',
+  suffix: 'Component',
+  indexFormat: 'ts',
+  exportType: 'named',
+});
+
+// Check results
+console.log(`Processed ${result.summary.total} files`);
+console.log(`Successful: ${result.summary.successful}`);
+console.log(`Failed: ${result.summary.failed}`);
+
+// Get component names
+const componentNames = batchConverter.getComponentNames(result);
+console.log('Generated components:', componentNames);
+
+// Generate summary report
+const report = batchConverter.generateSummaryReport(result);
+console.log(report);
 ```
 
 ## API Reference
@@ -185,6 +246,39 @@ Convert SVG to Vue 3 component. **Note: This is a synchronous function.**
 - `scriptSetup?: boolean` - Use script setup syntax (default: `true`)
 - `compositionApi?: boolean` - Use Composition API (default: `true`)
 - `optimize?: boolean` - Apply SVGO optimization (default: `true`)
+
+### `BatchConverter`
+
+Process multiple SVG files in batch operations.
+
+#### `convertBatch(options: BatchConversionOptions)`
+
+Convert multiple SVG files to framework components.
+
+**Options:**
+
+- `inputDir: string` - Input directory path
+- `outputDir: string` - Output directory path
+- `framework?: 'react' | 'vue'` - Target framework (default: 'react')
+- `recursive?: boolean` - Recursively scan directories (default: false)
+- `extensions?: string[]` - File extensions to process (default: ['.svg'])
+- `generateIndex?: boolean` - Generate index file (default: false)
+- `indexFormat?: 'ts' | 'js'` - Index file format (default: 'ts')
+- `exportType?: 'named' | 'default'` - Export type (default: 'named')
+- `prefix?: string` - Add prefix to component names
+- `suffix?: string` - Add suffix to component names
+- `typescript?: boolean` - Generate TypeScript components (default: true)
+- All other conversion options from `convertToReact`/`convertToVue`
+
+**Returns:** `Promise<BatchConversionResult>`
+
+#### `getComponentNames(results: BatchConversionResult)`
+
+Get array of generated component names from batch results.
+
+#### `generateSummaryReport(results: BatchConversionResult)`
+
+Generate a detailed summary report of the conversion process.
 
 ### `optimizeSvg(svgContent, config?)`
 
@@ -286,7 +380,7 @@ const customConfig = createSvgoConfig({
 const optimizedSvg = optimizeSvg(svgContent, customConfig);
 ```
 
-### Batch Processing
+### Manual Batch Processing
 
 ```typescript
 import {
@@ -306,6 +400,65 @@ for (const svgFile of svgFiles) {
 
   await writeComponentFile(`./components/${result.filename}`, result.code);
 }
+```
+
+### Index File Generation
+
+When using the `--index` flag or `generateIndex: true` option, SVGFusion creates an optimized index file for tree-shaking:
+
+#### Named Exports (Default)
+
+```typescript
+// Auto-generated index file for tree-shaking
+// This file exports all components for optimal bundling
+
+export { default as IconStar } from './IconStar';
+export { default as IconUser } from './IconUser';
+export { default as IconHome } from './IconHome';
+
+// Barrel export for convenience
+export { IconStar, IconUser, IconHome };
+
+// TypeScript component types
+export type IconComponent = React.ComponentType<React.SVGProps<SVGSVGElement>>;
+export type IconComponents = {
+  IconStar: IconComponent;
+  IconUser: IconComponent;
+  IconHome: IconComponent;
+};
+```
+
+#### Default Exports
+
+```typescript
+// Auto-generated index file
+// Warning: Default exports are less tree-shakeable
+
+import IconStar from './IconStar';
+import IconUser from './IconUser';
+import IconHome from './IconHome';
+
+export default {
+  IconStar,
+  IconUser,
+  IconHome,
+};
+
+// Individual exports for flexibility
+export { default as IconStar } from './IconStar';
+export { default as IconUser } from './IconUser';
+export { default as IconHome } from './IconHome';
+```
+
+#### Usage
+
+```typescript
+// Tree-shakeable named imports (recommended)
+import { IconStar, IconUser } from './components';
+
+// Default import
+import * as Icons from './components';
+const { IconStar, IconUser } = Icons;
 ```
 
 ## Complex Filename Support

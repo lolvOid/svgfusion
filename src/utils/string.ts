@@ -1,7 +1,10 @@
-export const pascalCase = (str: string): string => {
-  return str
-    .replace(/(?:^\w|[A-Z]|\b\w)/g, (match, index) =>
-      index === 0 ? match.toUpperCase() : match.toLowerCase()
-    )
-    .replace(/\s+/g, '');
+export const pascalCase = (str: string) => {
+  return (
+    str
+      .match(
+        /[A-Z]{2,}(?=[A-Z][a-z]+[0-9]*|\b)|[A-Z]?[a-z]+[0-9]*[a-z]*|[A-Z]|[0-9]+[a-z]*/g
+      )
+      ?.map(x => x.charAt(0).toUpperCase() + x.slice(1).toLowerCase())
+      .join('') || ''
+  );
 };

@@ -169,11 +169,5 @@ export default {
   ${svg}
 </template>`;
 
-  // Style section (optional)
-  const style = `
-<style scoped>
-/* Component styles */
-</style>`;
-
-  return [script, template, style].filter(Boolean).join('\n');
+  return [script, template].filter(Boolean).join('\n');
 }
