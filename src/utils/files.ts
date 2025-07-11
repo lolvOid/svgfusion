@@ -93,6 +93,11 @@ export async function ensureDirectoryExists(dirPath: string): Promise<void> {
 }
 
 /**
+ * Alias for ensureDirectoryExists for consistency
+ */
+export const ensureDir = ensureDirectoryExists;
+
+/**
  * Get file extension for framework
  * @param framework - Target framework
  * @param typescript - Whether to use TypeScript

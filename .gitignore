@@ -83,4 +83,4 @@ pids
 .husky/_
 
 # Examples
-examples/*
+examples/components/*

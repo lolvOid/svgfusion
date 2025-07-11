@@ -42,8 +42,7 @@ program
   .version(packageJson.version);
 
 program
-  .description('Convert SVG files to React or Vue components')
-  .argument('<input>', 'Input SVG file or directory')
+  .argument('[input]', 'Input SVG file or directory')
   .option('-o, --output <output>', 'Output directory', './components')
   .option(
     '-f, --framework <framework>',
@@ -51,28 +50,56 @@ program
     'react'
   )
   .option('-t, --typescript', 'Generate TypeScript files', false)
+  .option(
+    '-r, --recursive',
+    'Recursively scan input directory for SVG files',
+    false
+  )
   .option('--no-optimize', 'Skip SVG optimization')
   .option('--prefix <prefix>', 'Add prefix to component name')
   .option('--suffix <suffix>', 'Add suffix to component name')
+  .option('--index', 'Generate index file for tree-shaking', false)
+  .option('--index-format <format>', 'Index file format (ts|js)', 'ts')
+  .option('--export-type <type>', 'Export type (named|default)', 'named')
   .action(
     async (
-      input: string,
-      options: {
+      input?: string,
+      options?: {
         framework: string;
         output: string;
         typescript: boolean;
+        recursive: boolean;
         optimize: boolean;
         prefix?: string;
         suffix?: string;
+        index: boolean;
+        indexFormat: string;
+        exportType: string;
       }
     ) => {
+      // Show help if no input provided
+      if (!input) {
+        program.outputHelp();
+        process.exit(0);
+      }
+
       console.log(createBanner(colors));
 
       console.log(`${colors.blue}🔄 Processing SVG files...${colors.reset}`);
 
       try {
-        const { framework, output, typescript, optimize, prefix, suffix } =
-          options;
+        const {
+          framework,
+          output,
+          typescript,
+          recursive,
+          optimize,
+          prefix,
+          suffix,
+          index: generateIndex,
+          indexFormat,
+          exportType,
+        } = options!;
 
         if (framework !== 'react' && framework !== 'vue') {
           throw new Error('Framework must be either "react" or "vue"');
@@ -91,7 +118,7 @@ program
           }
         } else if (inputStat.isDirectory()) {
           // Directory input
-          svgFiles = await readSvgDirectory(input);
+          svgFiles = await readSvgDirectory(input, recursive);
         } else {
           throw new Error('Input must be a file or directory');
         }
@@ -103,6 +130,8 @@ program
         console.log(
           `${colors.blue}🔄 Converting ${svgFiles.length} SVG file(s)...${colors.reset}`
         );
+
+        const results = [];
 
         for (const filePath of svgFiles) {
           const svgContent = await readSvgFile(filePath);
@@ -133,6 +162,28 @@ program
           // Write component file
           const outputPath = join(output, result.filename);
           await writeComponentFile(outputPath, result.code);
+
+          results.push(result);
+        }
+
+        // Generate index file if requested
+        if (generateIndex && results.length > 0) {
+          const { generateIndexFile } = await import(
+            './utils/index-generator.js'
+          );
+          const indexContent = generateIndexFile(results, {
+            format: indexFormat as 'ts' | 'js',
+            exportType: exportType as 'named' | 'default',
+            typescript,
+          });
+
+          const indexFilename = `index.${indexFormat}`;
+          const indexPath = join(output, indexFilename);
+          await writeComponentFile(indexPath, indexContent);
+
+          console.log(
+            `${colors.green}📄 Generated ${indexFilename} for tree-shaking${colors.reset}`
+          );
         }
 
         console.log(
@@ -141,6 +192,14 @@ program
 
         console.log(
           `${colors.dim}📁 Output location: ${colors.reset}${colors.cyan}${output}${colors.reset}`
+        );
+
+        // Display component names
+        const componentNames = results.map(r => r.componentName);
+        console.log(
+          `${colors.dim}📦 Generated components: ${
+            colors.reset
+          }${componentNames.join(', ')}`
         );
       } catch (error) {
         console.error(
@@ -156,10 +215,17 @@ program
   .addHelpText(
     'after',
     `\n${colors.gray}Examples:${colors.reset}\n` +
-      `  ${colors.blue}svgfusion convert src/icons -o src/components${colors.reset}\n` +
-      `  ${colors.blue}svgfusion convert src/icons --framework vue --typescript${colors.reset}\n` +
-      `  ${colors.blue}svgfusion convert src/icons --optimize --prefix My --suffix Widget${colors.reset}\n` +
-      `  ${colors.blue}svgfusion convert src/icons --framework react --typescript --optimize${colors.reset}\n`
-  )
-  .outputHelp();
+      `  ${colors.blue}svgfusion src/icons -o src/components${colors.reset}\n` +
+      `  ${colors.blue}svgfusion src/icons --framework vue --typescript${colors.reset}\n` +
+      `  ${colors.blue}svgfusion src/icons --recursive --index${colors.reset}\n` +
+      `  ${colors.blue}svgfusion src/icons --prefix Icon --suffix Component --index${colors.reset}\n` +
+      `  ${colors.blue}svgfusion src/icons --framework react --typescript --optimize${colors.reset}\n`
+  );
+
+// Show help by default if no arguments provided
+if (process.argv.length === 2) {
+  program.outputHelp();
+  process.exit(0);
+}
+
 program.parse();

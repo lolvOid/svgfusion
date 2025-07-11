@@ -46,6 +46,10 @@ export interface BatchConversionOptions extends ConversionOptions {
   outputDir: string;
   recursive?: boolean;
   extensions?: string[];
+  generateIndex?: boolean;
+  indexFormat?: 'ts' | 'js';
+  exportType?: 'named' | 'default';
+  framework?: Framework;
 }
 
 export interface BatchConversionResult {
@@ -78,4 +82,7 @@ export interface CliOptions {
   format?: 'esm' | 'cjs';
   recursive?: boolean;
   verbose?: boolean;
+  generateIndex?: boolean;
+  indexFormat?: 'ts' | 'js';
+  exportType?: 'named' | 'default';
 }

@@ -45,6 +45,9 @@ importers:
       '@commitlint/config-conventional':
         specifier: ^17.8.1
         version: 17.8.1
+      '@jest/globals':
+        specifier: ^30.0.4
+        version: 30.0.4
       '@semantic-release/changelog':
         specifier: ^6.0.3
         version: 6.0.3(semantic-release@24.2.6(typescript@5.8.3))
