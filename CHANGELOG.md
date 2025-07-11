@@ -1,3 +1,11 @@
+# [1.8.0](https://github.com/lolvOid/svgfusion/compare/v1.7.0...v1.8.0) (2025-07-11)
+
+
+### Features
+
+* complete architecture refactor and enhance component generation ([e8b023e](https://github.com/lolvOid/svgfusion/commit/e8b023e591c3abac80ad6ce785742345c49411d9))
+* update CLI and engine to improve performance and usability ([374bfa4](https://github.com/lolvOid/svgfusion/commit/374bfa4a31bf563d239f339dd4600d78b3f1a213))
+
 # [2.0.0](https://github.com/lolvOid/svgfusion/compare/v1.7.0...v2.0.0) (2025-07-12)
 
 ## 🚀 Major Architecture Rewrite
