@@ -61,7 +61,7 @@ pnpm add svgfusion
 
 ## CLI Options
 
-<img src="https://i.ibb.co/8n2b5mtp/cli.png" alt="SVGFusion CLI" width="512" >
+<img src="https://i.ibb.co/TD0QP5FC/cli.png" alt="SVGFusion CLI" width="512" >
 
 svgfusion ./icons --output ./components --prefix Icon --suffix Svg
 

@@ -1,6 +1,6 @@
 # CLI Usage
 
-![SVGFusion CLI](https://i.ibb.co/8n2b5mtp/cli.png)
+![SVGFusion CLI](https://i.ibb.co/TD0QP5FC/cli.png)
 
 The SVGFusion CLI provides a simple yet powerful interface for converting SVG files to React and Vue components.
 
