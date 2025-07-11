@@ -24,46 +24,9 @@ export function svgToComponentName(filename: string): string {
 function processComplexFilename(filename: string): string {
   // Handle files with metadata like "User Profile Avatar, Type=Solid" or "Size=xl, Color=Brand, Type=Glass"
 
-  let processed = filename;
-
-  // Handle simple patterns like "User Profile Avatar, Type=Solid" first
-  const simpleMatch = processed.match(/^([^,]+),\s*Type=([^,]+)/i);
-  if (simpleMatch) {
-    processed = `${simpleMatch[1]} ${simpleMatch[2]}`;
-    return processed;
-  }
-
-  // Check for metadata patterns
-  const sizeMatch = processed.match(/Size=(\w+)/i);
-  const colorMatch = processed.match(/Color=(\w+)/i);
-  const typeMatch = processed.match(/Type=(\w+)/i);
-
-  // If it has metadata, construct a meaningful name
-  if (sizeMatch || colorMatch || typeMatch) {
-    const parts = [];
-    if (typeMatch) parts.push(typeMatch[1]);
-    if (colorMatch) parts.push(colorMatch[1]);
-    if (sizeMatch) parts.push(sizeMatch[1]);
-
-    if (parts.length > 0) {
-      processed = parts.join(' ');
-      return processed;
-    }
-  }
-
-  // If no metadata patterns found, just clean up the filename
-  processed = processed
-    .replace(/\b\w+=\w+\b/g, '') // Remove key=value patterns
-    .replace(/,\s*/g, ' ') // Replace commas with spaces
-    .replace(/[=]/g, ' ') // Replace equals with spaces
-    .replace(/\s+/g, ' ') // Normalize multiple spaces
-    .trim();
-
-  // If the result is empty or too short, use original filename as fallback
-  if (!processed || processed.length < 2) {
-    processed = filename;
-  }
-
+  // Lowercase the filename, remove all non-alphanumeric characters and spaces
+  let processed = filename.toLowerCase().replace(/[^a-zA-Z0-9]/g, ' ');
+  processed = processed.replace(/\s+/g, ' ').trim();
   return processed;
 }
 
