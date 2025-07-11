@@ -47,14 +47,6 @@ function generateNamedExports(
     content += `export { default as ${result.componentName} } from './${importPath}';\n`;
   }
 
-  // Add barrel export for convenience
-  content += `\n// Barrel export for convenience\n`;
-  content += `export {\n`;
-  for (const result of results) {
-    content += `  ${result.componentName},\n`;
-  }
-  content += `};\n`;
-
   // Add TypeScript types export if needed
   if (typescript && format === 'ts') {
     content += `\n// TypeScript component types\n`;

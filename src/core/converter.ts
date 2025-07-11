@@ -1,6 +1,6 @@
 import { ConversionOptions, ConversionResult } from '../types/index.js';
-import { optimizeSvg } from '../utils/svgo.js';
-import { formatComponentName } from '../utils/name.js';
+import { optimizeSvg } from '../utils/svgo';
+import { formatComponentName } from '../utils/name';
 
 /**
  * Base converter class for SVG to framework conversion
@@ -9,10 +9,7 @@ export abstract class BaseConverter {
   /**
    * Process SVG content with optimization
    */
-  protected async processSvg(
-    svgContent: string,
-    options: ConversionOptions
-  ): Promise<string> {
+  protected processSvg(svgContent: string, options: ConversionOptions): string {
     const { optimize = true } = options;
 
     if (optimize) {

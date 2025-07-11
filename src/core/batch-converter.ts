@@ -10,6 +10,10 @@ import { ReactConverter } from './react-converter';
 import { VueConverter } from './vue-converter';
 import { generateIndexFile } from '../utils/index-generator';
 import { ensureDir, writeComponentFile } from '../utils/files';
+import {
+  validateDuplicateNames,
+  formatDuplicateErrors,
+} from '../utils/duplicate-validator';
 
 /**
  * Batch converter for processing multiple SVG files
@@ -43,6 +47,19 @@ export class BatchConverter {
 
       // Get all SVG files
       const svgFiles = await this.getSvgFiles(inputDir, recursive, extensions);
+
+      // Validate for duplicate component names before processing
+      const duplicateValidation = validateDuplicateNames(svgFiles, {
+        prefix: conversionOptions.prefix,
+        suffix: conversionOptions.suffix,
+      });
+
+      if (duplicateValidation.hasDuplicates) {
+        const errorMessage = formatDuplicateErrors(duplicateValidation);
+        throw new Error(
+          `Duplicate component names detected:\n\n${errorMessage}`
+        );
+      }
 
       // Convert each file
       for (const filePath of svgFiles) {

@@ -1,5 +1,10 @@
 import { Config } from '@svgr/core';
 import { ReactConversionOptions } from '../../types/index.js';
+import {
+  replaceColorsWithProps,
+  generateColorProps,
+  ColorInfo,
+} from '../../utils/color-extractor.js';
 
 /**
  * Enhanced SVGR configuration generator for complex SVG support
@@ -63,12 +68,12 @@ export function createSvgrConfig(options: ReactConversionOptions): Config {
             removeViewBox: false,
             removeTitle: titleProp ? false : true,
             removeDesc: descProp ? false : true,
-            removeUselessStrokeAndFill: false,
+            removeUselessStrokeAndFill: options.splitColors ? false : true, // Preserve stroke/fill for split colors
             removeUnusedNS: false,
             // Preserve complex features
             removeUselessDefs: false,
             convertShapeToPath: false,
-            mergePaths: false,
+            mergePaths: options.splitColors ? false : true, // Don't merge paths for split colors
             convertColors: false, // Disable color conversion to preserve gradients
           },
         },
@@ -90,13 +95,84 @@ export function createSvgrConfig(options: ReactConversionOptions): Config {
 export function postProcessReactComponent(
   svgrOutput: string,
   componentName: string,
-  _options: ReactConversionOptions
+  options: ReactConversionOptions,
+  originalColors?: string[]
 ): string {
   let processedCode = svgrOutput;
 
   // Add unique IDs to prevent collisions (always enabled for complex SVGs)
   if (hasComplexFeatures(processedCode)) {
     processedCode = addUniqueIds(processedCode, componentName);
+  }
+
+  // Handle split colors feature
+  if (options.splitColors && originalColors && originalColors.length > 0) {
+    // Use original colors detected before optimization
+    const colorProps = generateColorProps(originalColors, 'react');
+    if (colorProps) {
+      // Find the interface definition and add color props
+      const interfaceRegex = /(interface\s+\w+Props\s*{[^}]*)(})/;
+      const match = processedCode.match(interfaceRegex);
+      if (match) {
+        const interfaceContent = match[1];
+        const closingBrace = match[2];
+        processedCode = processedCode.replace(
+          interfaceRegex,
+          `${interfaceContent}\n${colorProps}\n${closingBrace}`
+        );
+      }
+    }
+
+    // Create color mapping for replacement
+    const colorMap = new Map<string, string>();
+    originalColors.forEach((color, index) => {
+      colorMap.set(color, `color${index + 1}`);
+    });
+
+    // Replace colors in JSX - this is a simplified version
+    // Since optimization may have changed the structure, we'll add the color props
+    // but may not be able to replace them in the optimized SVG
+    const originalColorInfo: ColorInfo = {
+      colors: originalColors,
+      colorMap,
+      fillColors: [],
+      strokeColors: [],
+      gradientColors: [],
+      fillColorMap: new Map(),
+      strokeColorMap: new Map(),
+      gradientColorMap: new Map(),
+    };
+    processedCode = replaceColorsWithProps(
+      processedCode,
+      originalColorInfo,
+      'react'
+    );
+  }
+
+  // Handle fixed stroke width feature
+  if (options.isFixedStrokeWidth) {
+    // Add isFixedStrokeWidth prop to interface
+    const interfaceRegex = /(interface\s+\w+Props\s*{[^}]*)(})/;
+    const match = processedCode.match(interfaceRegex);
+    if (match) {
+      const interfaceContent = match[1];
+      const closingBrace = match[2];
+      processedCode = processedCode.replace(
+        interfaceRegex,
+        `${interfaceContent}\n  isFixedStrokeWidth?: boolean;\n${closingBrace}`
+      );
+    }
+
+    // Add vector-effect conditionally to stroke elements
+    processedCode = processedCode.replace(/(<[^>]+stroke[^>]*>)/g, match => {
+      if (match.includes('vector-effect')) {
+        return match; // Don't add if already present
+      }
+      return match.replace(
+        '>',
+        ' vectorEffect={isFixedStrokeWidth ? "non-scaling-stroke" : undefined}>'
+      );
+    });
   }
 
   return processedCode;

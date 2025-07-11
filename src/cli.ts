@@ -15,7 +15,7 @@ import { fileURLToPath } from 'url';
 import { dirname, join } from 'path';
 import { readFileSync } from 'fs';
 import { createBanner } from './utils/banner.js';
-import { colors } from './utils/colors.js';
+import { ansiColors } from './utils/colors.js';
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
@@ -31,7 +31,7 @@ const program = new Command();
 const isNpxCall =
   process.argv[1]?.includes('npx') || process.argv[1]?.includes('_npx');
 if (process.argv.length === 1 || (isNpxCall && process.argv.length === 2)) {
-  console.log(createBanner(colors));
+  console.log(createBanner(ansiColors));
 }
 
 program
@@ -61,6 +61,16 @@ program
   .option('--index', 'Generate index file for tree-shaking', false)
   .option('--index-format <format>', 'Index file format (ts|js)', 'ts')
   .option('--export-type <type>', 'Export type (named|default)', 'named')
+  .option(
+    '--split-colors',
+    'Split colors into separate props with classes',
+    false
+  )
+  .option(
+    '--fixed-stroke-width',
+    'Add vector-effect="non-scaling-stroke" to stroke elements',
+    false
+  )
   .action(
     async (
       input?: string,
@@ -75,6 +85,8 @@ program
         index: boolean;
         indexFormat: string;
         exportType: string;
+        splitColors: boolean;
+        fixedStrokeWidth: boolean;
       }
     ) => {
       // Show help if no input provided
@@ -83,9 +95,11 @@ program
         process.exit(0);
       }
 
-      console.log(createBanner(colors));
+      console.log(createBanner(ansiColors));
 
-      console.log(`${colors.blue}🔄 Processing SVG files...${colors.reset}`);
+      console.log(
+        `${ansiColors.blue}🔄 Processing SVG files...${ansiColors.reset}`
+      );
 
       try {
         const {
@@ -99,6 +113,8 @@ program
           index: generateIndex,
           indexFormat,
           exportType,
+          splitColors,
+          fixedStrokeWidth,
         } = options!;
 
         if (framework !== 'react' && framework !== 'vue') {
@@ -128,7 +144,7 @@ program
         }
 
         console.log(
-          `${colors.blue}🔄 Converting ${svgFiles.length} SVG file(s)...${colors.reset}`
+          `${ansiColors.blue}🔄 Converting ${svgFiles.length} SVG file(s)...${ansiColors.reset}`
         );
 
         const results = [];
@@ -153,10 +169,14 @@ program
               ? await convertToReact(optimizedSvg, {
                   typescript,
                   name: componentName,
+                  splitColors,
+                  isFixedStrokeWidth: fixedStrokeWidth,
                 })
               : await convertToVue(optimizedSvg, {
                   typescript,
                   name: componentName,
+                  splitColors,
+                  isFixedStrokeWidth: fixedStrokeWidth,
                 });
 
           // Write component file
@@ -182,44 +202,44 @@ program
           await writeComponentFile(indexPath, indexContent);
 
           console.log(
-            `${colors.green}📄 Generated ${indexFilename} for tree-shaking${colors.reset}`
+            `${ansiColors.green}📄 Generated ${indexFilename} for tree-shaking${ansiColors.reset}`
           );
         }
 
         console.log(
-          `${colors.green}✅ Successfully converted ${svgFiles.length} SVG file(s) to ${framework} components${colors.reset}`
+          `${ansiColors.green}✅ Successfully converted ${svgFiles.length} SVG file(s) to ${framework} components${ansiColors.reset}`
         );
 
         console.log(
-          `${colors.dim}📁 Output location: ${colors.reset}${colors.cyan}${output}${colors.reset}`
+          `${ansiColors.dim}📁 Output location: ${ansiColors.reset}${ansiColors.cyan}${output}${ansiColors.reset}`
         );
 
-        // Display component names
+        // Diraay component names
         const componentNames = results.map(r => r.componentName);
         console.log(
-          `${colors.dim}📦 Generated components: ${
-            colors.reset
+          `${ansiColors.dim}📦 Generated components: ${
+            ansiColors.reset
           }${componentNames.join(', ')}`
         );
       } catch (error) {
         console.error(
-          `${colors.red}❌ Error: ${
+          `${ansiColors.red}❌ Error: ${
             error instanceof Error ? error.message : 'Unknown error'
-          }${colors.reset}`
+          }${ansiColors.reset}`
         );
         process.exit(1);
       }
     }
   )
-  .addHelpText('before', createBanner(colors))
+  .addHelpText('before', createBanner(ansiColors))
   .addHelpText(
     'after',
-    `\n${colors.gray}Examples:${colors.reset}\n` +
-      `  ${colors.blue}svgfusion src/icons -o src/components${colors.reset}\n` +
-      `  ${colors.blue}svgfusion src/icons --framework vue --typescript${colors.reset}\n` +
-      `  ${colors.blue}svgfusion src/icons --recursive --index${colors.reset}\n` +
-      `  ${colors.blue}svgfusion src/icons --prefix Icon --suffix Component --index${colors.reset}\n` +
-      `  ${colors.blue}svgfusion src/icons --framework react --typescript --optimize${colors.reset}\n`
+    `\n${ansiColors.gray}Examples:${ansiColors.reset}\n` +
+      `  ${ansiColors.blue}svgfusion src/icons -o src/components${ansiColors.reset}\n` +
+      `  ${ansiColors.blue}svgfusion src/icons --framework vue --typescript${ansiColors.reset}\n` +
+      `  ${ansiColors.blue}svgfusion src/icons --recursive --index${ansiColors.reset}\n` +
+      `  ${ansiColors.blue}svgfusion src/icons --prefix Icon --suffix Component --index${ansiColors.reset}\n` +
+      `  ${ansiColors.blue}svgfusion src/icons --framework react --typescript --optimize${ansiColors.reset}\n`
   );
 
 // Show help by default if no arguments provided

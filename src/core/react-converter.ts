@@ -1,12 +1,13 @@
 import { transform } from '@svgr/core';
 import { ReactConversionOptions, ConversionResult } from '../types/index.js';
-import { BaseConverter } from './converter.js';
+import { BaseConverter } from './converter';
 import {
   createSvgrConfig,
   postProcessReactComponent,
   hasComplexFeatures,
   addUniqueIds,
-} from './processors/svgr-processor.js';
+} from './processors/svgr-processor';
+import { extractColors } from '../utils/color-extractor';
 
 /**
  * React-specific SVG converter
@@ -23,8 +24,13 @@ export class ReactConverter extends BaseConverter {
       // Generate component name first (needed for ID collision prevention)
       const componentName = this.generateComponentName(options);
 
+      // Extract colors BEFORE processing if splitColors is enabled
+      const colors = options.splitColors
+        ? extractColors(svgContent).colors
+        : undefined;
+
       // Process SVG with optimization
-      let processedSvg = await this.processSvg(svgContent, options);
+      let processedSvg = this.processSvg(svgContent, options);
 
       // Add unique IDs to prevent collisions BEFORE SVGR processing
       if (hasComplexFeatures(processedSvg)) {
@@ -43,7 +49,8 @@ export class ReactConverter extends BaseConverter {
       const code = postProcessReactComponent(
         svgrResult,
         componentName,
-        options
+        options,
+        colors
       );
 
       // Generate filename
@@ -57,6 +64,7 @@ export class ReactConverter extends BaseConverter {
         code,
         filename,
         componentName,
+        colors,
       };
     } catch (error) {
       throw new Error(`Failed to convert SVG to React: ${error}`);
