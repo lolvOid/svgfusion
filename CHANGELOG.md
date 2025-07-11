@@ -1,3 +1,10 @@
+## [1.5.1](https://github.com/lolvOid/svgfusion/compare/v1.5.0...v1.5.1) (2025-07-11)
+
+
+### Bug Fixes
+
+* update CLI image reference in README and CLI usage documentation ([bccb0bd](https://github.com/lolvOid/svgfusion/commit/bccb0bd4b8108b4387df43270e19fdc588f9833b))
+
 # [1.5.0](https://github.com/lolvOid/svgfusion/compare/v1.4.0...v1.5.0) (2025-07-11)
 
 
