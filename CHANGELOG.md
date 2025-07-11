@@ -1,3 +1,10 @@
+# [1.9.0](https://github.com/lolvOid/svgfusion/compare/v1.8.0...v1.9.0) (2025-07-11)
+
+
+### Features
+
+* enhance React and Vue generators to support size prop and improve SVG attribute handling ([765dd1e](https://github.com/lolvOid/svgfusion/commit/765dd1eddd6cdd680551fd25978e4f8fda1a6151))
+
 # [1.8.0](https://github.com/lolvOid/svgfusion/compare/v1.7.0...v1.8.0) (2025-07-11)
 
 
