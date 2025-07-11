@@ -1,7 +1,57 @@
 import { formatComponentName, svgToComponentName } from '../src/utils/name';
 
 describe('formatComponentName', () => {
-  const cases = [
+  const sanitizeCases = [
+    { name: 'icon', prefix: 'We-', suffix: '$2', expected: 'WeIcon2' },
+    { name: 'icon', prefix: '$$', suffix: '!!!', expected: 'Icon' },
+    {
+      name: 'icon',
+      prefix: 'My$',
+      suffix: 'Widget!',
+      expected: 'MyIconWidget',
+    },
+    { name: 'icon', prefix: '123$', suffix: '456!', expected: '123Icon456' },
+    { name: 'icon', prefix: ' ', suffix: ' ', expected: 'Icon' },
+    { name: 'icon', prefix: undefined, suffix: undefined, expected: 'Icon' },
+  ];
+
+  sanitizeCases.forEach(({ name, prefix, suffix, expected }) => {
+    it(`should sanitize prefix='${prefix}' and suffix='${suffix}' for '${name}' and match snapshot`, () => {
+      const result = formatComponentName(name, prefix, suffix);
+      expect(result).toBe(expected);
+      expect(result).toMatchSnapshot();
+    });
+  });
+
+  const addCases = [
+    { name: 'star', prefix: 'Icon', suffix: 'Svg', expected: 'IconStarSvg' },
+    {
+      name: 'user-profile',
+      prefix: 'App',
+      suffix: 'Component',
+      expected: 'AppUserProfileComponent',
+    },
+    { name: 'icon', prefix: 'My', suffix: undefined, expected: 'MyIcon' },
+    {
+      name: 'icon',
+      prefix: undefined,
+      suffix: 'Widget',
+      expected: 'IconWidget',
+    },
+    { name: 'icon', prefix: '', suffix: 'Widget', expected: 'IconWidget' },
+    { name: 'icon', prefix: 'My', suffix: '', expected: 'MyIcon' },
+    { name: 'icon', prefix: '', suffix: '', expected: 'Icon' },
+  ];
+
+  addCases.forEach(({ name, prefix, suffix, expected }) => {
+    it(`should add prefix='${prefix}' and suffix='${suffix}' to '${name}' and match snapshot`, () => {
+      const result = formatComponentName(name, prefix, suffix);
+      expect(result).toBe(expected);
+      expect(result).toMatchSnapshot();
+    });
+  });
+
+  const normalCases = [
     { name: 'icon', expected: 'Icon' },
     { name: 'star', expected: 'Star' },
     { name: 'user-profile', expected: 'UserProfile' },
@@ -20,9 +70,33 @@ describe('formatComponentName', () => {
     { name: 'UserProfile', expected: 'UserProfile' },
   ];
 
-  cases.forEach(({ name, expected }) => {
-    it(`should convert '${name}' to '${expected}'`, () => {
-      expect(formatComponentName(name)).toBe(expected);
+  const negativeCases = [
+    { name: 'icon', prefix: 'We-', suffix: '$2', expected: 'WeIcon2' },
+    { name: 'icon', prefix: '$$', suffix: '!!!', expected: 'Icon' },
+    {
+      name: 'icon',
+      prefix: 'My$',
+      suffix: 'Widget!',
+      expected: 'MyIconWidget',
+    },
+    { name: 'icon', prefix: '123$', suffix: '456!', expected: '123Icon456' },
+    { name: 'icon', prefix: ' ', suffix: ' ', expected: 'Icon' },
+    { name: 'icon', prefix: undefined, suffix: undefined, expected: 'Icon' },
+  ];
+
+  normalCases.forEach(({ name, expected }) => {
+    it(`should convert '${name}' to '${expected}' and match snapshot`, () => {
+      const result = formatComponentName(name);
+      expect(result).toBe(expected);
+      expect(result).toMatchSnapshot();
+    });
+  });
+
+  negativeCases.forEach(({ name, prefix, suffix, expected }) => {
+    it(`should sanitize prefix='${prefix}' and suffix='${suffix}' for '${name}' and match snapshot`, () => {
+      const result = formatComponentName(name, prefix, suffix);
+      expect(result).toBe(expected);
+      expect(result).toMatchSnapshot();
     });
   });
 });
@@ -49,15 +123,11 @@ describe('svgToComponentName', () => {
     { name: '', expected: '' },
   ];
 
-  cases.forEach(({ name }) => {
-    it(`should convert '${name}' and match snapshot`, () => {
-      expect(svgToComponentName(name)).toMatchSnapshot();
-    });
-  });
-
   cases.forEach(({ name, expected }) => {
-    it(`should convert '${name}' to '${expected}'`, () => {
-      expect(svgToComponentName(name)).toBe(expected);
+    it(`should convert '${name}' to '${expected}' and match snapshot`, () => {
+      const result = svgToComponentName(name);
+      expect(result).toBe(expected);
+      expect(result).toMatchSnapshot();
     });
   });
 });

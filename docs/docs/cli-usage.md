@@ -26,6 +26,33 @@ svgfusion convert input.svg
 
 ## Options
 
+### --prefix `<prefix>`
+
+Add a prefix to the generated component name. Input is sanitized to remove symbols and spaces.
+
+```bash
+svgfusion convert icon.svg --prefix Icon
+# Output: IconIconStar, IconUserProfile, ...
+```
+
+### --suffix `<suffix>`
+
+Add a suffix to the generated component name. Input is sanitized to remove symbols and spaces.
+
+```bash
+svgfusion convert icon.svg --suffix Svg
+# Output: IconStarSvg, UserProfileSvg, ...
+```
+
+### --prefix and --suffix together
+
+You can combine both options:
+
+```bash
+svgfusion convert ./icons --prefix App --suffix Widget
+# Output: AppStarWidget, AppUserWidget, ...
+```
+
 ### -o, --output `<directory>`
 
 Specify the output directory for generated components.
@@ -162,6 +189,6 @@ const props = withDefaults(defineProps<Props>(), {
 ## Tips
 
 1. **Batch Processing**: Use directory input to convert multiple SVG files at once
-2. **Naming**: Component names are automatically generated from filenames using PascalCase
+2. **Naming**: Component names are automatically generated from filenames using PascalCase. You can customize names with `--prefix` and `--suffix` options for your design system or naming conventions.
 3. **Optimization**: SVG optimization is enabled by default for smaller bundle sizes
 4. **TypeScript**: Always use `-t` flag for TypeScript projects for better type safety
