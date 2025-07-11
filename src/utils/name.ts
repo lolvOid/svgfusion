@@ -1,4 +1,4 @@
-import pascalCase from 'just-pascal-case';
+import { pascalCase } from './string';
 
 /**
  * Convert SVG filename to a valid React component name
