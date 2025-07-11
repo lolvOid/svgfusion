@@ -1,3 +1,10 @@
+# [1.4.0](https://github.com/lolvOid/svgfusion/compare/v1.3.0...v1.4.0) (2025-07-11)
+
+
+### Features
+
+* add CLI banner and color utilities; update README with CLI image ([13a29a6](https://github.com/lolvOid/svgfusion/commit/13a29a622cbdfa5a7af62f3b027513c2d7840c3b))
+
 # [1.3.0](https://github.com/lolvOid/svgfusion/compare/v1.2.1...v1.3.0) (2025-07-11)
 
 
