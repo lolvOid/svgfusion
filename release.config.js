@@ -4,26 +4,21 @@ const config = () => {
 
   /** @type {import('semantic-release').Options} */
   const semanticReleaseConfig = {
-    branches: [
-      'main',
-      { name: 'develop', prerelease: 'alpha' },
-      { name: 'feature/*', prerelease: true },
-      { name: 'hotfix/*', prerelease: 'hotfix' },
-    ],
+    branches: ['main', { name: '*', prerelease: true }],
     plugins: [
       '@semantic-release/commit-analyzer',
       '@semantic-release/release-notes-generator',
       [
         '@semantic-release/changelog',
         {
-          changelogFile: 'CHANGELOG.md'
-        }
+          changelogFile: 'CHANGELOG.md',
+        },
       ],
       [
         '@semantic-release/npm',
         {
-          npmPublish: true
-        }
+          npmPublish: true,
+        },
       ],
       [
         '@semantic-release/github',
@@ -31,23 +26,19 @@ const config = () => {
           assets: [
             {
               path: 'dist/**/*',
-              label: 'Built distribution'
-            }
-          ]
-        }
+              label: 'Built distribution',
+            },
+          ],
+        },
       ],
       [
         '@semantic-release/git',
         {
-          assets: [
-            'CHANGELOG.md',
-            'package.json',
-            'package-lock.json'
-          ],
-          message: `chore(release): \${nextRelease.version} [skip ci]\n\n\${nextRelease.notes}`
-        }
-      ]
-    ]
+          assets: ['CHANGELOG.md', 'package.json', 'package-lock.json'],
+          message: `chore(release): \${nextRelease.version} [skip ci]\n\n\${nextRelease.notes}`,
+        },
+      ],
+    ],
   };
 
   return semanticReleaseConfig;
