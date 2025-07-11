@@ -114,7 +114,7 @@ ${style ? `<style scoped>\n${style}\n</style>` : ''}`;
       .map(child => this.elementToVueTemplate(child, 2))
       .join('\n');
 
-    return `  <svg v-bind="$attrs">
+    return `  <svg v-bind="$attrs" :width="props.size || undefined" :height="props.size || undefined">
     <title v-if="props.title" :id="props.titleId">{{ props.title }}</title>
     <desc v-if="props.desc" :id="props.descId">{{ props.desc }}</desc>
 ${childrenJsx}
@@ -128,12 +128,29 @@ ${childrenJsx}
     const indent = '  '.repeat(depth);
     const { tag, attributes, children, content } = element;
 
-    // Convert attributes to Vue template format
-    const vueAttributes = Object.entries(attributes)
-      .map(([key, value]) => `${key}="${value}"`)
-      .join(' ');
+    // Convert attributes to Vue template format with color class logic
+    const vueAttributes: string[] = [];
 
-    const attributeString = vueAttributes ? ' ' + vueAttributes : '';
+    Object.entries(attributes).forEach(([key, value]) => {
+      // Check if value is a color variable (starts and ends with curly braces)
+      if (value.startsWith('{') && value.endsWith('}')) {
+        const variableName = value.slice(1, -1); // Remove the braces
+
+        // Add the color attribute
+        vueAttributes.push(`:${key}="props.${variableName}"`);
+
+        // Add the corresponding class if it's a fill or stroke attribute
+        if (key === 'fill' || key === 'stroke') {
+          const classVar = `${variableName}Class`;
+          vueAttributes.push(`:class="props.${classVar}"`);
+        }
+      } else {
+        vueAttributes.push(`${key}="${value}"`);
+      }
+    });
+
+    const attributeString =
+      vueAttributes.length > 0 ? ' ' + vueAttributes.join(' ') : '';
 
     // Handle self-closing tags
     if (children.length === 0 && !content) {
@@ -186,6 +203,7 @@ ${childrenJsx}
       lines.push('  titleId?: string;');
       lines.push('  desc?: string;');
       lines.push('  descId?: string;');
+      lines.push('  size?: string;');
 
       // Add color props
       const colorProps = this.generateColorPropsInterface(colorMappings);
@@ -210,6 +228,12 @@ ${childrenJsx}
       lines.push('  style: { type: Object, default: undefined },');
       lines.push('  width: { type: [String, Number], default: undefined },');
       lines.push('  height: { type: [String, Number], default: undefined },');
+      lines.push('  size: { type: String, default: "20" },');
+    }
+
+    // Add size defaults for TypeScript
+    if (this.vueOptions.typescript) {
+      lines.push('  size: "20",');
     }
 
     // Add color defaults

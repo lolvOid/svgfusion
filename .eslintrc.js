@@ -33,6 +33,7 @@ module.exports = {
     'no-console': 'warn',
     'prefer-const': 'error',
     'no-var': 'error',
+    '@typescript-eslint/no-unsafe-member-access': 'off',
   },
   ignorePatterns: ['dist/', 'node_modules/', '*.js', '*.mjs', '*.cjs'],
   overrides: [
