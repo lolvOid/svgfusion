@@ -82,10 +82,6 @@
     "postinstall": "if [ -d docs ]; then cd docs && pnpm install; fi"
   },
   "dependencies": {
-    "@svgr/core": "^8.0.0",
-    "@svgr/plugin-jsx": "^8.1.0",
-    "@svgr/plugin-prettier": "^8.1.0",
-    "@svgr/plugin-svgo": "^8.1.0",
     "@types/figlet": "^1.7.0",
     "chalk": "^5.0.0",
     "commander": "^11.0.0",

@@ -17,7 +17,7 @@ export default defineConfig([
   },
   // CLI build (unminified to preserve shebang)
   {
-    entry: ['src/cli.ts'],
+    entry: { cli: 'src/cli.ts' },
     format: ['cjs'],
     splitting: false,
     sourcemap: false,
@@ -28,8 +28,5 @@ export default defineConfig([
     shims: true,
     minify: false,
     treeshake: false,
-    banner: {
-      js: '#!/usr/bin/env node',
-    },
   },
 ]);

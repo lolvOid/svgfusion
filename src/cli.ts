@@ -1,251 +1,259 @@
-import { Command } from 'commander';
+#!/usr/bin/env node
+
+import { program } from 'commander';
 import {
-  readSvgFile,
-  readSvgDirectory,
-  writeComponentFile,
-} from './utils/files.js';
-import { stat } from 'fs/promises';
-import { extname, basename } from 'path';
-import { svgToComponentName } from './utils/name.js';
+  readFileSync,
+  writeFileSync,
+  existsSync,
+  mkdirSync,
+  readdirSync,
+  statSync,
+} from 'fs';
+import { resolve, basename, extname, join } from 'path';
+import { SVGFusion, SVGFusionOptions } from './engine.js';
 import { formatComponentName } from './utils/name.js';
-import { convertToReact } from './core/react-converter.js';
-import { convertToVue } from './core/vue-converter.js';
-import { optimizeSvg } from './utils/svgo.js';
-import { fileURLToPath } from 'url';
-import { dirname, join } from 'path';
-import { readFileSync } from 'fs';
 import { createBanner } from './utils/banner.js';
 import { ansiColors } from './utils/colors.js';
 
-const __filename = fileURLToPath(import.meta.url);
-const __dirname = dirname(__filename);
-
-// Read package.json for version
-const packageJson = JSON.parse(
-  readFileSync(join(__dirname, '..', 'package.json'), 'utf-8')
-) as { version: string };
-
-const program = new Command();
-
-// Show banner when running without arguments or via npx
-const isNpxCall =
-  process.argv[1]?.includes('npx') || process.argv[1]?.includes('_npx');
-if (process.argv.length === 1 || (isNpxCall && process.argv.length === 2)) {
+// Use existing banner system instead of hardcoded ASCII
+function showBanner() {
   console.log(createBanner(ansiColors));
 }
 
-program
-  .name('svgfusion')
-  .description(
-    'Transform SVG files into production-ready React and Vue 3 components'
-  )
-  .version(packageJson.version);
-
-program
-  .argument('[input]', 'Input SVG file or directory')
-  .option('-o, --output <output>', 'Output directory', './components')
-  .option(
-    '-f, --framework <framework>',
-    'Target framework (react|vue)',
-    'react'
-  )
-  .option('-t, --typescript', 'Generate TypeScript files', false)
-  .option(
-    '-r, --recursive',
-    'Recursively scan input directory for SVG files',
-    false
-  )
-  .option('--no-optimize', 'Skip SVG optimization')
-  .option('--prefix <prefix>', 'Add prefix to component name')
-  .option('--suffix <suffix>', 'Add suffix to component name')
-  .option('--index', 'Generate index file for tree-shaking', false)
-  .option('--index-format <format>', 'Index file format (ts|js)', 'ts')
-  .option('--export-type <type>', 'Export type (named|default)', 'named')
-  .option(
-    '--split-colors',
-    'Split colors into separate props with classes',
-    false
-  )
-  .option(
-    '--fixed-stroke-width',
-    'Add vector-effect="non-scaling-stroke" to stroke elements',
-    false
-  )
-  .action(
-    async (
-      input?: string,
-      options?: {
-        framework: string;
-        output: string;
-        typescript: boolean;
-        recursive: boolean;
-        optimize: boolean;
-        prefix?: string;
-        suffix?: string;
-        index: boolean;
-        indexFormat: string;
-        exportType: string;
-        splitColors: boolean;
-        fixedStrokeWidth: boolean;
-      }
-    ) => {
-      // Show help if no input provided
-      if (!input) {
-        program.outputHelp();
-        process.exit(0);
-      }
-
-      console.log(createBanner(ansiColors));
-
-      console.log(
-        `${ansiColors.blue}🔄 Processing SVG files...${ansiColors.reset}`
-      );
-
-      try {
-        const {
-          framework,
-          output,
-          typescript,
-          recursive,
-          optimize,
-          prefix,
-          suffix,
-          index: generateIndex,
-          indexFormat,
-          exportType,
-          splitColors,
-          fixedStrokeWidth,
-        } = options!;
-
-        if (framework !== 'react' && framework !== 'vue') {
-          throw new Error('Framework must be either "react" or "vue"');
-        }
-
-        // Read input files
-        const inputStat = await stat(input);
-        let svgFiles: string[];
-
-        if (inputStat.isFile()) {
-          // Single file input
-          if (extname(input).toLowerCase() === '.svg') {
-            svgFiles = [input];
-          } else {
-            throw new Error('Input file must be an SVG file');
-          }
-        } else if (inputStat.isDirectory()) {
-          // Directory input
-          svgFiles = await readSvgDirectory(input, recursive);
-        } else {
-          throw new Error('Input must be a file or directory');
-        }
-
-        if (svgFiles.length === 0) {
-          throw new Error('No SVG files found in the input path');
-        }
-
-        console.log(
-          `${ansiColors.blue}🔄 Converting ${svgFiles.length} SVG file(s)...${ansiColors.reset}`
-        );
-
-        const results = [];
-
-        for (const filePath of svgFiles) {
-          const svgContent = await readSvgFile(filePath);
-
-          // Optimize SVG if requested
-          const optimizedSvg = optimize ? optimizeSvg(svgContent) : svgContent;
-
-          // Generate component name from filename
-          const filename = basename(filePath);
-          const componentName = formatComponentName(
-            svgToComponentName(filename),
-            prefix,
-            suffix
-          );
-
-          // Convert based on framework
-          const result =
-            framework === 'react'
-              ? await convertToReact(optimizedSvg, {
-                  typescript,
-                  name: componentName,
-                  splitColors,
-                  isFixedStrokeWidth: fixedStrokeWidth,
-                })
-              : await convertToVue(optimizedSvg, {
-                  typescript,
-                  name: componentName,
-                  splitColors,
-                  isFixedStrokeWidth: fixedStrokeWidth,
-                });
-
-          // Write component file
-          const outputPath = join(output, result.filename);
-          await writeComponentFile(outputPath, result.code);
-
-          results.push(result);
-        }
-
-        // Generate index file if requested
-        if (generateIndex && results.length > 0) {
-          const { generateIndexFile } = await import(
-            './utils/index-generator.js'
-          );
-          const indexContent = generateIndexFile(results, {
-            format: indexFormat as 'ts' | 'js',
-            exportType: exportType as 'named' | 'default',
-            typescript,
-          });
-
-          const indexFilename = `index.${indexFormat}`;
-          const indexPath = join(output, indexFilename);
-          await writeComponentFile(indexPath, indexContent);
-
-          console.log(
-            `${ansiColors.green}📄 Generated ${indexFilename} for tree-shaking${ansiColors.reset}`
-          );
-        }
-
-        console.log(
-          `${ansiColors.green}✅ Successfully converted ${svgFiles.length} SVG file(s) to ${framework} components${ansiColors.reset}`
-        );
-
-        console.log(
-          `${ansiColors.dim}📁 Output location: ${ansiColors.reset}${ansiColors.cyan}${output}${ansiColors.reset}`
-        );
-
-        // Diraay component names
-        const componentNames = results.map(r => r.componentName);
-        console.log(
-          `${ansiColors.dim}📦 Generated components: ${
-            ansiColors.reset
-          }${componentNames.join(', ')}`
-        );
-      } catch (error) {
-        console.error(
-          `${ansiColors.red}❌ Error: ${
-            error instanceof Error ? error.message : 'Unknown error'
-          }${ansiColors.reset}`
-        );
-        process.exit(1);
-      }
-    }
-  )
-  .addHelpText('before', createBanner(ansiColors))
-  .addHelpText(
-    'after',
-    `\n${ansiColors.gray}Examples:${ansiColors.reset}\n` +
-      `  ${ansiColors.blue}svgfusion src/icons -o src/components${ansiColors.reset}\n` +
-      `  ${ansiColors.blue}svgfusion src/icons --framework vue --typescript${ansiColors.reset}\n` +
-      `  ${ansiColors.blue}svgfusion src/icons --recursive --index${ansiColors.reset}\n` +
-      `  ${ansiColors.blue}svgfusion src/icons --prefix Icon --suffix Component --index${ansiColors.reset}\n` +
-      `  ${ansiColors.blue}svgfusion src/icons --framework react --typescript --optimize${ansiColors.reset}\n`
-  );
-
-// Show help by default if no arguments provided
-if (process.argv.length === 2) {
-  program.outputHelp();
-  process.exit(0);
+interface CliOptions {
+  output?: string;
+  framework?: 'react' | 'vue';
+  typescript?: boolean;
+  splitColors?: boolean;
+  fixedStrokeWidth?: boolean;
+  memo?: boolean;
+  forwardRef?: boolean;
+  name?: string;
+  optimize?: boolean;
+  recursive?: boolean;
+  prefix?: string;
+  suffix?: string;
+  index?: boolean;
 }
 
-program.parse();
+async function convertSvgFile(
+  filePath: string,
+  options: CliOptions
+): Promise<void> {
+  try {
+    // Read SVG file
+    const svgContent = readFileSync(filePath, 'utf8');
+
+    // Generate component name from filename if not provided
+    const fileName = basename(filePath, extname(filePath));
+    const componentName =
+      options.name ||
+      formatComponentName(fileName, options.prefix, options.suffix);
+
+    // Configure SVGFusion options
+    const fusionOptions: SVGFusionOptions = {
+      framework: options.framework || 'react',
+      transformation: {
+        optimize: options.optimize ?? true,
+        splitColors: options.splitColors,
+        fixedStrokeWidth: options.fixedStrokeWidth,
+        accessibility: true,
+      },
+      generator: {
+        typescript: options.typescript ?? true,
+        memo: options.memo ?? true,
+        forwardRef: options.forwardRef ?? true,
+        componentName,
+      },
+    };
+
+    // Convert SVG
+    const fusion = new SVGFusion();
+    const result = await fusion.convert(svgContent, fusionOptions);
+
+    // Determine output directory
+    const outputDir = options.output || './components';
+
+    // Create output directory if it doesn't exist
+    if (!existsSync(outputDir)) {
+      mkdirSync(outputDir, { recursive: true });
+    }
+
+    // Write component file
+    const outputPath = resolve(outputDir, result.filename);
+    writeFileSync(outputPath, result.code, 'utf8');
+
+    console.log(
+      `✅ Successfully converted SVG to ${options.framework} component`
+    );
+    console.log(`📁 Output location: ${outputDir}`);
+    console.log(`📦 Generated component: ${result.componentName}`);
+
+    // Show additional info for split colors
+    if (options.splitColors && result.metadata.originalColors.length > 0) {
+      console.log(
+        `🎨 Colors extracted: ${result.metadata.originalColors.join(', ')}`
+      );
+    }
+  } catch (error) {
+    console.error(
+      '❌ Conversion failed:',
+      error instanceof Error ? error.message : String(error)
+    );
+    process.exit(1);
+  }
+}
+
+function findSvgFiles(dirPath: string, recursive: boolean = false): string[] {
+  const svgFiles: string[] = [];
+
+  try {
+    const items = readdirSync(dirPath);
+
+    for (const item of items) {
+      const fullPath = join(dirPath, item);
+      const stat = statSync(fullPath);
+
+      if (stat.isDirectory() && recursive) {
+        svgFiles.push(...findSvgFiles(fullPath, recursive));
+      } else if (stat.isFile() && item.toLowerCase().endsWith('.svg')) {
+        svgFiles.push(fullPath);
+      }
+    }
+  } catch (error) {
+    console.error(`Error reading directory ${dirPath}:`, error);
+  }
+
+  return svgFiles;
+}
+
+async function processInput(input: string, options: CliOptions): Promise<void> {
+  const inputPath = resolve(input);
+
+  if (!existsSync(inputPath)) {
+    console.error(`❌ Input file not found: ${inputPath}`);
+    process.exit(1);
+  }
+
+  const stat = statSync(inputPath);
+
+  if (stat.isFile()) {
+    if (!inputPath.toLowerCase().endsWith('.svg')) {
+      console.error('❌ Input file must be an SVG file');
+      process.exit(1);
+    }
+    await convertSvgFile(inputPath, options);
+  } else if (stat.isDirectory()) {
+    const svgFiles = findSvgFiles(inputPath, options.recursive);
+
+    if (svgFiles.length === 0) {
+      console.error('❌ No SVG files found in the specified directory');
+      process.exit(1);
+    }
+
+    console.log(`🔄 Processing ${svgFiles.length} SVG file(s)...`);
+
+    for (const svgFile of svgFiles) {
+      console.log(`\n📄 Processing: ${basename(svgFile)}`);
+      await convertSvgFile(svgFile, options);
+    }
+
+    if (options.index) {
+      await generateIndexFile(options.output || './components', options);
+    }
+
+    console.log(
+      `\n✅ Successfully converted ${svgFiles.length} SVG file(s) to ${options.framework} components`
+    );
+  }
+}
+
+async function generateIndexFile(
+  outputDir: string,
+  options: CliOptions
+): Promise<void> {
+  try {
+    const files = readdirSync(outputDir);
+    const componentFiles = files.filter(
+      file =>
+        file.endsWith('.tsx') || file.endsWith('.ts') || file.endsWith('.vue')
+    );
+
+    if (componentFiles.length === 0) {
+      return;
+    }
+
+    const exports = componentFiles
+      .map(file => {
+        const name = basename(file, extname(file));
+        return `export { default as ${name} } from './${name}';`;
+      })
+      .join('\n');
+
+    const indexContent = `// Auto-generated index file\n${exports}\n`;
+    const indexPath = join(outputDir, 'index.ts');
+
+    writeFileSync(indexPath, indexContent, 'utf8');
+    console.log('📄 Generated index.ts for tree-shaking');
+  } catch (error) {
+    console.error('Warning: Failed to generate index file:', error);
+  }
+}
+
+async function main() {
+  showBanner();
+
+  program
+    .name('svgfusion')
+    .description(
+      'Transform SVG files into production-ready React/Vue components'
+    )
+    .version('2.0.0')
+    .argument('<input>', 'SVG file or directory to convert')
+    .option(
+      '-o, --output <dir>',
+      'Output directory for generated components',
+      './components'
+    )
+    .option(
+      '-f, --framework <framework>',
+      'Target framework: react or vue',
+      'react'
+    )
+    .option('--typescript', 'Generate TypeScript components')
+    .option('--javascript', 'Generate JavaScript components')
+    .option('--split-colors', 'Enable color splitting feature')
+    .option('--fixed-stroke-width', 'Enable fixed stroke width feature')
+    .option('--memo', 'Wrap component with React.memo')
+    .option('--no-memo', 'Disable React.memo wrapping')
+    .option('--forward-ref', 'Enable forwardRef support')
+    .option('--no-forward-ref', 'Disable forwardRef support')
+    .option('-n, --name <name>', 'Custom component name')
+    .option('--optimize', 'Enable SVG optimization')
+    .option('--no-optimize', 'Disable SVG optimization')
+    .option('--recursive', 'Process directories recursively')
+    .option('--prefix <prefix>', 'Add prefix to component names')
+    .option('--suffix <suffix>', 'Add suffix to component names')
+    .option('--index', 'Generate index.ts file for directory processing')
+    .action(async (input: string, options: any) => {
+      // Process TypeScript/JavaScript option
+      if (options.javascript) {
+        options.typescript = false;
+      } else if (options.typescript === undefined) {
+        options.typescript = true;
+      }
+
+      // Process the input (file or directory)
+      await processInput(input, options);
+    });
+
+  await program.parseAsync();
+}
+
+// Run CLI
+if (import.meta.url === `file://${process.argv[1]}`) {
+  main().catch(error => {
+    console.error('❌ Unexpected error:', error);
+    process.exit(1);
+  });
+}
