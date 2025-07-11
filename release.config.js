@@ -4,7 +4,7 @@ const config = () => {
 
   /** @type {import('semantic-release').Options} */
   const semanticReleaseConfig = {
-    branches: ['main', { name: '*', prerelease: true }],
+    branches: ['main', { name: '*', prerelease: 'beta' }],
     plugins: [
       '@semantic-release/commit-analyzer',
       '@semantic-release/release-notes-generator',

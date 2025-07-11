@@ -53,10 +53,7 @@ ${colors.gray}──────────────────────
 const program = new Command();
 
 // Show banner when running without arguments
-if (process.argv.length === 2) {
-  // eslint-disable-next-line no-console
-  console.log(createBanner());
-}
+console.log(createBanner());
 
 program
   .name('svgfusion')
