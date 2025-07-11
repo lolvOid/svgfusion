@@ -4,6 +4,9 @@ import {
   readSvgDirectory,
   writeComponentFile,
 } from './utils/files.js';
+import { stat } from 'fs/promises';
+import { extname, basename } from 'path';
+import { svgToComponentName } from './utils/name.js';
 import { convertToReact } from './core/react-converter.js';
 import { convertToVue } from './core/vue-converter.js';
 import { optimizeSvg } from './utils/svgo.js';
@@ -98,7 +101,22 @@ program
         }
 
         // Read input files
-        const svgFiles = await readSvgDirectory(input);
+        const inputStat = await stat(input);
+        let svgFiles: string[];
+
+        if (inputStat.isFile()) {
+          // Single file input
+          if (extname(input).toLowerCase() === '.svg') {
+            svgFiles = [input];
+          } else {
+            throw new Error('Input file must be an SVG file');
+          }
+        } else if (inputStat.isDirectory()) {
+          // Directory input
+          svgFiles = await readSvgDirectory(input);
+        } else {
+          throw new Error('Input must be a file or directory');
+        }
 
         if (svgFiles.length === 0) {
           throw new Error('No SVG files found in the input path');
@@ -115,11 +133,21 @@ program
           // Optimize SVG if requested
           const optimizedSvg = optimize ? optimizeSvg(svgContent) : svgContent;
 
+          // Generate component name from filename
+          const filename = basename(filePath);
+          const componentName = svgToComponentName(filename);
+
           // Convert based on framework
           const result =
             framework === 'react'
-              ? await convertToReact(optimizedSvg, { typescript })
-              : await convertToVue(optimizedSvg, { typescript });
+              ? await convertToReact(optimizedSvg, {
+                  typescript,
+                  name: componentName,
+                })
+              : await convertToVue(optimizedSvg, {
+                  typescript,
+                  name: componentName,
+                });
 
           // Write component file
           const outputPath = join(output, result.filename);
