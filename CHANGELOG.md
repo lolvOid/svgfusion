@@ -1,3 +1,10 @@
+## [1.0.4](https://github.com/lolvOid/svgfusion/compare/v1.0.3...v1.0.4) (2025-07-11)
+
+
+### Bug Fixes
+
+* update CI workflow to allow all branches and remove unnecessary build steps ([eca96a8](https://github.com/lolvOid/svgfusion/commit/eca96a81d49fe7c1aec9458f7b3435334e4dc265))
+
 ## [1.0.3](https://github.com/lolvOid/svgfusion/compare/v1.0.2...v1.0.3) (2025-07-10)
 
 
