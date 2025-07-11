@@ -1,3 +1,10 @@
+# [1.7.0](https://github.com/lolvOid/svgfusion/compare/v1.6.0...v1.7.0) (2025-07-11)
+
+
+### Features
+
+* add advanced features with split colors, fixed stroke width, and duplicate validation ([94c429f](https://github.com/lolvOid/svgfusion/commit/94c429fbf4325b9e42eab9af30b9e18c35b2e986))
+
 # [1.6.0](https://github.com/lolvOid/svgfusion/compare/v1.5.1...v1.6.0) (2025-07-11)
 
 
