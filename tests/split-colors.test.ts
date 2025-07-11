@@ -11,8 +11,8 @@ describe('Split Colors Feature', () => {
 
     expect(colorInfo.fillColors).toEqual(['#FF0000']);
     expect(colorInfo.strokeColors).toEqual(['#00FF00']);
-    expect(colorInfo.fillColorMap.get('#FF0000')).toBe('fillColor1');
-    expect(colorInfo.strokeColorMap.get('#00FF00')).toBe('strokeColor1');
+    expect(colorInfo.fillColorMap.get('#FF0000')).toBe('color2');
+    expect(colorInfo.strokeColorMap.get('#00FF00')).toBe('color');
 
     // Snapshot test for color extraction result
     expect(colorInfo).toMatchSnapshot();
@@ -24,8 +24,8 @@ describe('Split Colors Feature', () => {
     const colorInfo = extractColors(svg);
 
     expect(colorInfo.gradientColors).toEqual(['#0000FF', '#FF0000']);
-    expect(colorInfo.gradientColorMap.get('#FF0000')).toBe('gradientColor2');
-    expect(colorInfo.gradientColorMap.get('#0000FF')).toBe('gradientColor1');
+    expect(colorInfo.gradientColorMap.get('#FF0000')).toBe('color2');
+    expect(colorInfo.gradientColorMap.get('#0000FF')).toBe('color');
 
     // Snapshot test for gradient color extraction
     expect(colorInfo).toMatchSnapshot();
@@ -38,8 +38,8 @@ describe('Split Colors Feature', () => {
 
     expect(colorInfo.fillColors).toEqual(['#000000']);
     expect(colorInfo.strokeColors).toEqual(['#000000']);
-    expect(colorInfo.fillColorMap.get('#000000')).toBe('fillColor1');
-    expect(colorInfo.strokeColorMap.get('#000000')).toBe('strokeColor1');
+    expect(colorInfo.fillColorMap.get('#000000')).toBe('color');
+    expect(colorInfo.strokeColorMap.get('#000000')).toBe('color');
 
     // Snapshot test for same color in different contexts
     expect(colorInfo).toMatchSnapshot();
@@ -51,10 +51,10 @@ describe('Split Colors Feature', () => {
     const colorInfo = extractColors(svg);
     const result = replaceColorsWithProps(svg, colorInfo, 'react');
 
-    expect(result).toContain('fill={fillColor1}');
-    expect(result).toContain('stroke={strokeColor1}');
-    expect(result).toContain('className={fillColor1Class}');
-    expect(result).toContain('className={strokeColor1Class}');
+    expect(result).toContain('fill={color2}');
+    expect(result).toContain('stroke={color}');
+    expect(result).toContain('className={color2Class}');
+    expect(result).toContain('className={colorClass}');
 
     // Snapshot test for React prop replacement
     expect(result).toMatchSnapshot();
@@ -66,8 +66,8 @@ describe('Split Colors Feature', () => {
     const colorInfo = extractColors(svg);
     const result = replaceColorsWithProps(svg, colorInfo, 'vue');
 
-    expect(result).toContain(':stop-color="gradientColor1"');
-    expect(result).toContain(':class="gradientColor1Class"');
+    expect(result).toContain(':stop-color="color"');
+    expect(result).toContain(':class="colorClass"');
 
     // Snapshot test for Vue prop replacement
     expect(result).toMatchSnapshot();

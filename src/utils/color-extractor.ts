@@ -91,25 +91,21 @@ export function extractColors(svgContent: string): ColorInfo {
   const gradientColorMap = new Map<string, string>();
   const allColorMap = new Map<string, string>();
 
-  uniqueFillColors.forEach((color, index) => {
-    const colorVar = `fillColor${index + 1}`;
-    fillColorMap.set(color, colorVar);
-  });
-
-  uniqueStrokeColors.forEach((color, index) => {
-    const colorVar = `strokeColor${index + 1}`;
-    strokeColorMap.set(color, colorVar);
-  });
-
-  uniqueGradientColors.forEach((color, index) => {
-    const colorVar = `gradientColor${index + 1}`;
-    gradientColorMap.set(color, colorVar);
-  });
-
-  // Legacy support - keep the old behavior for backwards compatibility
+  // Create unified color mapping (color, color2, color3, etc.)
   uniqueAllColors.forEach((color, index) => {
-    const colorVar = `color${index + 1}`;
+    const colorVar = index === 0 ? 'color' : `color${index + 1}`;
     allColorMap.set(color, colorVar);
+
+    // Also set in individual maps using unified naming
+    if (uniqueFillColors.includes(color)) {
+      fillColorMap.set(color, colorVar);
+    }
+    if (uniqueStrokeColors.includes(color)) {
+      strokeColorMap.set(color, colorVar);
+    }
+    if (uniqueGradientColors.includes(color)) {
+      gradientColorMap.set(color, colorVar);
+    }
   });
 
   return {
@@ -122,6 +118,42 @@ export function extractColors(svgContent: string): ColorInfo {
     strokeColorMap,
     gradientColorMap,
   };
+}
+
+/**
+ * Extract colors with element mapping for precise replacement
+ */
+export function extractColorsWithElementMapping(svgContent: string): {
+  colorInfo: ColorInfo;
+  elementColorMap: Map<string, string>;
+} {
+  const colorInfo = extractColors(svgContent);
+  const elementColorMap = new Map<string, string>();
+
+  // Find all elements with colors and map them to their path data or unique identifier
+  const elementRegex =
+    /<(path|circle|rect|ellipse|line|polyline|polygon)[^>]*>/g;
+  let match;
+
+  while ((match = elementRegex.exec(svgContent)) !== null) {
+    const element = match[0];
+
+    // Extract unique identifier (use 'd' attribute for paths, or other unique attributes)
+    const pathData = element.match(/d="([^"]*?)"/);
+    const fillColor = element.match(/fill="([^"]*?)"/);
+
+    if (pathData && fillColor) {
+      const pathId = pathData[1].substring(0, 50); // Use first 50 chars as unique identifier
+      const color = fillColor[1];
+      const colorVar = colorInfo.colorMap.get(color);
+
+      if (colorVar) {
+        elementColorMap.set(pathId, colorVar);
+      }
+    }
+  }
+
+  return { colorInfo, elementColorMap };
 }
 
 /**
@@ -261,6 +293,40 @@ export function replaceColorsWithProps(
 }
 
 /**
+ * Replace currentColor with appropriate color variables in React/Vue components
+ */
+export function replaceCurrentColorWithVariables(
+  componentCode: string,
+  elementColorMap: Map<string, string>,
+  framework: 'react' | 'vue'
+): string {
+  let modifiedCode = componentCode;
+
+  // Find all fill="currentColor" or fill={currentColor} and replace based on path context
+  const fillRegex =
+    framework === 'react'
+      ? /(<path[^>]*d="([^"]{1,50})[^"]*"[^>]*fill=){[^}]*currentColor[^}]*}([^>]*>)/g
+      : /(<path[^>]*d="([^"]{1,50})[^"]*"[^>]*fill=)"currentColor"([^>]*>)/g;
+
+  modifiedCode = modifiedCode.replace(
+    fillRegex,
+    (match: string, prefix: string, pathPrefix: string, suffix: string) => {
+      const colorVar = elementColorMap.get(pathPrefix);
+      if (colorVar) {
+        if (framework === 'react') {
+          return `${prefix}{${colorVar}}${suffix}`;
+        } else {
+          return `${prefix}"${colorVar}"${suffix}`;
+        }
+      }
+      return match;
+    }
+  );
+
+  return modifiedCode;
+}
+
+/**
  * Generate color props for component interfaces
  */
 export function generateColorProps(
@@ -271,7 +337,7 @@ export function generateColorProps(
 
   const props = colors
     .map((_, index) => {
-      const colorVar = `color${index + 1}`;
+      const colorVar = index === 0 ? 'color' : `color${index + 1}`;
       const classVar = `${colorVar}Class`;
 
       if (framework === 'react') {

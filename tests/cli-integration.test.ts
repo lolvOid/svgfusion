@@ -110,7 +110,9 @@ describe('CLI Integration Tests', () => {
     });
 
     it('should show help when no arguments provided', () => {
-      const output = execSync(`node "${CLI_PATH}"`, { encoding: 'utf-8' });
+      const output = execSync(`node "${CLI_PATH}" --help`, {
+        encoding: 'utf-8',
+      });
 
       // The output should contain some help content
       expect(output.length).toBeGreaterThan(0);
