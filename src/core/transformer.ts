@@ -123,7 +123,7 @@ export class SVGTransformer {
    */
   private applyFixedStrokeWidth(ast: SVGAst): void {
     const strokeFixingFeature = new StrokeFixingFeature({
-      onlyIfStrokePresent: true,
+      onlyIfStrokePresent: false, // Apply to all stroke-capable elements for consistent scaling
       preserveExisting: true,
     });
 

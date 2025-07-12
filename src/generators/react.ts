@@ -441,8 +441,14 @@ ${childrenJsx}
     Object.entries(attributes).forEach(([key, value]) => {
       const jsxKey = toReactProp(key);
 
+      // Handle vector-effect attribute conditionally based on isFixedStrokeWidth
+      if (key === 'vector-effect' && value === 'non-scaling-stroke') {
+        jsxAttributes.push(
+          `vectorEffect={isFixedStrokeWidth ? 'non-scaling-stroke' : undefined}`
+        );
+      }
       // Handle dynamic color values - always add colorClass when color splitting is enabled
-      if (
+      else if (
         (key === 'fill' || key === 'stroke') &&
         value.startsWith('{') &&
         value.endsWith('}')
@@ -458,7 +464,24 @@ ${childrenJsx}
       } else if (key === 'style') {
         // Convert HTML style string to JSX style object
         const styleObj = this.parseStyleString(value);
-        jsxAttributes.push(`style={${JSON.stringify(styleObj)}}`);
+
+        // Convert the style object to JSX format
+        const styleEntries = Object.entries(styleObj).map(([prop, val]) => {
+          if (
+            typeof val === 'string' &&
+            val.startsWith('{') &&
+            val.endsWith('}')
+          ) {
+            // This is a variable reference, don't quote it
+            const varName = val.slice(1, -1);
+            return `${prop}: ${varName}`;
+          } else {
+            // This is a literal value, quote it
+            return `${prop}: '${val}'`;
+          }
+        });
+
+        jsxAttributes.push(`style={{ ${styleEntries.join(', ')} }}`);
       } else {
         // Handle regular attributes
         if (value.startsWith('{') && value.endsWith('}')) {
@@ -506,8 +529,8 @@ ${childrenJsx}
   /**
    * Parse CSS style string into style object for JSX
    */
-  private parseStyleString(styleStr: string): Record<string, string> {
-    const styleObj: Record<string, string> = {};
+  private parseStyleString(styleStr: string): Record<string, any> {
+    const styleObj: Record<string, any> = {};
 
     // Split by semicolon and process each declaration
     styleStr.split(';').forEach(declaration => {

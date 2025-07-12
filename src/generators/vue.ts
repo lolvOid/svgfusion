@@ -168,8 +168,19 @@ ${children}
     const hasOriginalClass = 'class' in attributes;
 
     Object.entries(attributes).forEach(([key, value]) => {
+      // Handle vector-effect attribute conditionally based on isFixedStrokeWidth
+      if (key === 'vector-effect' && value === 'non-scaling-stroke') {
+        vueAttributes.push(
+          `:vector-effect="props.isFixedStrokeWidth ? 'non-scaling-stroke' : undefined"`
+        );
+      }
+      // Handle style attribute with color variables
+      else if (key === 'style') {
+        const parsedStyle = this.parseStyleStringForVue(value);
+        vueAttributes.push(`:style="${parsedStyle}"`);
+      }
       // Check if value is a color variable (starts and ends with curly braces)
-      if (value.startsWith('{') && value.endsWith('}')) {
+      else if (value.startsWith('{') && value.endsWith('}')) {
         const variableName = value.slice(1, -1); // Remove the braces
 
         // Add the color attribute
@@ -436,6 +447,34 @@ ${children}
         return `  ${propName}?: string;\n  ${className}?: string;`;
       })
       .join('\n');
+  }
+
+  /**
+   * Parse style string for Vue template syntax
+   */
+  private parseStyleStringForVue(styleStr: string): string {
+    const styleEntries: string[] = [];
+
+    // Split by semicolon and process each declaration
+    styleStr.split(';').forEach(declaration => {
+      const colonIndex = declaration.indexOf(':');
+      if (colonIndex > 0) {
+        const property = declaration.slice(0, colonIndex).trim();
+        const value = declaration.slice(colonIndex + 1).trim();
+
+        if (property && value) {
+          // Handle color variables - if value is wrapped in braces, it's a variable
+          if (value.startsWith('{') && value.endsWith('}')) {
+            const variableName = value.slice(1, -1); // Remove braces
+            styleEntries.push(`'${property}': props.${variableName}`);
+          } else {
+            styleEntries.push(`'${property}': '${value}'`);
+          }
+        }
+      }
+    });
+
+    return `{ ${styleEntries.join(', ')} }`;
   }
 
   /**

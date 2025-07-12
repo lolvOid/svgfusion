@@ -63,18 +63,8 @@ export class StrokeFixingFeature {
       return false;
     }
 
-    // Only add to elements that have stroke if option is enabled
-    if (this.options.onlyIfStrokePresent) {
-      const hasStroke =
-        element.attributes.stroke &&
-        element.attributes.stroke !== 'none' &&
-        element.attributes.stroke !== 'transparent';
-      if (!hasStroke) {
-        return false;
-      }
-    }
-
-    // Add to stroke-capable elements
+    // Add to stroke-capable elements - these elements can have strokes
+    // and should have consistent scaling behavior regardless of current stroke state
     const strokeElements = [
       'path',
       'line',

@@ -14,6 +14,7 @@ function App() {
   const [size, setSize] = useState<string>('48');
   const [color, setColor] = useState('#3498db');
   const [color2, setColor2] = useState('#e74c3c');
+  const [isFixedStrokeWidth, setIsFixedStrokeWidth] = useState(false);
 
   const icons = [
     { Component: GoldPerson, name: 'Gold Person' },
@@ -78,6 +79,27 @@ function App() {
                   className="w-12 h-10 border-none rounded cursor-pointer"
                 />
               </div>
+
+              <div className="flex flex-col items-center space-y-2">
+                <label className="font-semibold text-gray-700">
+                  Fixed Stroke Width
+                </label>
+                <button
+                  onClick={() => setIsFixedStrokeWidth(!isFixedStrokeWidth)}
+                  className={`w-12 h-6 rounded-full transition-colors duration-200 relative ${
+                    isFixedStrokeWidth ? 'bg-blue-500' : 'bg-gray-300'
+                  }`}
+                >
+                  <div
+                    className={`w-5 h-5 bg-white rounded-full shadow-sm transition-transform duration-200 absolute top-0.5 ${
+                      isFixedStrokeWidth ? 'translate-x-6' : 'translate-x-0.5'
+                    }`}
+                  />
+                </button>
+                <span className="text-xs text-gray-500">
+                  {isFixedStrokeWidth ? 'Enabled' : 'Disabled'}
+                </span>
+              </div>
             </div>
           </section>
 
@@ -93,6 +115,7 @@ function App() {
                     color={color}
                     color2={color2}
                     title={name}
+                    isFixedStrokeWidth={isFixedStrokeWidth}
                   />
                   <span className="text-sm text-gray-600 font-medium">
                     {name}

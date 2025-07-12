@@ -41,6 +41,25 @@
                 class="w-12 h-10 border-none rounded cursor-pointer"
               />
             </div>
+
+            <div class="flex flex-col items-center space-y-2">
+              <label class="font-semibold text-gray-700">Fixed Stroke Width</label>
+              <button
+                @click="isFixedStrokeWidth = !isFixedStrokeWidth"
+                :class="`w-12 h-6 rounded-full transition-colors duration-200 relative ${
+                  isFixedStrokeWidth ? 'bg-green-500' : 'bg-gray-300'
+                }`"
+              >
+                <div
+                  :class="`w-5 h-5 bg-white rounded-full shadow-sm transition-transform duration-200 absolute top-0.5 ${
+                    isFixedStrokeWidth ? 'translate-x-6' : 'translate-x-0.5'
+                  }`"
+                />
+              </button>
+              <span class="text-xs text-gray-500">
+                {{ isFixedStrokeWidth ? 'Enabled' : 'Disabled' }}
+              </span>
+            </div>
           </div>
         </section>
 
@@ -57,6 +76,7 @@
                 :color="color"
                 :color2="color2"
                 :title="icon.name"
+                :isFixedStrokeWidth="isFixedStrokeWidth"
               />
               <span class="text-sm text-gray-600 font-medium">{{
                 icon.name
@@ -107,6 +127,7 @@ import {
 const size = ref(48);
 const color = ref('#3498db');
 const color2 = ref('#e74c3c');
+const isFixedStrokeWidth = ref(false);
 
 const icons = [
   { component: GoldPerson, name: 'Gold Person' },

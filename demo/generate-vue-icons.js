@@ -38,7 +38,7 @@ async function generateVueIcons() {
         const result = await convertToVue(svgContent, {
           transformation: {
             splitColors: true,
-            isFixedStrokeWidth: true,
+            fixedStrokeWidth: true,
           },
           generator: {
             componentName: componentName,

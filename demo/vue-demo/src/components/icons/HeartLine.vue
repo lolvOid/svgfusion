@@ -15,6 +15,9 @@
       stroke-width="2"
       d="M17 4c-3.2 0-5 2.667-5 4 0-1.333-1.8-4-5-4S3 6.667 3 8c0 7 9 12 9 12s9-5 9-12c0-1.333-.8-4-4-4z"
       fill="none"
+      :vector-effect="
+        props.isFixedStrokeWidth ? 'non-scaling-stroke' : undefined
+      "
       :class="[props.colorClass]"
     />
   </svg>
@@ -33,11 +36,13 @@
     size?: string;
     color?: string;
     colorClass?: string;
+    isFixedStrokeWidth?: boolean;
   }
 
   const props = withDefaults(defineProps<Props>(), {
     size: '20',
     color: '#000000',
     colorClass: undefined,
+    isFixedStrokeWidth: false,
   });
 </script>
