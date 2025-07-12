@@ -43,7 +43,9 @@ export abstract class ComponentGenerator {
   /**
    * Generate component code from transformation result
    */
-  abstract generate(result: TransformationResult): ComponentResult;
+  abstract generate(
+    result: TransformationResult
+  ): ComponentResult | Promise<ComponentResult>;
 
   /**
    * Convert SVG AST to JSX string

@@ -4,6 +4,7 @@ export interface IndexGenerationOptions {
   format: 'ts' | 'js';
   exportType: 'named' | 'default';
   typescript: boolean;
+  framework?: 'react' | 'vue';
 }
 
 /**
@@ -23,7 +24,12 @@ export function generateIndexFile(
   if (exportType === 'default') {
     return generateDefaultExports(sortedResults, format, typescript);
   } else {
-    return generateNamedExports(sortedResults, format, typescript);
+    return generateNamedExports(
+      sortedResults,
+      format,
+      typescript,
+      options.framework
+    );
   }
 }
 
@@ -33,7 +39,8 @@ export function generateIndexFile(
 function generateNamedExports(
   results: ConversionResult[],
   format: 'ts' | 'js',
-  typescript: boolean
+  typescript: boolean,
+  framework?: 'react' | 'vue'
 ): string {
   let content = '';
 
@@ -43,14 +50,21 @@ function generateNamedExports(
 
   // Add individual exports
   for (const result of results) {
-    const importPath = getImportPath(result.filename);
+    const importPath = getImportPath(result.filename, framework);
     content += `export { default as ${result.componentName} } from './${importPath}';\n`;
   }
 
   // Add TypeScript types export if needed
   if (typescript && format === 'ts') {
     content += `\n// TypeScript component types\n`;
-    content += `export type IconComponent = React.ComponentType<React.SVGProps<SVGSVGElement>>;\n`;
+
+    if (framework === 'vue') {
+      content += `export type IconComponent = any;\n`;
+    } else {
+      // Default to React types
+      content += `export type IconComponent = React.ComponentType<React.SVGProps<SVGSVGElement>>;\n`;
+    }
+
     content += `export type IconComponents = {\n`;
     for (const result of results) {
       content += `  ${result.componentName}: IconComponent;\n`;
@@ -100,10 +114,16 @@ function generateDefaultExports(
 }
 
 /**
- * Get import path from filename (remove extension for imports)
+ * Get import path from filename
+ * For Vue, keep .vue extension; for React, remove extension
  */
-function getImportPath(filename: string): string {
-  // Remove file extension for imports
+function getImportPath(filename: string, framework?: 'react' | 'vue'): string {
+  if (framework === 'vue' && filename.endsWith('.vue')) {
+    // Keep .vue extension for Vue imports
+    return filename;
+  }
+
+  // Remove file extension for React imports
   return filename.replace(/\.(tsx?|jsx?|vue)$/, '');
 }
 
