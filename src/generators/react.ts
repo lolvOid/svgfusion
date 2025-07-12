@@ -10,6 +10,8 @@ import {
 } from '../core/generator';
 import { TransformationResult, ColorMapping } from '../core/transformer';
 import { SVGElement } from '../core/parser';
+import { format } from 'prettier';
+import { toReactProp, camelCase } from '../utils/string';
 
 export interface ReactGeneratorOptions extends GeneratorOptions {
   memo?: boolean;
@@ -40,7 +42,7 @@ export class ReactGenerator extends ComponentGenerator {
   /**
    * Generate React component from transformation result
    */
-  generate(result: TransformationResult): ComponentResult {
+  async generate(result: TransformationResult): Promise<ComponentResult> {
     const componentName = this.getComponentName();
     const { colorMappings, metadata } = result;
 
@@ -53,12 +55,34 @@ export class ReactGenerator extends ComponentGenerator {
     const component = this.generateComponent(result);
     const exports = this.generateExports(componentName);
 
-    const code = [imports, interfaces, component, exports]
+    const rawCode = [imports, interfaces, component, exports]
       .filter(Boolean)
       .join('\n\n');
 
     const extension = this.reactOptions.typescript ? 'tsx' : 'jsx';
     const filename = this.generateFilename(componentName, extension);
+
+    // Format the code with prettier
+    let code: string;
+    try {
+      code = await format(rawCode, {
+        parser: extension === 'tsx' ? 'typescript' : 'babel',
+        semi: true,
+        singleQuote: true,
+        trailingComma: 'es5',
+        tabWidth: 2,
+        printWidth: 80,
+        bracketSpacing: true,
+        arrowParens: 'avoid',
+      });
+    } catch (error) {
+      // Fallback to unformatted code if prettier fails
+      console.warn(
+        'Prettier formatting failed, using unformatted code:',
+        error
+      );
+      code = rawCode;
+    }
 
     return {
       code,
@@ -75,12 +99,16 @@ export class ReactGenerator extends ComponentGenerator {
     const imports: string[] = [];
 
     if (this.reactOptions.typescript) {
-      imports.push("import * as React from 'react';");
+      // Collect all React imports in one statement
+      const reactImports = ['Ref'];
       if (this.reactOptions.forwardRef) {
-        imports.push("import { Ref, forwardRef, memo } from 'react';");
-      } else if (this.reactOptions.memo) {
-        imports.push("import { memo } from 'react';");
+        reactImports.push('forwardRef');
       }
+      if (this.reactOptions.memo) {
+        reactImports.push('memo');
+      }
+      imports.push(`import { ${reactImports.join(', ')} } from 'react';`);
+      imports.push("import * as React from 'react';");
     } else {
       imports.push("import React from 'react';");
       if (this.reactOptions.propTypes) {
@@ -196,11 +224,20 @@ export class ReactGenerator extends ComponentGenerator {
     const colorDefaults = this.generateColorDefaults(colorMappings);
     const sizeDefault = 'size = "20"';
     const allDefaults = [sizeDefault, colorDefaults].filter(Boolean).join(', ');
-    const defaultPropsString = allDefaults ? `, ${allDefaults}` : '';
 
-    const customPropsDestructure = `{ ${allCustomProps.join(
-      ', '
-    )}${defaultPropsString}, ...svgProps }`;
+    // Separate props with defaults from props without defaults
+    const propsWithDefaults = allDefaults
+      .split(', ')
+      .map(def => def.split(' = ')[0]);
+    const propsWithoutDefaults = allCustomProps.filter(
+      prop => !propsWithDefaults.includes(prop)
+    );
+
+    const customPropsDestructure = `{
+    ${propsWithoutDefaults.join(',\n    ')},
+    ${allDefaults},
+    ...svgProps
+  }`;
 
     // Get root SVG attributes
     const rootAttributes = this.generateSvgAttributes(result.ast);
@@ -397,10 +434,11 @@ ${childrenJsx}
     attributes: Record<string, string>
   ): string[] {
     const jsxAttributes: string[] = [];
+    const classNames: string[] = [];
 
     // Process all attributes
     Object.entries(attributes).forEach(([key, value]) => {
-      const jsxKey = this.convertAttributeName(key);
+      const jsxKey = toReactProp(key);
 
       // Handle dynamic color values and add corresponding class
       if (
@@ -413,9 +451,13 @@ ${childrenJsx}
         // Add the color attribute
         jsxAttributes.push(`${jsxKey}=${value}`);
 
-        // Add the corresponding class if it exists
+        // Collect class name for later combination
         const classVar = `${colorVar}Class`;
-        jsxAttributes.push(`className={${classVar}}`);
+        classNames.push(classVar);
+      } else if (key === 'style') {
+        // Convert HTML style string to JSX style object
+        const styleObj = this.parseStyleString(value);
+        jsxAttributes.push(`style={${JSON.stringify(styleObj)}}`);
       } else {
         // Handle regular attributes
         if (value.startsWith('{') && value.endsWith('}')) {
@@ -426,6 +468,40 @@ ${childrenJsx}
       }
     });
 
+    // Add combined className if any color classes were found
+    if (classNames.length > 0) {
+      if (classNames.length === 1) {
+        jsxAttributes.push(`className={${classNames[0]}}`);
+      } else {
+        const combinedClasses = classNames.map(cls => `\${${cls}}`).join(' ');
+        jsxAttributes.push(`className={\`${combinedClasses}\`}`);
+      }
+    }
+
     return jsxAttributes;
+  }
+
+  /**
+   * Parse CSS style string into style object for JSX
+   */
+  private parseStyleString(styleStr: string): Record<string, string> {
+    const styleObj: Record<string, string> = {};
+
+    // Split by semicolon and process each declaration
+    styleStr.split(';').forEach(declaration => {
+      const colonIndex = declaration.indexOf(':');
+      if (colonIndex > 0) {
+        const property = declaration.slice(0, colonIndex).trim();
+        const value = declaration.slice(colonIndex + 1).trim();
+
+        if (property && value) {
+          // Convert kebab-case CSS properties to camelCase for JSX
+          const camelProperty = camelCase(property);
+          styleObj[camelProperty] = value;
+        }
+      }
+    });
+
+    return styleObj;
   }
 }

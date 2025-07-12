@@ -2,8 +2,8 @@ import figlet from 'figlet';
 import { Colors } from './colors';
 
 // Create ASCII art banner
-export function createBanner(colors: Colors): string {
-  const title = figlet.textSync('SVGfusion', {
+export function createBanner(colors: Colors, text: 'SVGfusion'): string {
+  const title = figlet.textSync(text, {
     font: 'ANSI Shadow',
     horizontalLayout: 'default',
     verticalLayout: 'default',

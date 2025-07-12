@@ -10,6 +10,7 @@ import {
 } from '../core/generator';
 import { TransformationResult, ColorMapping } from '../core/transformer';
 import { SVGElement } from '../core/parser';
+import { format } from 'prettier';
 
 export interface VueGeneratorOptions extends GeneratorOptions {
   composition?: boolean;
@@ -38,25 +39,55 @@ export class VueGenerator extends ComponentGenerator {
   /**
    * Generate Vue component from transformation result
    */
-  generate(result: TransformationResult): ComponentResult {
+  async generate(result: TransformationResult): Promise<ComponentResult> {
     const componentName = this.getComponentName();
 
-    let code: string;
+    let rawCode: string;
 
     if (this.vueOptions.sfc) {
       // Generate Single File Component
-      code = this.generateSFC(result);
+      rawCode = this.generateSFC(result);
     } else {
       // Generate separate .js/.ts file
-      code = this.generateJSComponent(result);
+      rawCode = this.generateJSComponent(result);
     }
 
     const extension = this.vueOptions.sfc
       ? 'vue'
       : this.vueOptions.typescript
-      ? 'ts'
-      : 'js';
+        ? 'ts'
+        : 'js';
     const filename = this.generateFilename(componentName, extension);
+
+    // Format the code with prettier
+    let code: string;
+    try {
+      const parser = this.vueOptions.sfc
+        ? 'vue'
+        : this.vueOptions.typescript
+          ? 'typescript'
+          : 'babel';
+
+      code = await format(rawCode, {
+        parser,
+        semi: true,
+        singleQuote: true,
+        trailingComma: 'es5',
+        tabWidth: 2,
+        printWidth: 80,
+        bracketSpacing: true,
+        arrowParens: 'avoid',
+        htmlWhitespaceSensitivity: 'ignore',
+        vueIndentScriptAndStyle: true,
+      });
+    } catch (error) {
+      // Fallback to unformatted code if prettier fails
+      console.warn(
+        'Prettier formatting failed, using unformatted code:',
+        error
+      );
+      code = rawCode;
+    }
 
     return {
       code,
@@ -109,15 +140,18 @@ ${style ? `<style scoped>\n${style}\n</style>` : ''}`;
     // Generate the template using v-bind to spread all SVG attributes
     const { ast } = result;
 
+    // Generate SVG root attributes
+    const rootAttributes = this.generateSvgAttributes(ast);
+
     // Generate children
-    const childrenJsx = ast.root.children
+    const children = ast.root.children
       .map(child => this.elementToVueTemplate(child, 2))
       .join('\n');
 
-    return `  <svg v-bind="$attrs" :width="props.size || undefined" :height="props.size || undefined">
+    return `  <svg${rootAttributes} v-bind="$attrs" :width="props.size || undefined" :height="props.size || undefined">
     <title v-if="props.title" :id="props.titleId">{{ props.title }}</title>
     <desc v-if="props.desc" :id="props.descId">{{ props.desc }}</desc>
-${childrenJsx}
+${children}
   </svg>`;
   }
 
@@ -130,6 +164,7 @@ ${childrenJsx}
 
     // Convert attributes to Vue template format with color class logic
     const vueAttributes: string[] = [];
+    const classVars: string[] = [];
 
     Object.entries(attributes).forEach(([key, value]) => {
       // Check if value is a color variable (starts and ends with curly braces)
@@ -139,15 +174,20 @@ ${childrenJsx}
         // Add the color attribute
         vueAttributes.push(`:${key}="props.${variableName}"`);
 
-        // Add the corresponding class if it's a fill or stroke attribute
+        // Collect class variables for fill or stroke attributes
         if (key === 'fill' || key === 'stroke') {
           const classVar = `${variableName}Class`;
-          vueAttributes.push(`:class="props.${classVar}"`);
+          classVars.push(`props.${classVar}`);
         }
       } else {
         vueAttributes.push(`${key}="${value}"`);
       }
     });
+
+    // Add combined class attribute if there are any class variables
+    if (classVars.length > 0) {
+      vueAttributes.push(`:class="[${classVars.join(', ')}]"`);
+    }
 
     const attributeString =
       vueAttributes.length > 0 ? ' ' + vueAttributes.join(' ') : '';
@@ -196,9 +236,15 @@ ${childrenJsx}
     const { colorMappings, metadata } = result;
     const lines: string[] = [];
 
+    // Add required imports for TypeScript
+    if (this.vueOptions.typescript) {
+      lines.push('import type { SVGAttributes } from "vue";');
+      lines.push('');
+    }
+
     // Define props
     if (this.vueOptions.typescript) {
-      lines.push('interface Props extends SVGAttributes {');
+      lines.push('interface Props extends /* @vue-ignore */ SVGAttributes {');
       lines.push('  title?: string;');
       lines.push('  titleId?: string;');
       lines.push('  desc?: string;');
@@ -376,6 +422,49 @@ ${childrenJsx}
         return `  ${propName}?: string;\n  ${className}?: string;`;
       })
       .join('\n');
+  }
+
+  /**
+   * Generate SVG root attributes for Vue template
+   */
+  private generateSvgAttributes(ast: {
+    root: any;
+    viewBox?: string;
+    width?: string;
+    height?: string;
+    namespace?: string;
+  }): string {
+    const attributes: string[] = [];
+
+    // Add viewBox from root element attributes or AST
+    const viewBox = ast.root.attributes?.viewBox || ast.viewBox;
+    if (viewBox) {
+      attributes.push(` viewBox="${viewBox}"`);
+    }
+
+    // Add xmlns if present
+    const xmlns =
+      ast.root.attributes?.xmlns ||
+      ast.namespace ||
+      'http://www.w3.org/2000/svg';
+    if (xmlns) {
+      attributes.push(` xmlns="${xmlns}"`);
+    }
+
+    // Add width and height if present and no viewBox
+    if (!viewBox) {
+      const width = ast.root.attributes?.width || ast.width;
+      const height = ast.root.attributes?.height || ast.height;
+
+      if (width) {
+        attributes.push(` width="${width}"`);
+      }
+      if (height) {
+        attributes.push(` height="${height}"`);
+      }
+    }
+
+    return attributes.join('');
   }
 
   /**

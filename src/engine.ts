@@ -41,7 +41,10 @@ export class SVGFusion {
   /**
    * Convert SVG content to component code
    */
-  convert(svgContent: string, options: SVGFusionOptions): ConversionResult {
+  async convert(
+    svgContent: string,
+    options: SVGFusionOptions
+  ): Promise<ConversionResult> {
     try {
       // Parse SVG content into AST
       const ast = this.parser.parse(svgContent);
@@ -62,7 +65,7 @@ export class SVGFusion {
         generator = new VueGenerator(options.generator as VueGeneratorOptions);
       }
 
-      const componentResult = generator.generate(transformationResult);
+      const componentResult = await generator.generate(transformationResult);
 
       return {
         ...componentResult,

@@ -15,9 +15,10 @@ import { formatComponentName } from './utils/name.js';
 import { createBanner } from './utils/banner.js';
 import { ansiColors } from './utils/colors.js';
 
+const TITLE = 'SVGfusion';
 // Use existing banner system instead of hardcoded ASCII
 function showBanner() {
-  console.log(createBanner(ansiColors));
+  console.log(createBanner(ansiColors, TITLE));
 }
 
 interface CliOptions {
@@ -37,7 +38,10 @@ interface CliOptions {
   index?: boolean;
 }
 
-function convertSvgFile(filePath: string, options: CliOptions): void {
+async function convertSvgFile(
+  filePath: string,
+  options: CliOptions
+): Promise<void> {
   try {
     // Read SVG file
     const svgContent = readFileSync(filePath, 'utf8');
@@ -67,7 +71,7 @@ function convertSvgFile(filePath: string, options: CliOptions): void {
 
     // Convert SVG
     const fusion = new SVGFusion();
-    const result = fusion.convert(svgContent, fusionOptions);
+    const result = await fusion.convert(svgContent, fusionOptions);
 
     // Determine output directory
     const outputDir = options.output || './components';
@@ -125,7 +129,7 @@ function findSvgFiles(dirPath: string, recursive: boolean = false): string[] {
   return svgFiles;
 }
 
-function processInput(input: string, options: CliOptions): void {
+async function processInput(input: string, options: CliOptions): Promise<void> {
   const inputPath = resolve(input);
 
   if (!existsSync(inputPath)) {
@@ -140,7 +144,7 @@ function processInput(input: string, options: CliOptions): void {
       console.error('❌ Input file must be an SVG file');
       process.exit(1);
     }
-    convertSvgFile(inputPath, options);
+    await convertSvgFile(inputPath, options);
   } else if (stat.isDirectory()) {
     const svgFiles = findSvgFiles(inputPath, options.recursive);
 
@@ -153,7 +157,7 @@ function processInput(input: string, options: CliOptions): void {
 
     for (const svgFile of svgFiles) {
       console.log(`\n📄 Processing: ${basename(svgFile)}`);
-      convertSvgFile(svgFile, options);
+      await convertSvgFile(svgFile, options);
     }
 
     if (options.index) {
@@ -195,7 +199,7 @@ function generateIndexFile(outputDir: string, _options: CliOptions): void {
   }
 }
 
-function main() {
+async function main() {
   showBanner();
 
   program
@@ -244,7 +248,7 @@ Examples:
 ${ansiColors.reset}
 `
     )
-    .action((input: string, rawOptions: Record<string, unknown>) => {
+    .action(async (input: string, rawOptions: Record<string, unknown>) => {
       const options = rawOptions as CliOptions;
 
       // Process TypeScript/JavaScript option
@@ -255,7 +259,7 @@ ${ansiColors.reset}
       }
 
       // Process the input (file or directory)
-      processInput(input, options);
+      await processInput(input, options);
     });
 
   // Show help if no arguments provided
@@ -268,10 +272,8 @@ ${ansiColors.reset}
 
 // Run CLI
 if (import.meta.url === `file://${process.argv[1]}`) {
-  try {
-    main();
-  } catch (error) {
+  main().catch(error => {
     console.error('❌ Unexpected error:', error);
     process.exit(1);
-  }
+  });
 }
