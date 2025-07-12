@@ -1,3 +1,10 @@
+# [1.13.0](https://github.com/lolvOid/svgfusion/compare/v1.12.0...v1.13.0) (2025-07-12)
+
+
+### Features
+
+* update docs ([a95522a](https://github.com/lolvOid/svgfusion/commit/a95522a8d8322f1e4eee3abf4bcebfce58cb5d04))
+
 # [1.12.0](https://github.com/lolvOid/svgfusion/compare/v1.11.0...v1.12.0) (2025-07-12)
 
 
