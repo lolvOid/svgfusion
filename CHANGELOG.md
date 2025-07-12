@@ -1,3 +1,10 @@
+# [1.12.0](https://github.com/lolvOid/svgfusion/compare/v1.11.0...v1.12.0) (2025-07-12)
+
+
+### Features
+
+* Add "none" to SVG paths in icon components ([80f46f2](https://github.com/lolvOid/svgfusion/commit/80f46f217e85406233dd1840c56c243f524b4241))
+
 # [1.11.0](https://github.com/lolvOid/svgfusion/compare/v1.10.0...v1.11.0) (2025-07-12)
 
 
