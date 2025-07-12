@@ -1,3 +1,10 @@
+# [1.11.0](https://github.com/lolvOid/svgfusion/compare/v1.10.0...v1.11.0) (2025-07-12)
+
+
+### Features
+
+* Add HeartLine icon and improve color handling ([3b9aaf4](https://github.com/lolvOid/svgfusion/commit/3b9aaf44f14e877a8024d75af6e073d3451470e6))
+
 # [1.10.0](https://github.com/lolvOid/svgfusion/compare/v1.9.0...v1.10.0) (2025-07-12)
 
 
