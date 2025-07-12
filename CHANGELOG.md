@@ -1,3 +1,15 @@
+# [1.10.0](https://github.com/lolvOid/svgfusion/compare/v1.9.0...v1.10.0) (2025-07-12)
+
+
+### Bug Fixes
+
+* update example directory paths in CLI integration tests ([9089644](https://github.com/lolvOid/svgfusion/commit/9089644f1ee199a86e9363454c0193443be1f1c3))
+
+
+### Features
+
+* initialize Vue demo project with Vite, Tailwind CSS, and TypeScript ([99e276a](https://github.com/lolvOid/svgfusion/commit/99e276a6cf96e7bee02cf2e283ac4ed6bf9defd6))
+
 # [1.9.0](https://github.com/lolvOid/svgfusion/compare/v1.8.0...v1.9.0) (2025-07-11)
 
 
