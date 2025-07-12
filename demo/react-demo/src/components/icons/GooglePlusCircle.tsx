@@ -7,6 +7,13 @@ interface GooglePlusCircleProps extends React.SVGProps<SVGSVGElement> {
   desc?: string;
   descId?: string;
   size?: string;
+  color?: string;
+  colorClass?: string;
+  color2?: string;
+  color2Class?: string;
+  color3?: string;
+  color3Class?: string;
+  isFixedStrokeWidth?: boolean;
 }
 
 const GooglePlusCircle = (
@@ -15,7 +22,14 @@ const GooglePlusCircle = (
     titleId,
     desc,
     descId,
+    colorClass,
+    color2Class,
+    color3Class,
+    isFixedStrokeWidth,
     size = '20',
+    color = '#AC2201',
+    color2 = '#CD2900',
+    color3 = '#FCFCFC',
     ...svgProps
   }: GooglePlusCircleProps,
   ref: Ref<SVGSVGElement>
@@ -32,16 +46,23 @@ const GooglePlusCircle = (
     >
       {title ? <title id={titleId}>{title}</title> : null}
       {desc ? <desc id={descId}>{desc}</desc> : null}
-      <circle style={{ fill: '#CD2900' }} cx="256" cy="256" r="247.916" />
+      <circle
+        style={{ fill: color2 }}
+        cx="256"
+        cy="256"
+        r="247.916"
+        vectorEffect={isFixedStrokeWidth ? 'non-scaling-stroke' : undefined}
+      />
       <path
-        style={{ fill: '#AC2201' }}
+        style={{ fill: color }}
         d="M256,8.084c-10.96,0-21.752,0.72-32.337,2.099C345.304,26.029,439.242,130.04,439.242,256
 	s-93.939,229.971-215.579,245.817c10.585,1.379,21.377,2.099,32.337,2.099c136.921,0,247.916-110.996,247.916-247.916
 	S392.921,8.084,256,8.084z"
+        vectorEffect={isFixedStrokeWidth ? 'non-scaling-stroke' : undefined}
       />
       <g>
         <path
-          style={{ fill: '#FCFCFC' }}
+          style={{ fill: color3 }}
           d="M202.105,407.444c-82.432,0-150.363-67.04-151.431-149.443
 		C50.149,217.471,65.608,179.115,94.204,150c28.577-29.098,66.617-45.235,107.115-45.442l0.778-0.002
 		c34.328,0,67.95,11.802,94.675,33.233l5.535,4.439c1.053,0.844,1.139,2.416,0.184,3.37l-35.784,35.785
@@ -50,14 +71,16 @@ const GooglePlusCircle = (
 		c18.125,17.407,41.84,26.993,66.778,26.993c36.647-0.035,69.502-20.248,86.044-52.817h-63.497c-0.844,0-1.528-0.684-1.528-1.528
 		v-51.916c0-0.844,0.684-1.528,1.528-1.528h121.125c0.844,0,1.528,0.684,1.528,1.53l-0.004,14.774
 		c-0.028,79.113-63.724,144.8-141.99,146.427C204.246,407.433,203.178,407.444,202.105,407.444z"
+          vectorEffect={isFixedStrokeWidth ? 'non-scaling-stroke' : undefined}
         />
         <path
-          style={{ fill: '#FCFCFC' }}
+          style={{ fill: color3 }}
           d="M374.029,232.891v-28.157c0-1.154-0.936-2.09-2.09-2.09h-28.157c-1.154,0-2.09-0.936-2.09-2.09
 		v-40.014c0-1.154,0.936-2.09,2.09-2.09h28.157c1.154,0,2.09-0.936,2.09-2.09v-28.157c0-1.154,0.936-2.09,2.09-2.09h40.014
 		c1.154,0,2.09,0.936,2.09,2.09v28.157c0,1.154,0.936,2.09,2.09,2.09h28.157c1.154,0,2.09,0.936,2.09,2.09v40.014
 		c0,1.154-0.936,2.09-2.09,2.09h-28.157c-1.154,0-2.09,0.936-2.09,2.09v28.157c0,1.154-0.936,2.09-2.09,2.09h-40.014
 		C374.965,234.981,374.029,234.045,374.029,232.891z"
+          vectorEffect={isFixedStrokeWidth ? 'non-scaling-stroke' : undefined}
         />
       </g>
       <path
@@ -65,6 +88,7 @@ const GooglePlusCircle = (
 	s26.628,132.667,74.982,181.019C123.333,485.372,187.62,512,256,512s132.667-26.628,181.019-74.981
 	C485.372,388.667,512,324.379,512,256S485.372,123.333,437.019,74.981z M256,495.832C123.756,495.832,16.168,388.244,16.168,256
 	S123.756,16.168,256,16.168S495.832,123.756,495.832,256S388.244,495.832,256,495.832z"
+        vectorEffect={isFixedStrokeWidth ? 'non-scaling-stroke' : undefined}
       />
       <path
         d="M349.613,237.646c-0.942-0.363-1.956-0.509-2.966-0.509H223.663c-4.465,0-8.084,3.62-8.084,8.084v53.895
@@ -82,6 +106,7 @@ const GooglePlusCircle = (
 	c-30.016,30.562-46.242,70.83-45.691,113.387c0.544,42.027,17.323,81.451,47.245,111.01c29.949,29.587,69.629,45.881,111.731,45.881
 	c1.124,0,2.246-0.012,3.364-0.034c40.182-0.835,77.802-17.334,105.928-46.457c28.004-28.995,43.435-67.177,43.45-107.51
 	l0.005-15.764C354.854,241.967,352.889,238.911,349.613,237.646z"
+        vectorEffect={isFixedStrokeWidth ? 'non-scaling-stroke' : undefined}
       />
       <path
         d="M450.021,150.905h-24.253v-24.253c0-4.465-3.618-8.084-8.084-8.084h-43.116c-4.466,0-8.084,3.62-8.084,8.084v24.253h-24.253
@@ -90,6 +115,7 @@ const GooglePlusCircle = (
 	C458.105,154.525,454.487,150.905,450.021,150.905z M441.937,194.021h-24.253c-4.466,0-8.084,3.62-8.084,8.084v24.253h-26.947
 	v-24.253c0-4.465-3.618-8.084-8.084-8.084h-24.253v-26.947h24.253c4.466,0,8.084-3.62,8.084-8.084v-24.253H409.6v24.253
 	c0,4.465,3.618,8.084,8.084,8.084h24.253V194.021z"
+        vectorEffect={isFixedStrokeWidth ? 'non-scaling-stroke' : undefined}
       />
     </svg>
   );

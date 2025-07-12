@@ -115,6 +115,49 @@ export class ColorSplittingFeature {
         )}}`;
       }
 
+      // Replace colors in style attribute
+      if (newAttributes.style) {
+        let updatedStyle = newAttributes.style;
+
+        // Replace fill colors in style
+        const fillMatch = updatedStyle.match(/fill:\s*([^;]+)/);
+        if (fillMatch) {
+          const fillColor = fillMatch[1].trim();
+          if (colorMap.has(fillColor)) {
+            updatedStyle = updatedStyle.replace(
+              /fill:\s*[^;]+/,
+              `fill: {${colorMap.get(fillColor)}}`
+            );
+          }
+        }
+
+        // Replace stroke colors in style
+        const strokeMatch = updatedStyle.match(/stroke:\s*([^;]+)/);
+        if (strokeMatch) {
+          const strokeColor = strokeMatch[1].trim();
+          if (colorMap.has(strokeColor)) {
+            updatedStyle = updatedStyle.replace(
+              /stroke:\s*[^;]+/,
+              `stroke: {${colorMap.get(strokeColor)}}`
+            );
+          }
+        }
+
+        // Replace stop-color in style
+        const stopColorMatch = updatedStyle.match(/stop-color:\s*([^;]+)/);
+        if (stopColorMatch) {
+          const stopColor = stopColorMatch[1].trim();
+          if (colorMap.has(stopColor)) {
+            updatedStyle = updatedStyle.replace(
+              /stop-color:\s*[^;]+/,
+              `stop-color: {${colorMap.get(stopColor)}}`
+            );
+          }
+        }
+
+        newAttributes.style = updatedStyle;
+      }
+
       // Add missing attributes with "none" when color splitting is enabled
       // Rule: If element has one meaningful attribute (fill OR stroke), add the other as "none"
       // Don't add anything if element has neither fill nor stroke or has empty values
@@ -172,6 +215,19 @@ export class ColorSplittingFeature {
         type: 'stop-color',
         element,
         attribute: 'stop-color',
+      });
+    }
+
+    // Check style attribute for colors
+    if (element.attributes.style) {
+      const styleColors = this.extractColorsFromStyle(element.attributes.style);
+      styleColors.forEach(color => {
+        colors.push({
+          value: color.value,
+          type: color.type,
+          element,
+          attribute: 'style',
+        });
       });
     }
 
@@ -268,5 +324,47 @@ export class ColorSplittingFeature {
     ];
 
     return namedColors.includes(color.toLowerCase());
+  }
+
+  /**
+   * Extract colors from style attribute
+   */
+  private extractColorsFromStyle(style: string): Array<{
+    value: string;
+    type: 'fill' | 'stroke' | 'stop-color';
+  }> {
+    const colors: Array<{
+      value: string;
+      type: 'fill' | 'stroke' | 'stop-color';
+    }> = [];
+
+    // Parse fill colors from style
+    const fillMatch = style.match(/fill:\s*([^;]+)/);
+    if (fillMatch) {
+      const fillColor = fillMatch[1].trim();
+      if (this.isValidColor(fillColor)) {
+        colors.push({ value: fillColor, type: 'fill' });
+      }
+    }
+
+    // Parse stroke colors from style
+    const strokeMatch = style.match(/stroke:\s*([^;]+)/);
+    if (strokeMatch) {
+      const strokeColor = strokeMatch[1].trim();
+      if (this.isValidColor(strokeColor)) {
+        colors.push({ value: strokeColor, type: 'stroke' });
+      }
+    }
+
+    // Parse stop-color from style
+    const stopColorMatch = style.match(/stop-color:\s*([^;]+)/);
+    if (stopColorMatch) {
+      const stopColor = stopColorMatch[1].trim();
+      if (this.isValidColor(stopColor)) {
+        colors.push({ value: stopColor, type: 'stop-color' });
+      }
+    }
+
+    return colors;
   }
 }
