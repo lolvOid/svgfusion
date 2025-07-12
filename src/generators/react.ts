@@ -435,12 +435,13 @@ ${childrenJsx}
   ): string[] {
     const jsxAttributes: string[] = [];
     const classNames: string[] = [];
+    const hasOriginalClass = 'class' in attributes || 'className' in attributes;
 
     // Process all attributes
     Object.entries(attributes).forEach(([key, value]) => {
       const jsxKey = toReactProp(key);
 
-      // Handle dynamic color values and add corresponding class
+      // Handle dynamic color values - always add colorClass when color splitting is enabled
       if (
         (key === 'fill' || key === 'stroke') &&
         value.startsWith('{') &&
@@ -451,7 +452,7 @@ ${childrenJsx}
         // Add the color attribute
         jsxAttributes.push(`${jsxKey}=${value}`);
 
-        // Collect class name for later combination
+        // Always collect class name for color splitting
         const classVar = `${colorVar}Class`;
         classNames.push(classVar);
       } else if (key === 'style') {
@@ -470,11 +471,32 @@ ${childrenJsx}
 
     // Add combined className if any color classes were found
     if (classNames.length > 0) {
+      // Get the original class value
+      const originalClass = attributes.class || attributes.className;
+
       if (classNames.length === 1) {
-        jsxAttributes.push(`className={${classNames[0]}}`);
+        if (originalClass) {
+          jsxAttributes.push(
+            `className={\`${originalClass} \${${classNames[0]}}\`}`
+          );
+        } else {
+          jsxAttributes.push(`className={${classNames[0]}}`);
+        }
       } else {
         const combinedClasses = classNames.map(cls => `\${${cls}}`).join(' ');
-        jsxAttributes.push(`className={\`${combinedClasses}\`}`);
+        if (originalClass) {
+          jsxAttributes.push(
+            `className={\`${originalClass} ${combinedClasses}\`}`
+          );
+        } else {
+          jsxAttributes.push(`className={\`${combinedClasses}\`}`);
+        }
+      }
+    } else if (hasOriginalClass) {
+      // Keep original class if no color classes
+      const originalClass = attributes.class || attributes.className;
+      if (originalClass) {
+        jsxAttributes.push(`className="${originalClass}"`);
       }
     }
 

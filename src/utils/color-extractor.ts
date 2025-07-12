@@ -2,6 +2,8 @@
  * Color extraction utility for SVG split colors feature
  */
 
+import { colord } from 'colord';
+
 export interface ColorInfo {
   colors: string[];
   colorMap: Map<string, string>;
@@ -11,6 +13,29 @@ export interface ColorInfo {
   fillColorMap: Map<string, string>;
   strokeColorMap: Map<string, string>;
   gradientColorMap: Map<string, string>;
+}
+
+/**
+ * Convert any color format to hex
+ */
+function convertToHex(color: string): string {
+  try {
+    // Handle special cases
+    if (
+      color === 'none' ||
+      color === 'transparent' ||
+      color === 'currentColor'
+    ) {
+      return color;
+    }
+
+    // Try to parse and convert to hex
+    const colorObj = colord(color);
+    return colorObj.toHex();
+  } catch (error) {
+    // If parsing fails, return original color
+    return color;
+  }
 }
 
 /**
@@ -49,8 +74,9 @@ export function extractColors(svgContent: string): ColorInfo {
     while ((match = regex.exec(svgContent)) !== null) {
       const color = match[1].trim();
       if (isValidColor(color)) {
-        fillColors.add(color);
-        allColors.add(color);
+        const hexColor = convertToHex(color);
+        fillColors.add(hexColor);
+        allColors.add(hexColor);
       }
     }
   });
@@ -61,8 +87,9 @@ export function extractColors(svgContent: string): ColorInfo {
     while ((match = regex.exec(svgContent)) !== null) {
       const color = match[1].trim();
       if (isValidColor(color)) {
-        strokeColors.add(color);
-        allColors.add(color);
+        const hexColor = convertToHex(color);
+        strokeColors.add(hexColor);
+        allColors.add(hexColor);
       }
     }
   });
@@ -73,8 +100,9 @@ export function extractColors(svgContent: string): ColorInfo {
     while ((match = regex.exec(svgContent)) !== null) {
       const color = match[1].trim();
       if (isValidColor(color)) {
-        gradientColors.add(color);
-        allColors.add(color);
+        const hexColor = convertToHex(color);
+        gradientColors.add(hexColor);
+        allColors.add(hexColor);
       }
     }
   });
@@ -166,127 +194,60 @@ export function replaceColorsWithProps(
 ): string {
   let modifiedContent = svgContent;
 
-  // Replace fill colors
-  colorInfo.fillColorMap.forEach((propName, originalColor) => {
-    // Escape special regex characters in color values
-    const escapedColor = originalColor.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+  // Create a map of original colors to their hex equivalents and variable names
+  const colorReplacements = new Map<
+    string,
+    { hex: string; variableName: string }
+  >();
 
-    // Replace in fill attributes
-    const fillRegex = new RegExp(`fill="${escapedColor}"`, 'g');
-    const fillSingleQuoteRegex = new RegExp(`fill='${escapedColor}'`, 'g');
-    const fillStyleRegex = new RegExp(`fill:\\s*${escapedColor}`, 'g');
-
-    if (framework === 'react') {
-      // React JSX syntax
-      modifiedContent = modifiedContent
-        .replace(fillRegex, `fill={${propName}}`)
-        .replace(fillSingleQuoteRegex, `fill={${propName}}`)
-        .replace(fillStyleRegex, `fill: {${propName}}`);
-
-      // Add className for fill
-      const classVar = `${propName}Class`;
-      modifiedContent = modifiedContent.replace(
-        new RegExp(`fill={${propName}}`, 'g'),
-        `fill={${propName}} className={${classVar}}`
-      );
-    } else {
-      // Vue template syntax
-      modifiedContent = modifiedContent
-        .replace(fillRegex, `:fill="${propName}"`)
-        .replace(fillSingleQuoteRegex, `:fill="${propName}"`)
-        .replace(fillStyleRegex, `fill: {{ ${propName} }}`);
-
-      // Add class for fill
-      const classVar = `${propName}Class`;
-      modifiedContent = modifiedContent.replace(
-        new RegExp(`:fill="${propName}"`, 'g'),
-        `:fill="${propName}" :class="${classVar}"`
-      );
-    }
+  // Fill color replacements
+  colorInfo.fillColorMap.forEach((variableName, hexColor) => {
+    colorReplacements.set(hexColor, { hex: hexColor, variableName });
   });
 
-  // Replace stroke colors
-  colorInfo.strokeColorMap.forEach((propName, originalColor) => {
-    // Escape special regex characters in color values
-    const escapedColor = originalColor.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
-
-    // Replace in stroke attributes
-    const strokeRegex = new RegExp(`stroke="${escapedColor}"`, 'g');
-    const strokeSingleQuoteRegex = new RegExp(`stroke='${escapedColor}'`, 'g');
-    const strokeStyleRegex = new RegExp(`stroke:\\s*${escapedColor}`, 'g');
-
-    if (framework === 'react') {
-      // React JSX syntax
-      modifiedContent = modifiedContent
-        .replace(strokeRegex, `stroke={${propName}}`)
-        .replace(strokeSingleQuoteRegex, `stroke={${propName}}`)
-        .replace(strokeStyleRegex, `stroke: {${propName}}`);
-
-      // Add className for stroke
-      const classVar = `${propName}Class`;
-      modifiedContent = modifiedContent.replace(
-        new RegExp(`stroke={${propName}}`, 'g'),
-        `stroke={${propName}} className={${classVar}}`
-      );
-    } else {
-      // Vue template syntax
-      modifiedContent = modifiedContent
-        .replace(strokeRegex, `:stroke="${propName}"`)
-        .replace(strokeSingleQuoteRegex, `:stroke="${propName}"`)
-        .replace(strokeStyleRegex, `stroke: {{ ${propName} }}`);
-
-      // Add class for stroke
-      const classVar = `${propName}Class`;
-      modifiedContent = modifiedContent.replace(
-        new RegExp(`:stroke="${propName}"`, 'g'),
-        `:stroke="${propName}" :class="${classVar}"`
-      );
-    }
+  // Stroke color replacements
+  colorInfo.strokeColorMap.forEach((variableName, hexColor) => {
+    colorReplacements.set(hexColor, { hex: hexColor, variableName });
   });
 
-  // Replace gradient colors
-  colorInfo.gradientColorMap.forEach((propName, originalColor) => {
-    // Escape special regex characters in color values
-    const escapedColor = originalColor.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+  // Gradient color replacements
+  colorInfo.gradientColorMap.forEach((variableName, hexColor) => {
+    colorReplacements.set(hexColor, { hex: hexColor, variableName });
+  });
 
-    // Replace in stop-color attributes
-    const stopColorRegex = new RegExp(`stop-color="${escapedColor}"`, 'g');
-    const stopColorSingleQuoteRegex = new RegExp(
-      `stop-color='${escapedColor}'`,
-      'g'
+  // Find and replace colors in the SVG content
+  const colorRegexPatterns = [
+    /fill="([^"]*?)"/g,
+    /fill='([^']*?)'/g,
+    /stroke="([^"]*?)"/g,
+    /stroke='([^']*?)'/g,
+    /stop-color="([^"]*?)"/g,
+    /stop-color='([^']*?)'/g,
+  ];
+
+  colorRegexPatterns.forEach(regex => {
+    modifiedContent = modifiedContent.replace(
+      regex,
+      (match, colorValue: string) => {
+        const attribute = match.split('=')[0];
+        const quote = match.includes('"') ? '"' : "'";
+
+        // Convert the found color to hex to match our color maps
+        const hexColor = convertToHex(colorValue);
+
+        // Check if this hex color exists in our replacements
+        const replacement = colorReplacements.get(hexColor);
+        if (replacement) {
+          if (framework === 'react') {
+            return `${attribute}={${replacement.variableName}}`;
+          } else {
+            return `${attribute}=${quote}${replacement.variableName}${quote}`;
+          }
+        }
+
+        return match; // Return original if no replacement found
+      }
     );
-    const stopColorStyleRegex = new RegExp(
-      `stop-color:\\s*${escapedColor}`,
-      'g'
-    );
-
-    if (framework === 'react') {
-      // React JSX syntax
-      modifiedContent = modifiedContent
-        .replace(stopColorRegex, `stopColor={${propName}}`)
-        .replace(stopColorSingleQuoteRegex, `stopColor={${propName}}`)
-        .replace(stopColorStyleRegex, `stopColor: {${propName}}`);
-
-      // Add className for gradient
-      const classVar = `${propName}Class`;
-      modifiedContent = modifiedContent.replace(
-        new RegExp(`stopColor={${propName}}`, 'g'),
-        `stopColor={${propName}} className={${classVar}}`
-      );
-    } else {
-      // Vue template syntax
-      modifiedContent = modifiedContent
-        .replace(stopColorRegex, `:stop-color="${propName}"`)
-        .replace(stopColorSingleQuoteRegex, `:stop-color="${propName}"`)
-        .replace(stopColorStyleRegex, `stop-color: {{ ${propName} }}`);
-
-      // Add class for gradient
-      const classVar = `${propName}Class`;
-      modifiedContent = modifiedContent.replace(
-        new RegExp(`:stop-color="${propName}"`, 'g'),
-        `:stop-color="${propName}" :class="${classVar}"`
-      );
-    }
   });
 
   return modifiedContent;

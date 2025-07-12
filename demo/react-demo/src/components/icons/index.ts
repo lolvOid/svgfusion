@@ -6,6 +6,7 @@ export { default as BrowserifyIcon } from './BrowserifyIcon';
 export { default as GoldPerson } from './GoldPerson';
 export { default as GooglePlusCircle } from './GooglePlusCircle';
 export { default as GradientIcon } from './GradientIcon';
+export { default as HeartLine } from './HeartLine';
 export { default as MagicTypeFilledColorSecondary } from './MagicTypeFilledColorSecondary';
 export { default as SodaWater } from './SodaWater';
 
@@ -17,6 +18,7 @@ export type IconComponents = {
   GoldPerson: IconComponent;
   GooglePlusCircle: IconComponent;
   GradientIcon: IconComponent;
+  HeartLine: IconComponent;
   MagicTypeFilledColorSecondary: IconComponent;
   SodaWater: IconComponent;
 };

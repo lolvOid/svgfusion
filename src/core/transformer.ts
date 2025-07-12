@@ -31,6 +31,7 @@ export interface TransformationResult {
     originalColors: string[];
     optimizationApplied: boolean;
     features: string[];
+    hasClassAttributes: boolean;
   };
 }
 
@@ -95,6 +96,7 @@ export class SVGTransformer {
         originalColors: colorMappings.map(m => m.originalColor),
         optimizationApplied: optimize,
         features,
+        hasClassAttributes: this.hasClassAttributes(transformedAst),
       },
     };
   }
@@ -264,5 +266,22 @@ export class SVGTransformer {
       attributes: { ...element.attributes },
       children: element.children.map(child => this.deepCloneElement(child)),
     };
+  }
+
+  /**
+   * Check if the SVG has any class attributes in its elements
+   */
+  private hasClassAttributes(ast: SVGAst): boolean {
+    const checkElement = (element: SVGElement): boolean => {
+      // Check if this element has a class attribute
+      if (element.attributes.class || element.attributes.className) {
+        return true;
+      }
+
+      // Recursively check children
+      return element.children.some(child => checkElement(child));
+    };
+
+    return checkElement(ast.root);
   }
 }

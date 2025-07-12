@@ -7,6 +7,7 @@ import {
   BrowserifyIcon,
   GooglePlusCircle,
   SodaWater,
+  HeartLine,
 } from './components/icons';
 
 function App() {
@@ -22,6 +23,7 @@ function App() {
     { Component: BrowserifyIcon, name: 'Browserify' },
     { Component: GooglePlusCircle, name: 'Google Plus' },
     { Component: SodaWater, name: 'Soda Water' },
+    { Component: HeartLine, name: 'HeartLine' },
   ];
 
   return (
