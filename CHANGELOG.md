@@ -1,3 +1,10 @@
+# [1.14.0](https://github.com/lolvOid/svgfusion/compare/v1.13.0...v1.14.0) (2025-07-12)
+
+
+### Features
+
+* Add fixed stroke width toggle ([63cc747](https://github.com/lolvOid/svgfusion/commit/63cc7471fa995b9d2a9346d1570b29bc098c2adc))
+
 # [1.13.0](https://github.com/lolvOid/svgfusion/compare/v1.12.0...v1.13.0) (2025-07-12)
 
 
