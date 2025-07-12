@@ -115,6 +115,28 @@ export class ColorSplittingFeature {
         )}}`;
       }
 
+      // Add missing attributes with "none" when color splitting is enabled
+      // Rule: If element has one meaningful attribute (fill OR stroke), add the other as "none"
+      // Don't add anything if element has neither fill nor stroke or has empty values
+      if (this.isDrawableElement(el.tag)) {
+        const originalHadFill =
+          el.attributes.fill !== undefined && el.attributes.fill !== '';
+        const originalHadStroke =
+          el.attributes.stroke !== undefined && el.attributes.stroke !== '';
+
+        // If had meaningful fill but no stroke, add stroke="none"
+        if (originalHadFill && !originalHadStroke && !newAttributes.stroke) {
+          newAttributes.stroke = 'none';
+        }
+
+        // If had meaningful stroke but no fill, add fill="none"
+        if (originalHadStroke && !originalHadFill && !newAttributes.fill) {
+          newAttributes.fill = 'none';
+        }
+
+        // If had neither fill nor stroke (or empty values), don't add anything
+      }
+
       return { ...el, attributes: newAttributes };
     });
   }
@@ -172,6 +194,25 @@ export class ColorSplittingFeature {
         this.transformElement(child, transformer)
       ),
     };
+  }
+
+  /**
+   * Check if an element is a drawable SVG element that can have fill/stroke
+   */
+  private isDrawableElement(tag: string): boolean {
+    const drawableElements = [
+      'path',
+      'circle',
+      'ellipse',
+      'line',
+      'rect',
+      'polygon',
+      'polyline',
+      'text',
+      'tspan',
+      'use',
+    ];
+    return drawableElements.includes(tag);
   }
 
   /**
