@@ -146,7 +146,10 @@ export abstract class ComponentGenerator {
   /**
    * Generate color props interface/type definitions
    */
-  protected generateColorProps(colorMappings: ColorMapping[]): string {
+  protected generateColorProps(
+    colorMappings: ColorMapping[],
+    includeClassProps: boolean = true
+  ): string {
     if (colorMappings.length === 0) return '';
 
     return colorMappings
@@ -155,9 +158,17 @@ export abstract class ComponentGenerator {
         const className = `${propName}Class`;
 
         if (this.options.typescript) {
-          return `  ${propName}?: string;\n  ${className}?: string;`;
+          let props = `  ${propName}?: string;`;
+          if (includeClassProps) {
+            props += `\n  ${className}?: string;`;
+          }
+          return props;
         } else {
-          return `  ${propName}: PropTypes.string,\n  ${className}: PropTypes.string,`;
+          let props = `  ${propName}: PropTypes.string,`;
+          if (includeClassProps) {
+            props += `\n  ${className}: PropTypes.string,`;
+          }
+          return props;
         }
       })
       .join('\n');

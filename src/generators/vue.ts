@@ -165,6 +165,7 @@ ${children}
     // Convert attributes to Vue template format with color class logic
     const vueAttributes: string[] = [];
     const classVars: string[] = [];
+    const hasOriginalClass = 'class' in attributes;
 
     Object.entries(attributes).forEach(([key, value]) => {
       // Check if value is a color variable (starts and ends with curly braces)
@@ -174,7 +175,7 @@ ${children}
         // Add the color attribute
         vueAttributes.push(`:${key}="props.${variableName}"`);
 
-        // Collect class variables for fill or stroke attributes
+        // Always collect class variables for fill or stroke attributes when color splitting is enabled
         if (key === 'fill' || key === 'stroke') {
           const classVar = `${variableName}Class`;
           classVars.push(`props.${classVar}`);
@@ -186,7 +187,20 @@ ${children}
 
     // Add combined class attribute if there are any class variables
     if (classVars.length > 0) {
-      vueAttributes.push(`:class="[${classVars.join(', ')}]"`);
+      const originalClass = attributes.class;
+      if (originalClass) {
+        vueAttributes.push(
+          `:class="[${classVars.join(', ')}, '${originalClass}']"`
+        );
+      } else {
+        vueAttributes.push(`:class="[${classVars.join(', ')}]"`);
+      }
+    } else if (hasOriginalClass) {
+      // Keep original class if no color classes
+      const originalClass = attributes.class;
+      if (originalClass) {
+        vueAttributes.push(`class="${originalClass}"`);
+      }
     }
 
     const attributeString =

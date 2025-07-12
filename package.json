@@ -88,6 +88,7 @@
   "dependencies": {
     "@types/figlet": "^1.7.0",
     "chalk": "^5.0.0",
+    "colord": "^2.9.3",
     "commander": "^11.0.0",
     "figlet": "^1.8.1",
     "ora": "^7.0.0",

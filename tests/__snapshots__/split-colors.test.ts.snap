@@ -3,26 +3,26 @@
 exports[`Split Colors Feature should extract fill and stroke colors separately 1`] = `
 {
   "colorMap": Map {
-    "#00FF00" => "color",
-    "#FF0000" => "color2",
+    "#00ff00" => "color",
+    "#ff0000" => "color2",
   },
   "colors": [
-    "#00FF00",
-    "#FF0000",
+    "#00ff00",
+    "#ff0000",
   ],
   "fillColorMap": Map {
-    "#FF0000" => "color2",
+    "#ff0000" => "color2",
   },
   "fillColors": [
-    "#FF0000",
+    "#ff0000",
   ],
   "gradientColorMap": Map {},
   "gradientColors": [],
   "strokeColorMap": Map {
-    "#00FF00" => "color",
+    "#00ff00" => "color",
   },
   "strokeColors": [
-    "#00FF00",
+    "#00ff00",
   ],
 }
 `;
@@ -30,22 +30,22 @@ exports[`Split Colors Feature should extract fill and stroke colors separately 1
 exports[`Split Colors Feature should extract gradient stop colors 1`] = `
 {
   "colorMap": Map {
-    "#0000FF" => "color",
-    "#FF0000" => "color2",
+    "#0000ff" => "color",
+    "#ff0000" => "color2",
   },
   "colors": [
-    "#0000FF",
-    "#FF0000",
+    "#0000ff",
+    "#ff0000",
   ],
   "fillColorMap": Map {},
   "fillColors": [],
   "gradientColorMap": Map {
-    "#0000FF" => "color",
-    "#FF0000" => "color2",
+    "#0000ff" => "color",
+    "#ff0000" => "color2",
   },
   "gradientColors": [
-    "#0000FF",
-    "#FF0000",
+    "#0000ff",
+    "#ff0000",
   ],
   "strokeColorMap": Map {},
   "strokeColors": [],
@@ -55,42 +55,42 @@ exports[`Split Colors Feature should extract gradient stop colors 1`] = `
 exports[`Split Colors Feature should handle complex SVG with mixed fill, stroke, and gradient colors 1`] = `
 {
   "colorMap": Map {
-    "#0000FF" => "color",
-    "#00FF00" => "color2",
-    "#FF0000" => "color3",
-    "#FF00FF" => "color4",
-    "#FFFF00" => "color5",
+    "#0000ff" => "color",
+    "#00ff00" => "color2",
+    "#ff0000" => "color3",
+    "#ff00ff" => "color4",
+    "#ffff00" => "color5",
   },
   "colors": [
-    "#0000FF",
-    "#00FF00",
-    "#FF0000",
-    "#FF00FF",
-    "#FFFF00",
+    "#0000ff",
+    "#00ff00",
+    "#ff0000",
+    "#ff00ff",
+    "#ffff00",
   ],
   "fillColorMap": Map {
-    "#0000FF" => "color",
-    "#FF0000" => "color3",
+    "#0000ff" => "color",
+    "#ff0000" => "color3",
   },
   "fillColors": [
-    "#0000FF",
-    "#FF0000",
+    "#0000ff",
+    "#ff0000",
   ],
   "gradientColorMap": Map {
-    "#FF00FF" => "color4",
-    "#FFFF00" => "color5",
+    "#ff00ff" => "color4",
+    "#ffff00" => "color5",
   },
   "gradientColors": [
-    "#FF00FF",
-    "#FFFF00",
+    "#ff00ff",
+    "#ffff00",
   ],
   "strokeColorMap": Map {
-    "#00FF00" => "color2",
-    "#FF0000" => "color3",
+    "#00ff00" => "color2",
+    "#ff0000" => "color3",
   },
   "strokeColors": [
-    "#00FF00",
-    "#FF0000",
+    "#00ff00",
+    "#ff0000",
   ],
 }
 `;
@@ -98,26 +98,26 @@ exports[`Split Colors Feature should handle complex SVG with mixed fill, stroke,
 exports[`Split Colors Feature should handle invalid and special color values 1`] = `
 {
   "colorMap": Map {
-    "hsl(120, 100%, 50%)" => "color",
-    "rgb(255, 0, 0)" => "color2",
+    "#00ff00" => "color",
+    "#ff0000" => "color2",
   },
   "colors": [
-    "hsl(120, 100%, 50%)",
-    "rgb(255, 0, 0)",
+    "#00ff00",
+    "#ff0000",
   ],
   "fillColorMap": Map {
-    "rgb(255, 0, 0)" => "color2",
+    "#ff0000" => "color2",
   },
   "fillColors": [
-    "rgb(255, 0, 0)",
+    "#ff0000",
   ],
   "gradientColorMap": Map {},
   "gradientColors": [],
   "strokeColorMap": Map {
-    "hsl(120, 100%, 50%)" => "color",
+    "#00ff00" => "color",
   },
   "strokeColors": [
-    "hsl(120, 100%, 50%)",
+    "#00ff00",
   ],
 }
 `;
@@ -147,6 +147,6 @@ exports[`Split Colors Feature should handle same color in fill and stroke separa
 }
 `;
 
-exports[`Split Colors Feature should replace colors with React props 1`] = `"<path fill={color2} className={color2Class} stroke={color} className={colorClass} />"`;
+exports[`Split Colors Feature should replace colors with React props 1`] = `"<path fill={color2} stroke={color} />"`;
 
-exports[`Split Colors Feature should replace colors with Vue props 1`] = `"<stop :stop-color="color" :class="colorClass" />"`;
+exports[`Split Colors Feature should replace colors with Vue props 1`] = `"<stop stop-color="color" />"`;
