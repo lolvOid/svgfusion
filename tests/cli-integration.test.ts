@@ -75,9 +75,9 @@ describe('CLI Integration Tests', () => {
       expect(existsSync(indexPath)).toBe(true);
     });
 
-    it('should apply prefix and suffix via CLI', () => {
+    it('should apply prefix Demo and suffix Icon via CLI', () => {
       const output = execSync(
-        `node "${CLI_PATH}" "${EXAMPLES_DIR}" -o "${TEST_OUTPUT_DIR}" --prefix Icon --suffix Component`,
+        `node "${CLI_PATH}" "${EXAMPLES_DIR}" -o "${TEST_OUTPUT_DIR}" --prefix Demo --suffix Icon`,
         { encoding: 'utf-8' }
       );
 
@@ -90,7 +90,7 @@ describe('CLI Integration Tests', () => {
       );
       componentFiles.forEach(file => {
         const nameWithoutExt = file.replace(/\.(tsx|jsx)$/, '');
-        expect(nameWithoutExt).toMatch(/^Icon.*Component$/);
+        expect(nameWithoutExt).toMatch(/^Demo.*Icon$/);
       });
     });
 

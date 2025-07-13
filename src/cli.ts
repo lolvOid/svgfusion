@@ -11,7 +11,6 @@ import {
 } from 'fs';
 import { resolve, basename, extname, join } from 'path';
 import { SVGFusion, SVGFusionOptions } from './engine.js';
-import { formatComponentName } from './utils/name.js';
 import { createBanner } from './utils/banner.js';
 import { ansiColors } from './utils/colors.js';
 
@@ -47,13 +46,14 @@ async function convertSvgFile(
     // Read SVG file
     const svgContent = readFileSync(filePath, 'utf8');
 
+    console.log(
+      `🔄 Converting: ${basename(filePath)}`,
+      options.prefix,
+      options.suffix
+    );
     // Generate component name from filename if not provided
     const fileName = basename(filePath, extname(filePath));
-    const componentName =
-      options.name ||
-      formatComponentName(fileName, options.prefix, options.suffix);
-
-    // Configure SVGFusion options
+    const componentName = options.name || fileName;
     const fusionOptions: SVGFusionOptions = {
       framework: options.framework || 'react',
       transformation: {
@@ -64,6 +64,8 @@ async function convertSvgFile(
         accessibility: true,
       },
       generator: {
+        prefix: options.prefix || '',
+        suffix: options.suffix || '',
         typescript: options.typescript ?? true,
         memo: options.memo ?? true,
         forwardRef: options.forwardRef ?? true,

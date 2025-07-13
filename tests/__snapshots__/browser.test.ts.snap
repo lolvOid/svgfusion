@@ -80,14 +80,14 @@ exports[`Browser API Vue component without TypeScript: vue-component-javascript 
   defineOptions({ inheritAttrs: false });
 
   const props = defineProps({
-    title: { type: String, default: undefined },
-    titleId: { type: String, default: undefined },
-    desc: { type: String, default: undefined },
-    descId: { type: String, default: undefined },
-    class: { type: String, default: undefined },
-    style: { type: Object, default: undefined },
-    width: { type: [String, Number], default: undefined },
-    height: { type: [String, Number], default: undefined },
+    title: { type: String, default: '' },
+    titleId: { type: String, default: '' },
+    desc: { type: String, default: '' },
+    descId: { type: String, default: '' },
+    class: { type: String, default: '' },
+    style: { type: Object, default: '' },
+    width: { type: [String, Number], default: '' },
+    height: { type: [String, Number], default: '' },
     size: { type: String, default: '20' },
   });
 </script>
@@ -249,14 +249,14 @@ exports[`Browser API convertToVue composition API snapshot: vue-component-compos
   export default defineComponent({
     name: 'VueIcon',
     props: {
-      title: { type: String, default: undefined },
-      titleId: { type: String, default: undefined },
-      desc: { type: String, default: undefined },
-      descId: { type: String, default: undefined },
-      class: { type: String, default: undefined },
-      style: { type: Object, default: undefined },
-      width: { type: [String, Number], default: undefined },
-      height: { type: [String, Number], default: undefined },
+      title: { type: String, default: '' },
+      titleId: { type: String, default: '' },
+      desc: { type: String, default: '' },
+      descId: { type: String, default: '' },
+      class: { type: String, default: '' },
+      style: { type: Object, default: '' },
+      width: { type: [String, Number], default: '' },
+      height: { type: [String, Number], default: '' },
     },
     setup() {
       return {};

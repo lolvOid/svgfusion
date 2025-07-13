@@ -399,6 +399,12 @@ describe('svgToComponentName', () => {
       suffix: '',
       expected: 'FlagUs',
     },
+    {
+      name: 'CSV, Type=Solid.svg',
+      prefix: 'mnkt-file-type-document',
+      suffix: '',
+      expected: 'MnktFileTypeDocumentCsvTypeSolid',
+    },
   ];
 
   prefixSuffixCases.forEach(({ name, prefix, suffix, expected }) => {

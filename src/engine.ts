@@ -68,6 +68,7 @@ export class SVGFusion {
 
       const componentResult = await generator.generate(transformationResult);
 
+      // Return final result with metadata
       return {
         ...componentResult,
         metadata: transformationResult.metadata,
