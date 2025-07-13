@@ -1,24 +1,24 @@
 // Auto-generated index file for tree-shaking
 // This file exports all components for optimal bundling
 
-export { default as BackCardColor } from './BackCardColor.vue';
-export { default as BrowserifyIcon } from './BrowserifyIcon.vue';
-export { default as GoldPerson } from './GoldPerson.vue';
-export { default as GooglePlusCircle } from './GooglePlusCircle.vue';
-export { default as GradientIcon } from './GradientIcon.vue';
-export { default as HeartLine } from './HeartLine.vue';
-export { default as MagicTypeFilledColorSecondary } from './MagicTypeFilledColorSecondary.vue';
-export { default as SodaWater } from './SodaWater.vue';
+export { default as DemoBackCardColorIcon } from './DemoBackCardColorIcon.vue';
+export { default as DemoBrowserifyIconIcon } from './DemoBrowserifyIconIcon.vue';
+export { default as DemoGoldPersonIcon } from './DemoGoldPersonIcon.vue';
+export { default as DemoGooglePlusCircleIcon } from './DemoGooglePlusCircleIcon.vue';
+export { default as DemoGradientIconIcon } from './DemoGradientIconIcon.vue';
+export { default as DemoHeartLineIcon } from './DemoHeartLineIcon.vue';
+export { default as DemoMagicTypeFilledColorSecondaryIcon } from './DemoMagicTypeFilledColorSecondaryIcon.vue';
+export { default as DemoSodaWaterIcon } from './DemoSodaWaterIcon.vue';
 
 // TypeScript component types
 export type IconComponent = any;
 export type IconComponents = {
-  BackCardColor: IconComponent;
-  BrowserifyIcon: IconComponent;
-  GoldPerson: IconComponent;
-  GooglePlusCircle: IconComponent;
-  GradientIcon: IconComponent;
-  HeartLine: IconComponent;
-  MagicTypeFilledColorSecondary: IconComponent;
-  SodaWater: IconComponent;
+  DemoBackCardColorIcon: IconComponent;
+  DemoBrowserifyIconIcon: IconComponent;
+  DemoGoldPersonIcon: IconComponent;
+  DemoGooglePlusCircleIcon: IconComponent;
+  DemoGradientIconIcon: IconComponent;
+  DemoHeartLineIcon: IconComponent;
+  DemoMagicTypeFilledColorSecondaryIcon: IconComponent;
+  DemoSodaWaterIcon: IconComponent;
 };

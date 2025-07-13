@@ -6,16 +6,23 @@
 import { SVGAst, SVGElement } from './parser';
 import { ColorSplittingFeature } from '../features/color-splitting';
 import { StrokeFixingFeature } from '../features/stroke-fixing';
+import { StrokeWidthSplittingFeature } from '../features/stroke-width-splitting';
 import { AccessibilityFeature } from '../features/accessibility';
 
 export interface TransformationOptions {
   optimize?: boolean;
   splitColors?: boolean;
+  splitStrokeWidths?: boolean;
   fixedStrokeWidth?: boolean;
   accessibility?: boolean;
   removeComments?: boolean;
   removeDuplicates?: boolean;
   minifyPaths?: boolean;
+}
+
+export interface StrokeWidthMapping {
+  originalStrokeWidth: string;
+  variableName: string;
 }
 
 export interface ColorMapping {
@@ -27,8 +34,10 @@ export interface ColorMapping {
 export interface TransformationResult {
   ast: SVGAst;
   colorMappings: ColorMapping[];
+  strokeWidthMappings: StrokeWidthMapping[];
   metadata: {
     originalColors: string[];
+    originalStrokeWidths: string[];
     optimizationApplied: boolean;
     features: string[];
     hasClassAttributes: boolean;
@@ -49,6 +58,7 @@ export class SVGTransformer {
     const {
       optimize = true,
       splitColors = false,
+      splitStrokeWidths = false,
       fixedStrokeWidth = false,
       accessibility = true,
       removeComments = true,
@@ -60,6 +70,7 @@ export class SVGTransformer {
     const transformedAst = this.deepCloneAst(ast);
     const features: string[] = [];
     let colorMappings: ColorMapping[] = [];
+    let strokeWidthMappings: StrokeWidthMapping[] = [];
 
     // Apply optimizations if requested
     if (optimize) {
@@ -77,6 +88,12 @@ export class SVGTransformer {
       features.push('split-colors');
     }
 
+    // Handle stroke width splitting
+    if (splitStrokeWidths) {
+      strokeWidthMappings = this.applySplitStrokeWidths(transformedAst);
+      features.push('split-stroke-widths');
+    }
+
     // Apply fixed stroke width
     if (fixedStrokeWidth) {
       this.applyFixedStrokeWidth(transformedAst);
@@ -92,8 +109,12 @@ export class SVGTransformer {
     return {
       ast: transformedAst,
       colorMappings,
+      strokeWidthMappings,
       metadata: {
         originalColors: colorMappings.map(m => m.originalColor),
+        originalStrokeWidths: strokeWidthMappings.map(
+          m => m.originalStrokeWidth
+        ),
         optimizationApplied: optimize,
         features,
         hasClassAttributes: this.hasClassAttributes(transformedAst),
@@ -283,5 +304,22 @@ export class SVGTransformer {
     };
 
     return checkElement(ast.root);
+  }
+
+  /**
+   * Apply stroke width splitting transformation
+   */
+  private applySplitStrokeWidths(ast: SVGAst): StrokeWidthMapping[] {
+    const strokeWidthSplittingFeature = new StrokeWidthSplittingFeature({
+      generateClasses: true,
+      strokeWidthPrefix: 'strokeWidth',
+    });
+
+    const result = strokeWidthSplittingFeature.apply(ast.root);
+
+    // Update the AST with the processed element
+    ast.root = result.processedElement;
+
+    return result.mappings;
   }
 }

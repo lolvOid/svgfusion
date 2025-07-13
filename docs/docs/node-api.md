@@ -1,6 +1,6 @@
-# API Reference
+# Node API
 
-SVGFusion provides a simple API for converting SVG files into React and Vue components.
+SVGFusion provides a simple Node API for converting SVG files into React and Vue components.
 
 ## Installation
 
@@ -118,9 +118,49 @@ import { convertToVue } from 'svgfusion';
 
 const result = await convertToVue(svgContent, {
   name: 'StarIcon',
+  prefix: 'My',
+  suffix: 'Icon',
   splitColors: true,
 });
 ```
+
+Both convenience functions now support automatic hyphen separators when using prefix/suffix combinations, generating component names like `UI-Star-Component` that are converted to proper PascalCase (e.g., `UIStarComponent`).
+
+## Component Naming
+
+SVGFusion provides enhanced component naming capabilities with prefix/suffix support and automatic hyphen separators.
+
+### svgToComponentName
+
+```typescript
+import { svgToComponentName } from 'svgfusion';
+
+// Basic usage
+const componentName = svgToComponentName('star-icon.svg');
+// Result: 'StarIcon'
+
+// With prefix and suffix
+const componentName = svgToComponentName('star.svg', 'UI', 'Component');
+// Result: 'UIStarComponent' (automatic hyphen separators: UI-Star-Component → UIStarComponent)
+```
+
+### formatComponentName
+
+```typescript
+import { formatComponentName } from 'svgfusion';
+
+const formattedName = formatComponentName('Star', 'UI', 'Icon');
+// Result: 'UIStarIcon'
+```
+
+### Enhanced PascalCase Conversion
+
+The library includes enhanced PascalCase conversion that properly handles:
+
+- Number boundaries (e.g., 'Button2xl' → 'Button2Xl')
+- Complex filenames with metadata
+- Leading numbers and symbols (automatically removed)
+- Proper camelCase to PascalCase conversion
 
 ## Utility Functions
 

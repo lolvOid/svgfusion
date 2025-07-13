@@ -4,15 +4,25 @@ describe('formatComponentName', () => {
   const sanitizeCases = [
     { name: 'icon', prefix: 'We-', suffix: '$2', expected: 'WeIcon2' },
     { name: 'icon', prefix: '$$', suffix: '!!!', expected: 'Icon' },
+    { name: 'WeatherIcon', prefix: '', suffix: '', expected: 'WeatherIcon' },
     {
       name: 'icon',
       prefix: 'My$',
       suffix: 'Widget!',
       expected: 'MyIconWidget',
     },
-    { name: 'icon', prefix: '123$', suffix: '456!', expected: '123Icon456' },
+    { name: 'icon', prefix: '123$', suffix: '456!', expected: 'Icon456' },
     { name: 'icon', prefix: ' ', suffix: ' ', expected: 'Icon' },
     { name: 'icon', prefix: undefined, suffix: undefined, expected: 'Icon' },
+    {
+      name: 'icon',
+      prefix: 'Icon',
+      suffix: 'Svg2a',
+      expected: 'IconIconSvg2A',
+    },
+    { name: 'icon', prefix: '', suffix: 'Widget3B', expected: 'IconWidget3B' },
+    { name: 'icon', prefix: 'My', suffix: '', expected: 'MyIcon' },
+    { name: 'icon', prefix: '', suffix: '', expected: 'Icon' },
   ];
 
   sanitizeCases.forEach(({ name, prefix, suffix, expected }) => {
@@ -63,7 +73,7 @@ describe('formatComponentName', () => {
     { name: 'icon star', expected: 'IconStar' },
     { name: 'user-profile_avatar icon', expected: 'UserProfileAvatarIcon' },
     { name: 'icon-24', expected: 'Icon24' },
-    { name: 'button-2xl', expected: 'Button2xl' },
+    { name: 'button-2xl', expected: 'Button2Xl' },
     { name: '', expected: '' },
     { name: 'a', expected: 'A' },
     { name: 'IconStar', expected: 'IconStar' },
@@ -79,7 +89,7 @@ describe('formatComponentName', () => {
       suffix: 'Widget!',
       expected: 'MyIconWidget',
     },
-    { name: 'icon', prefix: '123$', suffix: '456!', expected: '123Icon456' },
+    { name: 'icon', prefix: '123$', suffix: '456!', expected: 'Icon456' },
     { name: 'icon', prefix: ' ', suffix: ' ', expected: 'Icon' },
     { name: 'icon', prefix: undefined, suffix: undefined, expected: 'Icon' },
   ];
@@ -108,6 +118,22 @@ describe('svgToComponentName', () => {
     { name: 'user-profile-avatar.svg', expected: 'UserProfileAvatar' },
     { name: 'icon_star.svg', expected: 'IconStar' },
     { name: 'MP3, Type=Solid.svg', expected: 'Mp3TypeSolid' },
+    { name: '3icon.svg', expected: 'Icon' },
+    {
+      name: 'Magic,Type=filled,Color=secondary.svg',
+      expected: 'MagicTypeFilledColorSecondary',
+    },
+    {
+      name: 'Magic,Type=filled,Color=secondary.svg',
+      expected: 'MagicTypeFilledColorSecondary',
+    },
+    {
+      name: 'Size=xl, Color=Brand, Type=Glass.svg',
+      expected: 'SizeXlColorBrandTypeGlass',
+    },
+    { name: 'icon-24.svg', expected: 'Icon24' },
+    { name: 'button-2xl.svg', expected: 'Button2Xl' },
+    { name: 'WeatherIcon.svg', expected: 'WeatherIcon' },
     {
       name: 'Size=xl, Color=Brand, Type=Glass.svg',
       expected: 'SizeXlColorBrandTypeGlass',
@@ -118,7 +144,7 @@ describe('svgToComponentName', () => {
     { name: 'icons/star.svg', expected: 'IconsStar' },
     { name: 'icon.SVG', expected: 'Icon' },
     { name: 'star.Svg', expected: 'Star' },
-    { name: 'icon@2x.svg', expected: 'Icon2x' },
+    { name: 'icon@2x.svg', expected: 'Icon2X' },
     { name: 'user+profile.svg', expected: 'UserProfile' },
     { name: '', expected: '' },
   ];

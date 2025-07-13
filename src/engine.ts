@@ -21,6 +21,7 @@ export interface ConversionResult {
   dependencies: string[];
   metadata: {
     originalColors: string[];
+    originalStrokeWidths: string[];
     optimizationApplied: boolean;
     features: string[];
   };

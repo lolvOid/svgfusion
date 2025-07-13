@@ -1,7 +1,6 @@
-import { Ref, forwardRef, memo } from 'react';
-import * as React from 'react';
+import React, { Ref, forwardRef, memo } from 'react';
 
-interface BrowserifyIconProps extends React.SVGProps<SVGSVGElement> {
+interface DemoBrowserifyIconIconProps extends React.SVGProps<SVGSVGElement> {
   title?: string;
   titleId?: string;
   desc?: string;
@@ -16,7 +15,7 @@ interface BrowserifyIconProps extends React.SVGProps<SVGSVGElement> {
   isFixedStrokeWidth?: boolean;
 }
 
-const BrowserifyIcon = (
+const DemoBrowserifyIconIcon = (
   {
     title,
     titleId,
@@ -31,7 +30,7 @@ const BrowserifyIcon = (
     color2 = '#E6B35A',
     color3 = '#FFFFFF',
     ...svgProps
-  }: BrowserifyIconProps,
+  }: DemoBrowserifyIconIconProps,
   ref: Ref<SVGSVGElement>
 ) => {
   const computedSize = size ? { width: size, height: size } : {};
@@ -103,6 +102,6 @@ const BrowserifyIcon = (
   );
 };
 
-const ForwardRef = forwardRef(BrowserifyIcon);
+const ForwardRef = forwardRef(DemoBrowserifyIconIcon);
 const Memo = memo(ForwardRef);
 export default Memo;

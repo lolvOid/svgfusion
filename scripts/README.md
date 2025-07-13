@@ -38,7 +38,7 @@ node scripts/run_demo.js help        # Show help
 
 ## What It Does
 
-### 1. Generate Components 📦
+### 1. Generate Components
 
 - Builds the latest SVGFusion library
 - Converts SVG files from `demo/svgs/` into React and Vue components
@@ -49,12 +49,12 @@ node scripts/run_demo.js help        # Show help
   - ViewBox preservation
   - Index files for easy importing
 
-### 2. Install Dependencies 🔧
+### 2. Install Dependencies
 
 - Installs React demo dependencies (if `demo/react-demo/` exists)
 - Installs Vue demo dependencies (if `demo/vue-demo/` exists)
 
-### 3. Run Development Servers 🚀
+### 3. Run Development Servers
 
 - Starts React demo at `http://localhost:5175/` (or next available port)
 - Starts Vue demo at `http://localhost:5176/` (or next available port)

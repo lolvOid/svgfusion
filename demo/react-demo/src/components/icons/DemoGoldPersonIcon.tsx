@@ -1,7 +1,6 @@
-import { Ref, forwardRef, memo } from 'react';
-import * as React from 'react';
+import React, { Ref, forwardRef, memo } from 'react';
 
-interface GoldPersonProps extends React.SVGProps<SVGSVGElement> {
+interface DemoGoldPersonIconProps extends React.SVGProps<SVGSVGElement> {
   title?: string;
   titleId?: string;
   desc?: string;
@@ -20,7 +19,7 @@ interface GoldPersonProps extends React.SVGProps<SVGSVGElement> {
   isFixedStrokeWidth?: boolean;
 }
 
-const GoldPerson = (
+const DemoGoldPersonIcon = (
   {
     title,
     titleId,
@@ -39,7 +38,7 @@ const GoldPerson = (
     color4 = '#FF9FB9',
     color5 = '#FFFFFF',
     ...svgProps
-  }: GoldPersonProps,
+  }: DemoGoldPersonIconProps,
   ref: Ref<SVGSVGElement>
 ) => {
   const computedSize = size ? { width: size, height: size } : {};
@@ -254,6 +253,6 @@ const GoldPerson = (
   );
 };
 
-const ForwardRef = forwardRef(GoldPerson);
+const ForwardRef = forwardRef(DemoGoldPersonIcon);
 const Memo = memo(ForwardRef);
 export default Memo;

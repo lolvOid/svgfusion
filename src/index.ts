@@ -15,6 +15,7 @@ export {
   type TransformationOptions,
   type TransformationResult,
   type ColorMapping,
+  type StrokeWidthMapping,
 } from './core/transformer';
 export { ReactGenerator, type ReactGeneratorOptions } from './generators/react';
 export { VueGenerator, type VueGeneratorOptions } from './generators/vue';
@@ -26,6 +27,7 @@ export {
 
 // Feature exports
 export { ColorSplittingFeature } from './features/color-splitting';
+export { StrokeWidthSplittingFeature } from './features/stroke-width-splitting';
 export { StrokeFixingFeature } from './features/stroke-fixing';
 export { AccessibilityFeature } from './features/accessibility';
 
@@ -47,6 +49,7 @@ export {
   readSvgDirectory,
   writeComponentFile,
 } from './utils/files';
+
 export {
   svgToComponentName,
   sanitizeComponentName,

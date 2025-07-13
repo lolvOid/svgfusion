@@ -1,24 +1,24 @@
 // Auto-generated index file for tree-shaking
 // This file exports all components for optimal bundling
 
-export { default as BackCardColor } from './BackCardColor';
-export { default as BrowserifyIcon } from './BrowserifyIcon';
-export { default as GoldPerson } from './GoldPerson';
-export { default as GooglePlusCircle } from './GooglePlusCircle';
-export { default as GradientIcon } from './GradientIcon';
-export { default as HeartLine } from './HeartLine';
-export { default as MagicTypeFilledColorSecondary } from './MagicTypeFilledColorSecondary';
-export { default as SodaWater } from './SodaWater';
+export { default as DemoBackCardColorIcon } from './DemoBackCardColorIcon';
+export { default as DemoBrowserifyIconIcon } from './DemoBrowserifyIconIcon';
+export { default as DemoGoldPersonIcon } from './DemoGoldPersonIcon';
+export { default as DemoGooglePlusCircleIcon } from './DemoGooglePlusCircleIcon';
+export { default as DemoGradientIconIcon } from './DemoGradientIconIcon';
+export { default as DemoHeartLineIcon } from './DemoHeartLineIcon';
+export { default as DemoMagicTypeFilledColorSecondaryIcon } from './DemoMagicTypeFilledColorSecondaryIcon';
+export { default as DemoSodaWaterIcon } from './DemoSodaWaterIcon';
 
 // TypeScript component types
 export type IconComponent = React.ComponentType<React.SVGProps<SVGSVGElement>>;
 export type IconComponents = {
-  BackCardColor: IconComponent;
-  BrowserifyIcon: IconComponent;
-  GoldPerson: IconComponent;
-  GooglePlusCircle: IconComponent;
-  GradientIcon: IconComponent;
-  HeartLine: IconComponent;
-  MagicTypeFilledColorSecondary: IconComponent;
-  SodaWater: IconComponent;
+  DemoBackCardColorIcon: IconComponent;
+  DemoBrowserifyIconIcon: IconComponent;
+  DemoGoldPersonIcon: IconComponent;
+  DemoGooglePlusCircleIcon: IconComponent;
+  DemoGradientIconIcon: IconComponent;
+  DemoHeartLineIcon: IconComponent;
+  DemoMagicTypeFilledColorSecondaryIcon: IconComponent;
+  DemoSodaWaterIcon: IconComponent;
 };

@@ -1,0 +1,425 @@
+// Jest Snapshot v1, https://jestjs.io/docs/snapshot-testing
+
+exports[`Browser API React component with forwardRef and memo disabled: react-component-no-forwarded-ref-no-memo 1`] = `
+"import React from 'react';
+
+interface SimpleIconProps extends React.SVGProps<SVGSVGElement> {
+  title?: string;
+  titleId?: string;
+  desc?: string;
+  descId?: string;
+  size?: string;
+}
+
+const SimpleIcon = ({
+  title,
+  titleId,
+  desc,
+  descId,
+  size = '20',
+  ...svgProps
+}: SimpleIconProps) => {
+  const computedSize = size ? { width: size, height: size } : {};
+
+  return (
+    <svg
+      viewBox="0 0 24 24"
+      xmlns="http://www.w3.org/2000/svg"
+      {...computedSize}
+      {...svgProps}
+    >
+      {title ? <title id={titleId}>{title}</title> : null}
+      {desc ? <desc id={descId}>{desc}</desc> : null}
+      <path
+        d="M12 2L2 7V17L12 22L22 17V7L12 2Z"
+        fill="#3B82F6"
+        stroke="#1E40AF"
+        strokeWidth="2"
+      />
+      <path
+        d="M12 8L8 10V14L12 16L16 14V10L12 8Z"
+        fill="#EF4444"
+        stroke="#DC2626"
+        strokeWidth="1"
+      />
+    </svg>
+  );
+};
+
+export default SimpleIcon;
+"
+`;
+
+exports[`Browser API Vue component without TypeScript: vue-component-javascript 1`] = `
+"<template>
+  <svg
+    viewBox="0 0 24 24"
+    xmlns="http://www.w3.org/2000/svg"
+    v-bind="$attrs"
+    :width="props.size || undefined"
+    :height="props.size || undefined"
+  >
+    <title v-if="props.title" :id="props.titleId">{{ props.title }}</title>
+    <desc v-if="props.desc" :id="props.descId">{{ props.desc }}</desc>
+    <path
+      d="M12 2L2 7V17L12 22L22 17V7L12 2Z"
+      fill="#3B82F6"
+      stroke="#1E40AF"
+      stroke-width="2"
+    />
+    <path
+      d="M12 8L8 10V14L12 16L16 14V10L12 8Z"
+      fill="#EF4444"
+      stroke="#DC2626"
+      stroke-width="1"
+    />
+  </svg>
+</template>
+
+<script setup>
+  defineOptions({ inheritAttrs: false });
+
+  const props = defineProps({
+    title: { type: String, default: undefined },
+    titleId: { type: String, default: undefined },
+    desc: { type: String, default: undefined },
+    descId: { type: String, default: undefined },
+    class: { type: String, default: undefined },
+    style: { type: Object, default: undefined },
+    width: { type: [String, Number], default: undefined },
+    height: { type: [String, Number], default: undefined },
+    size: { type: String, default: '20' },
+  });
+</script>
+"
+`;
+
+exports[`Browser API convertToReact basic configuration snapshot: react-component-basic 1`] = `
+"import React, { Ref, forwardRef, memo } from 'react';
+
+interface BasicIconProps extends React.SVGProps<SVGSVGElement> {
+  title?: string;
+  titleId?: string;
+  desc?: string;
+  descId?: string;
+  size?: string;
+}
+
+const BasicIcon = (
+  { title, titleId, desc, descId, size = '20', ...svgProps }: BasicIconProps,
+  ref: Ref<SVGSVGElement>
+) => {
+  const computedSize = size ? { width: size, height: size } : {};
+
+  return (
+    <svg
+      ref={ref}
+      viewBox="0 0 24 24"
+      xmlns="http://www.w3.org/2000/svg"
+      {...computedSize}
+      {...svgProps}
+    >
+      {title ? <title id={titleId}>{title}</title> : null}
+      {desc ? <desc id={descId}>{desc}</desc> : null}
+      <path
+        d="M12 2L2 7V17L12 22L22 17V7L12 2Z"
+        fill="#3B82F6"
+        stroke="#1E40AF"
+        strokeWidth="2"
+      />
+      <path
+        d="M12 8L8 10V14L12 16L16 14V10L12 8Z"
+        fill="#EF4444"
+        stroke="#DC2626"
+        strokeWidth="1"
+      />
+    </svg>
+  );
+};
+
+const ForwardRef = forwardRef(BasicIcon);
+const Memo = memo(ForwardRef);
+export default Memo;
+"
+`;
+
+exports[`Browser API convertToReact generates React component: react-component-with-split-colors 1`] = `
+"import React, { Ref, forwardRef, memo } from 'react';
+
+interface TestIconProps extends React.SVGProps<SVGSVGElement> {
+  title?: string;
+  titleId?: string;
+  desc?: string;
+  descId?: string;
+  size?: string;
+  color?: string;
+  colorClass?: string;
+  color2?: string;
+  color2Class?: string;
+  color3?: string;
+  color3Class?: string;
+  color4?: string;
+  color4Class?: string;
+}
+
+const TestIcon = (
+  {
+    title,
+    titleId,
+    desc,
+    descId,
+    colorClass,
+    color2Class,
+    color3Class,
+    color4Class,
+    size = '20',
+    color = '#1E40AF',
+    color2 = '#3B82F6',
+    color3 = '#DC2626',
+    color4 = '#EF4444',
+    ...svgProps
+  }: TestIconProps,
+  ref: Ref<SVGSVGElement>
+) => {
+  const computedSize = size ? { width: size, height: size } : {};
+
+  return (
+    <svg
+      ref={ref}
+      viewBox="0 0 24 24"
+      xmlns="http://www.w3.org/2000/svg"
+      {...computedSize}
+      {...svgProps}
+    >
+      {title ? <title id={titleId}>{title}</title> : null}
+      {desc ? <desc id={descId}>{desc}</desc> : null}
+      <path
+        d="M12 2L2 7V17L12 22L22 17V7L12 2Z"
+        fill={color2}
+        stroke={color}
+        strokeWidth="2"
+        className={\`\${color2Class} \${colorClass}\`}
+      />
+      <path
+        d="M12 8L8 10V14L12 16L16 14V10L12 8Z"
+        fill={color4}
+        stroke={color3}
+        strokeWidth="1"
+        className={\`\${color4Class} \${color3Class}\`}
+      />
+    </svg>
+  );
+};
+
+const ForwardRef = forwardRef(TestIcon);
+const Memo = memo(ForwardRef);
+export default Memo;
+"
+`;
+
+exports[`Browser API convertToVue composition API snapshot: vue-component-composition-api 1`] = `
+"<template>
+  <svg
+    viewBox="0 0 24 24"
+    xmlns="http://www.w3.org/2000/svg"
+    v-bind="$attrs"
+    :width="props.size || undefined"
+    :height="props.size || undefined"
+  >
+    <title v-if="props.title" :id="props.titleId">{{ props.title }}</title>
+    <desc v-if="props.desc" :id="props.descId">{{ props.desc }}</desc>
+    <path
+      d="M12 2L2 7V17L12 22L22 17V7L12 2Z"
+      fill="#3B82F6"
+      stroke="#1E40AF"
+      stroke-width="2"
+    />
+    <path
+      d="M12 8L8 10V14L12 16L16 14V10L12 8Z"
+      fill="#EF4444"
+      stroke="#DC2626"
+      stroke-width="1"
+    />
+  </svg>
+</template>
+
+<script lang="ts">
+  import { defineComponent } from 'vue';
+
+  export default defineComponent({
+    name: 'VueIcon',
+    props: {
+      title: { type: String, default: undefined },
+      titleId: { type: String, default: undefined },
+      desc: { type: String, default: undefined },
+      descId: { type: String, default: undefined },
+      class: { type: String, default: undefined },
+      style: { type: Object, default: undefined },
+      width: { type: [String, Number], default: undefined },
+      height: { type: [String, Number], default: undefined },
+    },
+    setup() {
+      return {};
+    },
+  });
+</script>
+"
+`;
+
+exports[`Browser API convertToVue generates Vue component: vue-component-sfc-script-setup 1`] = `
+"<template>
+  <svg
+    viewBox="0 0 24 24"
+    xmlns="http://www.w3.org/2000/svg"
+    v-bind="$attrs"
+    :width="props.size || undefined"
+    :height="props.size || undefined"
+  >
+    <title v-if="props.title" :id="props.titleId">{{ props.title }}</title>
+    <desc v-if="props.desc" :id="props.descId">{{ props.desc }}</desc>
+    <path
+      d="M12 2L2 7V17L12 22L22 17V7L12 2Z"
+      fill="#3B82F6"
+      stroke="#1E40AF"
+      stroke-width="2"
+    />
+    <path
+      d="M12 8L8 10V14L12 16L16 14V10L12 8Z"
+      fill="#EF4444"
+      stroke="#DC2626"
+      stroke-width="1"
+    />
+  </svg>
+</template>
+
+<script setup lang="ts">
+  defineOptions({ inheritAttrs: false });
+
+  import type { SVGAttributes } from 'vue';
+
+  interface Props extends /* @vue-ignore */ SVGAttributes {
+    title?: string;
+    titleId?: string;
+    desc?: string;
+    descId?: string;
+    size?: string;
+  }
+
+  const props = withDefaults(defineProps<Props>(), {
+    size: '20',
+  });
+</script>
+"
+`;
+
+exports[`Browser API extractColors finds all colors in SVG: extracted-colors 1`] = `
+[
+  "#1E40AF",
+  "#3B82F6",
+  "#DC2626",
+  "#EF4444",
+]
+`;
+
+exports[`Browser API supports batch conversion: batch-conversion-results 1`] = `
+[
+  {
+    "code": "import React, { Ref, forwardRef, memo } from 'react';
+
+interface Icon1Props extends React.SVGProps<SVGSVGElement> {
+  title?: string;
+  titleId?: string;
+  desc?: string;
+  descId?: string;
+  size?: string;
+}
+
+const Icon1 = (
+  { title, titleId, desc, descId, size = '20', ...svgProps }: Icon1Props,
+  ref: Ref<SVGSVGElement>
+) => {
+  const computedSize = size ? { width: size, height: size } : {};
+
+  return (
+    <svg
+      ref={ref}
+      viewBox="0 0 24 24"
+      xmlns="http://www.w3.org/2000/svg"
+      {...computedSize}
+      {...svgProps}
+    >
+      {title ? <title id={titleId}>{title}</title> : null}
+      {desc ? <desc id={descId}>{desc}</desc> : null}
+      <path
+        d="M12 2L2 7V17L12 22L22 17V7L12 2Z"
+        fill="#3B82F6"
+        stroke="#1E40AF"
+        strokeWidth="2"
+      />
+      <path
+        d="M12 8L8 10V14L12 16L16 14V10L12 8Z"
+        fill="#EF4444"
+        stroke="#DC2626"
+        strokeWidth="1"
+      />
+    </svg>
+  );
+};
+
+const ForwardRef = forwardRef(Icon1);
+const Memo = memo(ForwardRef);
+export default Memo;
+",
+    "componentName": "Icon1",
+  },
+  {
+    "code": "import React, { Ref, forwardRef, memo } from 'react';
+
+interface Icon2Props extends React.SVGProps<SVGSVGElement> {
+  title?: string;
+  titleId?: string;
+  desc?: string;
+  descId?: string;
+  size?: string;
+}
+
+const Icon2 = (
+  { title, titleId, desc, descId, size = '20', ...svgProps }: Icon2Props,
+  ref: Ref<SVGSVGElement>
+) => {
+  const computedSize = size ? { width: size, height: size } : {};
+
+  return (
+    <svg
+      ref={ref}
+      viewBox="0 0 24 24"
+      xmlns="http://www.w3.org/2000/svg"
+      {...computedSize}
+      {...svgProps}
+    >
+      {title ? <title id={titleId}>{title}</title> : null}
+      {desc ? <desc id={descId}>{desc}</desc> : null}
+      <path
+        d="M12 2L2 7V17L12 22L22 17V7L12 2Z"
+        fill="#22C55E"
+        stroke="#1E40AF"
+        strokeWidth="2"
+      />
+      <path
+        d="M12 8L8 10V14L12 16L16 14V10L12 8Z"
+        fill="#EF4444"
+        stroke="#DC2626"
+        strokeWidth="1"
+      />
+    </svg>
+  );
+};
+
+const ForwardRef = forwardRef(Icon2);
+const Memo = memo(ForwardRef);
+export default Memo;
+",
+    "componentName": "Icon2",
+  },
+]
+`;

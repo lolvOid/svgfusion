@@ -16,6 +16,7 @@
       :vector-effect="
         props.isFixedStrokeWidth ? 'non-scaling-stroke' : undefined
       "
+      :class="[props.colorClass]"
     />
     <path
       :style="{ fill: props.color8 }"
@@ -25,6 +26,7 @@
       :vector-effect="
         props.isFixedStrokeWidth ? 'non-scaling-stroke' : undefined
       "
+      :class="[props.color8Class]"
     />
     <path
       :style="{ fill: props.color }"
@@ -33,6 +35,7 @@
       :vector-effect="
         props.isFixedStrokeWidth ? 'non-scaling-stroke' : undefined
       "
+      :class="[props.colorClass]"
     />
     <path
       :style="{ fill: props.color8 }"
@@ -41,6 +44,7 @@
       :vector-effect="
         props.isFixedStrokeWidth ? 'non-scaling-stroke' : undefined
       "
+      :class="[props.color8Class]"
     />
     <rect
       x="70.621"
@@ -51,6 +55,7 @@
       :vector-effect="
         props.isFixedStrokeWidth ? 'non-scaling-stroke' : undefined
       "
+      :class="[props.color2Class]"
     />
     <rect
       x="132.414"
@@ -61,6 +66,7 @@
       :vector-effect="
         props.isFixedStrokeWidth ? 'non-scaling-stroke' : undefined
       "
+      :class="[props.color3Class]"
     />
     <rect
       x="194.207"
@@ -71,6 +77,7 @@
       :vector-effect="
         props.isFixedStrokeWidth ? 'non-scaling-stroke' : undefined
       "
+      :class="[props.color4Class]"
     />
     <rect
       x="317.793"
@@ -81,6 +88,7 @@
       :vector-effect="
         props.isFixedStrokeWidth ? 'non-scaling-stroke' : undefined
       "
+      :class="[props.color6Class]"
     />
     <rect
       x="256"
@@ -91,6 +99,7 @@
       :vector-effect="
         props.isFixedStrokeWidth ? 'non-scaling-stroke' : undefined
       "
+      :class="[props.color5Class]"
     />
     <rect
       x="379.586"
@@ -101,6 +110,7 @@
       :vector-effect="
         props.isFixedStrokeWidth ? 'non-scaling-stroke' : undefined
       "
+      :class="[props.color7Class]"
     />
   </svg>
 </template>

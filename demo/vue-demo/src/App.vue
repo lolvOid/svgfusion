@@ -3,7 +3,7 @@
     <div class="max-w-6xl mx-auto px-4 py-8">
       <header class="text-center mb-8">
         <h1 class="text-4xl font-bold text-green-600 mb-2">
-          🎨 SVGFusion Vue Demo
+          SVGFusion Vue Demo
         </h1>
         <p class="text-gray-600">Generated Vue components from SVG files</p>
       </header>
@@ -43,7 +43,9 @@
             </div>
 
             <div class="flex flex-col items-center space-y-2">
-              <label class="font-semibold text-gray-700">Fixed Stroke Width</label>
+              <label class="font-semibold text-gray-700"
+                >Fixed Stroke Width</label
+              >
               <button
                 @click="isFixedStrokeWidth = !isFixedStrokeWidth"
                 :class="`w-12 h-6 rounded-full transition-colors duration-200 relative ${
@@ -95,7 +97,7 @@
               :key="iconSize"
               class="flex flex-col items-center space-y-2"
             >
-              <GradientIcon :size="iconSize" />
+              <DemoGradientIconIcon :size="iconSize" />
               <span class="text-xs text-gray-500">{{ iconSize }}px</span>
             </div>
           </div>
@@ -114,14 +116,14 @@
 <script setup lang="ts">
 import { ref } from 'vue';
 import {
-  GoldPerson,
-  GradientIcon,
-  MagicTypeFilledColorSecondary,
-  BackCardColor,
-  BrowserifyIcon,
-  GooglePlusCircle,
-  SodaWater,
-  HeartLine,
+  DemoGoldPersonIcon,
+  DemoGradientIconIcon,
+  DemoMagicTypeFilledColorSecondaryIcon,
+  DemoBackCardColorIcon,
+  DemoBrowserifyIconIcon,
+  DemoGooglePlusCircleIcon,
+  DemoSodaWaterIcon,
+  DemoHeartLineIcon,
 } from './components/icons';
 
 const size = ref(48);
@@ -130,13 +132,13 @@ const color2 = ref('#e74c3c');
 const isFixedStrokeWidth = ref(false);
 
 const icons = [
-  { component: GoldPerson, name: 'Gold Person' },
-  { component: GradientIcon, name: 'Gradient Icon' },
-  { component: MagicTypeFilledColorSecondary, name: 'Magic Icon' },
-  { component: BackCardColor, name: 'Back Card' },
-  { component: BrowserifyIcon, name: 'Browserify' },
-  { component: GooglePlusCircle, name: 'Google Plus' },
-  { component: SodaWater, name: 'Soda Water' },
-  { component: HeartLine, name: 'HearLine' },
+  { component: DemoGoldPersonIcon, name: 'Gold Person' },
+  { component: DemoGradientIconIcon, name: 'Gradient Icon' },
+  { component: DemoMagicTypeFilledColorSecondaryIcon, name: 'Magic Icon' },
+  { component: DemoBackCardColorIcon, name: 'Back Card' },
+  { component: DemoBrowserifyIconIcon, name: 'Browserify' },
+  { component: DemoGooglePlusCircleIcon, name: 'Google Plus' },
+  { component: DemoSodaWaterIcon, name: 'Soda Water' },
+  { component: DemoHeartLineIcon, name: 'HearLine' },
 ];
 </script>

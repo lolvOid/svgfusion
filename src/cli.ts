@@ -27,6 +27,7 @@ interface CliOptions {
   typescript?: boolean;
   javascript?: boolean; // For CLI parsing
   splitColors?: boolean;
+  splitStrokeWidths?: boolean;
   fixedStrokeWidth?: boolean;
   memo?: boolean;
   forwardRef?: boolean;
@@ -58,6 +59,7 @@ async function convertSvgFile(
       transformation: {
         optimize: options.optimize ?? true,
         splitColors: options.splitColors,
+        splitStrokeWidths: options.splitStrokeWidths,
         fixedStrokeWidth: options.fixedStrokeWidth,
         accessibility: true,
       },
@@ -95,6 +97,16 @@ async function convertSvgFile(
     if (options.splitColors && result.metadata.originalColors.length > 0) {
       console.log(
         `🎨 Colors extracted: ${result.metadata.originalColors.join(', ')}`
+      );
+    }
+
+    // Show additional info for split stroke widths
+    if (
+      options.splitStrokeWidths &&
+      result.metadata.originalStrokeWidths.length > 0
+    ) {
+      console.log(
+        `📏 Stroke widths extracted: ${result.metadata.originalStrokeWidths.join(', ')}`
       );
     }
   } catch (error) {
@@ -222,6 +234,7 @@ async function main() {
     .option('--typescript', 'Generate TypeScript components')
     .option('--javascript', 'Generate JavaScript components')
     .option('--split-colors', 'Enable color splitting feature')
+    .option('--split-stroke-widths', 'Enable stroke width splitting feature')
     .option('--fixed-stroke-width', 'Enable fixed stroke width feature')
     .option('--memo', 'Wrap component with React.memo')
     .option('--no-memo', 'Disable React.memo wrapping')

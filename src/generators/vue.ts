@@ -8,7 +8,11 @@ import {
   GeneratorOptions,
   ComponentResult,
 } from '../core/generator';
-import { TransformationResult, ColorMapping } from '../core/transformer';
+import {
+  TransformationResult,
+  ColorMapping,
+  StrokeWidthMapping,
+} from '../core/transformer';
 import { SVGElement } from '../core/parser';
 import { format } from 'prettier';
 
@@ -178,16 +182,20 @@ ${children}
       else if (key === 'style') {
         const parsedStyle = this.parseStyleStringForVue(value);
         vueAttributes.push(`:style="${parsedStyle}"`);
+
+        // Also collect class variables from style attribute variables
+        const styleClassVars = this.extractClassVarsFromStyle(value);
+        classVars.push(...styleClassVars);
       }
-      // Check if value is a color variable (starts and ends with curly braces)
+      // Check if value is a color or stroke-width variable (starts and ends with curly braces)
       else if (value.startsWith('{') && value.endsWith('}')) {
         const variableName = value.slice(1, -1); // Remove the braces
 
-        // Add the color attribute
+        // Add the attribute
         vueAttributes.push(`:${key}="props.${variableName}"`);
 
-        // Always collect class variables for fill or stroke attributes when color splitting is enabled
-        if (key === 'fill' || key === 'stroke') {
+        // Always collect class variables for fill, stroke, or stroke-width attributes when splitting is enabled
+        if (key === 'fill' || key === 'stroke' || key === 'stroke-width') {
           const classVar = `${variableName}Class`;
           classVars.push(`props.${classVar}`);
         }
@@ -258,7 +266,7 @@ ${children}
    * Generate <script setup> content
    */
   private generateScriptSetup(result: TransformationResult): string {
-    const { colorMappings, metadata } = result;
+    const { colorMappings, strokeWidthMappings, metadata } = result;
     const lines: string[] = [];
 
     // Add required imports for TypeScript
@@ -280,6 +288,13 @@ ${children}
       const colorProps = this.generateColorPropsInterface(colorMappings);
       if (colorProps) {
         lines.push(colorProps);
+      }
+
+      // Add stroke width props
+      const strokeWidthProps =
+        this.generateStrokeWidthPropsInterface(strokeWidthMappings);
+      if (strokeWidthProps) {
+        lines.push(strokeWidthProps);
       }
 
       if (metadata.features.includes('fixed-stroke-width')) {
@@ -324,6 +339,23 @@ ${children}
       }
     });
 
+    // Add stroke width defaults
+    strokeWidthMappings.forEach(mapping => {
+      const propName = mapping.variableName;
+      const defaultValue = mapping.originalStrokeWidth;
+      const className = `${propName}Class`;
+
+      if (this.vueOptions.typescript) {
+        lines.push(`  ${propName}: '${defaultValue}',`);
+        lines.push(`  ${className}: undefined,`);
+      } else {
+        lines.push(
+          `  ${propName}: { type: [String, Number], default: '${defaultValue}' },`
+        );
+        lines.push(`  ${className}: { type: String, default: undefined },`);
+      }
+    });
+
     if (metadata.features.includes('fixed-stroke-width')) {
       if (this.vueOptions.typescript) {
         lines.push('  isFixedStrokeWidth: false,');
@@ -341,7 +373,7 @@ ${children}
    * Generate Composition API script
    */
   private generateCompositionAPI(result: TransformationResult): string {
-    const { colorMappings, metadata } = result;
+    const { colorMappings, strokeWidthMappings, metadata } = result;
     const componentName = this.getComponentName();
     const lines: string[] = [];
 
@@ -371,6 +403,18 @@ ${children}
       lines.push(`    ${className}: { type: String, default: undefined },`);
     });
 
+    // Add stroke width props
+    strokeWidthMappings.forEach(mapping => {
+      const propName = mapping.variableName;
+      const defaultValue = mapping.originalStrokeWidth;
+      const className = `${propName}Class`;
+
+      lines.push(
+        `    ${propName}: { type: [String, Number], default: '${defaultValue}' },`
+      );
+      lines.push(`    ${className}: { type: String, default: undefined },`);
+    });
+
     if (metadata.features.includes('fixed-stroke-width')) {
       lines.push('    isFixedStrokeWidth: { type: Boolean, default: false },');
     }
@@ -388,7 +432,7 @@ ${children}
    * Generate Options API script
    */
   private generateOptionsAPI(result: TransformationResult): string {
-    const { colorMappings, metadata } = result;
+    const { colorMappings, strokeWidthMappings, metadata } = result;
     const componentName = this.getComponentName();
     const lines: string[] = [];
 
@@ -412,6 +456,18 @@ ${children}
 
       lines.push(
         `    ${propName}: { type: String, default: '${defaultValue}' },`
+      );
+      lines.push(`    ${className}: { type: String, default: undefined },`);
+    });
+
+    // Add stroke width props
+    strokeWidthMappings.forEach(mapping => {
+      const propName = mapping.variableName;
+      const defaultValue = mapping.originalStrokeWidth;
+      const className = `${propName}Class`;
+
+      lines.push(
+        `    ${propName}: { type: [String, Number], default: '${defaultValue}' },`
       );
       lines.push(`    ${className}: { type: String, default: undefined },`);
     });
@@ -445,6 +501,23 @@ ${children}
         const propName = mapping.variableName;
         const className = `${propName}Class`;
         return `  ${propName}?: string;\n  ${className}?: string;`;
+      })
+      .join('\n');
+  }
+
+  /**
+   * Generate TypeScript interface for stroke width props
+   */
+  private generateStrokeWidthPropsInterface(
+    strokeWidthMappings: StrokeWidthMapping[]
+  ): string {
+    if (strokeWidthMappings.length === 0) return '';
+
+    return strokeWidthMappings
+      .map(mapping => {
+        const propName = mapping.variableName;
+        const className = `${propName}Class`;
+        return `  ${propName}?: string | number;\n  ${className}?: string;`;
       })
       .join('\n');
   }
@@ -525,5 +598,37 @@ ${children}
    */
   private getDependencies(): string[] {
     return ['vue'];
+  }
+
+  /**
+   * Extract class variables from style attribute value
+   */
+  private extractClassVarsFromStyle(styleStr: string): string[] {
+    const classVars: string[] = [];
+
+    // Split by semicolon and process each declaration
+    styleStr.split(';').forEach(declaration => {
+      const colonIndex = declaration.indexOf(':');
+      if (colonIndex > 0) {
+        const property = declaration.slice(0, colonIndex).trim();
+        const value = declaration.slice(colonIndex + 1).trim();
+
+        if (property && value && value.startsWith('{') && value.endsWith('}')) {
+          const variableName = value.slice(1, -1); // Remove braces
+
+          // Add class variable for fill, stroke, or stroke-width properties
+          if (
+            property === 'fill' ||
+            property === 'stroke' ||
+            property === 'stroke-width'
+          ) {
+            const classVar = `props.${variableName}Class`;
+            classVars.push(classVar);
+          }
+        }
+      }
+    });
+
+    return classVars;
   }
 }

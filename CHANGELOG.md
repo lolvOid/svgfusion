@@ -55,7 +55,7 @@
 
 # [2.0.0](https://github.com/lolvOid/svgfusion/compare/v1.7.0...v2.0.0) (2025-07-12)
 
-## 🚀 Major Architecture Rewrite
+## Major Architecture Rewrite
 
 ### BREAKING CHANGES
 
@@ -65,13 +65,13 @@
 
 ### Features
 
-* **🏗️ Custom SVGFusion Engine**: Complete rewrite with custom SVG parser and transformation system
-* **🎨 Native SVG Props Support**: Generated React components extend `React.SVGProps<SVGSVGElement>` for full native prop inheritance
-* **🎯 Vue Attributes Support**: Generated Vue components extend `SVGAttributes` with `v-bind="$attrs"` for complete attribute coverage
-* **⚡ Enhanced Performance**: Faster processing with streamlined synchronous architecture
-* **🔧 Feature-Based Transformations**: Modular transformation system with color-splitting, stroke-fixing, and accessibility features
-* **📝 Improved Type Safety**: Better TypeScript integration with proper type definitions and inference
-* **🛡️ Robust Error Handling**: Enhanced error handling and validation throughout the conversion process
+* **Custom SVGFusion Engine**: Complete rewrite with custom SVG parser and transformation system
+* **Native SVG Props Support**: Generated React components extend `React.SVGProps<SVGSVGElement>` for full native prop inheritance
+* **Vue Attributes Support**: Generated Vue components extend `SVGAttributes` with `v-bind="$attrs"` for complete attribute coverage
+* **Enhanced Performance**: Faster processing with streamlined synchronous architecture
+* **Feature-Based Transformations**: Modular transformation system with color-splitting, stroke-fixing, and accessibility features
+* **Improved Type Safety**: Better TypeScript integration with proper type definitions and inference
+* **Robust Error Handling**: Enhanced error handling and validation throughout the conversion process
 
 ### Bug Fixes
 

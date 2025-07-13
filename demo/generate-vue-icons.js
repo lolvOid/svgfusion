@@ -31,9 +31,9 @@ async function generateVueIcons() {
         console.log(`📄 Processing: ${fileName}`);
 
         const svgContent = fs.readFileSync(svgFile, 'utf-8');
-        const componentName = svgToComponentName(
+        const componentName = 
           path.basename(svgFile, '.svg')
-        );
+        
 
         const result = await convertToVue(svgContent, {
           transformation: {
@@ -41,6 +41,8 @@ async function generateVueIcons() {
             fixedStrokeWidth: true,
           },
           generator: {
+            prefix: 'Demo',
+            suffix: 'Icon',
             componentName: componentName,
             typescript: true,
             compositionApi: true,

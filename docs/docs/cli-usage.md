@@ -140,7 +140,7 @@ svgfusion ./icons --no-optimize
 
 **Default:** SVG optimization is enabled
 
-### 🚀 Advanced Options
+### Advanced Options
 
 ### --split-colors
 

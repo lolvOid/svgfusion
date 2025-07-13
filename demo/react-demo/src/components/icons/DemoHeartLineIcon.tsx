@@ -1,7 +1,6 @@
-import { Ref, forwardRef, memo } from 'react';
-import * as React from 'react';
+import React, { Ref, forwardRef, memo } from 'react';
 
-interface HeartLineProps extends React.SVGProps<SVGSVGElement> {
+interface DemoHeartLineIconProps extends React.SVGProps<SVGSVGElement> {
   title?: string;
   titleId?: string;
   desc?: string;
@@ -12,7 +11,7 @@ interface HeartLineProps extends React.SVGProps<SVGSVGElement> {
   isFixedStrokeWidth?: boolean;
 }
 
-const HeartLine = (
+const DemoHeartLineIcon = (
   {
     title,
     titleId,
@@ -23,7 +22,7 @@ const HeartLine = (
     size = '20',
     color = '#000000',
     ...svgProps
-  }: HeartLineProps,
+  }: DemoHeartLineIconProps,
   ref: Ref<SVGSVGElement>
 ) => {
   const computedSize = size ? { width: size, height: size } : {};
@@ -52,6 +51,6 @@ const HeartLine = (
   );
 };
 
-const ForwardRef = forwardRef(HeartLine);
+const ForwardRef = forwardRef(DemoHeartLineIcon);
 const Memo = memo(ForwardRef);
 export default Memo;

@@ -1,13 +1,13 @@
 import { useState } from 'react';
 import {
-  GoldPerson,
-  GradientIcon,
-  MagicTypeFilledColorSecondary,
-  BackCardColor,
-  BrowserifyIcon,
-  GooglePlusCircle,
-  SodaWater,
-  HeartLine,
+  DemoGoldPersonIcon,
+  DemoGradientIconIcon,
+  DemoMagicTypeFilledColorSecondaryIcon,
+  DemoBackCardColorIcon,
+  DemoBrowserifyIconIcon,
+  DemoGooglePlusCircleIcon,
+  DemoSodaWaterIcon,
+  DemoHeartLineIcon,
 } from './components/icons';
 
 function App() {
@@ -17,14 +17,14 @@ function App() {
   const [isFixedStrokeWidth, setIsFixedStrokeWidth] = useState(false);
 
   const icons = [
-    { Component: GoldPerson, name: 'Gold Person' },
-    { Component: GradientIcon, name: 'Gradient Icon' },
-    { Component: MagicTypeFilledColorSecondary, name: 'Magic Icon' },
-    { Component: BackCardColor, name: 'Back Card' },
-    { Component: BrowserifyIcon, name: 'Browserify' },
-    { Component: GooglePlusCircle, name: 'Google Plus' },
-    { Component: SodaWater, name: 'Soda Water' },
-    { Component: HeartLine, name: 'HeartLine' },
+    { Component: DemoGoldPersonIcon, name: 'Gold Person' },
+    { Component: DemoGradientIconIcon, name: 'Gradient Icon' },
+    { Component: DemoMagicTypeFilledColorSecondaryIcon, name: 'Magic Icon' },
+    { Component: DemoBackCardColorIcon, name: 'Back Card' },
+    { Component: DemoBrowserifyIconIcon, name: 'Browserify' },
+    { Component: DemoGooglePlusCircleIcon, name: 'Google Plus' },
+    { Component: DemoSodaWaterIcon, name: 'Soda Water' },
+    { Component: DemoHeartLineIcon, name: 'HeartLine' },
   ];
 
   return (
@@ -32,7 +32,7 @@ function App() {
       <div className="max-w-6xl mx-auto px-4 py-8">
         <header className="text-center mb-8">
           <h1 className="text-4xl font-bold text-blue-600 mb-2">
-            🎨 SVGFusion React Demo
+            SVGFusion React Demo
           </h1>
           <p className="text-gray-600">
             Generated React components from SVG files
@@ -135,7 +135,7 @@ function App() {
                   key={iconSize}
                   className="flex flex-col items-center space-y-2"
                 >
-                  <GradientIcon size={iconSize.toString()} />
+                  <DemoGradientIconIcon size={iconSize.toString()} />
                   <span className="text-xs text-gray-500">{iconSize}px</span>
                 </div>
               ))}

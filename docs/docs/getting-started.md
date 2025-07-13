@@ -100,8 +100,8 @@ const vueResult = await engine.convert(svgContent, {
 ## Next Steps
 
 - [CLI Reference](https://svgfusion.netlify.app/docs/cli-usage) - Learn all CLI commands and options
-- [API Reference](./api-reference) - Explore the SVGFusion API
-- [Examples](https://svgfusion.netlify.app/docs/examples) - Real-world usage examples
+- [Node API Reference](./node-api) - Explore the SVGFusion Node API
+- [Browser API Reference](./browser-api.md) - Explore the SVGFusion Browser API
 
 ## Quick Examples
 

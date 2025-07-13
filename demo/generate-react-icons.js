@@ -31,9 +31,7 @@ async function generateReactIcons() {
         console.log(`📄 Processing: ${fileName}`);
 
         const svgContent = fs.readFileSync(svgFile, 'utf-8');
-        const componentName = svgToComponentName(
-          path.basename(svgFile, '.svg')
-        );
+        const componentName = path.basename(svgFile, '.svg');
 
         console.log(`   📝 Component name: ${componentName}`);
 
@@ -43,6 +41,8 @@ async function generateReactIcons() {
             fixedStrokeWidth: true,
           },
           generator: {
+            prefix: 'Demo',
+            suffix: 'Icon',
             componentName: componentName,
             typescript: true,
             memo: true,
