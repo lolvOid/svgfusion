@@ -1,3 +1,10 @@
+## [1.15.3](https://github.com/lolvOid/svgfusion/compare/v1.15.2...v1.15.3) (2025-07-13)
+
+
+### Bug Fixes
+
+* Update component name formatting to follow Microsoft .NET guidelines for acronyms and casing ([e6e87c8](https://github.com/lolvOid/svgfusion/commit/e6e87c8c072d13614e3a31e16e885c0643055ce3))
+
 ## [1.15.2](https://github.com/lolvOid/svgfusion/compare/v1.15.1...v1.15.2) (2025-07-13)
 
 
