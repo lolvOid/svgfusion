@@ -1,3 +1,10 @@
+## [1.15.1](https://github.com/lolvOid/svgfusion/compare/v1.15.0...v1.15.1) (2025-07-13)
+
+
+### Bug Fixes
+
+* Update documentation links and remove obsolete browser API documentation ([b96e3bc](https://github.com/lolvOid/svgfusion/commit/b96e3bc91ff1ae396acdd92dcb0414a3791d6b59))
+
 # [1.15.0](https://github.com/lolvOid/svgfusion/compare/v1.14.0...v1.15.0) (2025-07-13)
 
 
