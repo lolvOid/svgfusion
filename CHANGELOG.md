@@ -1,3 +1,10 @@
+# [1.16.0](https://github.com/lolvOid/svgfusion/compare/v1.15.3...v1.16.0) (2025-07-13)
+
+
+### Features
+
+* update component naming and default props handling ([787d6b6](https://github.com/lolvOid/svgfusion/commit/787d6b6191634631e62921afbaeda39bfef04944))
+
 ## [1.15.3](https://github.com/lolvOid/svgfusion/compare/v1.15.2...v1.15.3) (2025-07-13)
 
 
