@@ -1,3 +1,10 @@
+# [1.18.0](https://github.com/lolvOid/svgfusion/compare/v1.17.0...v1.18.0) (2025-07-13)
+
+
+### Features
+
+* Add width, height, and strokeWidth controls to icon demos ([85bd1ff](https://github.com/lolvOid/svgfusion/commit/85bd1ff439991200dae2786ec29bb6fe83d2cdaa))
+
 # [1.17.0](https://github.com/lolvOid/svgfusion/compare/v1.16.1...v1.17.0) (2025-07-13)
 
 
