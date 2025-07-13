@@ -19,17 +19,17 @@ function HomepageHeader() {
         <p className="hero__subtitle">{siteConfig.tagline}</p>
         <div className={styles.buttons}>
           <Link
-            className="button button--secondary button--md"
+            className="button button--outline button--md"
             to="/docs/getting-started"
           >
             Get Started
           </Link>
           <Link
-            className="button button--outline button--secondary button--md"
+            className="button button--secondary  button--md"
             to="/docs/cli-usage"
             style={{ marginLeft: '1rem' }}
           >
-            CLI Reference
+            Playground
           </Link>
         </div>
       </div>

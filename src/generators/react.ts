@@ -8,7 +8,11 @@ import {
   GeneratorOptions,
   ComponentResult,
 } from '../core/generator';
-import { TransformationResult, ColorMapping } from '../core/transformer';
+import {
+  TransformationResult,
+  ColorMapping,
+  StrokeWidthMapping,
+} from '../core/transformer';
 import { SVGElement } from '../core/parser';
 import { format } from 'prettier';
 import { toReactProp, camelCase } from '../utils/string';
@@ -44,12 +48,13 @@ export class ReactGenerator extends ComponentGenerator {
    */
   async generate(result: TransformationResult): Promise<ComponentResult> {
     const componentName = this.getComponentName();
-    const { colorMappings, metadata } = result;
+    const { colorMappings, strokeWidthMappings, metadata } = result;
 
     // Build the component code
     const imports = this.generateImports();
     const interfaces = this.generateInterfaces(
       colorMappings,
+      strokeWidthMappings,
       metadata.features
     );
     const component = this.generateComponent(result);
@@ -100,17 +105,39 @@ export class ReactGenerator extends ComponentGenerator {
 
     if (this.reactOptions.typescript) {
       // Collect all React imports in one statement
-      const reactImports = ['Ref'];
+      const reactImports = [];
+      if (this.reactOptions.forwardRef) {
+        reactImports.push('Ref');
+        reactImports.push('forwardRef');
+      }
+      if (this.reactOptions.memo) {
+        reactImports.push('memo');
+      }
+      if (reactImports.length > 0) {
+        imports.push(
+          `import React, { ${reactImports.join(', ')} } from 'react';`
+        );
+      } else {
+        imports.push("import React from 'react';");
+      }
+    } else {
+      // JavaScript imports
+      const reactImports = [];
       if (this.reactOptions.forwardRef) {
         reactImports.push('forwardRef');
       }
       if (this.reactOptions.memo) {
         reactImports.push('memo');
       }
-      imports.push(`import { ${reactImports.join(', ')} } from 'react';`);
-      imports.push("import * as React from 'react';");
-    } else {
-      imports.push("import React from 'react';");
+
+      if (reactImports.length > 0) {
+        imports.push(
+          `import React, { ${reactImports.join(', ')} } from 'react';`
+        );
+      } else {
+        imports.push("import React from 'react';");
+      }
+
       if (this.reactOptions.propTypes) {
         imports.push("import PropTypes from 'prop-types';");
       }
@@ -124,6 +151,7 @@ export class ReactGenerator extends ComponentGenerator {
    */
   private generateInterfaces(
     colorMappings: ColorMapping[],
+    strokeWidthMappings: StrokeWidthMapping[],
     features: string[]
   ): string {
     if (!this.reactOptions.typescript && !this.reactOptions.propTypes) {
@@ -131,9 +159,17 @@ export class ReactGenerator extends ComponentGenerator {
     }
 
     if (this.reactOptions.typescript) {
-      return this.generateTypeScriptInterface(colorMappings, features);
+      return this.generateTypeScriptInterface(
+        colorMappings,
+        strokeWidthMappings,
+        features
+      );
     } else {
-      return this.generatePropTypes(colorMappings, features);
+      return this.generatePropTypes(
+        colorMappings,
+        strokeWidthMappings,
+        features
+      );
     }
   }
 
@@ -142,6 +178,7 @@ export class ReactGenerator extends ComponentGenerator {
    */
   private generateTypeScriptInterface(
     colorMappings: ColorMapping[],
+    strokeWidthMappings: StrokeWidthMapping[],
     features: string[]
   ): string {
     const customProps = [
@@ -156,6 +193,12 @@ export class ReactGenerator extends ComponentGenerator {
     const colorProps = this.generateColorProps(colorMappings);
     if (colorProps) {
       customProps.push(colorProps);
+    }
+
+    // Add stroke width props
+    const strokeWidthProps = this.generateStrokeWidthProps(strokeWidthMappings);
+    if (strokeWidthProps) {
+      customProps.push(strokeWidthProps);
     }
 
     // Add fixed stroke width prop if feature is enabled
@@ -174,6 +217,7 @@ export class ReactGenerator extends ComponentGenerator {
    */
   private generatePropTypes(
     colorMappings: ColorMapping[],
+    strokeWidthMappings: StrokeWidthMapping[],
     features: string[]
   ): string {
     // Implementation for PropTypes (for non-TypeScript projects)
@@ -195,6 +239,11 @@ export class ReactGenerator extends ComponentGenerator {
       props.push(colorProps);
     }
 
+    const strokeWidthProps = this.generateStrokeWidthProps(strokeWidthMappings);
+    if (strokeWidthProps) {
+      props.push(strokeWidthProps);
+    }
+
     if (features.includes('fixed-stroke-width')) {
       props.push('isFixedStrokeWidth: PropTypes.bool,');
     }
@@ -207,14 +256,24 @@ export class ReactGenerator extends ComponentGenerator {
    */
   private generateComponent(result: TransformationResult): string {
     const componentName = this.getComponentName();
-    const { colorMappings, metadata } = result;
+    const { colorMappings, strokeWidthMappings, metadata } = result;
 
     // Generate props destructuring for custom props only
     const customProps = ['title', 'titleId', 'desc', 'descId', 'size'];
     const colorProps = colorMappings.map(m => m.variableName);
     const colorClassProps = colorMappings.map(m => `${m.variableName}Class`);
+    const strokeWidthProps = strokeWidthMappings.map(m => m.variableName);
+    const strokeWidthClassProps = strokeWidthMappings.map(
+      m => `${m.variableName}Class`
+    );
 
-    const allCustomProps = [...customProps, ...colorProps, ...colorClassProps];
+    const allCustomProps = [
+      ...customProps,
+      ...colorProps,
+      ...colorClassProps,
+      ...strokeWidthProps,
+      ...strokeWidthClassProps,
+    ];
 
     if (metadata.features.includes('fixed-stroke-width')) {
       allCustomProps.push('isFixedStrokeWidth');
@@ -222,8 +281,12 @@ export class ReactGenerator extends ComponentGenerator {
 
     // Generate props destructuring with default values
     const colorDefaults = this.generateColorDefaults(colorMappings);
+    const strokeWidthDefaults =
+      this.generateStrokeWidthDefaults(strokeWidthMappings);
     const sizeDefault = 'size = "20"';
-    const allDefaults = [sizeDefault, colorDefaults].filter(Boolean).join(', ');
+    const allDefaults = [sizeDefault, colorDefaults, strokeWidthDefaults]
+      .filter(Boolean)
+      .join(', ');
 
     // Separate props with defaults from props without defaults
     const propsWithDefaults = allDefaults
@@ -461,11 +524,26 @@ ${childrenJsx}
         // Always collect class name for color splitting
         const classVar = `${colorVar}Class`;
         classNames.push(classVar);
+      }
+      // Handle dynamic stroke-width values - always add strokeWidthClass when stroke width splitting is enabled
+      else if (
+        key === 'stroke-width' &&
+        value.startsWith('{') &&
+        value.endsWith('}')
+      ) {
+        const strokeWidthVar = value.slice(1, -1); // Remove braces
+
+        // Add the stroke-width attribute
+        jsxAttributes.push(`${jsxKey}=${value}`);
+
+        // Always collect class name for stroke width splitting
+        const classVar = `${strokeWidthVar}Class`;
+        classNames.push(classVar);
       } else if (key === 'style') {
         // Convert HTML style string to JSX style object
         const styleObj = this.parseStyleString(value);
 
-        // Convert the style object to JSX format
+        // Convert the style object to JSX format and collect class names for stroke-width variables
         const styleEntries = Object.entries(styleObj).map(([prop, val]) => {
           if (
             typeof val === 'string' &&
@@ -474,6 +552,13 @@ ${childrenJsx}
           ) {
             // This is a variable reference, don't quote it
             const varName = val.slice(1, -1);
+
+            // If this is a stroke-width variable, collect the class name
+            if (prop === 'strokeWidth') {
+              const classVar = `${varName}Class`;
+              classNames.push(classVar);
+            }
+
             return `${prop}: ${varName}`;
           } else {
             // This is a literal value, quote it

@@ -2,7 +2,7 @@
 
 This directory contains the documentation website for SVGFusion, built with [Docusaurus](https://docusaurus.io/).
 
-## 🚀 Quick Start
+## Quick Start
 
 ```bash
 cd docs
@@ -12,7 +12,7 @@ npm start
 
 This starts a local development server and opens up a browser window.
 
-## 📦 Build
+## Build
 
 ```bash
 npm run build
@@ -20,7 +20,7 @@ npm run build
 
 This command generates static content into the `build` directory.
 
-## 🌐 Netlify Deployment
+## Netlify Deployment
 
 The documentation is automatically deployed to Netlify after each release.
 
@@ -28,7 +28,6 @@ The documentation is automatically deployed to Netlify after each release.
 
 1. **Create a Netlify site** from your GitHub repository
 2. **Configure build settings:**
-
    - Build command: `cd docs && npm run build`
    - Publish directory: `docs/build`
    - Node version: `20`
@@ -41,11 +40,11 @@ The documentation is automatically deployed to Netlify after each release.
 
 The documentation deploys automatically:
 
-- ✅ After each release (via semantic-release)
-- ✅ Manual trigger via GitHub Actions
-- ✅ Preview deployments for pull requests
+- After each release (via semantic-release)
+- Manual trigger via GitHub Actions
+- Preview deployments for pull requests
 
-## 🎨 Features
+## Features
 
 - **Interactive Playground** - Live SVG to React/Vue conversion
 - **Comprehensive Docs** - Complete API and CLI documentation
@@ -67,7 +66,7 @@ The documentation deploys automatically:
 - Modify `docusaurus.config.ts` for configuration
 - Update components in `src/components/`
 
-## 📁 Structure
+## Structure
 
 ```
 docs/

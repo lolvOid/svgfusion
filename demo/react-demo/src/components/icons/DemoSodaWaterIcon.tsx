@@ -1,7 +1,6 @@
-import { Ref, forwardRef, memo } from 'react';
-import * as React from 'react';
+import React, { Ref, forwardRef, memo } from 'react';
 
-interface SodaWaterProps extends React.SVGProps<SVGSVGElement> {
+interface DemoSodaWaterIconProps extends React.SVGProps<SVGSVGElement> {
   title?: string;
   titleId?: string;
   desc?: string;
@@ -18,7 +17,7 @@ interface SodaWaterProps extends React.SVGProps<SVGSVGElement> {
   isFixedStrokeWidth?: boolean;
 }
 
-const SodaWater = (
+const DemoSodaWaterIcon = (
   {
     title,
     titleId,
@@ -35,7 +34,7 @@ const SodaWater = (
     color3 = '#E7D8FF',
     color4 = '#FFFFFF',
     ...svgProps
-  }: SodaWaterProps,
+  }: DemoSodaWaterIconProps,
   ref: Ref<SVGSVGElement>
 ) => {
   const computedSize = size ? { width: size, height: size } : {};
@@ -114,6 +113,6 @@ const SodaWater = (
   );
 };
 
-const ForwardRef = forwardRef(SodaWater);
+const ForwardRef = forwardRef(DemoSodaWaterIcon);
 const Memo = memo(ForwardRef);
 export default Memo;

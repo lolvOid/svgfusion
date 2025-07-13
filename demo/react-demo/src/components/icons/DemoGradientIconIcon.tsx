@@ -1,7 +1,6 @@
-import { Ref, forwardRef, memo } from 'react';
-import * as React from 'react';
+import React, { Ref, forwardRef, memo } from 'react';
 
-interface GradientIconProps extends React.SVGProps<SVGSVGElement> {
+interface DemoGradientIconIconProps extends React.SVGProps<SVGSVGElement> {
   title?: string;
   titleId?: string;
   desc?: string;
@@ -26,7 +25,7 @@ interface GradientIconProps extends React.SVGProps<SVGSVGElement> {
   isFixedStrokeWidth?: boolean;
 }
 
-const GradientIcon = (
+const DemoGradientIconIcon = (
   {
     title,
     titleId,
@@ -51,7 +50,7 @@ const GradientIcon = (
     color7 = '#57B5D9',
     color8 = '#63AFDB',
     ...svgProps
-  }: GradientIconProps,
+  }: DemoGradientIconIconProps,
   ref: Ref<SVGSVGElement>
 ) => {
   const computedSize = size ? { width: size, height: size } : {};
@@ -144,6 +143,6 @@ const GradientIcon = (
   );
 };
 
-const ForwardRef = forwardRef(GradientIcon);
+const ForwardRef = forwardRef(DemoGradientIconIcon);
 const Memo = memo(ForwardRef);
 export default Memo;

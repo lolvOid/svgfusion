@@ -68,6 +68,21 @@ const config: Config = {
     locales: ['en'],
   },
 
+  scripts: [
+    {
+      src: 'https://cdnjs.buymeacoffee.com/1.0.0/widget.prod.min.js',
+      'data-name': 'BMC-Widget',
+      'data-cfasync': 'false',
+      'data-id': 'freddielin',
+      'data-description': 'Support SVGFusion development!',
+      'data-message': 'Help keep SVGFusion free and growing!',
+      'data-color': '#40DCA5',
+      'data-position': 'Right',
+      'data-x_margin': '18',
+      'data-y_margin': '18',
+    },
+  ],
+
   presets: [
     [
       'classic',
@@ -76,7 +91,7 @@ const config: Config = {
           sidebarPath: './sidebars.ts',
           // Please change this to your repo.
           // Remove this to remove the "edit this page" links.
-          editUrl: 'https://github.com/lolvOid/svgfusion/tree/main/docs/',
+          // editUrl: 'https://github.com/lolvOid/svgfusion/tree/main/docs/',
         },
         blog: false,
         theme: {
@@ -101,6 +116,11 @@ const config: Config = {
           sidebarId: 'tutorialSidebar',
           position: 'left',
           label: 'Docs',
+        },
+        {
+          to: '/playground',
+          label: 'Playground',
+          position: 'left',
         },
         {
           type: 'html',
@@ -129,8 +149,12 @@ const config: Config = {
               to: '/docs/cli-usage',
             },
             {
-              label: 'API Reference',
-              to: '/docs/api-reference',
+              label: 'Node API',
+              to: '/docs/node-api',
+            },
+            {
+              label: 'Browser API',
+              to: '/docs/browser-api',
             },
           ],
         },

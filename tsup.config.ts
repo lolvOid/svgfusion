@@ -15,6 +15,21 @@ export default defineConfig([
     minify: true,
     treeshake: true,
   },
+  // Browser build
+  {
+    entry: { browser: 'src/browser.ts' },
+    format: ['esm'],
+    splitting: false,
+    sourcemap: false,
+    dts: true,
+    clean: false,
+    target: 'es2020',
+    outDir: 'dist',
+    shims: true,
+    minify: true,
+    treeshake: true,
+    platform: 'browser',
+  },
   // CLI build (unminified to preserve shebang)
   {
     entry: { cli: 'src/cli.ts' },

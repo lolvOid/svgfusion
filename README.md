@@ -12,28 +12,33 @@ A powerful Node.js CLI tool and library that converts SVG files into optimized R
 [![React](https://img.shields.io/badge/React-20232A?style=flat&logo=react&logoColor=61DAFB)](https://reactjs.org/)
 [![Vue.js](https://img.shields.io/badge/Vue.js-35495E?style=flat&logo=vue.js&logoColor=4FC08D)](https://vuejs.org/)
 
-[📚 Documentation](https://svgfusion.netlify.app) • [⚡ CLI Reference](https://svgfusion.netlify.app/docs/cli-usage) • [📦 NPM](https://www.npmjs.com/package/svgfusion)
+[Documentation](https://svgfusion.netlify.app) • [CLI Reference](https://svgfusion.netlify.app/docs/cli-usage) • [NPM](https://www.npmjs.com/package/svgfusion) • **[Try Interactive Playground →](https://svgfusion.netlify.app/playground)**
 
 </div>
 
-## What's New in v1.12.0
-
-- **Enhanced Color Splitting**: Smart color extraction with intelligent fill/stroke="none" handling
-- **Improved CLI**: Streamlined command structure with better option handling
-- **Native SVG Props**: Full React.SVGProps and Vue SVGAttributes support
-- **Enhanced Type Safety**: Better TypeScript integration and type inference
-- **SVGFusion Engine**: Built-in SVG parser with reliable transformations
-- **Better Control**: Fine-grained control over SVG transformations and output
-
 ## Features
 
-**Native SVG Props**: Generated components extend React.SVGProps<SVGSVGElement> and Vue SVGAttributes
+**Stroke Width Splitting**: Extract and convert stroke widths to props for responsive design
+**Browser API**: Use SVGFusion directly in the browser with full feature support
+**Smart Component Naming**: Automatic prefix/suffix handling with proper PascalCase conversion
+**Advanced Color Splitting**: Intelligent color extraction with fill/stroke optimization
+**Native SVG Props**: Generated components extend React.SVGProps\<SVGSVGElement\> and Vue SVGAttributes
 **React & Vue Support**: Generate both React and Vue 3 components from the same SVG
 **Complex SVG Support**: Handles gradients, masks, filters, patterns, and Figma exports
 **TypeScript Ready**: Full TypeScript support with proper type definitions
 **Batch Processing**: Convert entire directories of SVG files
 **Production Ready**: Optimized output, error handling, and accessibility
 **Simple CLI**: Direct, intuitive command structure
+
+### Stroke Width Splitting
+
+Extract stroke widths from SVG elements and convert them to component props for responsive designs:
+
+```jsx
+// Original SVG: <path stroke-width="2" d="..."/>
+// Generated React component:
+<MyIcon strokeWidth1={4} /> // Scales the stroke width
+```
 
 ### Color Splitting (splitColors)
 
@@ -43,6 +48,14 @@ Extracts all unique fill, stroke, and gradient colors from your SVG and generate
 - Path with only stroke → gets `fill="none"`
 - Path with both → keeps both as props
 - Path with neither → stays unchanged
+
+## Try It Live
+
+**Experience SVGFusion instantly in your browser!**
+
+[**Launch Interactive Playground →**](https://svgfusion.dev/playground)
+
+Upload your SVG files, experiment with different options, and see the generated React/Vue components in real-time. No installation required!
 
 ## Quick Start
 
@@ -162,8 +175,8 @@ Options:
   -h, --help                   Show help
 ```
 
---prefix <prefix> Add prefix to component name (sanitized)
---suffix <suffix> Add suffix to component name (sanitized)
+--prefix `<prefix>` Add prefix to component name (sanitized)
+--suffix `<suffix>` Add suffix to component name (sanitized)
 --split-colors Extract individual color props for each SVG color
 --fixed-stroke-width Add support for non-scaling stroke width
 -h, --help Show help
@@ -580,3 +593,48 @@ Contributions are welcome! Please read [CONTRIBUTING.md](./CONTRIBUTING.md) for 
 ## Changelog
 
 See [CHANGELOG.md](./CHANGELOG.md) for details.
+
+### Browser Usage (New!)
+
+SVGFusion now supports browser environments! Convert SVG strings to component code without writing files.
+
+**Try the Interactive Playground**: [svgfusion.netlify.app/playground](https://svgfusion.netlify.app/playground)
+
+```javascript
+import { convertToReact, convertToVue } from 'svgfusion/browser';
+
+const svgContent = `<svg viewBox="0 0 24 24"><path fill="#3B82F6" d="..."/></svg>`;
+
+// Convert to React component string
+const reactResult = await convertToReact(svgContent, {
+  componentName: 'MyIcon',
+  typescript: true,
+  splitColors: true,
+});
+
+console.log(reactResult.code); // Generated React component code
+
+// Convert to Vue component string
+const vueResult = await convertToVue(svgContent, {
+  componentName: 'MyIcon',
+  typescript: true,
+  sfc: true,
+});
+
+console.log(vueResult.code); // Generated Vue component code
+```
+
+**Browser Features:**
+
+- All conversion features (color splitting, stroke fixing, etc.)
+- React and Vue component generation
+- TypeScript support
+- Batch conversion
+- Color extraction and validation
+- Index file generation
+- Works in all modern browsers
+- **Interactive Playground** with Monaco Editor
+
+[Complete Browser API Documentation](./docs/browser-api.md)
+
+### Node.js Usage

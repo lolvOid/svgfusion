@@ -1,7 +1,6 @@
-import { Ref, forwardRef, memo } from 'react';
-import * as React from 'react';
+import React, { Ref, forwardRef, memo } from 'react';
 
-interface MagicTypeFilledColorSecondaryProps
+interface DemoMagicTypeFilledColorSecondaryIconProps
   extends React.SVGProps<SVGSVGElement> {
   title?: string;
   titleId?: string;
@@ -23,7 +22,7 @@ interface MagicTypeFilledColorSecondaryProps
   isFixedStrokeWidth?: boolean;
 }
 
-const MagicTypeFilledColorSecondary = (
+const DemoMagicTypeFilledColorSecondaryIcon = (
   {
     title,
     titleId,
@@ -44,7 +43,7 @@ const MagicTypeFilledColorSecondary = (
     color5 = '#EF962F',
     color6 = '#F5B146',
     ...svgProps
-  }: MagicTypeFilledColorSecondaryProps,
+  }: DemoMagicTypeFilledColorSecondaryIconProps,
   ref: Ref<SVGSVGElement>
 ) => {
   const computedSize = size ? { width: size, height: size } : {};
@@ -105,6 +104,6 @@ const MagicTypeFilledColorSecondary = (
   );
 };
 
-const ForwardRef = forwardRef(MagicTypeFilledColorSecondary);
+const ForwardRef = forwardRef(DemoMagicTypeFilledColorSecondaryIcon);
 const Memo = memo(ForwardRef);
 export default Memo;

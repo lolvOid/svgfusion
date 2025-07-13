@@ -1,11 +1,43 @@
 export const pascalCase = (str: string) => {
+  // If the string is already in PascalCase and well-formed, preserve it
+  if (/^[A-Z][a-zA-Z0-9]*$/.test(str) && /[a-z]/.test(str)) {
+    return str;
+  }
+
+  // Handle camelCase input (starts with lowercase)
+  if (/^[a-z][a-zA-Z0-9]*$/.test(str) && /[A-Z]/.test(str)) {
+    return str.charAt(0).toUpperCase() + str.slice(1);
+  }
+
+  // Handle different input formats with separators
   return (
     str
-      .match(
-        /[A-Z]{2,}(?=[A-Z][a-z]+[0-9]*|\b)|[A-Z]?[a-z]+[0-9]*[a-z]*|[A-Z]|[0-9]+[a-z]*/g
-      )
-      ?.map(x => x.charAt(0).toUpperCase() + x.slice(1).toLowerCase())
-      .join('') || ''
+      // Split on common separators (spaces, hyphens, underscores, dots)
+      .split(/[\s\-_]+/)
+      // Filter out empty strings
+      .filter(Boolean)
+      // Convert each word to PascalCase
+      .map(word => {
+        // If word is all uppercase and longer than 3 chars, it's likely a regular word in caps
+        if (
+          word.length > 3 &&
+          word === word.toUpperCase() &&
+          /^[A-Z]+$/.test(word)
+        ) {
+          return word.charAt(0).toUpperCase() + word.slice(1).toLowerCase();
+        }
+        // If word is all uppercase and 1-3 chars (like "XML", "API", "iOS"), keep it as is
+        if (
+          word.length <= 3 &&
+          word === word.toUpperCase() &&
+          /^[A-Z]+$/.test(word)
+        ) {
+          return word;
+        }
+        // Otherwise, capitalize first letter and lowercase the rest
+        return word.charAt(0).toUpperCase() + word.slice(1).toLowerCase();
+      })
+      .join('')
   );
 };
 

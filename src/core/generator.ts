@@ -4,7 +4,12 @@
  */
 
 import { SVGAst, SVGElement } from './parser';
-import { ColorMapping, TransformationResult } from './transformer';
+import {
+  ColorMapping,
+  StrokeWidthMapping,
+  TransformationResult,
+} from './transformer';
+import { svgToComponentName } from '../utils/name';
 
 export interface GeneratorOptions {
   typescript?: boolean;
@@ -12,6 +17,8 @@ export interface GeneratorOptions {
   forwardRef?: boolean;
   exportDefault?: boolean;
   componentName?: string;
+  prefix?: string;
+  suffix?: string;
   includeTypes?: boolean;
 }
 
@@ -35,6 +42,8 @@ export abstract class ComponentGenerator {
       forwardRef: true,
       exportDefault: true,
       componentName: 'Icon',
+      prefix: '',
+      suffix: '',
       includeTypes: true,
       ...options,
     };
@@ -190,10 +199,62 @@ export abstract class ComponentGenerator {
   }
 
   /**
+   * Generate stroke width props interface/type definitions
+   */
+  protected generateStrokeWidthProps(
+    strokeWidthMappings: StrokeWidthMapping[],
+    includeClassProps: boolean = true
+  ): string {
+    if (strokeWidthMappings.length === 0) return '';
+
+    return strokeWidthMappings
+      .map(mapping => {
+        const propName = mapping.variableName;
+        const className = `${propName}Class`;
+
+        if (this.options.typescript) {
+          let props = `  ${propName}?: string | number;`;
+          if (includeClassProps) {
+            props += `\n  ${className}?: string;`;
+          }
+          return props;
+        } else {
+          let props = `  ${propName}: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),`;
+          if (includeClassProps) {
+            props += `\n  ${className}: PropTypes.string,`;
+          }
+          return props;
+        }
+      })
+      .join('\n');
+  }
+
+  /**
+   * Generate default props for stroke widths
+   */
+  protected generateStrokeWidthDefaults(
+    strokeWidthMappings: StrokeWidthMapping[]
+  ): string {
+    if (strokeWidthMappings.length === 0) return '';
+
+    return strokeWidthMappings
+      .map(mapping => {
+        const propName = mapping.variableName;
+        const defaultValue = mapping.originalStrokeWidth;
+        return `${propName} = "${defaultValue}"`;
+      })
+      .join(', ');
+  }
+
+  /**
    * Generate component name from options
    */
   protected getComponentName(): string {
-    return this.options.componentName;
+    return svgToComponentName(
+      this.options.componentName,
+      this.options.prefix,
+      this.options.suffix
+    );
   }
 
   /**

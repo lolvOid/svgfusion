@@ -1,7 +1,6 @@
-import { Ref, forwardRef, memo } from 'react';
-import * as React from 'react';
+import React, { Ref, forwardRef, memo } from 'react';
 
-interface BackCardColorProps extends React.SVGProps<SVGSVGElement> {
+interface DemoBackCardColorIconProps extends React.SVGProps<SVGSVGElement> {
   title?: string;
   titleId?: string;
   desc?: string;
@@ -20,7 +19,7 @@ interface BackCardColorProps extends React.SVGProps<SVGSVGElement> {
   isFixedStrokeWidth?: boolean;
 }
 
-const BackCardColor = (
+const DemoBackCardColorIcon = (
   {
     title,
     titleId,
@@ -39,7 +38,7 @@ const BackCardColor = (
     color4 = '#FDCD60',
     color5 = '#FFFFFF',
     ...svgProps
-  }: BackCardColorProps,
+  }: DemoBackCardColorIconProps,
   ref: Ref<SVGSVGElement>
 ) => {
   const computedSize = size ? { width: size, height: size } : {};
@@ -142,6 +141,6 @@ const BackCardColor = (
   );
 };
 
-const ForwardRef = forwardRef(BackCardColor);
+const ForwardRef = forwardRef(DemoBackCardColorIcon);
 const Memo = memo(ForwardRef);
 export default Memo;
