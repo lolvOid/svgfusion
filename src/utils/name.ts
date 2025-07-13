@@ -42,8 +42,8 @@ function processComplexFilename(filename: string): string {
   }
 
   // Handle files with special characters, paths, or metadata
-  // Convert to lowercase and replace all non-alphanumeric characters with spaces
-  let processed = filename.toLowerCase().replace(/[^a-zA-Z0-9]/g, ' ');
+  // Replace all non-alphanumeric characters with spaces (preserve case)
+  let processed = filename.replace(/[^a-zA-Z0-9]/g, ' ');
   processed = processed.replace(/\s+/g, ' ').trim();
   return processed;
 }
@@ -58,7 +58,7 @@ export function sanitizeComponentName(
   name: string,
   type: 'main' | 'prefix' | 'suffix' = 'main'
 ): string {
-  // First, clean special characters but keep alphanumeric
+  // First, clean special characters but keep alphanumeric and preserve case
   let sanitized = name
     // Replace equals signs with spaces (Type=Filled -> Type Filled)
     .replace(/=/g, ' ')
@@ -121,7 +121,7 @@ function finalPascalCase(str: string): string {
 
       // If part starts with number, capitalize the first letter after the number
       if (/^\d/.test(part)) {
-        return part.replace(/^(\d+)([a-z])/, (match, numbers, firstLetter) => {
+        return part.replace(/^(\d+)([a-z])/, (_, numbers, firstLetter) => {
           return numbers + firstLetter.toUpperCase();
         });
       }

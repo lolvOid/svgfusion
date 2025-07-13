@@ -20,6 +20,12 @@ describe('formatComponentName', () => {
       suffix: 'Svg2a',
       expected: 'IconIconSvg2A',
     },
+    {
+      name: 'newIcon',
+      prefix: 'my',
+      suffix: 'Widget',
+      expected: 'MyNewIconWidget',
+    },
     { name: 'icon', prefix: '', suffix: 'Widget3B', expected: 'IconWidget3B' },
     { name: 'icon', prefix: 'My', suffix: '', expected: 'MyIcon' },
     { name: 'icon', prefix: '', suffix: '', expected: 'Icon' },
@@ -78,6 +84,96 @@ describe('formatComponentName', () => {
     { name: 'a', expected: 'A' },
     { name: 'IconStar', expected: 'IconStar' },
     { name: 'UserProfile', expected: 'UserProfile' },
+
+    // Additional edge cases for formatComponentName
+    // Unicode handling
+    { name: 'café', expected: 'Caf' },
+    { name: 'naïve', expected: 'NaVe' },
+    { name: 'piñata', expected: 'PiAta' },
+    { name: 'Pokémon', expected: 'PokMon' },
+
+    // Complex mixed separators
+    { name: 'icon___with___underscores', expected: 'IconWithUnderscores' },
+    { name: 'button---with---dashes', expected: 'ButtonWithDashes' },
+    { name: 'mixed_-_separators', expected: 'MixedSeparators' },
+    { name: 'dots.and.more.dots', expected: 'DotsAndMoreDots' },
+
+    // Whitespace edge cases
+    { name: '   whitespace   everywhere   ', expected: 'WhitespaceEverywhere' },
+    { name: '\t\ttabs\t\tbetween\t\t', expected: 'TabsBetween' },
+    { name: '\n\nnewlines\n\nbetween\n\n', expected: 'NewlinesBetween' },
+
+    // Number sequences
+    { name: '123-456-789', expected: '' },
+    { name: 'version-123-456', expected: 'Version123456' },
+    { name: '1a2b3c', expected: 'A2b3C' },
+    { name: '42answer', expected: 'Answer' },
+
+    // Special character combinations
+    { name: 'icon!@#$%^&*()', expected: 'Icon' },
+    { name: '{}[]|\\:";\'<>?', expected: '' },
+    { name: 'hello~world`test', expected: 'HelloWorldTest' },
+    { name: 'plus+minus-equals=', expected: 'PlusMinusEquals' },
+
+    // Technology abbreviations
+    { name: 'XMLHttpRequest', expected: 'XMLHttpRequest' },
+    { name: 'JSONParser', expected: 'JSONParser' },
+    { name: 'SQLDatabase', expected: 'SQLDatabase' },
+    { name: 'HTMLElement', expected: 'HTMLElement' },
+    { name: 'CSSStyleSheet', expected: 'CSSStyleSheet' },
+    { name: 'XMLDocument', expected: 'XMLDocument' },
+
+    // Camel and Pascal case variations
+    { name: 'getUserData', expected: 'GetUserData' },
+    { name: 'fetchAPIResponse', expected: 'FetchAPIResponse' },
+    { name: 'parseJSONData', expected: 'ParseJSONData' },
+    { name: 'validateHTMLInput', expected: 'ValidateHTMLInput' },
+    { name: 'generateUUIDString', expected: 'GenerateUUIDString' },
+
+    // Business domain terms
+    { name: 'eCommerce', expected: 'ECommerce' },
+    { name: 'eBusiness', expected: 'EBusiness' },
+    { name: 'iPhone', expected: 'IPhone' },
+    { name: 'iPad', expected: 'IPad' },
+    { name: 'macOS', expected: 'MacOS' },
+    { name: 'iOS', expected: 'IOS' },
+
+    // File naming patterns
+    { name: 'component.test', expected: 'ComponentTest' },
+    { name: 'service.mock', expected: 'ServiceMock' },
+    { name: 'utils.helper', expected: 'UtilsHelper' },
+    { name: 'config.dev', expected: 'ConfigDev' },
+    { name: 'build.prod', expected: 'BuildProd' },
+
+    // Measurement and size indicators
+    { name: '16x16', expected: 'X16' },
+    { name: '1920x1080', expected: 'X1080' },
+    { name: '300dpi', expected: 'Dpi' },
+    { name: '72ppi', expected: 'Ppi' },
+    { name: '4k-resolution', expected: 'KResolution' },
+
+    // Version and date patterns
+    { name: 'v1-2-3', expected: 'V123' },
+    { name: 'version-2023-12-25', expected: 'Version20231225' },
+    { name: 'backup-20231225', expected: 'Backup20231225' },
+    { name: 'release-candidate-1', expected: 'ReleaseCandidate1' },
+
+    // Single character edge cases
+    { name: 'x', expected: 'X' },
+    { name: 'X', expected: 'X' },
+    { name: '9', expected: '' },
+    { name: '_', expected: '' },
+    { name: '-', expected: '' },
+    { name: '.', expected: '' },
+
+    // Duplicate word patterns
+    { name: 'test-test-test', expected: 'TestTestTest' },
+    { name: 'icon_icon_icon', expected: 'IconIconIcon' },
+    { name: 'data data data', expected: 'DataDataData' },
+    {
+      name: 'component.component.component',
+      expected: 'ComponentComponentComponent',
+    },
   ];
 
   const negativeCases = [
@@ -112,6 +208,168 @@ describe('formatComponentName', () => {
 });
 
 describe('svgToComponentName', () => {
+  // Test cases with prefix and suffix
+  const prefixSuffixCases = [
+    {
+      name: 'icon.svg',
+      prefix: 'My',
+      suffix: 'Component',
+      expected: 'MyIconComponent',
+    },
+    { name: 'star.svg', prefix: 'UI', suffix: 'Icon', expected: 'UIStarIcon' },
+    {
+      name: 'user-profile.svg',
+      prefix: 'App',
+      suffix: 'Widget',
+      expected: 'AppUserProfileWidget',
+    },
+    {
+      name: 'menu.svg',
+      prefix: 'Header',
+      suffix: undefined,
+      expected: 'HeaderMenu',
+    },
+    {
+      name: 'logo.svg',
+      prefix: undefined,
+      suffix: 'Brand',
+      expected: 'LogoBrand',
+    },
+    {
+      name: 'button.svg',
+      prefix: 'Custom',
+      suffix: 'Element',
+      expected: 'CustomButtonElement',
+    },
+
+    // Edge cases with prefix/suffix sanitization
+    {
+      name: 'icon.svg',
+      prefix: 'My$',
+      suffix: 'Widget!',
+      expected: 'MyIconWidget',
+    },
+    { name: 'star.svg', prefix: '123', suffix: 'Icon', expected: 'StarIcon' },
+    {
+      name: 'menu.svg',
+      prefix: 'Nav-',
+      suffix: '$Item',
+      expected: 'NavMenuItem',
+    },
+    {
+      name: 'logo.svg',
+      prefix: '!@#',
+      suffix: 'Brand456',
+      expected: 'LogoBrand456',
+    },
+
+    // Complex filenames with prefix/suffix
+    {
+      name: 'MP3, Type=Solid.svg',
+      prefix: 'Audio',
+      suffix: 'Icon',
+      expected: 'AudioMp3TypeSolidIcon',
+    },
+    {
+      name: 'Size=xl, Color=Brand.svg',
+      prefix: 'UI',
+      suffix: 'Component',
+      expected: 'UISizeXlColorBrandComponent',
+    },
+    {
+      name: 'user-profile-avatar.svg',
+      prefix: 'Person',
+      suffix: 'Image',
+      expected: 'PersonUserProfileAvatarImage',
+    },
+
+    // Unicode with prefix/suffix
+    {
+      name: 'café-icon.svg',
+      prefix: 'Coffee',
+      suffix: 'Symbol',
+      expected: 'CoffeeCafIconSymbol',
+    },
+    {
+      name: 'naïve-user.svg',
+      prefix: 'Simple',
+      suffix: 'Avatar',
+      expected: 'SimpleNaVeUserAvatar',
+    },
+
+    // Technology names with prefix/suffix
+    {
+      name: 'React-component.svg',
+      prefix: 'Framework',
+      suffix: 'Demo',
+      expected: 'FrameworkReactComponentDemo',
+    },
+    {
+      name: 'Vue.js-template.svg',
+      prefix: 'Modern',
+      suffix: 'Code',
+      expected: 'ModernVueJsTemplateCode',
+    },
+    {
+      name: 'Node.js-server.svg',
+      prefix: 'Backend',
+      suffix: 'Service',
+      expected: 'BackendNodeJsServerService',
+    },
+
+    // Empty and edge cases
+    {
+      name: '123.svg',
+      prefix: 'Number',
+      suffix: 'Icon',
+      expected: 'Number123Icon',
+    },
+    {
+      name: '456-789.svg',
+      prefix: 'Code',
+      suffix: 'Symbol',
+      expected: 'Code456789Symbol',
+    },
+    { name: '.svg', prefix: 'Dot', suffix: 'File', expected: 'DotFile' },
+    {
+      name: '!@#.svg',
+      prefix: 'Special',
+      suffix: 'Char',
+      expected: 'SpecialChar',
+    },
+
+    // Very long names with prefix/suffix
+    {
+      name: 'very-long-component-name.svg',
+      prefix: 'Super',
+      suffix: 'Widget',
+      expected: 'SuperVeryLongComponentNameWidget',
+    },
+
+    // Path handling with prefix/suffix
+    {
+      name: 'src/icons/menu.svg',
+      prefix: 'App',
+      suffix: 'Icon',
+      expected: 'AppSrcIconsMenuIcon',
+    },
+    {
+      name: '../shared/star.svg',
+      prefix: 'Common',
+      suffix: 'Element',
+      expected: 'CommonSharedStarElement',
+    },
+  ];
+
+  prefixSuffixCases.forEach(({ name, prefix, suffix, expected }) => {
+    it(`should convert '${name}' with prefix '${prefix}' and suffix '${suffix}' to '${expected}' and match snapshot`, () => {
+      const result = svgToComponentName(name, prefix, suffix);
+      expect(result).toBe(expected);
+      expect(result).toMatchSnapshot();
+    });
+  });
+
+  // Test cases without prefix/suffix (existing functionality)
   const cases = [
     { name: 'icon.svg', expected: 'Icon' },
     { name: 'star.svg', expected: 'Star' },
@@ -122,6 +380,10 @@ describe('svgToComponentName', () => {
     {
       name: 'Magic,Type=filled,Color=secondary.svg',
       expected: 'MagicTypeFilledColorSecondary',
+    },
+    {
+      name: 'PreIcon',
+      expected: 'PreIcon',
     },
     {
       name: 'Magic,Type=filled,Color=secondary.svg',
@@ -147,6 +409,120 @@ describe('svgToComponentName', () => {
     { name: 'icon@2x.svg', expected: 'Icon2X' },
     { name: 'user+profile.svg', expected: 'UserProfile' },
     { name: '', expected: '' },
+
+    // Additional edge cases
+    // Unicode and international characters
+    { name: 'café-icon.svg', expected: 'CafIcon' },
+    { name: 'naïve-user.svg', expected: 'NaVeUser' },
+    { name: 'résumé-template.svg', expected: 'RSumTemplate' },
+
+    // Very long filenames
+    {
+      name: 'very-very-very-long-component-name-that-exceeds-normal-limits-and-continues-even-further.svg',
+      expected:
+        'VeryVeryVeryLongComponentNameThatExceedsNormalLimitsAndContinuesEvenFurther',
+    },
+
+    // Mixed separators
+    {
+      name: 'icon_with-mixed.separators__here.svg',
+      expected: 'IconWithMixedSeparatorsHere',
+    },
+    {
+      name: 'complex___file---name...with.dots.svg',
+      expected: 'ComplexFileNameWithDots',
+    },
+
+    // Numbers in different positions
+    { name: '123-456-789.svg', expected: '' },
+    { name: 'icon123star456.svg', expected: 'Icon123Star456' },
+    { name: 'v2-icon-v3.svg', expected: 'V2IconV3' },
+    { name: '2FA-icon.svg', expected: 'FAIcon' },
+    { name: 'icon-v2.0.1.svg', expected: 'IconV201' },
+
+    // Special symbols and characters
+    { name: 'icon!@#$%^&*()[]{}|\\:";\'<>,.?/~`+=.svg', expected: 'Icon' },
+    { name: '♠♣♥♦-cards.svg', expected: 'Cards' },
+    { name: '★★★-rating.svg', expected: 'Rating' },
+    { name: '🎉-celebration.svg', expected: 'Celebration' },
+
+    // Whitespace variations
+    { name: '   icon   .svg', expected: 'Icon' },
+    { name: '\t\ticon\t\t.svg', expected: 'Icon' },
+    { name: '\n\nicon\n\n.svg', expected: 'Icon' },
+    { name: '   spaced   out   icon   .svg', expected: 'SpacedOutIcon' },
+
+    // CamelCase and PascalCase preservation
+    { name: 'XMLHttpRequest.svg', expected: 'XMLHttpRequest' },
+    { name: 'iOS-icon.svg', expected: 'IOSIcon' },
+    { name: 'API-endpoint.svg', expected: 'APIEndpoint' },
+    { name: 'SQL-database.svg', expected: 'SQLDatabase' },
+    { name: 'iPhone-mockup.svg', expected: 'IPhoneMockup' },
+    { name: 'macOS-window.svg', expected: 'MacOSWindow' },
+
+    // Abbreviations and acronyms
+    { name: 'PDF-viewer.svg', expected: 'PDFViewer' },
+    { name: 'HTML-parser.svg', expected: 'HtmlParser' },
+    { name: 'CSS-loader.svg', expected: 'CSSLoader' },
+    { name: 'JSON-formatter.svg', expected: 'JsonFormatter' },
+    { name: 'HTTP-client.svg', expected: 'HttpClient' },
+
+    // Mixed case scenarios
+    { name: 'myVariableNameHere.svg', expected: 'MyVariableNameHere' },
+    { name: 'someAPIEndpoint.svg', expected: 'SomeAPIEndpoint' },
+    { name: 'getUserIDFromDB.svg', expected: 'GetUserIDFromDB' },
+
+    // Path separators and nested structures
+    {
+      name: 'src/components/icons/user.svg',
+      expected: 'SrcComponentsIconsUser',
+    },
+    {
+      name: 'assets\\images\\icons\\star.svg',
+      expected: 'AssetsImagesIconsStar',
+    },
+    { name: '../../../shared/icons/menu.svg', expected: 'SharedIconsMenu' },
+    { name: './local/icon.svg', expected: 'LocalIcon' },
+
+    // Version numbers and timestamps
+    { name: 'icon-v1.2.3-beta.svg', expected: 'IconV123Beta' },
+    { name: 'logo-2023-12-25.svg', expected: 'Logo20231225' },
+    { name: 'backup-20231225-143022.svg', expected: 'Backup20231225143022' },
+
+    // File extensions variations
+    { name: 'icon.svg.backup', expected: 'IconSvgBackup' },
+    { name: 'icon.SVG.ORIG', expected: 'IconSVGOrig' },
+    { name: 'icon.svg.tmp', expected: 'IconSvgTmp' },
+
+    // Edge cases with single characters
+    { name: 'a.svg', expected: 'A' },
+    { name: 'z.svg', expected: 'Z' },
+    { name: '1.svg', expected: '' },
+    { name: '_.svg', expected: '' },
+    { name: '-.svg', expected: '' },
+
+    // Duplicate patterns
+    { name: 'icon-icon-icon.svg', expected: 'IconIconIcon' },
+    { name: 'star_star_star.svg', expected: 'StarStarStar' },
+    { name: 'user user user.svg', expected: 'UserUserUser' },
+
+    // Business/domain specific patterns
+    { name: 'e-commerce-cart.svg', expected: 'ECommerceCart' },
+    { name: 'B2B-dashboard.svg', expected: 'B2bDashboard' },
+    { name: 'CRM-contact.svg', expected: 'CRMContact' },
+    { name: 'SaaS-pricing.svg', expected: 'SaaSPricing' },
+
+    // Technology specific
+    { name: 'React-component.svg', expected: 'ReactComponent' },
+    { name: 'Vue.js-template.svg', expected: 'VueJsTemplate' },
+    { name: 'Next.js-page.svg', expected: 'NextJsPage' },
+    { name: 'Node.js-server.svg', expected: 'NodeJsServer' },
+
+    // Size and measurement indicators
+    { name: 'icon-16x16.svg', expected: 'Icon16X16' },
+    { name: 'logo-1920x1080.svg', expected: 'Logo1920X1080' },
+    { name: 'thumbnail-300px.svg', expected: 'Thumbnail300Px' },
+    { name: 'banner-full-width.svg', expected: 'BannerFullWidth' },
   ];
 
   cases.forEach(({ name, expected }) => {

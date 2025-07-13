@@ -34,6 +34,11 @@ export const pascalCase = (str: string) => {
         ) {
           return word;
         }
+        // Otherwise, capitalize first letter and preserve existing case if it's camelCase
+        if (/[a-z][A-Z]/.test(word)) {
+          // It's camelCase, preserve the case
+          return word.charAt(0).toUpperCase() + word.slice(1);
+        }
         // Otherwise, capitalize first letter and lowercase the rest
         return word.charAt(0).toUpperCase() + word.slice(1).toLowerCase();
       })
