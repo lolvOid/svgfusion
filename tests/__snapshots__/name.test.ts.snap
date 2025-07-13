@@ -48,25 +48,25 @@ exports[`formatComponentName should convert '300dpi' to 'Dpi' and match snapshot
 
 exports[`formatComponentName should convert '1920x1080' to 'X1080' and match snapshot 1`] = `"X1080"`;
 
-exports[`formatComponentName should convert 'CSSStyleSheet' to 'CSSStyleSheet' and match snapshot 1`] = `"CSSStyleSheet"`;
+exports[`formatComponentName should convert 'CSSStyleSheet' to 'CssStyleSheet' and match snapshot 1`] = `"CssStyleSheet"`;
 
-exports[`formatComponentName should convert 'HTMLElement' to 'HTMLElement' and match snapshot 1`] = `"HTMLElement"`;
+exports[`formatComponentName should convert 'HTMLElement' to 'HtmlElement' and match snapshot 1`] = `"HtmlElement"`;
 
 exports[`formatComponentName should convert 'IconStar' to 'IconStar' and match snapshot 1`] = `"IconStar"`;
 
-exports[`formatComponentName should convert 'JSONParser' to 'JSONParser' and match snapshot 1`] = `"JSONParser"`;
+exports[`formatComponentName should convert 'JSONParser' to 'JsonParser' and match snapshot 1`] = `"JsonParser"`;
 
 exports[`formatComponentName should convert 'Pokémon' to 'PokMon' and match snapshot 1`] = `"PokMon"`;
 
-exports[`formatComponentName should convert 'SQLDatabase' to 'SQLDatabase' and match snapshot 1`] = `"SQLDatabase"`;
+exports[`formatComponentName should convert 'SQLDatabase' to 'SqlDatabase' and match snapshot 1`] = `"SqlDatabase"`;
 
 exports[`formatComponentName should convert 'UserProfile' to 'UserProfile' and match snapshot 1`] = `"UserProfile"`;
 
 exports[`formatComponentName should convert 'X' to 'X' and match snapshot 1`] = `"X"`;
 
-exports[`formatComponentName should convert 'XMLDocument' to 'XMLDocument' and match snapshot 1`] = `"XMLDocument"`;
+exports[`formatComponentName should convert 'XMLDocument' to 'XmlDocument' and match snapshot 1`] = `"XmlDocument"`;
 
-exports[`formatComponentName should convert 'XMLHttpRequest' to 'XMLHttpRequest' and match snapshot 1`] = `"XMLHttpRequest"`;
+exports[`formatComponentName should convert 'XMLHttpRequest' to 'XmlHttpRequest' and match snapshot 1`] = `"XmlHttpRequest"`;
 
 exports[`formatComponentName should convert 'a' to 'A' and match snapshot 1`] = `"A"`;
 
@@ -94,15 +94,17 @@ exports[`formatComponentName should convert 'eBusiness' to 'EBusiness' and match
 
 exports[`formatComponentName should convert 'eCommerce' to 'ECommerce' and match snapshot 1`] = `"ECommerce"`;
 
-exports[`formatComponentName should convert 'fetchAPIResponse' to 'FetchAPIResponse' and match snapshot 1`] = `"FetchAPIResponse"`;
+exports[`formatComponentName should convert 'fetchAPIResponse' to 'FetchApiResponse' and match snapshot 1`] = `"FetchApiResponse"`;
 
-exports[`formatComponentName should convert 'generateUUIDString' to 'GenerateUUIDString' and match snapshot 1`] = `"GenerateUUIDString"`;
+exports[`formatComponentName should convert 'flagUS' to 'FlagUs' and match snapshot 1`] = `"FlagUs"`;
+
+exports[`formatComponentName should convert 'generateUUIDString' to 'GenerateUuidString' and match snapshot 1`] = `"GenerateUuidString"`;
 
 exports[`formatComponentName should convert 'getUserData' to 'GetUserData' and match snapshot 1`] = `"GetUserData"`;
 
 exports[`formatComponentName should convert 'hello~world\`test' to 'HelloWorldTest' and match snapshot 1`] = `"HelloWorldTest"`;
 
-exports[`formatComponentName should convert 'iOS' to 'IOS' and match snapshot 1`] = `"IOS"`;
+exports[`formatComponentName should convert 'iOS' to 'Ios' and match snapshot 1`] = `"Ios"`;
 
 exports[`formatComponentName should convert 'iPad' to 'IPad' and match snapshot 1`] = `"IPad"`;
 
@@ -124,13 +126,13 @@ exports[`formatComponentName should convert 'icon-24' to 'Icon24' and match snap
 
 exports[`formatComponentName should convert 'icon-star' to 'IconStar' and match snapshot 1`] = `"IconStar"`;
 
-exports[`formatComponentName should convert 'macOS' to 'MacOS' and match snapshot 1`] = `"MacOS"`;
+exports[`formatComponentName should convert 'macOS' to 'MacOs' and match snapshot 1`] = `"MacOs"`;
 
 exports[`formatComponentName should convert 'mixed_-_separators' to 'MixedSeparators' and match snapshot 1`] = `"MixedSeparators"`;
 
 exports[`formatComponentName should convert 'naïve' to 'NaVe' and match snapshot 1`] = `"NaVe"`;
 
-exports[`formatComponentName should convert 'parseJSONData' to 'ParseJSONData' and match snapshot 1`] = `"ParseJSONData"`;
+exports[`formatComponentName should convert 'parseJSONData' to 'ParseJsonData' and match snapshot 1`] = `"ParseJsonData"`;
 
 exports[`formatComponentName should convert 'piñata' to 'PiAta' and match snapshot 1`] = `"PiAta"`;
 
@@ -158,7 +160,7 @@ exports[`formatComponentName should convert 'utils.helper' to 'UtilsHelper' and 
 
 exports[`formatComponentName should convert 'v1-2-3' to 'V123' and match snapshot 1`] = `"V123"`;
 
-exports[`formatComponentName should convert 'validateHTMLInput' to 'ValidateHTMLInput' and match snapshot 1`] = `"ValidateHTMLInput"`;
+exports[`formatComponentName should convert 'validateHTMLInput' to 'ValidateHtmlInput' and match snapshot 1`] = `"ValidateHtmlInput"`;
 
 exports[`formatComponentName should convert 'version-123-456' to 'Version123456' and match snapshot 1`] = `"Version123456"`;
 
@@ -240,13 +242,13 @@ exports[`svgToComponentName should convert '123-456-789.svg' to '' and match sna
 
 exports[`svgToComponentName should convert '456-789.svg' with prefix 'Code' and suffix 'Symbol' to 'Code456789Symbol' and match snapshot 1`] = `"Code456789Symbol"`;
 
-exports[`svgToComponentName should convert 'API-endpoint.svg' to 'APIEndpoint' and match snapshot 1`] = `"APIEndpoint"`;
+exports[`svgToComponentName should convert 'API-endpoint.svg' to 'ApiEndpoint' and match snapshot 1`] = `"ApiEndpoint"`;
 
 exports[`svgToComponentName should convert 'B2B-dashboard.svg' to 'B2bDashboard' and match snapshot 1`] = `"B2bDashboard"`;
 
-exports[`svgToComponentName should convert 'CRM-contact.svg' to 'CRMContact' and match snapshot 1`] = `"CRMContact"`;
+exports[`svgToComponentName should convert 'CRM-contact.svg' to 'CrmContact' and match snapshot 1`] = `"CrmContact"`;
 
-exports[`svgToComponentName should convert 'CSS-loader.svg' to 'CSSLoader' and match snapshot 1`] = `"CSSLoader"`;
+exports[`svgToComponentName should convert 'CSS-loader.svg' to 'CssLoader' and match snapshot 1`] = `"CssLoader"`;
 
 exports[`svgToComponentName should convert 'HTML-parser.svg' to 'HtmlParser' and match snapshot 1`] = `"HtmlParser"`;
 
@@ -268,7 +270,7 @@ exports[`svgToComponentName should convert 'Node.js-server.svg' to 'NodeJsServer
 
 exports[`svgToComponentName should convert 'Node.js-server.svg' with prefix 'Backend' and suffix 'Service' to 'BackendNodeJsServerService' and match snapshot 1`] = `"BackendNodeJsServerService"`;
 
-exports[`svgToComponentName should convert 'PDF-viewer.svg' to 'PDFViewer' and match snapshot 1`] = `"PDFViewer"`;
+exports[`svgToComponentName should convert 'PDF-viewer.svg' to 'PdfViewer' and match snapshot 1`] = `"PdfViewer"`;
 
 exports[`svgToComponentName should convert 'PreIcon' to 'PreIcon' and match snapshot 1`] = `"PreIcon"`;
 
@@ -276,7 +278,7 @@ exports[`svgToComponentName should convert 'React-component.svg' to 'ReactCompon
 
 exports[`svgToComponentName should convert 'React-component.svg' with prefix 'Framework' and suffix 'Demo' to 'FrameworkReactComponentDemo' and match snapshot 1`] = `"FrameworkReactComponentDemo"`;
 
-exports[`svgToComponentName should convert 'SQL-database.svg' to 'SQLDatabase' and match snapshot 1`] = `"SQLDatabase"`;
+exports[`svgToComponentName should convert 'SQL-database.svg' to 'SqlDatabase' and match snapshot 1`] = `"SqlDatabase"`;
 
 exports[`svgToComponentName should convert 'SaaS-pricing.svg' to 'SaaSPricing' and match snapshot 1`] = `"SaaSPricing"`;
 
@@ -286,13 +288,17 @@ exports[`svgToComponentName should convert 'Size=xl, Color=Brand, Type=Glass.svg
 
 exports[`svgToComponentName should convert 'Size=xl, Color=Brand.svg' with prefix 'UI' and suffix 'Component' to 'UISizeXlColorBrandComponent' and match snapshot 1`] = `"UISizeXlColorBrandComponent"`;
 
+exports[`svgToComponentName should convert 'US' to 'US' and match snapshot 1`] = `"US"`;
+
+exports[`svgToComponentName should convert 'US' with prefix 'Flag' and suffix '' to 'FlagUs' and match snapshot 1`] = `"FlagUs"`;
+
 exports[`svgToComponentName should convert 'Vue.js-template.svg' to 'VueJsTemplate' and match snapshot 1`] = `"VueJsTemplate"`;
 
 exports[`svgToComponentName should convert 'Vue.js-template.svg' with prefix 'Modern' and suffix 'Code' to 'ModernVueJsTemplateCode' and match snapshot 1`] = `"ModernVueJsTemplateCode"`;
 
 exports[`svgToComponentName should convert 'WeatherIcon.svg' to 'WeatherIcon' and match snapshot 1`] = `"WeatherIcon"`;
 
-exports[`svgToComponentName should convert 'XMLHttpRequest.svg' to 'XMLHttpRequest' and match snapshot 1`] = `"XMLHttpRequest"`;
+exports[`svgToComponentName should convert 'XMLHttpRequest.svg' to 'XmlHttpRequest' and match snapshot 1`] = `"XmlHttpRequest"`;
 
 exports[`svgToComponentName should convert 'a.svg' to 'A' and match snapshot 1`] = `"A"`;
 
@@ -306,17 +312,23 @@ exports[`svgToComponentName should convert 'button.svg' with prefix 'Custom' and
 
 exports[`svgToComponentName should convert 'button-2xl.svg' to 'Button2Xl' and match snapshot 1`] = `"Button2Xl"`;
 
+exports[`svgToComponentName should convert 'button-2xl.svg' with prefix 'Custom' and suffix 'Size' to 'CustomButton2XlSize' and match snapshot 1`] = `"CustomButton2XlSize"`;
+
 exports[`svgToComponentName should convert 'café-icon.svg' to 'CafIcon' and match snapshot 1`] = `"CafIcon"`;
 
 exports[`svgToComponentName should convert 'café-icon.svg' with prefix 'Coffee' and suffix 'Symbol' to 'CoffeeCafIconSymbol' and match snapshot 1`] = `"CoffeeCafIconSymbol"`;
 
 exports[`svgToComponentName should convert 'complex___file---name...with.dots.svg' to 'ComplexFileNameWithDots' and match snapshot 1`] = `"ComplexFileNameWithDots"`;
 
+exports[`svgToComponentName should convert 'complex___file---name...with.dots.svg' with prefix 'Complex' and suffix 'Demo' to 'ComplexComplexFileNameWithDotsDemo' and match snapshot 1`] = `"ComplexComplexFileNameWithDotsDemo"`;
+
 exports[`svgToComponentName should convert 'e-commerce-cart.svg' to 'ECommerceCart' and match snapshot 1`] = `"ECommerceCart"`;
 
-exports[`svgToComponentName should convert 'getUserIDFromDB.svg' to 'GetUserIDFromDB' and match snapshot 1`] = `"GetUserIDFromDB"`;
+exports[`svgToComponentName should convert 'flagUS.svg' to 'FlagUs' and match snapshot 1`] = `"FlagUs"`;
 
-exports[`svgToComponentName should convert 'iOS-icon.svg' to 'IOSIcon' and match snapshot 1`] = `"IOSIcon"`;
+exports[`svgToComponentName should convert 'getUserIDFromDB.svg' to 'GetUserIdFromDb' and match snapshot 1`] = `"GetUserIdFromDb"`;
+
+exports[`svgToComponentName should convert 'iOS-icon.svg' to 'IOsIcon' and match snapshot 1`] = `"IOsIcon"`;
 
 exports[`svgToComponentName should convert 'iPhone-mockup.svg' to 'IPhoneMockup' and match snapshot 1`] = `"IPhoneMockup"`;
 
@@ -324,7 +336,7 @@ exports[`svgToComponentName should convert 'icon!@#$%^&*()[]{}|\\:";'<>,.?/~\`+=
 
 exports[`svgToComponentName should convert 'icon.SVG' to 'Icon' and match snapshot 1`] = `"Icon"`;
 
-exports[`svgToComponentName should convert 'icon.SVG.ORIG' to 'IconSVGOrig' and match snapshot 1`] = `"IconSVGOrig"`;
+exports[`svgToComponentName should convert 'icon.SVG.ORIG' to 'IconSvgOrig' and match snapshot 1`] = `"IconSvgOrig"`;
 
 exports[`svgToComponentName should convert 'icon.svg' to 'Icon' and match snapshot 1`] = `"Icon"`;
 
@@ -342,9 +354,13 @@ exports[`svgToComponentName should convert 'icon_star.svg' to 'IconStar' and mat
 
 exports[`svgToComponentName should convert 'icon_with-mixed.separators__here.svg' to 'IconWithMixedSeparatorsHere' and match snapshot 1`] = `"IconWithMixedSeparatorsHere"`;
 
+exports[`svgToComponentName should convert 'icon_with-mixed.separators__here.svg' with prefix 'Mixed' and suffix 'Example' to 'MixedIconWithMixedSeparatorsHereExample' and match snapshot 1`] = `"MixedIconWithMixedSeparatorsHereExample"`;
+
 exports[`svgToComponentName should convert 'icon-16x16.svg' to 'Icon16X16' and match snapshot 1`] = `"Icon16X16"`;
 
 exports[`svgToComponentName should convert 'icon-24.svg' to 'Icon24' and match snapshot 1`] = `"Icon24"`;
+
+exports[`svgToComponentName should convert 'icon-24.svg' with prefix 'App' and suffix 'Icon' to 'AppIcon24Icon' and match snapshot 1`] = `"AppIcon24Icon"`;
 
 exports[`svgToComponentName should convert 'icon-icon-icon.svg' to 'IconIconIcon' and match snapshot 1`] = `"IconIconIcon"`;
 
@@ -366,7 +382,7 @@ exports[`svgToComponentName should convert 'logo-1920x1080.svg' to 'Logo1920X108
 
 exports[`svgToComponentName should convert 'logo-2023-12-25.svg' to 'Logo20231225' and match snapshot 1`] = `"Logo20231225"`;
 
-exports[`svgToComponentName should convert 'macOS-window.svg' to 'MacOSWindow' and match snapshot 1`] = `"MacOSWindow"`;
+exports[`svgToComponentName should convert 'macOS-window.svg' to 'MacOsWindow' and match snapshot 1`] = `"MacOsWindow"`;
 
 exports[`svgToComponentName should convert 'menu.svg' with prefix 'Header' and suffix 'undefined' to 'HeaderMenu' and match snapshot 1`] = `"HeaderMenu"`;
 
@@ -380,7 +396,9 @@ exports[`svgToComponentName should convert 'naïve-user.svg' with prefix 'Simple
 
 exports[`svgToComponentName should convert 'résumé-template.svg' to 'RSumTemplate' and match snapshot 1`] = `"RSumTemplate"`;
 
-exports[`svgToComponentName should convert 'someAPIEndpoint.svg' to 'SomeAPIEndpoint' and match snapshot 1`] = `"SomeAPIEndpoint"`;
+exports[`svgToComponentName should convert 'résumé-template.svg' with prefix 'Document' and suffix 'Design' to 'DocumentRSumTemplateDesign' and match snapshot 1`] = `"DocumentRSumTemplateDesign"`;
+
+exports[`svgToComponentName should convert 'someAPIEndpoint.svg' to 'SomeApiEndpoint' and match snapshot 1`] = `"SomeApiEndpoint"`;
 
 exports[`svgToComponentName should convert 'src/components/icons/user.svg' to 'SrcComponentsIconsUser' and match snapshot 1`] = `"SrcComponentsIconsUser"`;
 

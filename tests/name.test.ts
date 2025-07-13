@@ -115,28 +115,28 @@ describe('formatComponentName', () => {
     { name: 'hello~world`test', expected: 'HelloWorldTest' },
     { name: 'plus+minus-equals=', expected: 'PlusMinusEquals' },
 
-    // Technology abbreviations
-    { name: 'XMLHttpRequest', expected: 'XMLHttpRequest' },
-    { name: 'JSONParser', expected: 'JSONParser' },
-    { name: 'SQLDatabase', expected: 'SQLDatabase' },
-    { name: 'HTMLElement', expected: 'HTMLElement' },
-    { name: 'CSSStyleSheet', expected: 'CSSStyleSheet' },
-    { name: 'XMLDocument', expected: 'XMLDocument' },
+    // Technology abbreviations (following Microsoft .NET Framework Design Guidelines)
+    { name: 'XMLHttpRequest', expected: 'XmlHttpRequest' },
+    { name: 'JSONParser', expected: 'JsonParser' },
+    { name: 'SQLDatabase', expected: 'SqlDatabase' },
+    { name: 'HTMLElement', expected: 'HtmlElement' },
+    { name: 'CSSStyleSheet', expected: 'CssStyleSheet' },
+    { name: 'XMLDocument', expected: 'XmlDocument' },
 
-    // Camel and Pascal case variations
+    // Camel and Pascal case variations (following Microsoft .NET Framework Design Guidelines)
     { name: 'getUserData', expected: 'GetUserData' },
-    { name: 'fetchAPIResponse', expected: 'FetchAPIResponse' },
-    { name: 'parseJSONData', expected: 'ParseJSONData' },
-    { name: 'validateHTMLInput', expected: 'ValidateHTMLInput' },
-    { name: 'generateUUIDString', expected: 'GenerateUUIDString' },
+    { name: 'fetchAPIResponse', expected: 'FetchApiResponse' },
+    { name: 'parseJSONData', expected: 'ParseJsonData' },
+    { name: 'validateHTMLInput', expected: 'ValidateHtmlInput' },
+    { name: 'generateUUIDString', expected: 'GenerateUuidString' },
 
-    // Business domain terms
+    // Business domain terms (following Microsoft .NET Framework Design Guidelines)
     { name: 'eCommerce', expected: 'ECommerce' },
     { name: 'eBusiness', expected: 'EBusiness' },
     { name: 'iPhone', expected: 'IPhone' },
     { name: 'iPad', expected: 'IPad' },
-    { name: 'macOS', expected: 'MacOS' },
-    { name: 'iOS', expected: 'IOS' },
+    { name: 'macOS', expected: 'MacOs' },
+    { name: 'iOS', expected: 'Ios' },
 
     // File naming patterns
     { name: 'component.test', expected: 'ComponentTest' },
@@ -173,6 +173,10 @@ describe('formatComponentName', () => {
     {
       name: 'component.component.component',
       expected: 'ComponentComponentComponent',
+    },
+    {
+      name: 'flagUS',
+      expected: 'FlagUs',
     },
   ];
 
@@ -296,7 +300,37 @@ describe('svgToComponentName', () => {
       suffix: 'Avatar',
       expected: 'SimpleNaVeUserAvatar',
     },
-
+    {
+      name: 'résumé-template.svg',
+      prefix: 'Document',
+      suffix: 'Design',
+      expected: 'DocumentRSumTemplateDesign',
+    },
+    // Mixed separators with prefix/suffix
+    {
+      name: 'icon_with-mixed.separators__here.svg',
+      prefix: 'Mixed',
+      suffix: 'Example',
+      expected: 'MixedIconWithMixedSeparatorsHereExample',
+    },
+    {
+      name: 'complex___file---name...with.dots.svg',
+      prefix: 'Complex',
+      suffix: 'Demo',
+      expected: 'ComplexComplexFileNameWithDotsDemo',
+    },
+    {
+      name: 'icon-24.svg',
+      prefix: 'App',
+      suffix: 'Icon',
+      expected: 'AppIcon24Icon',
+    },
+    {
+      name: 'button-2xl.svg',
+      prefix: 'Custom',
+      suffix: 'Size',
+      expected: 'CustomButton2XlSize',
+    },
     // Technology names with prefix/suffix
     {
       name: 'React-component.svg',
@@ -359,6 +393,12 @@ describe('svgToComponentName', () => {
       suffix: 'Element',
       expected: 'CommonSharedStarElement',
     },
+    {
+      name: 'US',
+      prefix: 'Flag',
+      suffix: '',
+      expected: 'FlagUs',
+    },
   ];
 
   prefixSuffixCases.forEach(({ name, prefix, suffix, expected }) => {
@@ -377,6 +417,7 @@ describe('svgToComponentName', () => {
     { name: 'icon_star.svg', expected: 'IconStar' },
     { name: 'MP3, Type=Solid.svg', expected: 'Mp3TypeSolid' },
     { name: '3icon.svg', expected: 'Icon' },
+    { name: 'flagUS.svg', expected: 'FlagUs' },
     {
       name: 'Magic,Type=filled,Color=secondary.svg',
       expected: 'MagicTypeFilledColorSecondary',
@@ -453,24 +494,24 @@ describe('svgToComponentName', () => {
     { name: '   spaced   out   icon   .svg', expected: 'SpacedOutIcon' },
 
     // CamelCase and PascalCase preservation
-    { name: 'XMLHttpRequest.svg', expected: 'XMLHttpRequest' },
-    { name: 'iOS-icon.svg', expected: 'IOSIcon' },
-    { name: 'API-endpoint.svg', expected: 'APIEndpoint' },
-    { name: 'SQL-database.svg', expected: 'SQLDatabase' },
+    { name: 'XMLHttpRequest.svg', expected: 'XmlHttpRequest' },
+    { name: 'iOS-icon.svg', expected: 'IOsIcon' },
+    { name: 'API-endpoint.svg', expected: 'ApiEndpoint' },
+    { name: 'SQL-database.svg', expected: 'SqlDatabase' },
     { name: 'iPhone-mockup.svg', expected: 'IPhoneMockup' },
-    { name: 'macOS-window.svg', expected: 'MacOSWindow' },
+    { name: 'macOS-window.svg', expected: 'MacOsWindow' },
 
     // Abbreviations and acronyms
-    { name: 'PDF-viewer.svg', expected: 'PDFViewer' },
+    { name: 'PDF-viewer.svg', expected: 'PdfViewer' },
     { name: 'HTML-parser.svg', expected: 'HtmlParser' },
-    { name: 'CSS-loader.svg', expected: 'CSSLoader' },
+    { name: 'CSS-loader.svg', expected: 'CssLoader' },
     { name: 'JSON-formatter.svg', expected: 'JsonFormatter' },
     { name: 'HTTP-client.svg', expected: 'HttpClient' },
 
     // Mixed case scenarios
     { name: 'myVariableNameHere.svg', expected: 'MyVariableNameHere' },
-    { name: 'someAPIEndpoint.svg', expected: 'SomeAPIEndpoint' },
-    { name: 'getUserIDFromDB.svg', expected: 'GetUserIDFromDB' },
+    { name: 'someAPIEndpoint.svg', expected: 'SomeApiEndpoint' },
+    { name: 'getUserIDFromDB.svg', expected: 'GetUserIdFromDb' },
 
     // Path separators and nested structures
     {
@@ -491,7 +532,7 @@ describe('svgToComponentName', () => {
 
     // File extensions variations
     { name: 'icon.svg.backup', expected: 'IconSvgBackup' },
-    { name: 'icon.SVG.ORIG', expected: 'IconSVGOrig' },
+    { name: 'icon.SVG.ORIG', expected: 'IconSvgOrig' },
     { name: 'icon.svg.tmp', expected: 'IconSvgTmp' },
 
     // Edge cases with single characters
@@ -509,7 +550,7 @@ describe('svgToComponentName', () => {
     // Business/domain specific patterns
     { name: 'e-commerce-cart.svg', expected: 'ECommerceCart' },
     { name: 'B2B-dashboard.svg', expected: 'B2bDashboard' },
-    { name: 'CRM-contact.svg', expected: 'CRMContact' },
+    { name: 'CRM-contact.svg', expected: 'CrmContact' },
     { name: 'SaaS-pricing.svg', expected: 'SaaSPricing' },
 
     // Technology specific
@@ -523,6 +564,11 @@ describe('svgToComponentName', () => {
     { name: 'logo-1920x1080.svg', expected: 'Logo1920X1080' },
     { name: 'thumbnail-300px.svg', expected: 'Thumbnail300Px' },
     { name: 'banner-full-width.svg', expected: 'BannerFullWidth' },
+
+    {
+      name: 'US',
+      expected: 'US',
+    },
   ];
 
   cases.forEach(({ name, expected }) => {

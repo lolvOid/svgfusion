@@ -19,6 +19,7 @@ import {
   validateSvg,
   formatComponentName,
   sanitizeComponentName,
+  svgToComponentName,
 } from 'svgfusion/browser';
 import { z } from 'zod';
 import { DEFAULT_SVG } from './defaultSvg';
@@ -522,7 +523,7 @@ export default function Playground() {
           : 'jsx';
 
     // Generate the full component name with sanitized prefix/suffix
-    const componentNameWithPrefixSuffix = formatComponentName(
+    const componentNameWithPrefixSuffix = svgToComponentName(
       options.componentName,
       options.prefix,
       options.suffix
