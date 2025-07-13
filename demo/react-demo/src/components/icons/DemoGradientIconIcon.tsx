@@ -39,7 +39,6 @@ const DemoGradientIconIcon = (
     color6Class,
     color7Class,
     color8Class,
-    isFixedStrokeWidth,
     size = '20',
     color = '#00DCCD',
     color2 = '#17D2D0',
@@ -49,6 +48,7 @@ const DemoGradientIconIcon = (
     color6 = '#49BBD7',
     color7 = '#57B5D9',
     color8 = '#63AFDB',
+    isFixedStrokeWidth = true,
     ...svgProps
   }: DemoGradientIconIconProps,
   ref: Ref<SVGSVGElement>
@@ -70,26 +70,26 @@ const DemoGradientIconIcon = (
         d="M22.276,311.484c-2.199-3.298-7.044-3.298-9.244,0L1.483,328.81C0.516,330.26,0,331.964,0,333.706
 	v14.983c0,4.875,3.953,8.828,8.828,8.828h17.655c4.875,0,8.828-3.953,8.828-8.828v-14.983c0-1.742-0.516-3.446-1.483-4.897
 	L22.276,311.484z"
-        vectorEffect={isFixedStrokeWidth ? 'non-scaling-stroke' : undefined}
+        vectorEffect={isFixedStrokeWidth ? 'non-scaling-stroke' : 'none'}
       />
       <path
         style={{ fill: color8 }}
         d="M510.517,328.81l-11.551-17.326c-2.199-3.298-7.044-3.298-9.244,0l-11.551,17.326
 	c-0.967,1.45-1.483,3.154-1.483,4.897v14.982c0,4.875,3.953,8.828,8.828,8.828h17.655c4.875,0,8.828-3.953,8.828-8.828v-14.983
 	C512,331.964,511.484,330.26,510.517,328.81z"
-        vectorEffect={isFixedStrokeWidth ? 'non-scaling-stroke' : undefined}
+        vectorEffect={isFixedStrokeWidth ? 'non-scaling-stroke' : 'none'}
       />
       <path
         style={{ fill: color }}
         d="M26.483,154.482c-9.751,0-17.655,7.905-17.655,17.655v105.931c0,9.75,7.904,17.655,17.655,17.655
 	h44.138V154.482H26.483z"
-        vectorEffect={isFixedStrokeWidth ? 'non-scaling-stroke' : undefined}
+        vectorEffect={isFixedStrokeWidth ? 'non-scaling-stroke' : 'none'}
       />
       <path
         style={{ fill: color8 }}
         d="M503.172,278.068V172.137c0-9.75-7.905-17.655-17.655-17.655h-44.138v141.241h44.138
 	C495.267,295.724,503.172,287.818,503.172,278.068z"
-        vectorEffect={isFixedStrokeWidth ? 'non-scaling-stroke' : undefined}
+        vectorEffect={isFixedStrokeWidth ? 'non-scaling-stroke' : 'none'}
       />
       <rect
         x="70.621"
@@ -97,7 +97,7 @@ const DemoGradientIconIcon = (
         style={{ fill: color2 }}
         width="61.793"
         height="141.241"
-        vectorEffect={isFixedStrokeWidth ? 'non-scaling-stroke' : undefined}
+        vectorEffect={isFixedStrokeWidth ? 'non-scaling-stroke' : 'none'}
       />
       <rect
         x="132.414"
@@ -105,7 +105,7 @@ const DemoGradientIconIcon = (
         style={{ fill: color3 }}
         width="61.793"
         height="141.241"
-        vectorEffect={isFixedStrokeWidth ? 'non-scaling-stroke' : undefined}
+        vectorEffect={isFixedStrokeWidth ? 'non-scaling-stroke' : 'none'}
       />
       <rect
         x="194.207"
@@ -113,7 +113,7 @@ const DemoGradientIconIcon = (
         style={{ fill: color4 }}
         width="61.793"
         height="141.241"
-        vectorEffect={isFixedStrokeWidth ? 'non-scaling-stroke' : undefined}
+        vectorEffect={isFixedStrokeWidth ? 'non-scaling-stroke' : 'none'}
       />
       <rect
         x="317.793"
@@ -121,7 +121,7 @@ const DemoGradientIconIcon = (
         style={{ fill: color6 }}
         width="61.793"
         height="141.241"
-        vectorEffect={isFixedStrokeWidth ? 'non-scaling-stroke' : undefined}
+        vectorEffect={isFixedStrokeWidth ? 'non-scaling-stroke' : 'none'}
       />
       <rect
         x="256"
@@ -129,7 +129,7 @@ const DemoGradientIconIcon = (
         style={{ fill: color5 }}
         width="61.793"
         height="141.241"
-        vectorEffect={isFixedStrokeWidth ? 'non-scaling-stroke' : undefined}
+        vectorEffect={isFixedStrokeWidth ? 'non-scaling-stroke' : 'none'}
       />
       <rect
         x="379.586"
@@ -137,7 +137,7 @@ const DemoGradientIconIcon = (
         style={{ fill: color7 }}
         width="61.793"
         height="141.241"
-        vectorEffect={isFixedStrokeWidth ? 'non-scaling-stroke' : undefined}
+        vectorEffect={isFixedStrokeWidth ? 'non-scaling-stroke' : 'none'}
       />
     </svg>
   );

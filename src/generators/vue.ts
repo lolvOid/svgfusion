@@ -330,7 +330,7 @@ ${children}
 
       if (this.vueOptions.typescript) {
         lines.push(`  ${propName}: '${defaultValue}',`);
-        lines.push(`  ${className}: ""`);
+        lines.push(`  ${className}: "",`);
       } else {
         lines.push(
           `  ${propName}: { type: String, default: '${defaultValue}' },`

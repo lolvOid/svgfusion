@@ -13,9 +13,7 @@
       cx="256"
       cy="256"
       r="247.916"
-      :vector-effect="
-        props.isFixedStrokeWidth ? 'non-scaling-stroke' : undefined
-      "
+      :vector-effect="props.isFixedStrokeWidth ? 'non-scaling-stroke' : 'none'"
       :class="[props.color2Class]"
     />
     <path
@@ -23,9 +21,7 @@
       d="M256,8.084c-10.96,0-21.752,0.72-32.337,2.099C345.304,26.029,439.242,130.04,439.242,256
 	s-93.939,229.971-215.579,245.817c10.585,1.379,21.377,2.099,32.337,2.099c136.921,0,247.916-110.996,247.916-247.916
 	S392.921,8.084,256,8.084z"
-      :vector-effect="
-        props.isFixedStrokeWidth ? 'non-scaling-stroke' : undefined
-      "
+      :vector-effect="props.isFixedStrokeWidth ? 'non-scaling-stroke' : 'none'"
       :class="[props.colorClass]"
     />
     <g>
@@ -40,7 +36,7 @@
 		v-51.916c0-0.844,0.684-1.528,1.528-1.528h121.125c0.844,0,1.528,0.684,1.528,1.53l-0.004,14.774
 		c-0.028,79.113-63.724,144.8-141.99,146.427C204.246,407.433,203.178,407.444,202.105,407.444z"
         :vector-effect="
-          props.isFixedStrokeWidth ? 'non-scaling-stroke' : undefined
+          props.isFixedStrokeWidth ? 'non-scaling-stroke' : 'none'
         "
         :class="[props.color3Class]"
       />
@@ -52,7 +48,7 @@
 		c0,1.154-0.936,2.09-2.09,2.09h-28.157c-1.154,0-2.09,0.936-2.09,2.09v28.157c0,1.154-0.936,2.09-2.09,2.09h-40.014
 		C374.965,234.981,374.029,234.045,374.029,232.891z"
         :vector-effect="
-          props.isFixedStrokeWidth ? 'non-scaling-stroke' : undefined
+          props.isFixedStrokeWidth ? 'non-scaling-stroke' : 'none'
         "
         :class="[props.color3Class]"
       />
@@ -62,9 +58,7 @@
 	s26.628,132.667,74.982,181.019C123.333,485.372,187.62,512,256,512s132.667-26.628,181.019-74.981
 	C485.372,388.667,512,324.379,512,256S485.372,123.333,437.019,74.981z M256,495.832C123.756,495.832,16.168,388.244,16.168,256
 	S123.756,16.168,256,16.168S495.832,123.756,495.832,256S388.244,495.832,256,495.832z"
-      :vector-effect="
-        props.isFixedStrokeWidth ? 'non-scaling-stroke' : undefined
-      "
+      :vector-effect="props.isFixedStrokeWidth ? 'non-scaling-stroke' : 'none'"
     />
     <path
       d="M349.613,237.646c-0.942-0.363-1.956-0.509-2.966-0.509H223.663c-4.465,0-8.084,3.62-8.084,8.084v53.895
@@ -82,9 +76,7 @@
 	c-30.016,30.562-46.242,70.83-45.691,113.387c0.544,42.027,17.323,81.451,47.245,111.01c29.949,29.587,69.629,45.881,111.731,45.881
 	c1.124,0,2.246-0.012,3.364-0.034c40.182-0.835,77.802-17.334,105.928-46.457c28.004-28.995,43.435-67.177,43.45-107.51
 	l0.005-15.764C354.854,241.967,352.889,238.911,349.613,237.646z"
-      :vector-effect="
-        props.isFixedStrokeWidth ? 'non-scaling-stroke' : undefined
-      "
+      :vector-effect="props.isFixedStrokeWidth ? 'non-scaling-stroke' : 'none'"
     />
     <path
       d="M450.021,150.905h-24.253v-24.253c0-4.465-3.618-8.084-8.084-8.084h-43.116c-4.466,0-8.084,3.62-8.084,8.084v24.253h-24.253
@@ -93,9 +85,7 @@
 	C458.105,154.525,454.487,150.905,450.021,150.905z M441.937,194.021h-24.253c-4.466,0-8.084,3.62-8.084,8.084v24.253h-26.947
 	v-24.253c0-4.465-3.618-8.084-8.084-8.084h-24.253v-26.947h24.253c4.466,0,8.084-3.62,8.084-8.084v-24.253H409.6v24.253
 	c0,4.465,3.618,8.084,8.084,8.084h24.253V194.021z"
-      :vector-effect="
-        props.isFixedStrokeWidth ? 'non-scaling-stroke' : undefined
-      "
+      :vector-effect="props.isFixedStrokeWidth ? 'non-scaling-stroke' : 'none'"
     />
   </svg>
 </template>
@@ -123,11 +113,11 @@
   const props = withDefaults(defineProps<Props>(), {
     size: '20',
     color: '#AC2201',
-    colorClass: undefined,
+    colorClass: '',
     color2: '#CD2900',
-    color2Class: undefined,
+    color2Class: '',
     color3: '#FCFCFC',
-    color3Class: undefined,
-    isFixedStrokeWidth: false,
+    color3Class: '',
+    isFixedStrokeWidth: true,
   });
 </script>
