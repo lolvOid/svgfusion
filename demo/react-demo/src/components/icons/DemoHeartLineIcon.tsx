@@ -5,7 +5,7 @@ interface DemoHeartLineIconProps extends React.SVGProps<SVGSVGElement> {
   titleId?: string;
   desc?: string;
   descId?: string;
-  size?: string;
+  size?: string | number;
   color?: string;
   colorClass?: string;
   strokeWidth?: string | number;
@@ -21,7 +21,7 @@ const DemoHeartLineIcon = (
     descId,
     colorClass,
     strokeWidthClass,
-    size = '20',
+    size,
     color = '#000000',
     strokeWidth = '2',
     isFixedStrokeWidth = true,
@@ -29,7 +29,10 @@ const DemoHeartLineIcon = (
   }: DemoHeartLineIconProps,
   ref: Ref<SVGSVGElement>
 ) => {
-  const computedSize = size ? { width: size, height: size } : {};
+  const computedSize = {
+    width: svgProps.width ?? size,
+    height: svgProps.height ?? size,
+  };
 
   return (
     <svg

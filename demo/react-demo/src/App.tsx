@@ -12,6 +12,9 @@ import {
 
 function App() {
   const [size, setSize] = useState<string>('48');
+  const [width, setWidth] = useState<string | undefined>('');
+  const [height, setHeight] = useState<string | undefined>('');
+  const [strokeWidth, setStrokeWidth] = useState<string>('1.5');
   const [color, setColor] = useState('#3498db');
   const [color2, setColor2] = useState('#e74c3c');
   const [isFixedStrokeWidth, setIsFixedStrokeWidth] = useState(false);
@@ -43,16 +46,53 @@ function App() {
           <section className="bg-white p-6 rounded-lg shadow-sm">
             <div className="flex flex-wrap gap-6 justify-center">
               <div className="flex flex-col items-center space-y-2">
-                <label className="font-semibold text-gray-700">
-                  Size: {size}px
-                </label>
+                <label className="font-semibold text-gray-700">Size</label>
                 <input
-                  type="range"
+                  type="number"
                   min="16"
                   max="128"
                   value={size}
                   onChange={e => setSize(e.target.value)}
-                  className="w-32"
+                  className="w-20 px-2 py-1 text-sm border rounded text-center"
+                  placeholder="24"
+                />
+              </div>
+
+              <div className="flex flex-col items-center space-y-2">
+                <label className="font-semibold text-gray-700">Width</label>
+                <input
+                  type="number"
+                  min="0"
+                  value={width || ''}
+                  onChange={e => setWidth(e.target.value || undefined)}
+                  className="w-20 px-2 py-1 text-sm border rounded text-center"
+                  placeholder="auto"
+                />
+              </div>
+
+              <div className="flex flex-col items-center space-y-2">
+                <label className="font-semibold text-gray-700">Height</label>
+                <input
+                  type="number"
+                  min="0"
+                  value={height || ''}
+                  onChange={e => setHeight(e.target.value || undefined)}
+                  className="w-20 px-2 py-1 text-sm border rounded text-center"
+                  placeholder="auto"
+                />
+              </div>
+
+              <div className="flex flex-col items-center space-y-2">
+                <label className="font-semibold text-gray-700">Stroke Width</label>
+                <input
+                  type="number"
+                  min="0.5"
+                  max="5"
+                  step="0.1"
+                  value={strokeWidth}
+                  onChange={e => setStrokeWidth(e.target.value)}
+                  className="w-20 px-2 py-1 text-sm border rounded text-center"
+                  placeholder="1.5"
                 />
               </div>
 
@@ -112,8 +152,11 @@ function App() {
                 <div className="flex flex-col items-center space-y-4">
                   <Component
                     size={size}
+                    width={width}
+                    height={height}
                     color={color}
                     color2={color2}
+                    strokeWidth={strokeWidth}
                     title={name}
                     isFixedStrokeWidth={isFixedStrokeWidth}
                   />

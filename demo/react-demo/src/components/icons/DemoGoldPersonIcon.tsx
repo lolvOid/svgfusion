@@ -5,7 +5,7 @@ interface DemoGoldPersonIconProps extends React.SVGProps<SVGSVGElement> {
   titleId?: string;
   desc?: string;
   descId?: string;
-  size?: string;
+  size?: string | number;
   color?: string;
   colorClass?: string;
   color2?: string;
@@ -30,7 +30,7 @@ const DemoGoldPersonIcon = (
     color3Class,
     color4Class,
     color5Class,
-    size = '20',
+    size,
     color = '#843A5F',
     color2 = '#AE9AA4',
     color3 = '#E6D8DF',
@@ -41,7 +41,10 @@ const DemoGoldPersonIcon = (
   }: DemoGoldPersonIconProps,
   ref: Ref<SVGSVGElement>
 ) => {
-  const computedSize = size ? { width: size, height: size } : {};
+  const computedSize = {
+    width: svgProps.width ?? size,
+    height: svgProps.height ?? size,
+  };
 
   return (
     <svg

@@ -152,7 +152,7 @@ ${style ? `<style scoped>\n${style}\n</style>` : ''}`;
       .map(child => this.elementToVueTemplate(child, 2))
       .join('\n');
 
-    return `  <svg${rootAttributes} v-bind="$attrs" :width="props.size || undefined" :height="props.size || undefined">
+    return `  <svg${rootAttributes} v-bind="$attrs" :width="computedWidth" :height="computedHeight">
     <title v-if="props.title" :id="props.titleId">{{ props.title }}</title>
     <desc v-if="props.desc" :id="props.descId">{{ props.desc }}</desc>
 ${children}
@@ -272,6 +272,10 @@ ${children}
     // Add required imports for TypeScript
     if (this.vueOptions.typescript) {
       lines.push('import type { SVGAttributes } from "vue";');
+      lines.push('import { computed } from "vue";');
+      lines.push('');
+    } else {
+      lines.push('import { computed } from "vue";');
       lines.push('');
     }
 
@@ -282,7 +286,9 @@ ${children}
       lines.push('  titleId?: string;');
       lines.push('  desc?: string;');
       lines.push('  descId?: string;');
-      lines.push('  size?: string;');
+      lines.push('  width?: string | number;');
+      lines.push('  height?: string | number;');
+      lines.push('  size?: string | number;');
 
       // Add color props
       const colorProps = this.generateColorPropsInterface(colorMappings);
@@ -314,12 +320,12 @@ ${children}
       lines.push("  style: { type: Object, default: '' },");
       lines.push("  width: { type: [String, Number], default: '' },");
       lines.push("  height: { type: [String, Number], default: '' },");
-      lines.push('  size: { type: String, default: "20" },');
+      lines.push('  size: { type: [String, Number], default: "24" },');
     }
 
     // Add size defaults for TypeScript
     if (this.vueOptions.typescript) {
-      lines.push('  size: "20",');
+      lines.push('  size: "24",');
     }
 
     // Add color defaults
@@ -365,6 +371,13 @@ ${children}
     }
 
     lines.push('});');
+    lines.push('');
+    lines.push(
+      'const computedWidth = computed(() => props.width || props.size);'
+    );
+    lines.push(
+      'const computedHeight = computed(() => props.height || props.size);'
+    );
 
     return lines.join('\n');
   }
@@ -377,7 +390,7 @@ ${children}
     const componentName = this.getComponentName();
     const lines: string[] = [];
 
-    lines.push("import { defineComponent } from 'vue';");
+    lines.push("import { defineComponent, computed } from 'vue';");
     lines.push('');
     lines.push(`export default defineComponent({`);
     lines.push(`  name: '${componentName}',`);
@@ -390,6 +403,7 @@ ${children}
     lines.push("    style: { type: Object, default: '' },");
     lines.push("    width: { type: [String, Number], default: '' },");
     lines.push("    height: { type: [String, Number], default: '' },");
+    lines.push('    size: { type: [String, Number], default: "24" },');
 
     // Add color props
     colorMappings.forEach(mapping => {
@@ -420,8 +434,14 @@ ${children}
     }
 
     lines.push('  },');
-    lines.push('  setup() {');
-    lines.push('    return {};');
+    lines.push('  setup(props) {');
+    lines.push(
+      '    const computedWidth = computed(() => props.width || props.size);'
+    );
+    lines.push(
+      '    const computedHeight = computed(() => props.height || props.size);'
+    );
+    lines.push('    return { computedWidth, computedHeight };');
     lines.push('  },');
     lines.push('});');
 
@@ -447,6 +467,7 @@ ${children}
     lines.push("    style: { type: Object, default: '' },");
     lines.push("    width: { type: [String, Number], default: '' },");
     lines.push("    height: { type: [String, Number], default: '' },");
+    lines.push('    size: { type: [String, Number], default: "24" },');
 
     // Add color props
     colorMappings.forEach(mapping => {
@@ -476,6 +497,14 @@ ${children}
       lines.push('    isFixedStrokeWidth: { type: Boolean, default: true },');
     }
 
+    lines.push('  },');
+    lines.push('  computed: {');
+    lines.push('    computedWidth() {');
+    lines.push('      return this.width || this.size;');
+    lines.push('    },');
+    lines.push('    computedHeight() {');
+    lines.push('      return this.height || this.size;');
+    lines.push('    },');
     lines.push('  },');
     lines.push('};');
 

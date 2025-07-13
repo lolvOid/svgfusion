@@ -6,7 +6,7 @@ interface DemoMagicTypeFilledColorSecondaryIconProps
   titleId?: string;
   desc?: string;
   descId?: string;
-  size?: string;
+  size?: string | number;
   color?: string;
   colorClass?: string;
   color2?: string;
@@ -34,7 +34,7 @@ const DemoMagicTypeFilledColorSecondaryIcon = (
     color4Class,
     color5Class,
     color6Class,
-    size = '20',
+    size,
     color = '#0085BF',
     color2 = '#0092D2',
     color3 = '#C9005B',
@@ -46,7 +46,10 @@ const DemoMagicTypeFilledColorSecondaryIcon = (
   }: DemoMagicTypeFilledColorSecondaryIconProps,
   ref: Ref<SVGSVGElement>
 ) => {
-  const computedSize = size ? { width: size, height: size } : {};
+  const computedSize = {
+    width: svgProps.width ?? size,
+    height: svgProps.height ?? size,
+  };
 
   return (
     <svg

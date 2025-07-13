@@ -5,7 +5,7 @@ interface DemoSodaWaterIconProps extends React.SVGProps<SVGSVGElement> {
   titleId?: string;
   desc?: string;
   descId?: string;
-  size?: string;
+  size?: string | number;
   color?: string;
   colorClass?: string;
   color2?: string;
@@ -27,7 +27,7 @@ const DemoSodaWaterIcon = (
     color2Class,
     color3Class,
     color4Class,
-    size = '20',
+    size,
     color = '#C15BFF',
     color2 = '#D1FF02',
     color3 = '#E7D8FF',
@@ -37,7 +37,10 @@ const DemoSodaWaterIcon = (
   }: DemoSodaWaterIconProps,
   ref: Ref<SVGSVGElement>
 ) => {
-  const computedSize = size ? { width: size, height: size } : {};
+  const computedSize = {
+    width: svgProps.width ?? size,
+    height: svgProps.height ?? size,
+  };
 
   return (
     <svg

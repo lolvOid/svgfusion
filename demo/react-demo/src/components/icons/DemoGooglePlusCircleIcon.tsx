@@ -5,7 +5,7 @@ interface DemoGooglePlusCircleIconProps extends React.SVGProps<SVGSVGElement> {
   titleId?: string;
   desc?: string;
   descId?: string;
-  size?: string;
+  size?: string | number;
   color?: string;
   colorClass?: string;
   color2?: string;
@@ -24,7 +24,7 @@ const DemoGooglePlusCircleIcon = (
     colorClass,
     color2Class,
     color3Class,
-    size = '20',
+    size,
     color = '#AC2201',
     color2 = '#CD2900',
     color3 = '#FCFCFC',
@@ -33,7 +33,10 @@ const DemoGooglePlusCircleIcon = (
   }: DemoGooglePlusCircleIconProps,
   ref: Ref<SVGSVGElement>
 ) => {
-  const computedSize = size ? { width: size, height: size } : {};
+  const computedSize = {
+    width: svgProps.width ?? size,
+    height: svgProps.height ?? size,
+  };
 
   return (
     <svg

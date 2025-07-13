@@ -3,8 +3,8 @@
     viewBox="0 0 1024 1024"
     xmlns="http://www.w3.org/2000/svg"
     v-bind="$attrs"
-    :width="props.size || undefined"
-    :height="props.size || undefined"
+    :width="computedWidth"
+    :height="computedHeight"
   >
     <title v-if="props.title" :id="props.titleId">{{ props.title }}</title>
     <desc v-if="props.desc" :id="props.descId">{{ props.desc }}</desc>
@@ -99,13 +99,16 @@
   defineOptions({ inheritAttrs: false });
 
   import type { SVGAttributes } from 'vue';
+  import { computed } from 'vue';
 
   interface Props extends /* @vue-ignore */ SVGAttributes {
     title?: string;
     titleId?: string;
     desc?: string;
     descId?: string;
-    size?: string;
+    width?: string | number;
+    height?: string | number;
+    size?: string | number;
     color?: string;
     colorClass?: string;
     color2?: string;
@@ -120,7 +123,7 @@
   }
 
   const props = withDefaults(defineProps<Props>(), {
-    size: '20',
+    size: undefined,
     color: '#5546CB',
     colorClass: '',
     color2: '#AFBCF3',
@@ -133,4 +136,7 @@
     color5Class: '',
     isFixedStrokeWidth: true,
   });
+
+  const computedWidth = computed(() => props.width || props.size);
+  const computedHeight = computed(() => props.height || props.size);
 </script>

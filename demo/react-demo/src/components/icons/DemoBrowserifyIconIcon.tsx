@@ -5,7 +5,7 @@ interface DemoBrowserifyIconIconProps extends React.SVGProps<SVGSVGElement> {
   titleId?: string;
   desc?: string;
   descId?: string;
-  size?: string;
+  size?: string | number;
   color?: string;
   colorClass?: string;
   color2?: string;
@@ -30,7 +30,7 @@ const DemoBrowserifyIconIcon = (
     color3Class,
     strokeWidthClass,
     strokeWidth2Class,
-    size = '20',
+    size,
     color = '#3C6991',
     color2 = '#E6B35A',
     color3 = '#FFFFFF',
@@ -41,7 +41,10 @@ const DemoBrowserifyIconIcon = (
   }: DemoBrowserifyIconIconProps,
   ref: Ref<SVGSVGElement>
 ) => {
-  const computedSize = size ? { width: size, height: size } : {};
+  const computedSize = {
+    width: svgProps.width ?? size,
+    height: svgProps.height ?? size,
+  };
 
   return (
     <svg

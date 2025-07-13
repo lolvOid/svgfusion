@@ -5,7 +5,7 @@ interface DemoGradientIconIconProps extends React.SVGProps<SVGSVGElement> {
   titleId?: string;
   desc?: string;
   descId?: string;
-  size?: string;
+  size?: string | number;
   color?: string;
   colorClass?: string;
   color2?: string;
@@ -39,7 +39,7 @@ const DemoGradientIconIcon = (
     color6Class,
     color7Class,
     color8Class,
-    size = '20',
+    size,
     color = '#00DCCD',
     color2 = '#17D2D0',
     color3 = '#24CCD2',
@@ -53,7 +53,10 @@ const DemoGradientIconIcon = (
   }: DemoGradientIconIconProps,
   ref: Ref<SVGSVGElement>
 ) => {
-  const computedSize = size ? { width: size, height: size } : {};
+  const computedSize = {
+    width: svgProps.width ?? size,
+    height: svgProps.height ?? size,
+  };
 
   return (
     <svg

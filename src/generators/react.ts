@@ -186,7 +186,7 @@ export class ReactGenerator extends ComponentGenerator {
       'titleId?: string;',
       'desc?: string;',
       'descId?: string;',
-      'size?: string;',
+      'size?: string | number;',
     ];
 
     // Add color props
@@ -227,7 +227,7 @@ export class ReactGenerator extends ComponentGenerator {
       'titleId: PropTypes.string,',
       'desc: PropTypes.string,',
       'descId: PropTypes.string,',
-      'size: PropTypes.string,',
+      'size: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),',
       'className: PropTypes.string,',
       'style: PropTypes.object,',
       'width: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),',
@@ -283,7 +283,7 @@ export class ReactGenerator extends ComponentGenerator {
     const colorDefaults = this.generateColorDefaults(colorMappings);
     const strokeWidthDefaults =
       this.generateStrokeWidthDefaults(strokeWidthMappings);
-    const sizeDefault = 'size = "20"';
+    const sizeDefault = 'size = "24"';
     const isFixedStrokeWidthDefault = metadata.features.includes(
       'fixed-stroke-width'
     )
@@ -331,7 +331,10 @@ export class ReactGenerator extends ComponentGenerator {
         .join('\n');
 
       return `const ${componentName} = (${customPropsDestructure}: ${propsType}${refType}) => {
-  const computedSize = size ? { width: size, height: size } : {};
+  const computedSize = {
+    width: svgProps.width ?? size,
+    height: svgProps.height ?? size
+  };
   
   return (
     <svg

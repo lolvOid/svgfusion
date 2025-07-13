@@ -12,15 +12,49 @@
         <section class="bg-white p-6 rounded-lg shadow-sm">
           <div class="flex flex-wrap gap-6 justify-center">
             <div class="flex flex-col items-center space-y-2">
-              <label class="font-semibold text-gray-700"
-                >Size: {{ size }}px</label
-              >
+              <label class="font-semibold text-gray-700">Size</label>
               <input
-                v-model="size"
-                type="range"
+                v-model.number="size"
+                type="number"
                 min="16"
                 max="128"
-                class="w-32"
+                class="w-20 px-2 py-1 text-sm border rounded text-center"
+                placeholder="24"
+              />
+            </div>
+
+            <div class="flex flex-col items-center space-y-2">
+              <label class="font-semibold text-gray-700">Width</label>
+              <input
+                v-model.number="width"
+                type="number"
+                min="0"
+                class="w-20 px-2 py-1 text-sm border rounded text-center"
+                placeholder="auto"
+              />
+            </div>
+
+            <div class="flex flex-col items-center space-y-2">
+              <label class="font-semibold text-gray-700">Height</label>
+              <input
+                v-model.number="height"
+                type="number"
+                min="0"
+                class="w-20 px-2 py-1 text-sm border rounded text-center"
+                placeholder="auto"
+              />
+            </div>
+
+            <div class="flex flex-col items-center space-y-2">
+              <label class="font-semibold text-gray-700">Stroke Width</label>
+              <input
+                v-model.number="strokeWidth"
+                type="number"
+                min="0.5"
+                max="5"
+                step="0.1"
+                class="w-20 px-2 py-1 text-sm border rounded text-center"
+                placeholder="1.5"
               />
             </div>
 
@@ -75,8 +109,11 @@
               <component
                 :is="icon.component"
                 :size="size"
+                :width="width"
+                :height="height"
                 :color="color"
                 :color2="color2"
+                :strokeWidth="strokeWidth"
                 :title="icon.name"
                 :isFixedStrokeWidth="isFixedStrokeWidth"
               />
@@ -127,6 +164,9 @@ import {
 } from './components/icons';
 
 const size = ref(48);
+const width = ref('');
+const height = ref('');
+const strokeWidth = ref(1.5);
 const color = ref('#3498db');
 const color2 = ref('#e74c3c');
 const isFixedStrokeWidth = ref(false);

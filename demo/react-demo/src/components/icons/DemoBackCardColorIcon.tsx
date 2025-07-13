@@ -5,7 +5,7 @@ interface DemoBackCardColorIconProps extends React.SVGProps<SVGSVGElement> {
   titleId?: string;
   desc?: string;
   descId?: string;
-  size?: string;
+  size?: string | number;
   color?: string;
   colorClass?: string;
   color2?: string;
@@ -30,7 +30,7 @@ const DemoBackCardColorIcon = (
     color3Class,
     color4Class,
     color5Class,
-    size = '20',
+    size,
     color = '#5546CB',
     color2 = '#AFBCF3',
     color3 = '#F97744',
@@ -41,7 +41,10 @@ const DemoBackCardColorIcon = (
   }: DemoBackCardColorIconProps,
   ref: Ref<SVGSVGElement>
 ) => {
-  const computedSize = size ? { width: size, height: size } : {};
+  const computedSize = {
+    width: svgProps.width ?? size,
+    height: svgProps.height ?? size,
+  };
 
   return (
     <svg

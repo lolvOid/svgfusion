@@ -8,7 +8,7 @@ interface SimpleIconProps extends React.SVGProps<SVGSVGElement> {
   titleId?: string;
   desc?: string;
   descId?: string;
-  size?: string;
+  size?: string | number;
 }
 
 const SimpleIcon = ({
@@ -16,10 +16,13 @@ const SimpleIcon = ({
   titleId,
   desc,
   descId,
-  size = '20',
+  size = '24',
   ...svgProps
 }: SimpleIconProps) => {
-  const computedSize = size ? { width: size, height: size } : {};
+  const computedSize = {
+    width: svgProps.width ?? size,
+    height: svgProps.height ?? size,
+  };
 
   return (
     <svg
@@ -56,8 +59,8 @@ exports[`Browser API Vue component without TypeScript: vue-component-javascript 
     viewBox="0 0 24 24"
     xmlns="http://www.w3.org/2000/svg"
     v-bind="$attrs"
-    :width="props.size || undefined"
-    :height="props.size || undefined"
+    :width="computedWidth"
+    :height="computedHeight"
   >
     <title v-if="props.title" :id="props.titleId">{{ props.title }}</title>
     <desc v-if="props.desc" :id="props.descId">{{ props.desc }}</desc>
@@ -79,6 +82,8 @@ exports[`Browser API Vue component without TypeScript: vue-component-javascript 
 <script setup>
   defineOptions({ inheritAttrs: false });
 
+  import { computed } from 'vue';
+
   const props = defineProps({
     title: { type: String, default: '' },
     titleId: { type: String, default: '' },
@@ -88,8 +93,11 @@ exports[`Browser API Vue component without TypeScript: vue-component-javascript 
     style: { type: Object, default: '' },
     width: { type: [String, Number], default: '' },
     height: { type: [String, Number], default: '' },
-    size: { type: String, default: '20' },
+    size: { type: [String, Number], default: '24' },
   });
+
+  const computedWidth = computed(() => props.width || props.size);
+  const computedHeight = computed(() => props.height || props.size);
 </script>
 "
 `;
@@ -102,14 +110,17 @@ interface BasicIconProps extends React.SVGProps<SVGSVGElement> {
   titleId?: string;
   desc?: string;
   descId?: string;
-  size?: string;
+  size?: string | number;
 }
 
 const BasicIcon = (
-  { title, titleId, desc, descId, size = '20', ...svgProps }: BasicIconProps,
+  { title, titleId, desc, descId, size = '24', ...svgProps }: BasicIconProps,
   ref: Ref<SVGSVGElement>
 ) => {
-  const computedSize = size ? { width: size, height: size } : {};
+  const computedSize = {
+    width: svgProps.width ?? size,
+    height: svgProps.height ?? size,
+  };
 
   return (
     <svg
@@ -151,7 +162,7 @@ interface TestIconProps extends React.SVGProps<SVGSVGElement> {
   titleId?: string;
   desc?: string;
   descId?: string;
-  size?: string;
+  size?: string | number;
   color?: string;
   colorClass?: string;
   color2?: string;
@@ -172,7 +183,7 @@ const TestIcon = (
     color2Class,
     color3Class,
     color4Class,
-    size = '20',
+    size = '24',
     color = '#1E40AF',
     color2 = '#3B82F6',
     color3 = '#DC2626',
@@ -181,7 +192,10 @@ const TestIcon = (
   }: TestIconProps,
   ref: Ref<SVGSVGElement>
 ) => {
-  const computedSize = size ? { width: size, height: size } : {};
+  const computedSize = {
+    width: svgProps.width ?? size,
+    height: svgProps.height ?? size,
+  };
 
   return (
     <svg
@@ -223,8 +237,8 @@ exports[`Browser API convertToVue composition API snapshot: vue-component-compos
     viewBox="0 0 24 24"
     xmlns="http://www.w3.org/2000/svg"
     v-bind="$attrs"
-    :width="props.size || undefined"
-    :height="props.size || undefined"
+    :width="computedWidth"
+    :height="computedHeight"
   >
     <title v-if="props.title" :id="props.titleId">{{ props.title }}</title>
     <desc v-if="props.desc" :id="props.descId">{{ props.desc }}</desc>
@@ -244,7 +258,7 @@ exports[`Browser API convertToVue composition API snapshot: vue-component-compos
 </template>
 
 <script lang="ts">
-  import { defineComponent } from 'vue';
+  import { defineComponent, computed } from 'vue';
 
   export default defineComponent({
     name: 'VueIcon',
@@ -257,9 +271,12 @@ exports[`Browser API convertToVue composition API snapshot: vue-component-compos
       style: { type: Object, default: '' },
       width: { type: [String, Number], default: '' },
       height: { type: [String, Number], default: '' },
+      size: { type: [String, Number], default: '24' },
     },
-    setup() {
-      return {};
+    setup(props) {
+      const computedWidth = computed(() => props.width || props.size);
+      const computedHeight = computed(() => props.height || props.size);
+      return { computedWidth, computedHeight };
     },
   });
 </script>
@@ -272,8 +289,8 @@ exports[`Browser API convertToVue generates Vue component: vue-component-sfc-scr
     viewBox="0 0 24 24"
     xmlns="http://www.w3.org/2000/svg"
     v-bind="$attrs"
-    :width="props.size || undefined"
-    :height="props.size || undefined"
+    :width="computedWidth"
+    :height="computedHeight"
   >
     <title v-if="props.title" :id="props.titleId">{{ props.title }}</title>
     <desc v-if="props.desc" :id="props.descId">{{ props.desc }}</desc>
@@ -296,18 +313,24 @@ exports[`Browser API convertToVue generates Vue component: vue-component-sfc-scr
   defineOptions({ inheritAttrs: false });
 
   import type { SVGAttributes } from 'vue';
+  import { computed } from 'vue';
 
   interface Props extends /* @vue-ignore */ SVGAttributes {
     title?: string;
     titleId?: string;
     desc?: string;
     descId?: string;
-    size?: string;
+    width?: string | number;
+    height?: string | number;
+    size?: string | number;
   }
 
   const props = withDefaults(defineProps<Props>(), {
-    size: '20',
+    size: '24',
   });
+
+  const computedWidth = computed(() => props.width || props.size);
+  const computedHeight = computed(() => props.height || props.size);
 </script>
 "
 `;
@@ -331,14 +354,17 @@ interface Icon1Props extends React.SVGProps<SVGSVGElement> {
   titleId?: string;
   desc?: string;
   descId?: string;
-  size?: string;
+  size?: string | number;
 }
 
 const Icon1 = (
-  { title, titleId, desc, descId, size = '20', ...svgProps }: Icon1Props,
+  { title, titleId, desc, descId, size = '24', ...svgProps }: Icon1Props,
   ref: Ref<SVGSVGElement>
 ) => {
-  const computedSize = size ? { width: size, height: size } : {};
+  const computedSize = {
+    width: svgProps.width ?? size,
+    height: svgProps.height ?? size,
+  };
 
   return (
     <svg
@@ -380,14 +406,17 @@ interface Icon2Props extends React.SVGProps<SVGSVGElement> {
   titleId?: string;
   desc?: string;
   descId?: string;
-  size?: string;
+  size?: string | number;
 }
 
 const Icon2 = (
-  { title, titleId, desc, descId, size = '20', ...svgProps }: Icon2Props,
+  { title, titleId, desc, descId, size = '24', ...svgProps }: Icon2Props,
   ref: Ref<SVGSVGElement>
 ) => {
-  const computedSize = size ? { width: size, height: size } : {};
+  const computedSize = {
+    width: svgProps.width ?? size,
+    height: svgProps.height ?? size,
+  };
 
   return (
     <svg
