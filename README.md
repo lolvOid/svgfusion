@@ -635,6 +635,5 @@ console.log(vueResult.code); // Generated Vue component code
 - Works in all modern browsers
 - **Interactive Playground** with Monaco Editor
 
-[Complete Browser API Documentation](./docs/browser-api.md)
-
-### Node.js Usage
+[Full Browser API Documentation](./docs/docs/browser-api.md)
+[Full Node API Documentation](./docs/docs/node-api.md)
