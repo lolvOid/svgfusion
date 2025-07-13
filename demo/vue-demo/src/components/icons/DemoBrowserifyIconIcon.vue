@@ -14,7 +14,7 @@
         :fill="props.color"
         stroke="none"
         :vector-effect="
-          props.isFixedStrokeWidth ? 'non-scaling-stroke' : undefined
+          props.isFixedStrokeWidth ? 'non-scaling-stroke' : 'none'
         "
         :class="[props.colorClass]"
       />
@@ -25,7 +25,7 @@
         stroke-width="1.17950344"
         :fill="props.color2"
         :vector-effect="
-          props.isFixedStrokeWidth ? 'non-scaling-stroke' : undefined
+          props.isFixedStrokeWidth ? 'non-scaling-stroke' : 'none'
         "
         :class="[props.color3Class, props.color2Class]"
       />
@@ -36,7 +36,7 @@
         stroke-width="1.17950344"
         :fill="props.color2"
         :vector-effect="
-          props.isFixedStrokeWidth ? 'non-scaling-stroke' : undefined
+          props.isFixedStrokeWidth ? 'non-scaling-stroke' : 'none'
         "
         :class="[props.color3Class, props.color2Class]"
       />
@@ -47,7 +47,7 @@
         stroke-width="0.8033945"
         :fill="props.color2"
         :vector-effect="
-          props.isFixedStrokeWidth ? 'non-scaling-stroke' : undefined
+          props.isFixedStrokeWidth ? 'non-scaling-stroke' : 'none'
         "
         :class="[props.color3Class, props.color2Class]"
       />
@@ -58,7 +58,7 @@
         stroke-width="0.8033945"
         :fill="props.color2"
         :vector-effect="
-          props.isFixedStrokeWidth ? 'non-scaling-stroke' : undefined
+          props.isFixedStrokeWidth ? 'non-scaling-stroke' : 'none'
         "
         :class="[props.color3Class, props.color2Class]"
       />
@@ -68,7 +68,7 @@
         :stroke="props.color3"
         :fill="props.color2"
         :vector-effect="
-          props.isFixedStrokeWidth ? 'non-scaling-stroke' : undefined
+          props.isFixedStrokeWidth ? 'non-scaling-stroke' : 'none'
         "
         :class="[props.color3Class, props.color2Class]"
       />
@@ -99,11 +99,11 @@
   const props = withDefaults(defineProps<Props>(), {
     size: '20',
     color: '#3C6991',
-    colorClass: undefined,
+    colorClass: '',
     color2: '#E6B35A',
-    color2Class: undefined,
+    color2Class: '',
     color3: '#FFFFFF',
-    color3Class: undefined,
-    isFixedStrokeWidth: false,
+    color3Class: '',
+    isFixedStrokeWidth: true,
   });
 </script>
