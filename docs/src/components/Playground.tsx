@@ -63,9 +63,9 @@ type ComponentNamingValidation = {
 const DEFAULT_OPTIONS: PlaygroundOptions = {
   framework: 'react',
   typescript: true,
-  componentName: 'weather-icon',
-  prefix: '',
-  suffix: '',
+  componentName: 'weather',
+  prefix: 'My',
+  suffix: 'Icon',
   splitColors: false,
   splitStrokeWidths: false,
   fixedStrokeWidth: false,

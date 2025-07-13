@@ -175,7 +175,7 @@ ${children}
       // Handle vector-effect attribute conditionally based on isFixedStrokeWidth
       if (key === 'vector-effect' && value === 'non-scaling-stroke') {
         vueAttributes.push(
-          `:vector-effect="props.isFixedStrokeWidth ? 'non-scaling-stroke' : undefined"`
+          `:vector-effect="props.isFixedStrokeWidth ? 'non-scaling-stroke' : 'none'"`
         );
       }
       // Handle style attribute with color variables
@@ -306,14 +306,14 @@ ${children}
       lines.push('const props = withDefaults(defineProps<Props>(), {');
     } else {
       lines.push('const props = defineProps({');
-      lines.push('  title: { type: String, default: undefined },');
-      lines.push('  titleId: { type: String, default: undefined },');
-      lines.push('  desc: { type: String, default: undefined },');
-      lines.push('  descId: { type: String, default: undefined },');
-      lines.push('  class: { type: String, default: undefined },');
-      lines.push('  style: { type: Object, default: undefined },');
-      lines.push('  width: { type: [String, Number], default: undefined },');
-      lines.push('  height: { type: [String, Number], default: undefined },');
+      lines.push("  title: { type: String, default: '' },");
+      lines.push("  titleId: { type: String, default: '' },");
+      lines.push("  desc: { type: String, default: '' },");
+      lines.push("  descId: { type: String, default: '' },");
+      lines.push("  class: { type: String, default: '' },");
+      lines.push("  style: { type: Object, default: '' },");
+      lines.push("  width: { type: [String, Number], default: '' },");
+      lines.push("  height: { type: [String, Number], default: '' },");
       lines.push('  size: { type: String, default: "20" },');
     }
 
@@ -330,12 +330,12 @@ ${children}
 
       if (this.vueOptions.typescript) {
         lines.push(`  ${propName}: '${defaultValue}',`);
-        lines.push(`  ${className}: undefined,`);
+        lines.push(`  ${className}: ""`);
       } else {
         lines.push(
           `  ${propName}: { type: String, default: '${defaultValue}' },`
         );
-        lines.push(`  ${className}: { type: String, default: undefined },`);
+        lines.push(`  ${className}: { type: String, default: "" },`);
       }
     });
 
@@ -347,20 +347,20 @@ ${children}
 
       if (this.vueOptions.typescript) {
         lines.push(`  ${propName}: '${defaultValue}',`);
-        lines.push(`  ${className}: undefined,`);
+        lines.push(`  ${className}: ""`);
       } else {
         lines.push(
           `  ${propName}: { type: [String, Number], default: '${defaultValue}' },`
         );
-        lines.push(`  ${className}: { type: String, default: undefined },`);
+        lines.push(`  ${className}: { type: String, default: "" },`);
       }
     });
 
     if (metadata.features.includes('fixed-stroke-width')) {
       if (this.vueOptions.typescript) {
-        lines.push('  isFixedStrokeWidth: false,');
+        lines.push('  isFixedStrokeWidth: true,');
       } else {
-        lines.push('  isFixedStrokeWidth: { type: Boolean, default: false },');
+        lines.push('  isFixedStrokeWidth: { type: Boolean, default: true },');
       }
     }
 
@@ -382,14 +382,14 @@ ${children}
     lines.push(`export default defineComponent({`);
     lines.push(`  name: '${componentName}',`);
     lines.push('  props: {');
-    lines.push('    title: { type: String, default: undefined },');
-    lines.push('    titleId: { type: String, default: undefined },');
-    lines.push('    desc: { type: String, default: undefined },');
-    lines.push('    descId: { type: String, default: undefined },');
-    lines.push('    class: { type: String, default: undefined },');
-    lines.push('    style: { type: Object, default: undefined },');
-    lines.push('    width: { type: [String, Number], default: undefined },');
-    lines.push('    height: { type: [String, Number], default: undefined },');
+    lines.push("    title: { type: String, default: '' },");
+    lines.push("    titleId: { type: String, default: '' },");
+    lines.push("    desc: { type: String, default: '' },");
+    lines.push("    descId: { type: String, default: '' },");
+    lines.push("    class: { type: String, default: '' },");
+    lines.push("    style: { type: Object, default: '' },");
+    lines.push("    width: { type: [String, Number], default: '' },");
+    lines.push("    height: { type: [String, Number], default: '' },");
 
     // Add color props
     colorMappings.forEach(mapping => {
@@ -400,7 +400,7 @@ ${children}
       lines.push(
         `    ${propName}: { type: String, default: '${defaultValue}' },`
       );
-      lines.push(`    ${className}: { type: String, default: undefined },`);
+      lines.push(`    ${className}: { type: String, default: "" },`);
     });
 
     // Add stroke width props
@@ -412,11 +412,11 @@ ${children}
       lines.push(
         `    ${propName}: { type: [String, Number], default: '${defaultValue}' },`
       );
-      lines.push(`    ${className}: { type: String, default: undefined },`);
+      lines.push(`    ${className}: { type: String, default: "" },`);
     });
 
     if (metadata.features.includes('fixed-stroke-width')) {
-      lines.push('    isFixedStrokeWidth: { type: Boolean, default: false },');
+      lines.push('    isFixedStrokeWidth: { type: Boolean, default: true },');
     }
 
     lines.push('  },');
@@ -439,14 +439,14 @@ ${children}
     lines.push('export default {');
     lines.push(`  name: '${componentName}',`);
     lines.push('  props: {');
-    lines.push('    title: { type: String, default: undefined },');
-    lines.push('    titleId: { type: String, default: undefined },');
-    lines.push('    desc: { type: String, default: undefined },');
-    lines.push('    descId: { type: String, default: undefined },');
-    lines.push('    class: { type: String, default: undefined },');
-    lines.push('    style: { type: Object, default: undefined },');
-    lines.push('    width: { type: [String, Number], default: undefined },');
-    lines.push('    height: { type: [String, Number], default: undefined },');
+    lines.push("    title: { type: String, default: '' },");
+    lines.push("    titleId: { type: String, default: '' },");
+    lines.push("    desc: { type: String, default: '' },");
+    lines.push("    descId: { type: String, default: '' },");
+    lines.push("    class: { type: String, default: '' },");
+    lines.push("    style: { type: Object, default: '' },");
+    lines.push("    width: { type: [String, Number], default: '' },");
+    lines.push("    height: { type: [String, Number], default: '' },");
 
     // Add color props
     colorMappings.forEach(mapping => {
@@ -457,7 +457,7 @@ ${children}
       lines.push(
         `    ${propName}: { type: String, default: '${defaultValue}' },`
       );
-      lines.push(`    ${className}: { type: String, default: undefined },`);
+      lines.push(`    ${className}: { type: String, default: "" },`);
     });
 
     // Add stroke width props
@@ -469,11 +469,11 @@ ${children}
       lines.push(
         `    ${propName}: { type: [String, Number], default: '${defaultValue}' },`
       );
-      lines.push(`    ${className}: { type: String, default: undefined },`);
+      lines.push(`    ${className}: { type: String, default: "" },`);
     });
 
     if (metadata.features.includes('fixed-stroke-width')) {
-      lines.push('    isFixedStrokeWidth: { type: Boolean, default: false },');
+      lines.push('    isFixedStrokeWidth: { type: Boolean, default: true },');
     }
 
     lines.push('  },');

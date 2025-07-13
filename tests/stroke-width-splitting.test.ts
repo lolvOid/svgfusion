@@ -211,7 +211,7 @@ describe('Stroke Width Splitting Feature', () => {
 
       expect(result.code).toContain('isFixedStrokeWidth?: boolean');
       expect(result.code).toContain(
-        "vectorEffect={isFixedStrokeWidth ? 'non-scaling-stroke' : undefined}"
+        "vectorEffect={isFixedStrokeWidth ? 'non-scaling-stroke' : 'none'}"
       );
       expect(result.metadata.features).toContain('split-stroke-widths');
       expect(result.metadata.features).toContain('fixed-stroke-width');

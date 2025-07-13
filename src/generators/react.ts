@@ -275,16 +275,26 @@ export class ReactGenerator extends ComponentGenerator {
       ...strokeWidthClassProps,
     ];
 
-    if (metadata.features.includes('fixed-stroke-width')) {
-      allCustomProps.push('isFixedStrokeWidth');
-    }
+    // if (metadata.features.includes('fixed-stroke-width')) {
+    //   allCustomProps.push('isFixedStrokeWidth');
+    // }
 
     // Generate props destructuring with default values
     const colorDefaults = this.generateColorDefaults(colorMappings);
     const strokeWidthDefaults =
       this.generateStrokeWidthDefaults(strokeWidthMappings);
     const sizeDefault = 'size = "20"';
-    const allDefaults = [sizeDefault, colorDefaults, strokeWidthDefaults]
+    const isFixedStrokeWidthDefault = metadata.features.includes(
+      'fixed-stroke-width'
+    )
+      ? 'isFixedStrokeWidth = true'
+      : '';
+    const allDefaults = [
+      sizeDefault,
+      colorDefaults,
+      strokeWidthDefaults,
+      isFixedStrokeWidthDefault,
+    ]
       .filter(Boolean)
       .join(', ');
 
@@ -507,7 +517,7 @@ ${childrenJsx}
       // Handle vector-effect attribute conditionally based on isFixedStrokeWidth
       if (key === 'vector-effect' && value === 'non-scaling-stroke') {
         jsxAttributes.push(
-          `vectorEffect={isFixedStrokeWidth ? 'non-scaling-stroke' : undefined}`
+          `vectorEffect={isFixedStrokeWidth ? 'non-scaling-stroke' : 'none'}`
         );
       }
       // Handle dynamic color values - always add colorClass when color splitting is enabled

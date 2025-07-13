@@ -250,6 +250,8 @@ exports[`svgToComponentName should convert 'CRM-contact.svg' to 'CrmContact' and
 
 exports[`svgToComponentName should convert 'CSS-loader.svg' to 'CssLoader' and match snapshot 1`] = `"CssLoader"`;
 
+exports[`svgToComponentName should convert 'CSV, Type=Solid.svg' with prefix 'mnkt-file-type-document' and suffix '' to 'MnktFileTypeDocumentCsvTypeSolid' and match snapshot 1`] = `"MnktFileTypeDocumentCsvTypeSolid"`;
+
 exports[`svgToComponentName should convert 'HTML-parser.svg' to 'HtmlParser' and match snapshot 1`] = `"HtmlParser"`;
 
 exports[`svgToComponentName should convert 'HTTP-client.svg' to 'HttpClient' and match snapshot 1`] = `"HttpClient"`;

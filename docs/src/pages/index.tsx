@@ -26,7 +26,7 @@ function HomepageHeader() {
           </Link>
           <Link
             className="button button--secondary  button--md"
-            to="/docs/cli-usage"
+            to="/playground"
             style={{ marginLeft: '1rem' }}
           >
             Playground
