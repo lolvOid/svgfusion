@@ -1,12 +1,42 @@
 export const pascalCase = (str: string) => {
-  // If the string is already in PascalCase and well-formed, preserve it
+  // If the string is already in PascalCase and well-formed, check for acronyms
   if (/^[A-Z][a-zA-Z0-9]*$/.test(str) && /[a-z]/.test(str)) {
-    return str;
+    // Apply Microsoft .NET guidelines to existing PascalCase strings
+    // Only convert standalone 3+ letter acronyms (like XML in XMLHttpRequest → XmlHttpRequest)
+    // Keep 2-letter acronyms like iOS → IOS, macOS → MacOS unchanged
+    return str.replace(
+      /(^|[a-z])([A-Z]{3,})(?=[A-Z][a-z]|$)/g,
+      (_, before, acronym) => {
+        const convertedAcronym =
+          acronym.charAt(0).toUpperCase() + acronym.slice(1).toLowerCase();
+        return before + convertedAcronym;
+      }
+    );
   }
 
   // Handle camelCase input (starts with lowercase)
   if (/^[a-z][a-zA-Z0-9]*$/.test(str) && /[A-Z]/.test(str)) {
-    return str.charAt(0).toUpperCase() + str.slice(1);
+    // Apply Microsoft .NET standard: treat acronyms according to length
+    let result = str.charAt(0).toUpperCase() + str.slice(1);
+
+    // Convert trailing acronyms following Microsoft .NET guidelines
+    result = result.replace(/([a-z])([A-Z]{2,})$/, (_, lower, upper) => {
+      // Microsoft .NET guidelines: All trailing acronyms become title case (flagUS → FlagUs, macOS → MacOs)
+      return lower + upper.charAt(0) + upper.slice(1).toLowerCase();
+    });
+
+    // Also handle internal acronyms like "getUserIDFromDB" → "GetUserIdFromDb"
+    result = result.replace(
+      /([a-z])([A-Z]{2,})([A-Z][a-z])/g,
+      (_, before, acronym, after) => {
+        // Microsoft .NET guidelines: Internal acronyms also become title case
+        return (
+          before + acronym.charAt(0) + acronym.slice(1).toLowerCase() + after
+        );
+      }
+    );
+
+    return result;
   }
 
   // Handle different input formats with separators
@@ -17,25 +47,35 @@ export const pascalCase = (str: string) => {
       // Filter out empty strings
       .filter(Boolean)
       // Convert each word to PascalCase
-      .map(word => {
-        // If word is all uppercase and longer than 3 chars, it's likely a regular word in caps
-        if (
-          word.length > 3 &&
-          word === word.toUpperCase() &&
-          /^[A-Z]+$/.test(word)
-        ) {
-          return word.charAt(0).toUpperCase() + word.slice(1).toLowerCase();
-        }
-        // If word is all uppercase and 1-3 chars (like "XML", "API", "iOS"), keep it as is
-        if (
-          word.length <= 3 &&
-          word === word.toUpperCase() &&
-          /^[A-Z]+$/.test(word)
-        ) {
-          return word;
+      .map((word, index, array) => {
+        // Microsoft .NET Framework Design Guidelines: 2-letter acronyms both uppercase, 3+ only first letter
+        if (word === word.toUpperCase() && /^[A-Z]+$/.test(word)) {
+          // Special handling for compound words (multiple parts)
+          if (array.length > 1) {
+            // In compound words, ALL acronyms (including 2-letter) become title case except the first one
+            if (index === 0 && word.length === 2) {
+              return word; // First 2-letter acronym stays uppercase (IOStream)
+            }
+            // All other positions: convert to title case (FlagUS → FlagUs)
+            return word.charAt(0).toUpperCase() + word.slice(1).toLowerCase();
+          } else {
+            // Single word: preserve 2-letter acronyms
+            if (word.length <= 2) {
+              return word; // Keep 1-2 letter acronyms uppercase (A, IO, UI, OS, DB, etc.)
+            }
+            // 3+ character acronyms: only first letter uppercase (XML→Xml, JSON→Json, HTML→Html)
+            return word.charAt(0).toUpperCase() + word.slice(1).toLowerCase();
+          }
         }
         // Otherwise, capitalize first letter and preserve existing case if it's camelCase
         if (/[a-z][A-Z]/.test(word)) {
+          // Handle trailing acronyms following Microsoft .NET guidelines
+          if (/[a-z][A-Z]{2,}$/.test(word)) {
+            return word.replace(/([a-z])([A-Z]{2,})$/, (_, lower, upper) => {
+              // Microsoft .NET guidelines: All trailing acronyms become title case
+              return lower + upper.charAt(0) + upper.slice(1).toLowerCase();
+            });
+          }
           // It's camelCase, preserve the case
           return word.charAt(0).toUpperCase() + word.slice(1);
         }
