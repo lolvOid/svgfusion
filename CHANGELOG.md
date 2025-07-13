@@ -1,3 +1,10 @@
+## [1.16.1](https://github.com/lolvOid/svgfusion/compare/v1.16.0...v1.16.1) (2025-07-13)
+
+
+### Bug Fixes
+
+* Set default isFixedStrokeWidth and update vectorEffect ([3cb3044](https://github.com/lolvOid/svgfusion/commit/3cb3044bd491430c686013c7e97c19cfcf10143e))
+
 # [1.16.0](https://github.com/lolvOid/svgfusion/compare/v1.15.3...v1.16.0) (2025-07-13)
 
 
