@@ -38,6 +38,7 @@ async function generateReactIcons() {
         const result = await convertToReact(svgContent, {
           transformation: {
             splitColors: true,
+            splitStrokeWidths: true,
             fixedStrokeWidth: true,
           },
           generator: {
