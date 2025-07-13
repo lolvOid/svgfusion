@@ -1,3 +1,10 @@
+# [1.17.0](https://github.com/lolvOid/svgfusion/compare/v1.16.1...v1.17.0) (2025-07-13)
+
+
+### Features
+
+* Add stroke width splitting to icon generators and demos ([3546e1a](https://github.com/lolvOid/svgfusion/commit/3546e1a9e3ef723c3ca0b65f69a7f5961b2aff27))
+
 ## [1.16.1](https://github.com/lolvOid/svgfusion/compare/v1.16.0...v1.16.1) (2025-07-13)
 
 
