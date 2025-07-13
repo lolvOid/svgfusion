@@ -1,3 +1,10 @@
+# [1.15.0](https://github.com/lolvOid/svgfusion/compare/v1.14.0...v1.15.0) (2025-07-13)
+
+
+### Features
+
+* Implement stroke width splitting feature for SVG components ([ac4ca93](https://github.com/lolvOid/svgfusion/commit/ac4ca93cfa21836848b4aea89f59e8081cffadd2))
+
 # [1.14.0](https://github.com/lolvOid/svgfusion/compare/v1.13.0...v1.14.0) (2025-07-12)
 
 
