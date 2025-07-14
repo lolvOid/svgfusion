@@ -1,3 +1,10 @@
+# [1.19.0](https://github.com/lolvOid/svgfusion/compare/v1.18.0...v1.19.0) (2025-07-14)
+
+
+### Features
+
+* version change ([a575f38](https://github.com/lolvOid/svgfusion/commit/a575f388daf67a947ca77cf337dd5ca8a2d40081))
+
 # [1.18.0](https://github.com/lolvOid/svgfusion/compare/v1.17.0...v1.18.0) (2025-07-13)
 
 
