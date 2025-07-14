@@ -1,3 +1,15 @@
+# [1.22.0](https://github.com/lolvOid/svgfusion/compare/v1.21.1...v1.22.0) (2025-07-14)
+
+
+### Bug Fixes
+
+* remove unnecessary defineOptions call in Vue component snapshots ([b13e95c](https://github.com/lolvOid/svgfusion/commit/b13e95c70dd4ec37d53e0752dd085390eefbbd1f))
+
+
+### Features
+
+* add fill/stroke normalization feature to SVG transformer ([b2967fa](https://github.com/lolvOid/svgfusion/commit/b2967fa935111bd9189ed87e06e2c12fcfd1f4b0))
+
 ## [1.21.1](https://github.com/lolvOid/svgfusion/compare/v1.21.0...v1.21.1) (2025-07-14)
 
 
