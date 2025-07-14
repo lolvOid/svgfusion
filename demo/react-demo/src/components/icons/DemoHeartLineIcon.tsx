@@ -21,7 +21,7 @@ const DemoHeartLineIcon = (
     descId,
     colorClass,
     strokeWidthClass,
-    size,
+    size = '24',
     color = '#000000',
     strokeWidth = '2',
     isFixedStrokeWidth = true,

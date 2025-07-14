@@ -13,6 +13,7 @@ const defaultConfig: Config = {
           removeTitle: false,
           removeDesc: false,
           removeUselessStrokeAndFill: false,
+          collapseGroups: false,
           convertColors: {
             currentColor: true,
             names2hex: true,

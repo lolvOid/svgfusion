@@ -30,7 +30,7 @@ const DemoBackCardColorIcon = (
     color3Class,
     color4Class,
     color5Class,
-    size,
+    size = '24',
     color = '#5546CB',
     color2 = '#AFBCF3',
     color3 = '#F97744',

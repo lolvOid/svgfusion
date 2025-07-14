@@ -104,7 +104,7 @@
   }
 
   const props = withDefaults(defineProps<Props>(), {
-    size: undefined,
+    size: '24',
     color: '#3C6991',
     colorClass: '',
     color2: '#E6B35A',

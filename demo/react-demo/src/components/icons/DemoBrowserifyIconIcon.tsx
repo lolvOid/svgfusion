@@ -30,7 +30,7 @@ const DemoBrowserifyIconIcon = (
     color3Class,
     strokeWidthClass,
     strokeWidth2Class,
-    size,
+    size = '24',
     color = '#3C6991',
     color2 = '#E6B35A',
     color3 = '#FFFFFF',

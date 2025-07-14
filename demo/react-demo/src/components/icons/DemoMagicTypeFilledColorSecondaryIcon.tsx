@@ -34,7 +34,7 @@ const DemoMagicTypeFilledColorSecondaryIcon = (
     color4Class,
     color5Class,
     color6Class,
-    size,
+    size = '24',
     color = '#0085BF',
     color2 = '#0092D2',
     color3 = '#C9005B',

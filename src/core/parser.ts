@@ -109,9 +109,80 @@ export class SVGParser {
   }
 
   /**
-   * Parse a single SVG element
+   * Parse a single SVG element using proper XML parser
    */
   private parseElement(content: string): SVGElement {
+    // Browser environment - use native DOMParser
+    if (typeof DOMParser !== 'undefined') {
+      const parser = new DOMParser();
+      const doc = parser.parseFromString(content, 'image/svg+xml');
+
+      // Check for parser errors
+      const parserError = doc.querySelector('parsererror');
+      if (parserError) {
+        throw new Error('Invalid SVG: XML parsing failed');
+      }
+
+      const svgElement = doc.documentElement;
+      if (svgElement.tagName.toLowerCase() !== 'svg') {
+        throw new Error('Invalid SVG: No svg element found');
+      }
+
+      return this.convertDOMToSVGElement(svgElement);
+    }
+
+    // Node.js environment - use jsdom fallback
+    try {
+      const { JSDOM } = require('jsdom');
+      const dom = new JSDOM(content, { contentType: 'image/svg+xml' });
+      const svgElement = dom.window.document.documentElement;
+
+      if (svgElement.tagName.toLowerCase() !== 'svg') {
+        throw new Error('Invalid SVG: No svg element found');
+      }
+
+      // eslint-disable-next-line @typescript-eslint/no-unsafe-argument
+      return this.convertDOMToSVGElement(svgElement);
+    } catch (error) {
+      // Fallback to regex parser if jsdom is not available
+      return this.parseElementWithRegex(content);
+    }
+  }
+
+  /**
+   * Convert DOM element to SVGElement (works for both browser DOMParser and jsdom)
+   */
+  private convertDOMToSVGElement(domElement: Element): SVGElement {
+    const element: SVGElement = {
+      tag: domElement.tagName.toLowerCase(),
+      attributes: {},
+      children: [],
+    };
+
+    // Copy attributes
+    for (let i = 0; i < domElement.attributes.length; i++) {
+      const attr = domElement.attributes[i];
+      element.attributes[attr.name] = attr.value;
+    }
+
+    // Process child elements
+    for (let i = 0; i < domElement.children.length; i++) {
+      const child = domElement.children[i];
+      element.children.push(this.convertDOMToSVGElement(child));
+    }
+
+    // Handle text content (for elements like <title>, <desc>)
+    if (domElement.children.length === 0 && domElement.textContent?.trim()) {
+      element.content = domElement.textContent.trim();
+    }
+
+    return element;
+  }
+
+  /**
+   * Fallback: Parse SVG element using regex (original implementation)
+   */
+  private parseElementWithRegex(content: string): SVGElement {
     // Find the opening SVG tag
     const svgMatch = content.match(/<svg([^>]*)>/i);
     if (!svgMatch) {

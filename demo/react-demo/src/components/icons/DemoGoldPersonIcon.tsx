@@ -30,7 +30,7 @@ const DemoGoldPersonIcon = (
     color3Class,
     color4Class,
     color5Class,
-    size,
+    size = '24',
     color = '#843A5F',
     color2 = '#AE9AA4',
     color3 = '#E6D8DF',

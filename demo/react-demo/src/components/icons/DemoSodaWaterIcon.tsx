@@ -27,7 +27,7 @@ const DemoSodaWaterIcon = (
     color2Class,
     color3Class,
     color4Class,
-    size,
+    size = '24',
     color = '#C15BFF',
     color2 = '#D1FF02',
     color3 = '#E7D8FF',

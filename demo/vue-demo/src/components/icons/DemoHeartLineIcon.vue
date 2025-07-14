@@ -43,7 +43,7 @@
   }
 
   const props = withDefaults(defineProps<Props>(), {
-    size: undefined,
+    size: '24',
     color: '#000000',
     colorClass: '',
     strokeWidth: '2',
