@@ -208,8 +208,6 @@
 </template>
 
 <script setup lang="ts">
-  defineOptions({ inheritAttrs: false });
-
   import type { SVGAttributes } from 'vue';
   import { computed } from 'vue';
 

@@ -21,6 +21,7 @@ export interface VueGeneratorOptions extends GeneratorOptions {
   scriptSetup?: boolean;
   sfc?: boolean; // Single File Component
   defineComponent?: boolean;
+  useDefineOptions?: boolean; // For Vue 3.3+ compatibility
 }
 
 /**
@@ -37,6 +38,7 @@ export class VueGenerator extends ComponentGenerator {
       scriptSetup: options.scriptSetup ?? true,
       sfc: options.sfc ?? true,
       defineComponent: options.defineComponent ?? false,
+      useDefineOptions: options.useDefineOptions ?? false,
     };
   }
 
@@ -117,7 +119,7 @@ ${template}
       this.vueOptions.typescript ? ' lang="ts"' : ''
     }>
 ${
-  this.vueOptions.scriptSetup
+  this.vueOptions.scriptSetup && this.vueOptions.useDefineOptions
     ? 'defineOptions({ inheritAttrs: false });\n\n'
     : ''
 }${script}

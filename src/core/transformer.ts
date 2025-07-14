@@ -8,12 +8,14 @@ import { ColorSplittingFeature } from '../features/color-splitting';
 import { StrokeFixingFeature } from '../features/stroke-fixing';
 import { StrokeWidthSplittingFeature } from '../features/stroke-width-splitting';
 import { AccessibilityFeature } from '../features/accessibility';
+import { FillStrokeNormalization } from '../features/fill-stroke-normalization';
 
 export interface TransformationOptions {
   optimize?: boolean;
   splitColors?: boolean;
   splitStrokeWidths?: boolean;
   fixedStrokeWidth?: boolean;
+  normalizeFillStroke?: boolean;
   accessibility?: boolean;
   removeComments?: boolean;
   removeDuplicates?: boolean;
@@ -60,6 +62,7 @@ export class SVGTransformer {
       splitColors = false,
       splitStrokeWidths = false,
       fixedStrokeWidth = false,
+      normalizeFillStroke = false,
       accessibility = true,
       removeComments = true,
       removeDuplicates = true,
@@ -98,6 +101,12 @@ export class SVGTransformer {
     if (fixedStrokeWidth) {
       this.applyFixedStrokeWidth(transformedAst);
       features.push('fixed-stroke-width');
+    }
+
+    // Apply fill/stroke normalization
+    if (normalizeFillStroke) {
+      this.applyFillStrokeNormalization(transformedAst);
+      features.push('normalize-fill-stroke');
     }
 
     // Apply accessibility features
@@ -166,6 +175,17 @@ export class SVGTransformer {
 
     const result = accessibilityFeature.apply(ast.root);
     ast.root = result.processedElement;
+  }
+
+  /**
+   * Apply fill/stroke normalization
+   */
+  private applyFillStrokeNormalization(ast: SVGAst): void {
+    const normalizationFeature = new FillStrokeNormalization({
+      enabled: true,
+    });
+
+    ast.root.children = normalizationFeature.apply(ast.root.children);
   }
 
   /**
