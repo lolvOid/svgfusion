@@ -115,6 +115,8 @@ jobs:
         run: pnpm exec semantic-release
 
       - name: Build documentation
+        env:
+          GOOGLE_SITE_VERIFICATION: ${{ secrets.GOOGLE_SITE_VERIFICATION }}
         run: |
           cd docs
           pnpm install --frozen-lockfile
@@ -172,6 +174,8 @@ jobs:
         run: pnpm exec semantic-release --pre-release
 
       - name: Build documentation
+        env:
+          GOOGLE_SITE_VERIFICATION: ${{ secrets.GOOGLE_SITE_VERIFICATION }}
         run: |
           cd docs
           pnpm install --frozen-lockfile

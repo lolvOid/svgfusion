@@ -12,9 +12,9 @@ const packageJson = JSON.parse(
 ) as { version: string };
 
 const config: Config = {
-  title: 'SVGFusion - Transform SVG to React & Vue Components',
+  title: 'SVGFusion',
   tagline:
-    'Transform SVG files into production-ready React and Vue 3 components',
+    'Transform SVG files into React and Vue components',
   favicon: 'img/favicon.ico',
 
   // Head tags for SEO

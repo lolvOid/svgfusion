@@ -74,7 +74,6 @@
     "type-check": "tsc --noEmit",
     "clean": "rm -rf dist",
     "prepare": "husky install",
-    "prepublishOnly": "pnpm run clean && pnpm run build && pnpm run test",
     "release": "semantic-release",
     "release:dry": "semantic-release --dry-run",
     "dev:docs": "cd docs && pnpm run start",

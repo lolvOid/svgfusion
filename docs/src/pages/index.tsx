@@ -41,7 +41,7 @@ export default function Home(): ReactNode {
   const { siteConfig } = useDocusaurusContext();
   return (
     <Layout
-      title={`${siteConfig.title} - Transform SVG to React & Vue Components`}
+      title={`${siteConfig.title}`}
       description="Transform SVG files into production-ready React and Vue 3 components with TypeScript support and automatic optimization"
     >
       <HomepageHeader />

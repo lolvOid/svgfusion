@@ -12,7 +12,7 @@ A powerful Node.js CLI tool and library that converts SVG files into optimized R
 [![React](https://img.shields.io/badge/React-20232A?style=flat&logo=react&logoColor=61DAFB)](https://reactjs.org/)
 [![Vue.js](https://img.shields.io/badge/Vue.js-35495E?style=flat&logo=vue.js&logoColor=4FC08D)](https://vuejs.org/)
 
-[Documentation](https://svgfusion.netlify.app) • [CLI Reference](https://svgfusion.netlify.app/docs/cli-usage) • [NPM](https://www.npmjs.com/package/svgfusion) • **[Try Interactive Playground →](https://svgfusion.netlify.app/playground)**
+[Documentation](https://svgfusion.netlify.app) • [CLI Reference](https://svgfusion.netlify.app/docs/cli-usage) • [NPM](https://www.npmjs.com/package/svgfusion) • **[Try Interactive Playground](https://svgfusion.netlify.app/playground)**
 
 </div>
 
