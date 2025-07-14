@@ -80,8 +80,6 @@ exports[`Browser API Vue component without TypeScript: vue-component-javascript 
 </template>
 
 <script setup>
-  defineOptions({ inheritAttrs: false });
-
   import { computed } from 'vue';
 
   const props = defineProps({
@@ -310,8 +308,6 @@ exports[`Browser API convertToVue generates Vue component: vue-component-sfc-scr
 </template>
 
 <script setup lang="ts">
-  defineOptions({ inheritAttrs: false });
-
   import type { SVGAttributes } from 'vue';
   import { computed } from 'vue';
 
