@@ -1,3 +1,10 @@
+# [1.21.0](https://github.com/lolvOid/svgfusion/compare/v1.20.0...v1.21.0) (2025-07-14)
+
+
+### Features
+
+* **parser:** enhance SVG parsing with DOMParser and jsdom fallback ([bda8d60](https://github.com/lolvOid/svgfusion/commit/bda8d60269638607b9f94840677ed715d8b0aca0))
+
 # [1.20.0](https://github.com/lolvOid/svgfusion/compare/v1.19.0...v1.20.0) (2025-07-14)
 
 
