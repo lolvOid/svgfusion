@@ -1,3 +1,10 @@
+## [1.21.1](https://github.com/lolvOid/svgfusion/compare/v1.21.0...v1.21.1) (2025-07-14)
+
+
+### Bug Fixes
+
+* preserve SVG tag case in parser and add @types/jsdom ([8a51078](https://github.com/lolvOid/svgfusion/commit/8a510787fb1d461b2cef36081d4d43c50932b850))
+
 # [1.21.0](https://github.com/lolvOid/svgfusion/compare/v1.20.0...v1.21.0) (2025-07-14)
 
 
