@@ -1,3 +1,10 @@
+# [1.20.0](https://github.com/lolvOid/svgfusion/compare/v1.19.0...v1.20.0) (2025-07-14)
+
+
+### Features
+
+* metdata ([1c27930](https://github.com/lolvOid/svgfusion/commit/1c279309ca005bb176aff600defa219c27abe3fb))
+
 # [1.19.0](https://github.com/lolvOid/svgfusion/compare/v1.18.0...v1.19.0) (2025-07-14)
 
 
