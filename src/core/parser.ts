@@ -154,7 +154,7 @@ export class SVGParser {
    */
   private convertDOMToSVGElement(domElement: Element): SVGElement {
     const element: SVGElement = {
-      tag: domElement.tagName.toLowerCase(),
+      tag: this.preserveSvgTagCase(domElement.tagName),
       attributes: {},
       children: [],
     };
@@ -307,6 +307,26 @@ export class SVGParser {
   ): void {
     callback(element);
     element.children.forEach(child => this.traverseElements(child, callback));
+  }
+
+  /**
+   * Preserve proper case for SVG elements
+   */
+  private preserveSvgTagCase(tagName: string): string {
+    const lowerTag = tagName.toLowerCase();
+
+    // Map of lowercase to proper case for SVG elements
+    const svgTagCaseMap: Record<string, string> = {
+      clippath: 'clipPath',
+      defs: 'defs',
+      foreignobject: 'foreignObject',
+      lineargradient: 'linearGradient',
+      radialgradient: 'radialGradient',
+      textpath: 'textPath',
+      use: 'use',
+    };
+
+    return svgTagCaseMap[lowerTag] || lowerTag;
   }
 
   /**
