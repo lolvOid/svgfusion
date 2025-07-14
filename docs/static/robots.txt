@@ -1,0 +1,16 @@
+User-agent: *
+Allow: /
+
+# Sitemap
+Sitemap: https://svgfusion.netlify.app/sitemap.xml
+
+# Disallow crawling of build artifacts and temporary files
+Disallow: /.git/
+Disallow: /node_modules/
+Disallow: /build/
+Disallow: /.docusaurus/
+
+# Allow important pages
+Allow: /docs/
+Allow: /playground
+Allow: /

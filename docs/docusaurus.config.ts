@@ -12,10 +12,83 @@ const packageJson = JSON.parse(
 ) as { version: string };
 
 const config: Config = {
-  title: 'SVGFusion',
+  title: 'SVGFusion - Transform SVG to React & Vue Components',
   tagline:
     'Transform SVG files into production-ready React and Vue 3 components',
   favicon: 'img/favicon.ico',
+  
+  // SEO metadata
+  metadata: [
+    // Add Google site verification if available from environment
+    ...(process.env.GOOGLE_SITE_VERIFICATION ? [{
+      name: 'google-site-verification',
+      content: process.env.GOOGLE_SITE_VERIFICATION
+    }] : []),
+    {
+      name: 'description',
+      content: 'SVGFusion transforms SVG files into production-ready React and Vue 3 components with TypeScript support, accessibility features, and customizable styling options.'
+    },
+    {
+      name: 'keywords',
+      content: 'SVG, React, Vue, components, TypeScript, icons, conversion, accessibility, web development, frontend'
+    },
+    {
+      name: 'author',
+      content: 'SVGFusion Team'
+    },
+    {
+      name: 'robots',
+      content: 'index, follow'
+    },
+    {
+      property: 'og:type',
+      content: 'website'
+    },
+    {
+      property: 'og:title',
+      content: 'SVGFusion - Transform SVG to React & Vue Components'
+    },
+    {
+      property: 'og:description',
+      content: 'Transform SVG files into production-ready React and Vue 3 components with TypeScript support, accessibility features, and customizable styling options.'
+    },
+    {
+      property: 'og:site_name',
+      content: 'SVGFusion'
+    },
+    {
+      property: 'og:url',
+      content: 'https://svgfusion.netlify.app'
+    },
+    {
+      property: 'og:image',
+      content: 'https://i.ibb.co/TZFfpFL/logo.png'
+    },
+    {
+      property: 'og:image:width',
+      content: '120'
+    },
+    {
+      property: 'og:image:height',
+      content: '120'
+    },
+    {
+      name: 'twitter:card',
+      content: 'summary_large_image'
+    },
+    {
+      name: 'twitter:title',
+      content: 'SVGFusion - Transform SVG to React & Vue Components'
+    },
+    {
+      name: 'twitter:description',
+      content: 'Transform SVG files into production-ready React and Vue 3 components with TypeScript support, accessibility features, and customizable styling options.'
+    },
+    {
+      name: 'twitter:image',
+      content: 'https://i.ibb.co/TZFfpFL/logo.png'
+    }
+  ],
 
   // Future flags, see https://docusaurus.io/docs/api/docusaurus-config#future
   future: {
@@ -93,6 +166,12 @@ const config: Config = {
           // Remove this to remove the "edit this page" links.
           // editUrl: 'https://github.com/lolvOid/svgfusion/tree/main/docs/',
         },
+        sitemap: {
+          changefreq: 'weekly',
+          priority: 0.5,
+          ignorePatterns: ['/tags/**'],
+          filename: 'sitemap.xml',
+        },
         blog: false,
         theme: {
           customCss: './src/css/custom.css',
@@ -102,8 +181,8 @@ const config: Config = {
   ],
 
   themeConfig: {
-    // Replace with your project's social card
-    image: 'img/docusaurus-social-card.jpg',
+    // Social card for sharing
+    image: 'https://i.ibb.co/TZFfpFL/logo.png',
     navbar: {
       title: 'SVGFusion',
       logo: {
