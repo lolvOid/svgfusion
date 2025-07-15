@@ -1,3 +1,15 @@
+# [1.23.0](https://github.com/lolvOid/svgfusion/compare/v1.22.0...v1.23.0) (2025-07-15)
+
+
+### Bug Fixes
+
+* remove --frozen-lockfile option from pnpm install commands ([cdbbb16](https://github.com/lolvOid/svgfusion/commit/cdbbb1663755b77e275ae10fbf5f1972d4fa1f0b))
+
+
+### Features
+
+* add accessibility and normalization options to CLI and generator ([24aad3f](https://github.com/lolvOid/svgfusion/commit/24aad3ff2845b4ae9d41f52034b434070f713b07))
+
 # [1.22.0](https://github.com/lolvOid/svgfusion/compare/v1.21.1...v1.22.0) (2025-07-14)
 
 
