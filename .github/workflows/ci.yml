@@ -103,7 +103,7 @@ jobs:
             ${{ runner.os }}-pnpm-
 
       - name: Install dependencies
-        run: pnpm install --frozen-lockfile
+        run: pnpm install
 
       - name: Build
         run: pnpm run build
@@ -119,7 +119,7 @@ jobs:
           GOOGLE_SITE_VERIFICATION: ${{ secrets.GOOGLE_SITE_VERIFICATION }}
         run: |
           cd docs
-          pnpm install --frozen-lockfile
+          pnpm install
           pnpm run build
 
       - name: Upload documentation artifacts
@@ -162,7 +162,7 @@ jobs:
             ${{ runner.os }}-pnpm-
 
       - name: Install dependencies
-        run: pnpm install --frozen-lockfile
+        run: pnpm install
 
       - name: Build
         run: pnpm run build
@@ -178,7 +178,7 @@ jobs:
           GOOGLE_SITE_VERIFICATION: ${{ secrets.GOOGLE_SITE_VERIFICATION }}
         run: |
           cd docs
-          pnpm install --frozen-lockfile
+          pnpm install
           pnpm run build
 
       - name: Upload documentation artifacts
