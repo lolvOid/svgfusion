@@ -3,9 +3,9 @@
 
 # SVGFusion
 
-**Transform SVG files into production-ready React and Vue 3 components**
+**SVGs to React & Vue 3 Components**
 
-A powerful Node.js CLI tool and library that converts SVG files into optimized React and Vue components with native SVG props inheritance, TypeScript integration, and smart optimization for modern development workflows.
+Convert SVG files into blazing-fast React and Vue 3 components with automatic color extraction, full TypeScript support, and seamless integration into any modern workflow.
 
 [![npm version](https://img.shields.io/npm/v/svgfusion)](https://www.npmjs.com/package/svgfusion)
 [![TypeScript](https://img.shields.io/badge/TypeScript-007ACC?style=flat&logo=typescript&logoColor=white)](https://www.typescriptlang.org/)
@@ -18,24 +18,22 @@ A powerful Node.js CLI tool and library that converts SVG files into optimized R
 
 ## Features
 
-**Advanced Transformations**: Comprehensive transformation options including color splitting, stroke width extraction, fixed stroke width, and fill/stroke normalization
-**Stroke Width Splitting**: Extract and convert stroke widths to props for responsive design
-**Browser API**: Use SVGFusion directly in the browser with full feature support
-**Smart Component Naming**: Automatic prefix/suffix handling with proper PascalCase conversion
-**Advanced Color Splitting**: Intelligent color extraction with fill/stroke optimization
-**Native SVG Props**: Generated components extend React.SVGProps\<SVGSVGElement\> and Vue SVGAttributes
-**React & Vue Support**: Generate both React and Vue 3 components from the same SVG
-**Complex SVG Support**: Handles gradients, masks, filters, patterns, and Figma exports
-**TypeScript Ready**: Full TypeScript support with proper type definitions
-**Batch Processing**: Convert entire directories of SVG files
-**Production Ready**: Optimized output, error handling, and accessibility
-**Simple CLI**: Direct, intuitive command structure
+- **Advanced Transformations**: Comprehensive transformation options including color splitting, stroke width extraction, fixed stroke width, and fill/stroke normalization
+- **Stroke Width Splitting**: Extract and convert stroke widths to props for responsive design
+- **Browser API**: Use SVGFusion directly in the browser with full feature support
+- **Smart Component Naming**: Automatic prefix/suffix handling with proper PascalCase conversion
+- **Advanced Color Splitting**: Intelligent color extraction with fill/stroke optimization
+- **Native SVG Props**: Generated components extend React.SVGProps\<SVGSVGElement\> and Vue SVGAttributes
+- **React & Vue Support**: Generate both React and Vue 3 components from the same SVG
+- **Complex SVG Support**: Handles gradients, masks, filters, patterns, and Figma exports
+- **TypeScript Ready**: Full TypeScript support with proper type definitions
+- **Batch Processing**: Convert entire directories of SVG files
+- **Production Ready**: Optimized output, error handling, and accessibility
+- **Simple CLI**: Direct, intuitive command structure
 
 ## Try It Live
 
-**Experience SVGFusion instantly in your browser!**
-
-[**Launch Interactive Playground →**](https://svgfusion.dev/playground)
+**Experience SVGFusion instantly in your browser!** - [**Launch Interactive Playground →**](https://svgfusion.dev/playground)
 
 Upload your SVG files, experiment with different options, and see the generated React/Vue components in real-time. No installation required!
 
@@ -647,5 +645,6 @@ console.log(vueResult.code); // Generated Vue component code
 - Works in all modern browsers
 - **Interactive Playground** with Monaco Editor
 
-[Full Browser API Documentation](./docs/docs/browser-api.md)
-[Full Node API Documentation](./docs/docs/node-api.md)
+#### [Browser API Documentation](./docs/docs/browser-api.md)
+
+#### [Node API Documentation](./docs/docs/node-api.md)
