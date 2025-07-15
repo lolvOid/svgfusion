@@ -2,9 +2,14 @@ import { themes as prismThemes } from 'prism-react-renderer';
 import type { Config } from '@docusaurus/types';
 import type * as Preset from '@docusaurus/preset-classic';
 import { readFileSync } from 'fs';
-import { join } from 'path';
+import { join, dirname } from 'path';
+import { fileURLToPath } from 'url';
 
 // This runs in Node.js - Don't use client-side code here (browser APIs, JSX...)
+
+// ESM-compatible __dirname replacement
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = dirname(__filename);
 
 // Read version from bundle package.json
 const packageJson = JSON.parse(

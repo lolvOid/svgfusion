@@ -15,7 +15,7 @@
     },
     "./browser": {
       "import": "./dist/browser.mjs",
-      "types": "./dist/browser.d.mts"
+      "types": "./dist/browser.d.ts"
     },
     "./cli": {
       "import": "./dist/cli.mjs",
@@ -83,7 +83,6 @@
     "commander": "^11.0.0",
     "jsdom": "^26.1.0",
     "zod": "^4.0.5",
-    "svgfusion-browser": "workspace:*",
     "svgfusion-cli": "workspace:*",
     "svgfusion-utils": "workspace:*",
     "svgfusion-core": "workspace:*",

@@ -14,6 +14,7 @@ export default defineConfig([
     shims: true,
     minify: true,
     treeshake: true,
-    external: ['prettier'],
+    platform: 'neutral',
+    external: ['prettier', 'jsdom'],
   },
 ]);

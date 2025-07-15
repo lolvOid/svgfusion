@@ -42,3 +42,14 @@ export {
   formatDuplicateErrors,
   generateConflictResolutions,
 } from './libs/duplicate-validator';
+
+// Color extractor
+export type { ColorInfo } from './libs/color-extractor';
+export {
+  extractColors,
+  extractColorsWithElementMapping,
+  replaceColorsWithProps,
+  replaceCurrentColorWithVariables,
+  generateColorProps,
+  generateDefaultColors,
+} from './libs/color-extractor';

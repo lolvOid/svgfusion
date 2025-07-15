@@ -33,8 +33,8 @@ export {
   replaceCurrentColorWithVariables,
   generateColorProps,
   generateDefaultColors,
-} from './utils/color-extractor';
-export type { ColorInfo } from './utils/color-extractor';
+} from 'svgfusion-utils';
+export type { ColorInfo } from 'svgfusion-utils';
 
 // Types
 export type {
