@@ -1,0 +1,28 @@
+{
+  "compilerOptions": {
+    "target": "ES2022",
+    "module": "ESNext",
+    "moduleResolution": "node",
+    "allowSyntheticDefaultImports": true,
+    "esModuleInterop": true,
+    "allowJs": true,
+    "strict": true,
+    "skipLibCheck": true,
+    "forceConsistentCasingInFileNames": true,
+    "declaration": true,
+    "outDir": "./dist",
+    "baseUrl": ".",
+    "paths": {
+      "svgfusion-utils": ["../svgfusion-utils/src/index.ts"]
+    },
+    "lib": ["ES2022", "DOM"],
+    "types": ["node", "jest"]
+  },
+  "include": [
+    "src/**/*",
+    "../svgfusion-bundle/tests/**/*",
+    "../svgfusion-utils/src/files.ts",
+    "../svgfusion-utils/src/duplicate-validator.ts"
+  ],
+  "exclude": ["node_modules", "dist"]
+}

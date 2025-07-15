@@ -1,0 +1,20 @@
+{
+  "name": "svgfusion-demo",
+  "version": "1.0.0",
+  "description": "",
+  "license": "ISC",
+  "author": "",
+  "type": "commonjs",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js ",
+    "install-react": "cd demo-react && pnpm install",
+    "install-vue": "cd demo-vue && pnpm install"
+  },
+  "dependencies": {
+    "svgfusion-core": "workspace:*",
+    "svgfusion-react": "workspace:*",
+    "svgfusion-vue": "workspace:*",
+    "svgfusion-utils": "workspace:*"
+  }
+}

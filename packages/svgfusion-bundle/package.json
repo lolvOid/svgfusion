@@ -1,0 +1,122 @@
+{
+  "name": "svgfusion",
+  "version": "1.24.0",
+  "description": "A powerful CLI tool and library that converts SVG files into production-ready React and Vue 3 components with native SVG props inheritance, TypeScript support, and custom SVGFusion engine.",
+  "main": "dist/index.js",
+  "module": "dist/index.mjs",
+  "types": "dist/index.d.ts",
+  "bin": {
+    "svgfusion": "dist/cli.js"
+  },
+  "exports": {
+    ".": {
+      "import": "./dist/index.mjs",
+      "require": "./dist/index.js"
+    },
+    "./browser": {
+      "import": "./dist/browser.mjs",
+      "types": "./dist/browser.d.mts"
+    },
+    "./cli": {
+      "import": "./dist/cli.mjs",
+      "require": "./dist/cli.js"
+    }
+  },
+  "files": [
+    "dist",
+    "README.md",
+    "CONTRIBUTING.md",
+    "LICENSE"
+  ],
+  "keywords": [
+    "svg",
+    "react",
+    "vue",
+    "vue3",
+    "component",
+    "converter",
+    "cli",
+    "jsx",
+    "tsx",
+    "typescript",
+    "svgr",
+    "batch",
+    "optimization",
+    "icon",
+    "frontend",
+    "build-tool"
+  ],
+  "author": "lolvoid",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/lolvOid/svgfusion.git"
+  },
+  "homepage": "https://svgfusion.netlify.app",
+  "bugs": {
+    "url": "https://github.com/lolvOid/svgfusion/issues"
+  },
+  "scripts": {
+    "build": "tsup && chmod +x dist/cli.js",
+    "dev": "tsup --watch",
+    "watch": "nodemon --watch src --ext ts --exec 'pnpm run build'",
+    "test": "NODE_OPTIONS=\"--experimental-vm-modules\" jest",
+    "test:coverage": "NODE_OPTIONS=\"--experimental-vm-modules\" jest --coverage --json --testLocationInResults --outputFile=./coverage/coverage-summary.json",
+    "test:watch": "NODE_OPTIONS=\"--experimental-vm-modules\" jest --watch",
+    "lint": "eslint src/**/*.ts tests/**/*.ts",
+    "lint:fix": "eslint src/**/*.ts tests/**/*.ts --fix",
+    "format": "prettier --write src/**/*.ts tests/**/*.ts *.md",
+    "format:check": "prettier --check src/**/*.ts tests/**/*.ts *.md",
+    "type-check": "tsc --noEmit",
+    "clean": "rm -rf dist",
+    "release": "semantic-release",
+    "release:dry": "semantic-release --dry-run",
+    "dev:docs": "cd docs && pnpm run start",
+    "demo": "node scripts/run_demo.js",
+    "demo:generate": "node scripts/run_demo.js generate",
+    "demo:run": "node scripts/run_demo.js run",
+    "demo:install": "node scripts/run_demo.js install",
+    "build:docs": "cd docs && pnpm run build"
+  },
+  "dependencies": {
+    "chalk": "^5.0.0",
+    "commander": "^11.0.0",
+    "jsdom": "^26.1.0",
+    "zod": "^4.0.5",
+    "svgfusion-browser": "workspace:*",
+    "svgfusion-cli": "workspace:*",
+    "svgfusion-utils": "workspace:*",
+    "svgfusion-core": "workspace:*",
+    "svgfusion-react": "workspace:*",
+    "svgfusion-vue": "workspace:*"
+  },
+  "devDependencies": {
+    "@commitlint/cli": "^17.8.1",
+    "@commitlint/config-conventional": "^17.8.1",
+    "@jest/globals": "^30.0.4",
+    "@semantic-release/changelog": "^6.0.3",
+    "@semantic-release/git": "^10.0.1",
+    "@semantic-release/github": "^11.0.3",
+    "@semantic-release/npm": "^12.0.2",
+    "@types/jest": "^30.0.0",
+    "@types/jsdom": "^21.1.7",
+    "@types/node": "^20.0.0",
+    "@types/prettier": "^3.0.0",
+    "@types/react": "^19.1.8",
+    "@types/react-dom": "^19.1.6",
+    "@types/vue": "^2.0.0",
+    "@typescript-eslint/eslint-plugin": "^6.21.0",
+    "@typescript-eslint/parser": "^6.21.0",
+    "eslint": "^8.57.0",
+    "jest": "^30.0.4",
+    "nodemon": "^3.1.10",
+    "prettier": "^3.6.2",
+    "semantic-release": "^24.2.6",
+    "ts-jest": "^29.4.0",
+    "tsup": "^8.5.0",
+    "typescript": "^5.0.0"
+  },
+  "engines": {
+    "node": ">=18.0.0"
+  }
+}

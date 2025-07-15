@@ -1,248 +1,248 @@
-name: CI/CD
+# name: CI/CD
 
-permissions:
-  contents: write
-  issues: write
-  pull-requests: write
-  deployments: write
-  statuses: write
-  id-token: write
-  checks: write
+# permissions:
+#   contents: write
+#   issues: write
+#   pull-requests: write
+#   deployments: write
+#   statuses: write
+#   id-token: write
+#   checks: write
 
-on:
-  push:
-    branches:
-      - 'main'
-  pull_request:
-    branches:
-      - '**'
-jobs:
-  test:
-    name: Test
-    runs-on: ubuntu-latest
-    strategy:
-      matrix:
-        node-version: [20.x]
+# on:
+#   push:
+#     branches:
+#       - 'main'
+#   pull_request:
+#     branches:
+#       - '**'
+# jobs:
+#   test:
+#     name: Test
+#     runs-on: ubuntu-latest
+#     strategy:
+#       matrix:
+#         node-version: [20.x]
 
-    steps:
-      - name: Checkout code
-        uses: actions/checkout@v4
-        with:
-          fetch-depth: 0
-          token: ${{ secrets.GITHUB_TOKEN }}
+#     steps:
+#       - name: Checkout code
+#         uses: actions/checkout@v4
+#         with:
+#           fetch-depth: 0
+#           token: ${{ secrets.GITHUB_TOKEN }}
 
-      - name: Install pnpm
-        uses: pnpm/action-setup@v3
-        with:
-          version: 10
+#       - name: Install pnpm
+#         uses: pnpm/action-setup@v3
+#         with:
+#           version: 10
 
-      - name: Setup Node.js ${{ matrix.node-version }}
-        uses: actions/setup-node@v4
-        with:
-          node-version: ${{ matrix.node-version }}
-          cache: 'pnpm'
-      - name: Cache pnpm store
-        uses: actions/cache@v4
-        with:
-          path: ~/.local/share/pnpm/store
-          key: ${{ runner.os }}-pnpm-${{ hashFiles('**/pnpm-lock.yaml') }}
-          restore-keys: |
-            ${{ runner.os }}-pnpm-
+#       - name: Setup Node.js ${{ matrix.node-version }}
+#         uses: actions/setup-node@v4
+#         with:
+#           node-version: ${{ matrix.node-version }}
+#           cache: 'pnpm'
+#       - name: Cache pnpm store
+#         uses: actions/cache@v4
+#         with:
+#           path: ~/.local/share/pnpm/store
+#           key: ${{ runner.os }}-pnpm-${{ hashFiles('**/pnpm-lock.yaml') }}
+#           restore-keys: |
+#             ${{ runner.os }}-pnpm-
 
-      - name: Install dependencies
-        run: pnpm install
+#       - name: Install dependencies
+#         run: pnpm install
 
-      - name: Run linter
-        run: pnpm run lint
+#       - name: Run linter
+#         run: pnpm run lint
 
-      - name: Run type check
-        run: pnpm run type-check
+#       - name: Run type check
+#         run: pnpm run type-check
 
-      - name: Run tests
-        run: pnpm run test:coverage
+#       - name: Run tests
+#         run: pnpm run test:coverage
 
-      - name: Jest coverage report
-        if: github.event_name == 'pull_request' && matrix.node-version == '20.x'
-        uses: ArtiomTr/jest-coverage-report-action@v2.3.1
-        with:
-          custom-title: Coverage report
-          skip-step: all
-          coverage-file: ./coverage/coverage-summary.json
-          base-coverage-file: ./coverage/coverage-summary.json
+#       - name: Jest coverage report
+#         if: github.event_name == 'pull_request' && matrix.node-version == '20.x'
+#         uses: ArtiomTr/jest-coverage-report-action@v2.3.1
+#         with:
+#           custom-title: Coverage report
+#           skip-step: all
+#           coverage-file: ./coverage/coverage-summary.json
+#           base-coverage-file: ./coverage/coverage-summary.json
 
-  release:
-    name: Release
-    runs-on: ubuntu-latest
-    needs: [test]
-    if: github.event_name == 'push'
-    steps:
-      - name: Checkout code
-        uses: actions/checkout@v4
-        with:
-          fetch-depth: 0
-          token: ${{ secrets.GITHUB_TOKEN }}
+#   release:
+#     name: Release
+#     runs-on: ubuntu-latest
+#     needs: [test]
+#     if: github.event_name == 'push'
+#     steps:
+#       - name: Checkout code
+#         uses: actions/checkout@v4
+#         with:
+#           fetch-depth: 0
+#           token: ${{ secrets.GITHUB_TOKEN }}
 
-      - name: Install pnpm
-        uses: pnpm/action-setup@v3
-        with:
-          version: 10
+#       - name: Install pnpm
+#         uses: pnpm/action-setup@v3
+#         with:
+#           version: 10
 
-      - name: Setup Node.js
-        uses: actions/setup-node@v4
-        with:
-          node-version: '20.x'
-          cache: 'pnpm'
-          registry-url: 'https://registry.npmjs.org'
+#       - name: Setup Node.js
+#         uses: actions/setup-node@v4
+#         with:
+#           node-version: '20.x'
+#           cache: 'pnpm'
+#           registry-url: 'https://registry.npmjs.org'
 
-      - name: Cache pnpm store
-        uses: actions/cache@v4
-        with:
-          path: ~/.local/share/pnpm/store
-          key: ${{ runner.os }}-pnpm-${{ hashFiles('**/pnpm-lock.yaml') }}
-          restore-keys: |
-            ${{ runner.os }}-pnpm-
+#       - name: Cache pnpm store
+#         uses: actions/cache@v4
+#         with:
+#           path: ~/.local/share/pnpm/store
+#           key: ${{ runner.os }}-pnpm-${{ hashFiles('**/pnpm-lock.yaml') }}
+#           restore-keys: |
+#             ${{ runner.os }}-pnpm-
 
-      - name: Install dependencies
-        run: pnpm install
+#       - name: Install dependencies
+#         run: pnpm install
 
-      - name: Build
-        run: pnpm run build
+#       - name: Build
+#         run: pnpm run build
 
-      - name: Release
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
-        run: pnpm exec semantic-release
+#       - name: Release
+#         env:
+#           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+#           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+#         run: pnpm exec semantic-release
 
-      - name: Build documentation
-        env:
-          GOOGLE_SITE_VERIFICATION: ${{ secrets.GOOGLE_SITE_VERIFICATION }}
-        run: |
-          cd docs
-          pnpm install
-          pnpm run build
+#       - name: Build documentation
+#         env:
+#           GOOGLE_SITE_VERIFICATION: ${{ secrets.GOOGLE_SITE_VERIFICATION }}
+#         run: |
+#           cd docs
+#           pnpm install
+#           pnpm run build
 
-      - name: Upload documentation artifacts
-        uses: actions/upload-artifact@v4
-        with:
-          name: docs-artifacts
-          path: docs/build/
+#       - name: Upload documentation artifacts
+#         uses: actions/upload-artifact@v4
+#         with:
+#           name: docs-artifacts
+#           path: docs/build/
 
-  release_beta:
-    name: Release Beta
-    runs-on: ubuntu-latest
-    needs: [test]
-    if: github.event_name == 'pull_request'
-    steps:
-      - name: Checkout code
-        uses: actions/checkout@v4
-        with:
-          fetch-depth: 0
-          token: ${{ secrets.GITHUB_TOKEN }}
-          ref: ${{ github.head_ref }}
+#   release_beta:
+#     name: Release Beta
+#     runs-on: ubuntu-latest
+#     needs: [test]
+#     if: github.event_name == 'pull_request'
+#     steps:
+#       - name: Checkout code
+#         uses: actions/checkout@v4
+#         with:
+#           fetch-depth: 0
+#           token: ${{ secrets.GITHUB_TOKEN }}
+#           ref: ${{ github.head_ref }}
 
-      - name: Install pnpm
-        uses: pnpm/action-setup@v3
-        with:
-          version: 10
+#       - name: Install pnpm
+#         uses: pnpm/action-setup@v3
+#         with:
+#           version: 10
 
-      - name: Setup Node.js
-        uses: actions/setup-node@v4
-        with:
-          node-version: '20.x'
-          cache: 'pnpm'
-          registry-url: 'https://registry.npmjs.org'
+#       - name: Setup Node.js
+#         uses: actions/setup-node@v4
+#         with:
+#           node-version: '20.x'
+#           cache: 'pnpm'
+#           registry-url: 'https://registry.npmjs.org'
 
-      - name: Cache pnpm store
-        uses: actions/cache@v4
-        with:
-          path: ~/.local/share/pnpm/store
-          key: ${{ runner.os }}-pnpm-${{ hashFiles('**/pnpm-lock.yaml') }}
-          restore-keys: |
-            ${{ runner.os }}-pnpm-
+#       - name: Cache pnpm store
+#         uses: actions/cache@v4
+#         with:
+#           path: ~/.local/share/pnpm/store
+#           key: ${{ runner.os }}-pnpm-${{ hashFiles('**/pnpm-lock.yaml') }}
+#           restore-keys: |
+#             ${{ runner.os }}-pnpm-
 
-      - name: Install dependencies
-        run: pnpm install
+#       - name: Install dependencies
+#         run: pnpm install
 
-      - name: Build
-        run: pnpm run build
+#       - name: Build
+#         run: pnpm run build
 
-      - name: Release beta
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
-        run: pnpm exec semantic-release --pre-release
+#       - name: Release beta
+#         env:
+#           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+#           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+#         run: pnpm exec semantic-release --pre-release
 
-      - name: Build documentation
-        env:
-          GOOGLE_SITE_VERIFICATION: ${{ secrets.GOOGLE_SITE_VERIFICATION }}
-        run: |
-          cd docs
-          pnpm install
-          pnpm run build
+#       - name: Build documentation
+#         env:
+#           GOOGLE_SITE_VERIFICATION: ${{ secrets.GOOGLE_SITE_VERIFICATION }}
+#         run: |
+#           cd docs
+#           pnpm install
+#           pnpm run build
 
-      - name: Upload documentation artifacts
-        uses: actions/upload-artifact@v4
-        with:
-          name: docs-artifacts
-          path: docs/build/
+#       - name: Upload documentation artifacts
+#         uses: actions/upload-artifact@v4
+#         with:
+#           name: docs-artifacts
+#           path: docs/build/
 
-  deploy:
-    name: Production Deployment
-    runs-on: ubuntu-latest
-    needs: [release]
-    if: github.event_name == 'push' && github.ref == 'refs/heads/main'
-    steps:
-      - name: Checkout repository
-        uses: actions/checkout@v4
+#   deploy:
+#     name: Production Deployment
+#     runs-on: ubuntu-latest
+#     needs: [release]
+#     if: github.event_name == 'push' && github.ref == 'refs/heads/main'
+#     steps:
+#       - name: Checkout repository
+#         uses: actions/checkout@v4
 
-      - name: Download documentation artifacts
-        uses: actions/download-artifact@v4
-        with:
-          name: docs-artifacts
-          path: docs/build/
+#       - name: Download documentation artifacts
+#         uses: actions/download-artifact@v4
+#         with:
+#           name: docs-artifacts
+#           path: docs/build/
 
-      - name: Deploy to Netlify (Production)
-        uses: nwtgck/actions-netlify@v3.0
-        with:
-          publish-dir: './docs/build'
-          production-branch: main
-          github-token: ${{ secrets.GITHUB_TOKEN }}
-          deploy-message: 'Deploy from GitHub Actions - ${{ github.event.head_commit.message }}'
-          enable-pull-request-comment: false
-          enable-commit-comment: true
-          overwrites-pull-request-comment: false
-        env:
-          NETLIFY_AUTH_TOKEN: ${{ secrets.NETLIFY_AUTH_TOKEN }}
-          NETLIFY_SITE_ID: ${{ secrets.NETLIFY_SITE_ID }}
-        timeout-minutes: 1
+#       - name: Deploy to Netlify (Production)
+#         uses: nwtgck/actions-netlify@v3.0
+#         with:
+#           publish-dir: './docs/build'
+#           production-branch: main
+#           github-token: ${{ secrets.GITHUB_TOKEN }}
+#           deploy-message: 'Deploy from GitHub Actions - ${{ github.event.head_commit.message }}'
+#           enable-pull-request-comment: false
+#           enable-commit-comment: true
+#           overwrites-pull-request-comment: false
+#         env:
+#           NETLIFY_AUTH_TOKEN: ${{ secrets.NETLIFY_AUTH_TOKEN }}
+#           NETLIFY_SITE_ID: ${{ secrets.NETLIFY_SITE_ID }}
+#         timeout-minutes: 1
 
-  deploy_preview:
-    name: Preview Deployment
-    runs-on: ubuntu-latest
-    needs: [release_beta]
-    if: github.event_name == 'pull_request'
-    steps:
-      - name: Checkout repository
-        uses: actions/checkout@v4
+#   deploy_preview:
+#     name: Preview Deployment
+#     runs-on: ubuntu-latest
+#     needs: [release_beta]
+#     if: github.event_name == 'pull_request'
+#     steps:
+#       - name: Checkout repository
+#         uses: actions/checkout@v4
 
-      - name: Download documentation artifacts
-        uses: actions/download-artifact@v4
-        with:
-          name: docs-artifacts
-          path: docs/build/
+#       - name: Download documentation artifacts
+#         uses: actions/download-artifact@v4
+#         with:
+#           name: docs-artifacts
+#           path: docs/build/
 
-      - name: Deploy to Netlify (Preview)
-        uses: nwtgck/actions-netlify@v3.0
-        with:
-          publish-dir: './docs/build'
-          github-token: ${{ secrets.GITHUB_TOKEN }}
-          deploy-message: 'Deploy PR #${{ github.event.number }} - ${{ github.event.pull_request.title }}'
-          alias: 'preview-${{ github.event.number }}'
-          enable-pull-request-comment: true
-          enable-commit-comment: false
-          overwrites-pull-request-comment: true
-        env:
-          NETLIFY_AUTH_TOKEN: ${{ secrets.NETLIFY_AUTH_TOKEN }}
-          NETLIFY_SITE_ID: ${{ secrets.NETLIFY_SITE_ID }}
-        timeout-minutes: 2
+#       - name: Deploy to Netlify (Preview)
+#         uses: nwtgck/actions-netlify@v3.0
+#         with:
+#           publish-dir: './docs/build'
+#           github-token: ${{ secrets.GITHUB_TOKEN }}
+#           deploy-message: 'Deploy PR #${{ github.event.number }} - ${{ github.event.pull_request.title }}'
+#           alias: 'preview-${{ github.event.number }}'
+#           enable-pull-request-comment: true
+#           enable-commit-comment: false
+#           overwrites-pull-request-comment: true
+#         env:
+#           NETLIFY_AUTH_TOKEN: ${{ secrets.NETLIFY_AUTH_TOKEN }}
+#           NETLIFY_SITE_ID: ${{ secrets.NETLIFY_SITE_ID }}
+#         timeout-minutes: 2

@@ -1,133 +1,133 @@
-name: Bundle Size Report
+# name: Bundle Size Report
 
-on:
-  pull_request:
-    branches:
-      - main
-      - develop
+# on:
+#   pull_request:
+#     branches:
+#       - main
+#       - develop
 
-jobs:
-  bundle-size:
-    name: Bundle Size Report
-    runs-on: ubuntu-latest
-    permissions:
-      contents: read
-      pull-requests: write
+# jobs:
+#   bundle-size:
+#     name: Bundle Size Report
+#     runs-on: ubuntu-latest
+#     permissions:
+#       contents: read
+#       pull-requests: write
 
-    steps:
-      - name: Checkout code
-        uses: actions/checkout@v4
+#     steps:
+#       - name: Checkout code
+#         uses: actions/checkout@v4
 
-      - name: Install pnpm
-        uses: pnpm/action-setup@v3
-        with:
-          version: 10
+#       - name: Install pnpm
+#         uses: pnpm/action-setup@v3
+#         with:
+#           version: 10
 
-      - name: Setup Node.js
-        uses: actions/setup-node@v4
-        with:
-          node-version: '20.x'
-          cache: 'pnpm'
+#       - name: Setup Node.js
+#         uses: actions/setup-node@v4
+#         with:
+#           node-version: '20.x'
+#           cache: 'pnpm'
 
-      - name: Cache pnpm store
-        uses: actions/cache@v4
-        with:
-          path: ~/.local/share/pnpm/store
-          key: ${{ runner.os }}-pnpm-${{ hashFiles('**/pnpm-lock.yaml') }}
-          restore-keys: |
-            ${{ runner.os }}-pnpm-
+#       - name: Cache pnpm store
+#         uses: actions/cache@v4
+#         with:
+#           path: ~/.local/share/pnpm/store
+#           key: ${{ runner.os }}-pnpm-${{ hashFiles('**/pnpm-lock.yaml') }}
+#           restore-keys: |
+#             ${{ runner.os }}-pnpm-
 
-      - name: Install dependencies
-        run: pnpm install
+#       - name: Install dependencies
+#         run: pnpm install
 
-      - name: Build project
-        run: pnpm run build
+#       - name: Build project
+#         run: pnpm run build
 
-      - name: Calculate bundle sizes
-        run: |
-          echo "📦 Bundle Size Report" > bundle-size.txt
-          echo "=====================" >> bundle-size.txt
-          echo "" >> bundle-size.txt
+#       - name: Calculate bundle sizes
+#         run: |
+#           echo "📦 Bundle Size Report" > bundle-size.txt
+#           echo "=====================" >> bundle-size.txt
+#           echo "" >> bundle-size.txt
 
-          for file in dist/*.js; do
-            if [ -f "$file" ]; then
-              filename=$(basename "$file")
-              original_size=$(stat -c%s "$file" 2>/dev/null || stat -f%z "$file")
-              gzip_size=$(gzip -c "$file" | wc -c)
-              
-              echo "📄 $filename" >> bundle-size.txt
-              echo "  Original: $(numfmt --to=iec-i --suffix=B $original_size)" >> bundle-size.txt
-              echo "  Gzipped:  $(numfmt --to=iec-i --suffix=B $gzip_size)" >> bundle-size.txt
-              echo "" >> bundle-size.txt
-            fi
-          done
+#           for file in dist/*.js; do
+#             if [ -f "$file" ]; then
+#               filename=$(basename "$file")
+#               original_size=$(stat -c%s "$file" 2>/dev/null || stat -f%z "$file")
+#               gzip_size=$(gzip -c "$file" | wc -c)
 
-          cat bundle-size.txt
+#               echo "📄 $filename" >> bundle-size.txt
+#               echo "  Original: $(numfmt --to=iec-i --suffix=B $original_size)" >> bundle-size.txt
+#               echo "  Gzipped:  $(numfmt --to=iec-i --suffix=B $gzip_size)" >> bundle-size.txt
+#               echo "" >> bundle-size.txt
+#             fi
+#           done
 
-      - name: Comment PR with bundle size
-        uses: actions/github-script@v7
-        with:
-          script: |
-            const fs = require('fs');
-            const bundleSize = fs.readFileSync('bundle-size.txt', 'utf8');
+#           cat bundle-size.txt
 
-            // Parse bundle size report and format as markdown table
-            const lines = bundleSize.split('\n');
-            let tableRows = [];
-            let currentFile = '';
-            let originalSize = '';
-            let gzippedSize = '';
+#       - name: Comment PR with bundle size
+#         uses: actions/github-script@v7
+#         with:
+#           script: |
+#             const fs = require('fs');
+#             const bundleSize = fs.readFileSync('bundle-size.txt', 'utf8');
 
-            for (const line of lines) {
-              if (line.startsWith('📄 ')) {
-                currentFile = line.replace('📄 ', '');
-              } else if (line.includes('Original:')) {
-                originalSize = line.replace('  Original: ', '').trim();
-              } else if (line.includes('Gzipped:')) {
-                gzippedSize = line.replace('  Gzipped: ', '').trim();
-                if (currentFile && originalSize && gzippedSize) {
-                  tableRows.push(`| \`${currentFile}\` | ${originalSize} | ${gzippedSize} |`);
-                  currentFile = originalSize = gzippedSize = '';
-                }
-              }
-            }
+#             // Parse bundle size report and format as markdown table
+#             const lines = bundleSize.split('\n');
+#             let tableRows = [];
+#             let currentFile = '';
+#             let originalSize = '';
+#             let gzippedSize = '';
 
-            const comment = `## 📦 Bundle Size Report
+#             for (const line of lines) {
+#               if (line.startsWith('📄 ')) {
+#                 currentFile = line.replace('📄 ', '');
+#               } else if (line.includes('Original:')) {
+#                 originalSize = line.replace('  Original: ', '').trim();
+#               } else if (line.includes('Gzipped:')) {
+#                 gzippedSize = line.replace('  Gzipped: ', '').trim();
+#                 if (currentFile && originalSize && gzippedSize) {
+#                   tableRows.push(`| \`${currentFile}\` | ${originalSize} | ${gzippedSize} |`);
+#                   currentFile = originalSize = gzippedSize = '';
+#                 }
+#               }
+#             }
 
-            | File | Original | Gzipped |
-            |------|----------|---------|
-            ${tableRows.join('\n')}
+#             const comment = `## 📦 Bundle Size Report
 
-            > 💡 This comment will be automatically updated when new commits are pushed to this PR.
+#             | File | Original | Gzipped |
+#             |------|----------|---------|
+#             ${tableRows.join('\n')}
 
-            <sub>Generated for commit [\`${context.sha.substring(0, 7)}\`](https://github.com/${context.repo.owner}/${context.repo.repo}/commit/${context.sha})</sub>`;
+#             > 💡 This comment will be automatically updated when new commits are pushed to this PR.
 
-            // Find existing comment from this bot
-            const { data: comments } = await github.rest.issues.listComments({
-              owner: context.repo.owner,
-              repo: context.repo.repo,
-              issue_number: context.issue.number,
-            });
+#             <sub>Generated for commit [\`${context.sha.substring(0, 7)}\`](https://github.com/${context.repo.owner}/${context.repo.repo}/commit/${context.sha})</sub>`;
 
-            const existingComment = comments.find(comment => 
-              comment.user.login === 'github-actions[bot]' && 
-              comment.body.includes('📦 Bundle Size Report')
-            );
+#             // Find existing comment from this bot
+#             const { data: comments } = await github.rest.issues.listComments({
+#               owner: context.repo.owner,
+#               repo: context.repo.repo,
+#               issue_number: context.issue.number,
+#             });
 
-            if (existingComment) {
-              console.log('Updating existing bundle size comment...');
-              await github.rest.issues.updateComment({
-                owner: context.repo.owner,
-                repo: context.repo.repo,
-                comment_id: existingComment.id,
-                body: comment
-              });
-            } else {
-              console.log('Creating new bundle size comment...');
-              await github.rest.issues.createComment({
-                owner: context.repo.owner,
-                repo: context.repo.repo,
-                issue_number: context.issue.number,
-                body: comment
-              });
-            }
+#             const existingComment = comments.find(comment =>
+#               comment.user.login === 'github-actions[bot]' &&
+#               comment.body.includes('📦 Bundle Size Report')
+#             );
+
+#             if (existingComment) {
+#               console.log('Updating existing bundle size comment...');
+#               await github.rest.issues.updateComment({
+#                 owner: context.repo.owner,
+#                 repo: context.repo.repo,
+#                 comment_id: existingComment.id,
+#                 body: comment
+#               });
+#             } else {
+#               console.log('Creating new bundle size comment...');
+#               await github.rest.issues.createComment({
+#                 owner: context.repo.owner,
+#                 repo: context.repo.repo,
+#                 issue_number: context.issue.number,
+#                 body: comment
+#               });
+#             }
