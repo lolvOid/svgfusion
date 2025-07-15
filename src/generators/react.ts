@@ -332,8 +332,8 @@ export class ReactGenerator extends ComponentGenerator {
 
       return `const ${componentName} = (${customPropsDestructure}: ${propsType}${refType}) => {
   const computedSize = {
-    width: svgProps.width ?? size,
-    height: svgProps.height ?? size
+    width: svgProps.width || size,
+    height: svgProps.height || size
   };
   
   return (
@@ -341,8 +341,8 @@ export class ReactGenerator extends ComponentGenerator {
       ${
         this.reactOptions.forwardRef ? 'ref={ref}\n      ' : ''
       }${rootAttributes}
-      {...computedSize}
       {...svgProps}
+      {...computedSize}
     >
       ${titleElement}
       ${descElement}
@@ -439,32 +439,47 @@ ${childrenJsx}
   }): string {
     const attributes: string[] = [];
 
-    // Add viewBox from root element attributes or AST
-    const viewBox = ast.root.attributes?.viewBox || ast.viewBox;
-    if (viewBox) {
-      attributes.push(`viewBox="${viewBox}"`);
-    }
+    // Add all attributes from the root element, prioritizing AST-level overrides
+    const rootAttrs = ast.root.attributes || {};
+    const allAttributes = {
+      ...rootAttrs,
+      // Override with AST-level attributes if present
+      ...(ast.viewBox && { viewBox: ast.viewBox }),
+      ...(ast.namespace && { xmlns: ast.namespace }),
+      ...(ast.width && { width: ast.width }),
+      ...(ast.height && { height: ast.height }),
+    };
 
-    // Add xmlns if present
-    const xmlns = ast.root.attributes?.xmlns || ast.namespace;
-    if (xmlns) {
-      attributes.push(`xmlns="${xmlns}"`);
-    }
+    // Skip width/height if viewBox is present (they'll be handled by computed size)
+    const hasViewBox = allAttributes.viewBox;
 
-    // Add width and height if present and no viewBox
-    if (!viewBox) {
-      const width = ast.root.attributes?.width || ast.width;
-      const height = ast.root.attributes?.height || ast.height;
+    // eslint-disable-next-line @typescript-eslint/no-unsafe-argument
+    Object.entries(allAttributes).forEach(([key, value]) => {
+      if (value !== undefined && value !== null) {
+        // Skip width/height when viewBox is present (handled separately)
+        if (hasViewBox && (key === 'width' || key === 'height')) {
+          return;
+        }
 
-      if (width) {
-        attributes.push(`width="${width}"`);
+        // Handle special attributes that need JSX formatting
+        if (
+          key === 'aria-labelledby' &&
+          typeof value === 'string' &&
+          value.includes('{')
+        ) {
+          // Convert template strings like '{titleId} {descId}' to JSX expressions
+          const jsxValue = value.replace(/\{(\w+)\}/g, '${$1}');
+          attributes.push(`aria-labelledby={\`${jsxValue}\`}`);
+        } else {
+          // eslint-disable-next-line @typescript-eslint/no-base-to-string
+          attributes.push(`${key}="${value}"`);
+        }
       }
-      if (height) {
-        attributes.push(`height="${height}"`);
-      }
-    }
+    });
 
-    return attributes.length > 0 ? attributes.join('\n    ') + '\n    ' : '';
+    return attributes.length > 0
+      ? attributes.join('\n      ') + '\n      '
+      : '';
   }
 
   /**

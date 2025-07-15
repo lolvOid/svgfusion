@@ -38,17 +38,21 @@ const DemoSodaWaterIcon = (
   ref: Ref<SVGSVGElement>
 ) => {
   const computedSize = {
-    width: svgProps.width ?? size,
-    height: svgProps.height ?? size,
+    width: svgProps.width || size,
+    height: svgProps.height || size,
   };
 
   return (
     <svg
       ref={ref}
       viewBox="0 0 1024 1024"
+      class="icon"
+      version="1.1"
       xmlns="http://www.w3.org/2000/svg"
-      {...computedSize}
+      role="img"
+      aria-labelledby={`${titleId} ${descId}`}
       {...svgProps}
+      {...computedSize}
     >
       {title ? <title id={titleId}>{title}</title> : null}
       {desc ? <desc id={descId}>{desc}</desc> : null}

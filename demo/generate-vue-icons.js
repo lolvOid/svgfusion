@@ -38,10 +38,13 @@ async function generateVueIcons() {
             splitColors: true,
             splitStrokeWidths: true,
             fixedStrokeWidth: true,
+            accessibility: true,
+            normalizeFillStroke: true,
           },
           generator: {
             prefix: 'Demo',
             suffix: 'Icon',
+            namedExport: true,
             componentName: componentName,
             typescript: true,
             compositionApi: true,

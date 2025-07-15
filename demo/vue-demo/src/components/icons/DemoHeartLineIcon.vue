@@ -2,6 +2,9 @@
   <svg
     viewBox="0 0 24 24"
     xmlns="http://www.w3.org/2000/svg"
+    fill="none"
+    role="img"
+    :aria-labelledby="`${props.titleId} ${props.descId}`"
     v-bind="$attrs"
     :width="computedWidth"
     :height="computedHeight"

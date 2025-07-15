@@ -1,7 +1,12 @@
 <template>
   <svg
     viewBox="0 -20 256 256"
+    version="1.1"
     xmlns="http://www.w3.org/2000/svg"
+    xmlns:xlink="http://www.w3.org/1999/xlink"
+    preserveAspectRatio="xMidYMid"
+    role="img"
+    :aria-labelledby="`${props.titleId} ${props.descId}`"
     v-bind="$attrs"
     :width="computedWidth"
     :height="computedHeight"

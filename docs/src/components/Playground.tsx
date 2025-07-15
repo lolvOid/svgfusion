@@ -33,6 +33,7 @@ interface PlaygroundOptions {
   splitColors: boolean;
   splitStrokeWidths: boolean;
   fixedStrokeWidth: boolean;
+  normalizeFillStroke: boolean;
   memo: boolean;
   forwardRef: boolean;
   sfc: boolean;
@@ -70,6 +71,7 @@ const DEFAULT_OPTIONS: PlaygroundOptions = {
   splitStrokeWidths: false,
   fixedStrokeWidth: false,
   memo: false,
+  normalizeFillStroke: false,
   forwardRef: false,
   sfc: true,
   scriptSetup: true,
@@ -413,6 +415,7 @@ export default function Playground() {
       splitColors: opts.splitColors,
       splitStrokeWidths: opts.splitStrokeWidths,
       fixedStrokeWidth: opts.fixedStrokeWidth,
+      normalizeFillStroke: opts.normalizeFillStroke,
       optimize: true,
       ...(opts.framework === 'react' && {
         memo: opts.memo,
@@ -1022,6 +1025,12 @@ export default function Playground() {
                     key: 'fixedStrokeWidth',
                     label: 'Fixed Stroke Width',
                     tooltip: 'Make stroke width configurable via props',
+                  },
+                  {
+                    key: 'normalizeFillStroke',
+                    label: 'Normalize Fill/Stroke',
+                    tooltip:
+                      'Normalize fill and stroke attributes for consistency',
                   },
                   ...(options.framework === 'react'
                     ? [

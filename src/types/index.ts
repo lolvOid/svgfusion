@@ -6,6 +6,14 @@ export interface ConversionOptions {
   typescript?: boolean;
   format?: 'esm' | 'cjs';
   splitColors?: boolean;
+  splitStrokeWidths?: boolean;
+  fixedStrokeWidth?: boolean;
+  normalizeFillStroke?: boolean;
+  accessibility?: boolean;
+  removeComments?: boolean;
+  removeDuplicates?: boolean;
+  minifyPaths?: boolean;
+  // Legacy support
   isFixedStrokeWidth?: boolean;
 }
 
@@ -89,5 +97,13 @@ export interface CliOptions {
   indexFormat?: 'ts' | 'js';
   exportType?: 'named' | 'default';
   splitColors?: boolean;
+  splitStrokeWidths?: boolean;
+  fixedStrokeWidth?: boolean;
+  normalizeFillStroke?: boolean;
+  accessibility?: boolean;
+  removeComments?: boolean;
+  removeDuplicates?: boolean;
+  minifyPaths?: boolean;
+  // Legacy support
   isFixedStrokeWidth?: boolean;
 }

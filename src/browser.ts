@@ -16,6 +16,7 @@ export interface BrowserConversionOptions {
   splitColors?: boolean;
   splitStrokeWidths?: boolean;
   fixedStrokeWidth?: boolean;
+  normalizeFillStroke?: boolean;
   memo?: boolean;
   forwardRef?: boolean;
   sfc?: boolean; // For Vue Single File Components
@@ -63,6 +64,7 @@ export class SVGFusionBrowser {
       splitColors = false,
       splitStrokeWidths = false,
       fixedStrokeWidth = false,
+      normalizeFillStroke = false,
       memo = true,
       forwardRef = true,
       sfc = true,
@@ -77,7 +79,9 @@ export class SVGFusionBrowser {
         splitColors,
         splitStrokeWidths,
         fixedStrokeWidth,
+        normalizeFillStroke,
         optimize,
+        accessibility: true,
       },
       generator:
         framework === 'react'

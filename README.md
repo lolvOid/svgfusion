@@ -18,6 +18,7 @@ A powerful Node.js CLI tool and library that converts SVG files into optimized R
 
 ## Features
 
+**Advanced Transformations**: Comprehensive transformation options including color splitting, stroke width extraction, fixed stroke width, and fill/stroke normalization
 **Stroke Width Splitting**: Extract and convert stroke widths to props for responsive design
 **Browser API**: Use SVGFusion directly in the browser with full feature support
 **Smart Component Naming**: Automatic prefix/suffix handling with proper PascalCase conversion
@@ -29,25 +30,6 @@ A powerful Node.js CLI tool and library that converts SVG files into optimized R
 **Batch Processing**: Convert entire directories of SVG files
 **Production Ready**: Optimized output, error handling, and accessibility
 **Simple CLI**: Direct, intuitive command structure
-
-### Stroke Width Splitting
-
-Extract stroke widths from SVG elements and convert them to component props for responsive designs:
-
-```jsx
-// Original SVG: <path stroke-width="2" d="..."/>
-// Generated React component:
-<MyIcon strokeWidth1={4} /> // Scales the stroke width
-```
-
-### Color Splitting (splitColors)
-
-Extracts all unique fill, stroke, and gradient colors from your SVG and generates props for each color and color class. Automatically adds `fill="none"` or `stroke="none"` to prevent unwanted browser defaults:
-
-- Path with only fill → gets `stroke="none"`
-- Path with only stroke → gets `fill="none"`
-- Path with both → keeps both as props
-- Path with neither → stays unchanged
 
 ## Try It Live
 
@@ -68,7 +50,7 @@ npx svgfusion ./icons --output ./components
 # Add prefixes, suffixes, and generate index file
 npx svgfusion ./icons --prefix Icon --suffix Component --index
 
-# Advanced: Split colors for Tailwind CSS with fixed stroke width
+# Advanced: Split colors for Custom CSS Class with fixed stroke width
 npx svgfusion ./icons --split-colors --fixed-stroke-width --prefix Icon
 ```
 
@@ -203,7 +185,7 @@ npx svgfusion ./assets/icons --output ./src/components --recursive --index
 # Convert with custom naming
 npx svgfusion ./assets/icons --output ./src/components --prefix Icon --suffix Component --index
 
-# Advanced: Split colors for Tailwind CSS compatibility
+# Advanced: Split colors for Custom CSS Class compatibility
 npx svgfusion ./assets/icons --output ./src/components --split-colors --prefix Icon
 
 # Advanced: Fixed stroke width with split colors
@@ -409,9 +391,31 @@ const result = await convertToReact(svgContent, {
 - Empty attribute values (`fill=""`) are treated as non-existent
 ````
 
-### Fixed Stroke Width Support
+### Transformation Options
 
-The `isFixedStrokeWidth` option adds support for non-scaling stroke width:
+SVGFusion provides comprehensive transformation capabilities through the transformation options API:
+
+```typescript
+const result = await engine.convert(svgContent, {
+  framework: 'react',
+  transformation: {
+    splitColors: true, // Extract color props
+    splitStrokeWidths: true, // Extract stroke width props
+    fixedStrokeWidth: true, // Non-scaling stroke support
+    normalizeFillStroke: true, // Normalize fill/stroke attributes
+    accessibility: true, // Add accessibility features
+    optimize: true, // Apply SVG optimizations
+    removeComments: true, // Remove XML comments
+    removeDuplicates: true, // Remove duplicate elements
+    minifyPaths: false, // Minify path data
+  },
+  generator: { componentName: 'MyIcon', typescript: true },
+});
+```
+
+#### Fixed Stroke Width Support
+
+The `fixedStrokeWidth` transformation adds support for non-scaling stroke width:
 
 ```typescript
 const result = await convertToReact(svgContent, {
@@ -423,6 +427,14 @@ const result = await convertToReact(svgContent, {
 // - isFixedStrokeWidth prop
 // - vector-effect="non-scaling-stroke" when prop is true
 ```
+
+#### Fill/Stroke Normalization
+
+The `normalizeFillStroke` transformation intelligently handles fill and stroke attributes:
+
+- Normalizes attribute values across all SVG elements
+- Ensures consistent color and stroke width application
+- Optimizes attribute inheritance and cascading
 
 ### Custom SVGO Configuration
 

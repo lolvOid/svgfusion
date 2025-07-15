@@ -25,8 +25,14 @@ svgfusion ./icons --output ./components
 # Convert to Vue components with TypeScript
 svgfusion ./icons --framework vue --typescript --output ./src/components
 
-# Advanced: Split colors for Tailwind CSS
+# Advanced: Split colors for Custom CSS Class
 svgfusion ./icons --split-colors --prefix Icon --output ./components
+
+# Advanced: Split stroke widths for responsive design
+svgfusion ./icons --split-stroke-widths --prefix Icon --output ./components
+
+# Advanced: Combine all transformation features
+svgfusion ./icons --split-colors --split-stroke-widths --fixed-stroke-width --prefix Icon --output ./components
 ```
 
 ## Options
@@ -159,6 +165,22 @@ This creates separate props for:
 
 **Default:** `false`
 
+### --split-stroke-widths
+
+Extract stroke width values as component props for responsive design.
+
+```bash
+svgfusion ./icons --split-stroke-widths
+```
+
+This creates separate props for:
+
+- `strokeWidth1`, `strokeWidth2`, etc. for stroke width values
+- `strokeWidth1Class`, `strokeWidth2Class`, etc. for CSS classes
+- Original `stroke-width` attributes are replaced with dynamic variables
+
+**Default:** `false`
+
 ### --fixed-stroke-width
 
 Add support for non-scaling stroke width using `vector-effect="non-scaling-stroke"`.
@@ -171,6 +193,24 @@ This adds:
 
 - `isFixedStrokeWidth` prop to components
 - Conditional `vector-effect` attribute
+- Ensures stroke width remains constant regardless of SVG scaling
+
+**Default:** `false`
+
+### --normalize-fill-stroke
+
+Normalize fill and stroke attributes for consistency across all SVG elements.
+
+```bash
+svgfusion ./icons --normalize-fill-stroke
+```
+
+This transformation:
+
+- Standardizes attribute values across all SVG elements
+- Ensures consistent color and stroke width application
+- Optimizes attribute inheritance and cascading
+- Removes redundant or conflicting attributes
 
 **Default:** `false`
 
@@ -202,12 +242,20 @@ svgfusion ./assets -r -o ./src/components --index
 
 ### Advanced Features
 
-#### Split Colors for Tailwind CSS
+#### Split colors for Custom CSS Class
 
 Perfect for design systems where you need granular control over colors:
 
 ```bash
 svgfusion ./icons --split-colors --prefix Icon -o ./src/components
+```
+
+#### Split Stroke Widths for Responsive Design
+
+Extract stroke width values as props for responsive icon scaling:
+
+```bash
+svgfusion ./icons --split-stroke-widths --prefix Icon -o ./src/components
 ```
 
 #### Fixed Stroke Width
@@ -218,6 +266,22 @@ For icons that need consistent stroke width at any scale:
 svgfusion ./icons --fixed-stroke-width --split-colors -o ./src/components
 ```
 
+#### Fill/Stroke Normalization
+
+Normalize attributes for consistent rendering:
+
+```bash
+svgfusion ./icons --normalize-fill-stroke --prefix Icon -o ./src/components
+```
+
+#### Combined Transformation Features
+
+Use multiple transformation features together for maximum flexibility:
+
+```bash
+svgfusion ./icons --split-colors --split-stroke-widths --fixed-stroke-width --normalize-fill-stroke -o ./src/components
+```
+
 #### Complete Advanced Example
 
 ```bash
@@ -226,7 +290,9 @@ svgfusion ./assets/icons \
   --typescript \
   --recursive \
   --split-colors \
+  --split-stroke-widths \
   --fixed-stroke-width \
+  --normalize-fill-stroke \
   --prefix App \
   --suffix Icon \
   --index \
@@ -240,7 +306,11 @@ svgfusion ./assets/icons \
 You can use SVGFusion without global installation:
 
 ```bash
+# Basic usage with split colors
 npx svgfusion ./icons -f react -t --split-colors
+
+# Advanced usage with all transformation features
+npx svgfusion ./icons -f react -t --split-colors --split-stroke-widths --fixed-stroke-width --normalize-fill-stroke
 ```
 
 ### Error Handling
@@ -267,6 +337,7 @@ Generated React components include:
 - Memo optimization
 - className support
 - Split colors support (when `--split-colors` is used)
+- Split stroke widths support (when `--split-stroke-widths` is used)
 - Fixed stroke width support (when `--fixed-stroke-width` is used)
 
 #### Basic Example
@@ -287,7 +358,7 @@ export default IconStar;
 export { IconStar };
 ```
 
-#### Advanced Example with Split Colors
+#### Advanced Example with Split Colors and Stroke Widths
 
 ```typescript
 import { SVGProps, memo, forwardRef } from 'react';
@@ -298,6 +369,8 @@ interface IconStarProps extends SVGProps<SVGSVGElement> {
   fillColor1Class?: string;
   strokeColor1?: string;
   strokeColor1Class?: string;
+  strokeWidth1?: number;
+  strokeWidth1Class?: string;
   isFixedStrokeWidth?: boolean;
 }
 
@@ -308,6 +381,8 @@ const IconStar = memo(
       fillColor1Class = '',
       strokeColor1 = '#00FF00',
       strokeColor1Class = '',
+      strokeWidth1 = 2,
+      strokeWidth1Class = '',
       isFixedStrokeWidth = false,
       ...rest
     } = props;
@@ -322,9 +397,9 @@ const IconStar = memo(
         <path
           d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"
           fill={fillColor1}
-          className={fillColor1Class}
+          className={`${fillColor1Class} ${strokeWidth1Class}`.trim()}
           stroke={strokeColor1}
-          className={strokeColor1Class}
+          strokeWidth={strokeWidth1}
         />
       </svg>
     );
@@ -345,6 +420,7 @@ Generated Vue components include:
 - Proper prop definitions
 - Scoped styles
 - Split colors support (when `--split-colors` is used)
+- Split stroke widths support (when `--split-stroke-widths` is used)
 - Fixed stroke width support (when `--fixed-stroke-width` is used)
 
 #### Basic Example
@@ -375,7 +451,7 @@ const props = withDefaults(defineProps<Props>(), {
 </style>
 ```
 
-#### Advanced Example with Split Colors
+#### Advanced Example with Split Colors and Stroke Widths
 
 ```vue
 <script setup lang="ts">
@@ -386,6 +462,8 @@ interface Props {
   fillColor1Class?: string;
   strokeColor1?: string;
   strokeColor1Class?: string;
+  strokeWidth1?: number;
+  strokeWidth1Class?: string;
   isFixedStrokeWidth?: boolean;
 }
 
@@ -396,7 +474,13 @@ const props = withDefaults(defineProps<Props>(), {
   fillColor1Class: '',
   strokeColor1: '#00FF00',
   strokeColor1Class: '',
+  strokeWidth1: 2,
+  strokeWidth1Class: '',
   isFixedStrokeWidth: false,
+});
+
+const combinedClasses = computed(() => {
+  return [fillColor1Class, strokeWidth1Class].filter(Boolean).join(' ');
 });
 </script>
 
@@ -409,9 +493,9 @@ const props = withDefaults(defineProps<Props>(), {
     <path
       d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"
       :fill="fillColor1"
-      :class="fillColor1Class"
+      :class="combinedClasses"
       :stroke="strokeColor1"
-      :class="strokeColor1Class"
+      :stroke-width="strokeWidth1"
     />
   </svg>
 </template>
@@ -428,9 +512,11 @@ const props = withDefaults(defineProps<Props>(), {
 3. **Optimization**: SVG optimization is enabled by default for smaller bundle sizes
 4. **TypeScript**: Always use `-t` flag for TypeScript projects for better type safety
 5. **Split Colors**: Use `--split-colors` for maximum flexibility with design systems and Tailwind CSS
-6. **Duplicate Detection**: SVGFusion automatically prevents naming conflicts - use different prefixes/suffixes to resolve conflicts
-7. **Index Files**: Use `--index` for better tree-shaking in bundlers
-8. **Fixed Stroke Width**: Use `--fixed-stroke-width` for icons that need consistent stroke width at any scale
+6. **Split Stroke Widths**: Use `--split-stroke-widths` for responsive icon scaling where stroke width can be controlled as props
+7. **Duplicate Detection**: SVGFusion automatically prevents naming conflicts - use different prefixes/suffixes to resolve conflicts
+8. **Index Files**: Use `--index` for better tree-shaking in bundlers
+9. **Fixed Stroke Width**: Use `--fixed-stroke-width` for icons that need consistent stroke width at any scale
+10. **Combining Features**: You can combine `--split-colors`, `--split-stroke-widths`, and `--fixed-stroke-width` for maximum customization flexibility
 
 ## Troubleshooting
 

@@ -36,9 +36,24 @@ console.log(result.code);
 
 ### Options
 
+#### Framework Options
+
 - `framework`: Target framework ('react' | 'vue')
+
+#### Transformation Options
+
 - `transformation.splitColors`: Extract color props from SVG
+- `transformation.splitStrokeWidths`: Extract stroke width props
 - `transformation.fixedStrokeWidth`: Add non-scaling stroke support
+- `transformation.normalizeFillStroke`: Normalize fill/stroke attributes
+- `transformation.accessibility`: Add accessibility features (default: true)
+- `transformation.optimize`: Apply SVG optimizations (default: true)
+- `transformation.removeComments`: Remove XML comments (default: true)
+- `transformation.removeDuplicates`: Remove duplicate elements (default: true)
+- `transformation.minifyPaths`: Minify path data (default: false)
+
+#### Generator Options
+
 - `generator.componentName`: Component name
 - `generator.typescript`: Generate TypeScript (default: true)
 

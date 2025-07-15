@@ -28,6 +28,7 @@ interface CliOptions {
   splitColors?: boolean;
   splitStrokeWidths?: boolean;
   fixedStrokeWidth?: boolean;
+  normalizeFillStroke?: boolean;
   memo?: boolean;
   forwardRef?: boolean;
   name?: string;
@@ -61,6 +62,7 @@ async function convertSvgFile(
         splitColors: options.splitColors,
         splitStrokeWidths: options.splitStrokeWidths,
         fixedStrokeWidth: options.fixedStrokeWidth,
+        normalizeFillStroke: options.normalizeFillStroke,
         accessibility: true,
       },
       generator: {
@@ -213,6 +215,7 @@ function generateIndexFile(outputDir: string, _options: CliOptions): void {
   }
 }
 
+// eslint-disable-next-line @typescript-eslint/require-await
 async function main() {
   showBanner();
 
@@ -249,6 +252,10 @@ async function main() {
     .option('--prefix <prefix>', 'Add prefix to component names')
     .option('--suffix <suffix>', 'Add suffix to component names')
     .option('--index', 'Generate index.ts file for directory processing')
+    .option(
+      '--normalize-fill-stroke',
+      'Normalize fill and stroke attributes for consistency'
+    )
     .addHelpText(
       'after',
       `

@@ -40,6 +40,8 @@ async function generateReactIcons() {
             splitColors: true,
             splitStrokeWidths: true,
             fixedStrokeWidth: true,
+            accessibility: true,
+            normalizeFillStroke: true,
           },
           generator: {
             prefix: 'Demo',

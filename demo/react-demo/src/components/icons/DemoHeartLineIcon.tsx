@@ -30,8 +30,8 @@ const DemoHeartLineIcon = (
   ref: Ref<SVGSVGElement>
 ) => {
   const computedSize = {
-    width: svgProps.width ?? size,
-    height: svgProps.height ?? size,
+    width: svgProps.width || size,
+    height: svgProps.height || size,
   };
 
   return (
@@ -39,8 +39,11 @@ const DemoHeartLineIcon = (
       ref={ref}
       viewBox="0 0 24 24"
       xmlns="http://www.w3.org/2000/svg"
-      {...computedSize}
+      fill="none"
+      role="img"
+      aria-labelledby={`${titleId} ${descId}`}
       {...svgProps}
+      {...computedSize}
     >
       {title ? <title id={titleId}>{title}</title> : null}
       {desc ? <desc id={descId}>{desc}</desc> : null}

@@ -42,17 +42,22 @@ const DemoBrowserifyIconIcon = (
   ref: Ref<SVGSVGElement>
 ) => {
   const computedSize = {
-    width: svgProps.width ?? size,
-    height: svgProps.height ?? size,
+    width: svgProps.width || size,
+    height: svgProps.height || size,
   };
 
   return (
     <svg
       ref={ref}
       viewBox="0 -20 256 256"
+      version="1.1"
       xmlns="http://www.w3.org/2000/svg"
-      {...computedSize}
+      xmlns:xlink="http://www.w3.org/1999/xlink"
+      preserveAspectRatio="xMidYMid"
+      role="img"
+      aria-labelledby={`${titleId} ${descId}`}
       {...svgProps}
+      {...computedSize}
     >
       {title ? <title id={titleId}>{title}</title> : null}
       {desc ? <desc id={descId}>{desc}</desc> : null}
