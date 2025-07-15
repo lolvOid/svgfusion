@@ -1,3 +1,10 @@
+# [1.24.0](https://github.com/lolvOid/svgfusion/compare/v1.23.0...v1.24.0) (2025-07-15)
+
+
+### Features
+
+* Update README with improved feature list and intro ([736736b](https://github.com/lolvOid/svgfusion/commit/736736be0d15ed2a0050f94e8b603e1c487f56eb))
+
 # [1.23.0](https://github.com/lolvOid/svgfusion/compare/v1.22.0...v1.23.0) (2025-07-15)
 
 
