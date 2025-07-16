@@ -68,7 +68,7 @@ jobs:
               echo "## $package" >> bundle-size.txt
               echo "" >> bundle-size.txt
               
-              for file in "$package_dir/dist"/*.{js,mjs}; do
+              for file in "$package_dir/dist"/*.{js,mjs,cjs}; do
                 if [ -f "$file" ]; then
                   filename=$(basename "$file")
                   original_size=$(stat -c%s "$file" 2>/dev/null || stat -f%z "$file")
