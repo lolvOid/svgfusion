@@ -41,9 +41,16 @@
     "@types/node": "^20.0.0",
     "eslint": "^8.57.0",
     "jest": "^30.0.4",
-    "prettier": "^3.6.2",
     "tsup": "^8.5.0",
     "typescript": "^5.0.0"
+  },
+  "peerDependencies": {
+    "prettier": "^3.0.0"
+  },
+  "peerDependenciesMeta": {
+    "prettier": {
+      "optional": true
+    }
   },
   "engines": {
     "node": ">=18.0.0"

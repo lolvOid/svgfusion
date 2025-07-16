@@ -12,7 +12,6 @@ import {
   StrokeWidthMapping,
   SVGElement,
 } from 'svgfusion-core';
-import { format } from 'prettier';
 import { toReactProp, camelCase } from 'svgfusion-utils';
 
 export interface ReactGeneratorOptions extends GeneratorOptions {
@@ -42,6 +41,34 @@ export class ReactGenerator extends ComponentGenerator {
   }
 
   /**
+   * Dynamically load prettier for code formatting
+   */
+  private async formatCode(code: string, parser: string): Promise<string> {
+    try {
+      // Dynamic import of prettier to avoid bundling it
+      const { format } = await import('prettier');
+
+      return await format(code, {
+        parser,
+        semi: true,
+        singleQuote: true,
+        trailingComma: 'es5',
+        tabWidth: 2,
+        printWidth: 80,
+        bracketSpacing: true,
+        arrowParens: 'avoid',
+      });
+    } catch (error) {
+      // Fallback to unformatted code if prettier is not available or fails
+      console.warn(
+        'Prettier formatting failed or not available, using unformatted code:',
+        error
+      );
+      return code;
+    }
+  }
+
+  /**
    * Generate React component from transformation result
    */
   async generate(result: TransformationResult): Promise<ComponentResult> {
@@ -66,26 +93,8 @@ export class ReactGenerator extends ComponentGenerator {
     const filename = this.generateFilename(componentName, extension);
 
     // Format the code with prettier
-    let code: string;
-    try {
-      code = await format(rawCode, {
-        parser: extension === 'tsx' ? 'typescript' : 'babel',
-        semi: true,
-        singleQuote: true,
-        trailingComma: 'es5',
-        tabWidth: 2,
-        printWidth: 80,
-        bracketSpacing: true,
-        arrowParens: 'avoid',
-      });
-    } catch (error) {
-      // Fallback to unformatted code if prettier fails
-      console.warn(
-        'Prettier formatting failed, using unformatted code:',
-        error
-      );
-      code = rawCode;
-    }
+    const parser = extension === 'tsx' ? 'typescript' : 'babel';
+    const code = await this.formatCode(rawCode, parser);
 
     return {
       code,
