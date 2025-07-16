@@ -12,4 +12,12 @@ export default defineConfig({
   platform: 'node',
   treeshake: true,
   shims: true,
+  bundle: true,
+  noExternal: [
+    'svgfusion-core',
+    'svgfusion-utils',
+    'svgfusion-react',
+    'svgfusion-vue'
+  ],
+  external: ['commander', 'figlet'],
 });

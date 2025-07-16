@@ -41,13 +41,7 @@ export default defineConfig([
     treeshake: true,
     platform: 'browser',
     bundle: true,
-    noExternal: [
-      'svgfusion-core',
-      'svgfusion-react', 
-      'svgfusion-vue',
-      'svgfusion-browser'
-    ],
-    external: ['chalk', 'commander', 'jsdom', 'zod', 'fs', 'path', 'fs/promises', 'svgfusion-utils', 'svgfusion-cli'],
+    external: ['chalk', 'commander', 'jsdom', 'zod', 'fs', 'path', 'fs/promises', 'svgfusion-utils', 'svgfusion-cli', 'svgfusion-browser'],
   },
   // CLI build (unminified to preserve shebang)
   {

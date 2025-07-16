@@ -36,6 +36,7 @@
   },
   "dependencies": {
     "commander": "^11.1.0",
+    "figlet": "^1.7.0",
     "svgfusion-core": "workspace:*",
     "svgfusion-utils": "workspace:*",
     "svgfusion-react": "workspace:*",

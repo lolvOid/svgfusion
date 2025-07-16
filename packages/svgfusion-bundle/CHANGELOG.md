@@ -1,9 +1,8 @@
 ## [1.24.1](https://github.com/lolvOid/svgfusion/compare/v1.24.0...v1.24.1) (2025-07-16)
 
-
 ### Bug Fixes
 
-* update publishConfig to include registry URL and remove repository and bugs fields ([148eca3](https://github.com/lolvOid/svgfusion/commit/148eca38daecf47dbb85288524c5e519f609fed2))
+- update publishConfig to include registry URL and remove repository and bugs fields ([148eca3](https://github.com/lolvOid/svgfusion/commit/148eca38daecf47dbb85288524c5e519f609fed2))
 
 # [1.24.0](https://github.com/lolvOid/svgfusion/compare/v1.23.0...v1.24.0) (2025-07-15)
 
