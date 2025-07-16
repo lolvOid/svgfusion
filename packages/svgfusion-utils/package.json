@@ -22,6 +22,10 @@
       "require": "./dist/node.cjs"
     }
   },
+  "files": [
+    "dist",
+    "README.md"
+  ],
   "scripts": {
     "build": "tsup",
     "dev": "tsup --watch",

@@ -133,10 +133,14 @@ export class SVGParser {
 
     // Node.js environment - use jsdom fallback
     try {
-      // Use dynamic import but handle it synchronously for now
-      // This will work in Node.js environments where jsdom is available
-
-      const jsdomModule = eval('require')('jsdom');
+      // Use a safe dynamic require pattern
+      const requireJsdom =
+        typeof require !== 'undefined'
+          ? require
+          : (function () {
+              throw new Error('require not available');
+            })();
+      const jsdomModule = requireJsdom('jsdom');
       const { JSDOM } = jsdomModule;
       const dom = new JSDOM(content, { contentType: 'image/svg+xml' });
       const svgElement = dom.window.document.documentElement;

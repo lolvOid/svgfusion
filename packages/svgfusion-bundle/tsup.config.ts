@@ -15,6 +15,16 @@ export default defineConfig([
     minify: true,
     treeshake: true,
     platform: 'node',
+    bundle: true,
+    noExternal: [
+      'svgfusion-core',
+      'svgfusion-react', 
+      'svgfusion-vue',
+      'svgfusion-utils',
+      'svgfusion-cli',
+      'svgfusion-browser'
+    ],
+    external: ['chalk', 'commander', 'jsdom', 'zod'],
   },
   // Browser build
   {
@@ -30,6 +40,14 @@ export default defineConfig([
     minify: true,
     treeshake: true,
     platform: 'browser',
+    bundle: true,
+    noExternal: [
+      'svgfusion-core',
+      'svgfusion-react', 
+      'svgfusion-vue',
+      'svgfusion-browser'
+    ],
+    external: ['chalk', 'commander', 'jsdom', 'zod', 'fs', 'path', 'fs/promises', 'svgfusion-utils', 'svgfusion-cli'],
   },
   // CLI build (unminified to preserve shebang)
   {
@@ -45,5 +63,15 @@ export default defineConfig([
     minify: false,
     treeshake: false,
     platform: 'node',
+    bundle: true,
+    noExternal: [
+      'svgfusion-core',
+      'svgfusion-react', 
+      'svgfusion-vue',
+      'svgfusion-utils',
+      'svgfusion-cli',
+      'svgfusion-browser'
+    ],
+    external: ['chalk', 'commander', 'jsdom', 'zod', 'figlet'],
   },
 ]);
