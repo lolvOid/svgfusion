@@ -7,7 +7,8 @@
   "types": "dist/index.d.ts",
   "publishConfig": {
     "directory": "./dist",
-    "access": "public"
+    "access": "public",
+    "registry": "https://registry.npmjs.org"
   },
   "bin": {
     "svgfusion": "dist/cli.js"
@@ -52,14 +53,7 @@
   ],
   "author": "SVGFusion Contributors",
   "license": "MIT",
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/lolvOid/svgfusion.git"
-  },
   "homepage": "https://svgfusion.netlify.app",
-  "bugs": {
-    "url": "https://github.com/lolvOid/svgfusion/issues"
-  },
   "scripts": {
     "build": "tsup && chmod +x dist/cli.js",
     "dev": "tsup --watch",
