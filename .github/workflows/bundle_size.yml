@@ -2,9 +2,7 @@ name: Bundle Size Report
 
 on:
   pull_request:
-    branches:
-      - main
-      - develop
+    types: [opened, synchronize, reopened]
 
 jobs:
   bundle-size:
