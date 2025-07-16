@@ -65,9 +65,25 @@ jobs:
           for package in "${packages[@]}"; do
             package_dir="packages/$package"
             if [ -d "$package_dir/dist" ]; then
-              echo "## $package" >> bundle-size.txt
+              # Calculate total size for the package
+              total_size=0
+              total_gzip_size=0
+              
+              # First pass: calculate totals
+              for file in "$package_dir/dist"/*.{js,mjs,cjs}; do
+                if [ -f "$file" ]; then
+                  original_size=$(stat -c%s "$file" 2>/dev/null || stat -f%z "$file")
+                  gzip_size=$(gzip -c "$file" | wc -c)
+                  total_size=$((total_size + original_size))
+                  total_gzip_size=$((total_gzip_size + gzip_size))
+                fi
+              done
+              
+              # Write package header with total size
+              echo "## $package (Total: $(format_bytes $total_size) / $(format_bytes $total_gzip_size) gzipped)" >> bundle-size.txt
               echo "" >> bundle-size.txt
               
+              # Second pass: write individual files
               for file in "$package_dir/dist"/*.{js,mjs,cjs}; do
                 if [ -f "$file" ]; then
                   filename=$(basename "$file")
@@ -100,11 +116,21 @@ jobs:
             let currentFile = '';
             let originalSize = '';
             let gzippedSize = '';
+            let packageTotalInfo = '';
 
             for (const line of lines) {
               if (line.startsWith('## ')) {
-                currentPackage = line.replace('## ', '');
-                packages[currentPackage] = [];
+                const packageLine = line.replace('## ', '');
+                // Extract package name and total info
+                const match = packageLine.match(/^(.+?)\s+\(Total:\s+(.+)\)$/);
+                if (match) {
+                  currentPackage = match[1];
+                  packageTotalInfo = match[2];
+                } else {
+                  currentPackage = packageLine;
+                  packageTotalInfo = '';
+                }
+                packages[currentPackage] = { files: [], totalInfo: packageTotalInfo };
               } else if (line.startsWith('📄 ')) {
                 currentFile = line.replace('📄 ', '');
               } else if (line.includes('Original:')) {
@@ -112,7 +138,7 @@ jobs:
               } else if (line.includes('Gzipped:')) {
                 gzippedSize = line.replace('  Gzipped: ', '').trim();
                 if (currentPackage && currentFile && originalSize && gzippedSize) {
-                  packages[currentPackage].push({
+                  packages[currentPackage].files.push({
                     file: currentFile,
                     original: originalSize,
                     gzipped: gzippedSize
@@ -124,21 +150,26 @@ jobs:
 
             // Generate markdown sections for each package
             let packageSections = [];
-            for (const [packageName, files] of Object.entries(packages)) {
-              if (files.length > 0) {
-                let section = `### ${packageName}\n\n`;
+            for (const [packageName, packageData] of Object.entries(packages)) {
+              if (packageData.files.length > 0) {
+                let section = `<details>\n<summary><strong>${packageName}</strong>`;
+                if (packageData.totalInfo) {
+                  section += ` (${packageData.totalInfo})`;
+                }
+                section += `</summary>\n\n`;
                 section += `| File | Original | Gzipped |\n`;
                 section += `|------|----------|----------|\n`;
                 
-                files.forEach(file => {
+                packageData.files.forEach(file => {
                   section += `| \`${file.file}\` | \`${file.original}\` | \`${file.gzipped}\` |\n`;
                 });
                 
+                section += `\n</details>\n`;
                 packageSections.push(section);
               }
             }
 
-            const totalFiles = Object.values(packages).reduce((sum, files) => sum + files.length, 0);
+            const totalFiles = Object.values(packages).reduce((sum, pkg) => sum + pkg.files.length, 0);
             const totalPackages = Object.keys(packages).length;
 
             const comment = `## Bundle Size Report
