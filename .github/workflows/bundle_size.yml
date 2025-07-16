@@ -39,7 +39,7 @@ jobs:
           echo "================================" >> bundle-size.txt
           echo "" >> bundle-size.txt
 
-          # Define packages to analyze (excluding demo and docs)
+          # Define packages to analyze
           packages=(
             "svgfusion-core"
             "svgfusion-react" 
@@ -150,19 +150,6 @@ jobs:
             **Summary**
             - Total packages analyzed: ${totalPackages}
             - Total files: ${totalFiles}
-            - Dynamic imports: Prettier is loaded dynamically (not bundled)
-
-            **What's included**
-            - Core packages: svgfusion-core, svgfusion-utils, svgfusion-bundle
-            - Framework packages: svgfusion-react, svgfusion-vue  
-            - CLI & Browser: svgfusion-cli, svgfusion-browser
-            - Excluded: demo packages, docs, development tools
-
-            **Notes**
-            - Bundle sizes show the actual distributed code size
-            - Gzipped sizes reflect real-world network transfer
-            - Dynamic imports (prettier) don't affect bundle size
-            - All packages use modern ES modules + CommonJS
 
             <details>
             <summary>Workflow Details</summary>
