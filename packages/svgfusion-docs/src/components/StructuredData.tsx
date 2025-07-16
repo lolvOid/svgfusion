@@ -4,23 +4,26 @@ interface StructuredDataProps {
   type?: 'WebSite' | 'SoftwareApplication' | 'Organization';
 }
 
-export default function StructuredData({ type = 'WebSite' }: StructuredDataProps) {
+export default function StructuredData({
+  type = 'WebSite',
+}: StructuredDataProps) {
   const getStructuredData = () => {
     const baseData = {
       '@context': 'https://schema.org',
       '@type': type,
       name: 'SVGFusion',
-      description: 'Transform SVG files into production-ready React and Vue 3 components with TypeScript support, accessibility features, and customizable styling options.',
+      description:
+        'Transform SVG files into production-ready React and Vue 3 components with TypeScript support, accessibility features, and customizable styling options.',
       url: 'https://svgfusion.netlify.app',
       image: 'https://svgfusion.netlify.app/img/og-image.jpg',
       author: {
         '@type': 'Organization',
-        name: 'SVGFusion Team'
+        name: 'SVGFusion Team',
       },
       publisher: {
         '@type': 'Organization',
-        name: 'SVGFusion Team'
-      }
+        name: 'SVGFusion Team',
+      },
     };
 
     if (type === 'SoftwareApplication') {
@@ -31,11 +34,11 @@ export default function StructuredData({ type = 'WebSite' }: StructuredDataProps
         offers: {
           '@type': 'Offer',
           price: '0',
-          priceCurrency: 'USD'
+          priceCurrency: 'USD',
         },
         downloadUrl: 'https://www.npmjs.com/package/svgfusion',
         softwareVersion: 'Latest',
-        releaseNotes: 'https://github.com/lolvOid/svgfusion/releases'
+        releaseNotes: 'https://github.com/lolvOid/svgfusion/releases',
       };
     }
 
@@ -46,11 +49,12 @@ export default function StructuredData({ type = 'WebSite' }: StructuredDataProps
         name: 'SVGFusion',
         url: 'https://svgfusion.netlify.app',
         logo: 'https://svgfusion.netlify.app/img/logo.png',
-        description: 'Open source tool for transforming SVG files into production-ready React and Vue components',
+        description:
+          'Open source tool for transforming SVG files into production-ready React and Vue components',
         sameAs: [
           'https://github.com/lolvOid/svgfusion',
-          'https://www.npmjs.com/package/svgfusion'
-        ]
+          'https://www.npmjs.com/package/svgfusion',
+        ],
       };
     }
 
@@ -61,7 +65,7 @@ export default function StructuredData({ type = 'WebSite' }: StructuredDataProps
     <script
       type="application/ld+json"
       dangerouslySetInnerHTML={{
-        __html: JSON.stringify(getStructuredData())
+        __html: JSON.stringify(getStructuredData()),
       }}
     />
   );

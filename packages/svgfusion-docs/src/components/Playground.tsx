@@ -17,11 +17,9 @@ import {
 import {
   SVGFusionBrowser,
   validateSvg,
-} from 'svgfusion/browser'; // Adjust import based on your setup
-import {
   sanitizeComponentName,
   svgToComponentName,
-} from 'svgfusion-utils/browser';
+} from 'svgfusion-browser';
 import { z } from 'zod';
 import { DEFAULT_SVG } from './defaultSvg';
 
@@ -43,7 +41,7 @@ interface PlaygroundOptions {
 }
 
 // Zod validation schema for component naming
-const componentNamingSchema = z.object({
+const _componentNamingSchema = z.object({
   componentName: z
     .string()
     .min(1, 'Component name is required')
@@ -247,7 +245,7 @@ export default function Playground() {
     try {
       const validationResult = validateSvg(svgInput);
       setValidation(validationResult);
-    } catch (error) {
+    } catch (_error) {
       setValidation({ valid: false, errors: ['Validation failed'] });
     }
   }, [svgInput]); // Only depends on svgInput, runs on every input change
@@ -485,7 +483,7 @@ export default function Playground() {
         try {
           const extractedColors = svgfusion.extractColors(svgInput);
           setColors(extractedColors);
-        } catch (colorError) {
+        } catch (_colorError) {
           setColors([]);
         }
       } catch (error) {
@@ -513,7 +511,7 @@ export default function Playground() {
     try {
       await navigator.clipboard.writeText(output);
       // Could add toast notification here
-    } catch (err) {
+    } catch (_err) {
       // Silent fail for copy operations
     }
   };

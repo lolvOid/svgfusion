@@ -1,4 +1,8 @@
-module.exports = {
-  extends: ['../../eslint.config.js'],
-  ignorePatterns: ['dist', 'node_modules', 'coverage'],
-};
+const rootConfig = require('../../eslint.config.js');
+
+module.exports = [
+  ...rootConfig,
+  {
+    ignores: ['dist', 'node_modules', 'coverage'],
+  },
+];

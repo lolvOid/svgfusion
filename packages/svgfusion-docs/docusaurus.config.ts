@@ -51,6 +51,7 @@ const config: Config = {
       return {
         name: 'webpack-plugin',
         configureWebpack(config: any) {
+          const webpack = require('webpack');
           return {
             resolve: {
               fallback: {
@@ -63,6 +64,14 @@ const config: Config = {
                 'fs/promises': false,
               },
             },
+            plugins: [
+              // Define global variables to handle Node.js globals in browser
+              new webpack.DefinePlugin({
+                __dirname: JSON.stringify('/'),
+                __filename: JSON.stringify('/index.js'),
+                global: 'globalThis',
+              }),
+            ],
           };
         },
       };

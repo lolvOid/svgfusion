@@ -133,7 +133,11 @@ export class SVGParser {
 
     // Node.js environment - use jsdom fallback
     try {
-      const { JSDOM } = require('jsdom');
+      // Use dynamic import but handle it synchronously for now
+      // This will work in Node.js environments where jsdom is available
+
+      const jsdomModule = eval('require')('jsdom');
+      const { JSDOM } = jsdomModule;
       const dom = new JSDOM(content, { contentType: 'image/svg+xml' });
       const svgElement = dom.window.document.documentElement;
 
@@ -141,9 +145,8 @@ export class SVGParser {
         throw new Error('Invalid SVG: No svg element found');
       }
 
-      // eslint-disable-next-line @typescript-eslint/no-unsafe-argument
       return this.convertDOMToSVGElement(svgElement);
-    } catch (error) {
+    } catch (_error) {
       // Fallback to regex parser if jsdom is not available
       return this.parseElementWithRegex(content);
     }

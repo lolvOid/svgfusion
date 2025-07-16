@@ -230,7 +230,6 @@ function generateIndexFile(outputDir: string, _options: CliOptions): void {
   }
 }
 
-// eslint-disable-next-line @typescript-eslint/require-await
 async function main() {
   showBanner();
 

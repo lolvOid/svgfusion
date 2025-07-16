@@ -1,17 +1,19 @@
 {
-  "name": "svgfusion-vue",
+  "name": "svgfusion-browser",
   "version": "1.0.0",
-  "description": "Vue component generator for SVGFusion",
+  "description": "Browser component generator for SVGFusion",
   "license": "MIT",
   "author": "lolvoid",
-  "main": "dist/index.js",
-  "module": "dist/index.mjs",
+  "type": "module",
+  "main": "dist/index.cjs",
+  "module": "dist/index.js",
   "types": "dist/index.d.ts",
   "exports": {
     ".": {
       "types": "./dist/index.d.ts",
-      "import": "./dist/index.mjs",
-      "require": "./dist/index.js"
+      "import": "./dist/index.js",
+      "require": "./dist/index.cjs",
+      "default": "./dist/index.js"
     }
   },
   "files": [
@@ -33,17 +35,21 @@
   },
   "dependencies": {
     "svgfusion-core": "workspace:*",
-    "svgfusion-utils": "workspace:*"
+    "svgfusion-react": "workspace:*",
+    "svgfusion-utils": "workspace:*",
+    "svgfusion-vue": "workspace:*"
   },
   "devDependencies": {
+    "@eslint/js": "^9.31.0",
     "@jest/globals": "^30.0.4",
     "@types/jest": "^30.0.0",
     "@types/node": "^20.0.0",
-    "eslint": "^8.57.0",
+    "eslint": "^9.31.0",
     "jest": "^30.0.4",
     "prettier": "^3.6.2",
     "tsup": "^8.5.0",
-    "typescript": "^5.0.0"
+    "typescript": "^5.0.0",
+    "typescript-eslint": "^8.37.0"
   },
   "engines": {
     "node": ">=18.0.0"

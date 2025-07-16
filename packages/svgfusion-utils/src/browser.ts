@@ -13,16 +13,8 @@ export {
   formatComponentName,
 } from './libs/name';
 
-// Duplicate validator
-export type {
-  DuplicateNameInfo,
-  DuplicateValidationResult,
-} from './libs/duplicate-validator';
-export {
-  validateDuplicateNames,
-  formatDuplicateErrors,
-  generateConflictResolutions,
-} from './libs/duplicate-validator';
+// Note: Duplicate validator functions require Node.js path utilities
+// and are not included in browser build
 
 // Color extractor
 export type { ColorInfo } from './libs/color-extractor';

@@ -7,8 +7,10 @@ export default defineConfig({
   splitting: false,
   sourcemap: false,
   clean: true,
-  minify: false,
+  minify: true,
   target: 'es2020',
   platform: 'neutral',
+  treeshake: true,
+  shims: true,
   external: ['svgfusion-core', 'prettier'],
 });

@@ -9,4 +9,7 @@ export default defineConfig({
   clean: true,
   minify: true,
   target: 'node18',
+  platform: 'node',
+  treeshake: true,
+  shims: true,
 });

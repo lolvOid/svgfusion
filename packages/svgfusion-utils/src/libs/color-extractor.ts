@@ -32,7 +32,7 @@ function convertToHex(color: string): string {
     // Try to parse and convert to hex
     const colorObj = colord(color);
     return colorObj.toHex();
-  } catch (error) {
+  } catch (_error) {
     // If parsing fails, return original color
     return color;
   }

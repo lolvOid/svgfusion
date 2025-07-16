@@ -1,4 +1,4 @@
-import type {ReactNode} from 'react';
+import type { ReactNode } from 'react';
 import clsx from 'clsx';
 import Heading from '@theme/Heading';
 import { Zap, Rocket, Code2 } from 'lucide-react';
@@ -16,8 +16,9 @@ const FeatureList: FeatureItem[] = [
     icon: <Zap size={48} />,
     description: (
       <>
-        Simple CLI commands and library API. Convert SVG files to React and Vue components 
-        with just one command: <code>svgfusion convert icon.svg</code>
+        Simple CLI commands and library API. Convert SVG files to React and Vue
+        components with just one command:{' '}
+        <code>svgfusion convert icon.svg</code>
       </>
     ),
   },
@@ -26,7 +27,7 @@ const FeatureList: FeatureItem[] = [
     icon: <Rocket size={48} />,
     description: (
       <>
-        Generated components include TypeScript support, proper prop types, 
+        Generated components include TypeScript support, proper prop types,
         optimization, and follow best practices for both React and Vue 3.
       </>
     ),
@@ -43,7 +44,7 @@ const FeatureList: FeatureItem[] = [
   },
 ];
 
-function Feature({title, icon, description}: FeatureItem) {
+function Feature({ title, icon, description }: FeatureItem) {
   return (
     <div className={clsx('col col--4')}>
       <div className="text--center">

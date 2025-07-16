@@ -26,12 +26,20 @@ export default defineConfig([
     splitting: false,
     sourcemap: false,
     dts: true,
-    clean: true,
-    target: 'esnext',
+    clean: false, // Don't clean to avoid conflicts with first build
+    target: 'es2020',
     outDir: 'dist',
     shims: true,
     minify: true,
     treeshake: true,
     platform: 'browser',
+    skipNodeModulesBundle: true,
+    terserOptions: {
+      compress: {
+        drop_console: true,
+        passes: 2,
+      },
+    },
+    removeNodeProtocol: true, // Remove 'node:' protocol from imports
   },
 ]);

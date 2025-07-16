@@ -12,5 +12,12 @@ export default defineConfig({
   platform: 'neutral',
   treeshake: true,
   shims: true,
-  external: ['svgfusion-core', 'prettier'],
+  skipNodeModulesBundle: true,
+  removeNodeProtocol: true,
+  external: [
+    'svgfusion-core',
+    'svgfusion-react',
+    'svgfusion-vue',
+    'svgfusion-utils',
+  ],
 });

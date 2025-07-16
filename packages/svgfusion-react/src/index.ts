@@ -1,3 +1,3 @@
 // Tree-shakable exports for better bundling
-export { ReactGenerator } from './react';
-export type { ReactGeneratorOptions } from './react';
+export { ReactGenerator } from './libs/react';
+export type { ReactGeneratorOptions } from './libs/react';

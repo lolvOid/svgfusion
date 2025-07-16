@@ -42,10 +42,10 @@
     "test": "pnpm -r --filter='!svgfusion-docs' --filter='!svgfusion-demo' test",
     "test:coverage": "pnpm -r --filter='!svgfusion-docs' --filter='!svgfusion-demo' test:coverage",
     "test:watch": "pnpm -r --filter='!svgfusion-docs' --filter='!svgfusion-demo' test:watch",
-    "lint": "pnpm -r --filter='!svgfusion-docs' --filter='!svgfusion-demo' lint",
-    "lint:fix": "pnpm -r --filter='!svgfusion-docs' --filter='!svgfusion-demo' lint:fix",
-    "format": "pnpm -r --filter='!svgfusion-docs' --filter='!svgfusion-demo' format",
-    "format:check": "pnpm -r --filter='!svgfusion-docs' --filter='!svgfusion-demo' format:check",
+    "lint": "pnpm -r --filter='!svgfusion-demo' lint",
+    "lint:fix": "pnpm -r --filter='!svgfusion-demo' lint:fix",
+    "format": "pnpm -r --filter='!svgfusion-demo' format",
+    "format:check": "pnpm -r --filter='!svgfusion-demo' format:check",
     "type-check": "pnpm -r --filter='!svgfusion-docs' --filter='!svgfusion-demo' type-check",
     "clean": "pnpm -r clean",
     "prepare": "husky install"
@@ -53,22 +53,22 @@
   "devDependencies": {
     "@commitlint/cli": "^17.8.1",
     "@commitlint/config-conventional": "^17.8.1",
+    "@eslint/js": "^9.31.0",
     "@jest/globals": "^30.0.4",
     "@semantic-release/changelog": "^6.0.3",
     "@semantic-release/git": "^10.0.1",
     "@semantic-release/github": "^11.0.3",
     "@semantic-release/npm": "^12.0.2",
     "@types/node": "^20.0.0",
-    "@typescript-eslint/eslint-plugin": "^6.21.0",
-    "@typescript-eslint/parser": "^6.21.0",
-    "eslint": "^8.57.0",
+    "eslint": "^9.31.0",
     "husky": "^8.0.3",
     "jest": "^30.0.4",
     "lint-staged": "^15.2.2",
     "nodemon": "^3.1.10",
     "prettier": "^3.6.2",
     "semantic-release": "^24.2.6",
-    "typescript": "^5.0.0"
+    "typescript": "^5.0.0",
+    "typescript-eslint": "^8.37.0"
   },
   "engines": {
     "node": ">=18.0.0"

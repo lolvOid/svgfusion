@@ -2,13 +2,20 @@
   "name": "svgfusion-core",
   "version": "1.0.0",
   "description": "",
-  "main": "dist/index.js",
-  "module": "dist/index.mjs",
+  "type": "module",
+  "main": "dist/index.cjs",
+  "module": "dist/index.js",
   "types": "dist/index.d.ts",
   "exports": {
     ".": {
-      "import": "./dist/index.mjs",
-      "require": "./dist/index.js"
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js",
+      "require": "./dist/index.cjs"
+    },
+    "./browser": {
+      "types": "./dist/browser.d.ts",
+      "import": "./dist/browser.mjs",
+      "require": "./dist/browser.js"
     }
   },
   "files": [
@@ -50,17 +57,13 @@
     "test": "NODE_OPTIONS=\"--experimental-vm-modules\" jest",
     "test:coverage": "NODE_OPTIONS=\"--experimental-vm-modules\" jest --coverage --json --testLocationInResults --outputFile=./coverage/coverage-summary.json",
     "test:watch": "NODE_OPTIONS=\"--experimental-vm-modules\" jest --watch",
-    "lint": "eslint src/**/*.ts tests/**/*.ts",
-    "lint:fix": "eslint src/**/*.ts tests/**/*.ts --fix",
-    "format": "prettier --write src/**/*.ts tests/**/*.ts *.md",
-    "format:check": "prettier --check src/**/*.ts tests/**/*.ts *.md",
+    "lint": "eslint src/**/*.ts",
+    "lint:fix": "eslint src/**/*.ts --fix",
+    "format": "prettier --write src/**/*.ts",
+    "format:check": "prettier --check src/**/*.ts",
     "type-check": "tsc --noEmit",
     "clean": "rm -rf dist",
     "dev:docs": "cd docs && pnpm run start",
-    "demo": "node scripts/run_demo.js",
-    "demo:generate": "node scripts/run_demo.js generate",
-    "demo:run": "node scripts/run_demo.js run",
-    "demo:install": "node scripts/run_demo.js install",
     "build:docs": "cd docs && pnpm run build"
   },
   "dependencies": {
@@ -70,6 +73,7 @@
     "zod": "^4.0.5"
   },
   "devDependencies": {
+    "@eslint/js": "9.31.0",
     "@jest/globals": "^30.0.4",
     "@semantic-release/changelog": "^6.0.3",
     "@semantic-release/git": "^10.0.1",
@@ -79,16 +83,15 @@
     "@types/jsdom": "^21.1.7",
     "@types/node": "^20.0.0",
     "@types/prettier": "^3.0.0",
-    "@typescript-eslint/eslint-plugin": "^6.21.0",
-    "@typescript-eslint/parser": "^6.21.0",
-    "eslint": "^8.57.0",
+    "eslint": "^9.31.0",
     "jest": "^30.0.4",
     "nodemon": "^3.1.10",
     "prettier": "^3.6.2",
     "semantic-release": "^24.2.6",
     "ts-jest": "^29.4.0",
     "tsup": "^8.5.0",
-    "typescript": "^5.0.0"
+    "typescript": "^5.0.0",
+    "typescript-eslint": "8.37.0"
   },
   "engines": {
     "node": ">=18.0.0"
