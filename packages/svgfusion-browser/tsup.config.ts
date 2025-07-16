@@ -13,22 +13,31 @@ export default defineConfig({
   treeshake: true,
   shims: true,
   bundle: true,
+  terserOptions: {
+    compress: {
+      drop_console: true,
+      passes: 2,
+    },
+    output: {
+      comments: false,
+    },
+  },
   noExternal: [
-    'svgfusion-core',
+    'svgfusion-core/browser',
     'svgfusion-react',
     'svgfusion-vue',
+    'svgfusion-utils/browser',
   ],
   external: [
-    'fs', 
-    'path', 
+    'fs',
+    'path',
     'fs/promises',
-    'svgfusion-utils',
     'prettier',
     'module',
     'url',
     'process',
     'assert',
     'v8',
-    'util'
+    'util',
   ],
 });
