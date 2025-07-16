@@ -95,9 +95,9 @@ jobs:
             const fs = require('fs');
             const bundleSize = fs.readFileSync('bundle-size.txt', 'utf8');
 
-            // Parse bundle size report and format as markdown table
+            // Parse bundle size report and format as markdown sections
             const lines = bundleSize.split('\n');
-            let tableRows = [];
+            let packages = {};
             let currentPackage = '';
             let currentFile = '';
             let originalSize = '';
@@ -106,6 +106,7 @@ jobs:
             for (const line of lines) {
               if (line.startsWith('## ')) {
                 currentPackage = line.replace('## ', '');
+                packages[currentPackage] = [];
               } else if (line.startsWith('📄 ')) {
                 currentFile = line.replace('📄 ', '');
               } else if (line.includes('Original:')) {
@@ -113,22 +114,70 @@ jobs:
               } else if (line.includes('Gzipped:')) {
                 gzippedSize = line.replace('  Gzipped: ', '').trim();
                 if (currentPackage && currentFile && originalSize && gzippedSize) {
-                  tableRows.push(`| **${currentPackage}** | \`${currentFile}\` | ${originalSize} | ${gzippedSize} |`);
+                  packages[currentPackage].push({
+                    file: currentFile,
+                    original: originalSize,
+                    gzipped: gzippedSize
+                  });
                   currentFile = originalSize = gzippedSize = '';
                 }
               }
             }
 
-            const comment = `## 📦 SVGFusion Bundle Size Report
+            // Generate markdown sections for each package
+            let packageSections = [];
+            for (const [packageName, files] of Object.entries(packages)) {
+              if (files.length > 0) {
+                let section = `### ${packageName}\n\n`;
+                section += `| File | Original | Gzipped |\n`;
+                section += `|------|----------|----------|\n`;
+                
+                files.forEach(file => {
+                  section += `| \`${file.file}\` | \`${file.original}\` | \`${file.gzipped}\` |\n`;
+                });
+                
+                packageSections.push(section);
+              }
+            }
 
-            | Package | File | Original | Gzipped |
-            |---------|------|----------|---------|
-            ${tableRows.join('\n')}
+            const totalFiles = Object.values(packages).reduce((sum, files) => sum + files.length, 0);
+            const totalPackages = Object.keys(packages).length;
 
-            > 💡 This report shows bundle sizes for all SVGFusion packages (excluding demo and docs).
-            > Dynamic imports (like prettier) are not included in bundle sizes.
+            const comment = `## Bundle Size Report
 
-            <sub>Generated for commit [\`${context.sha.substring(0, 7)}\`](https://github.com/${context.repo.owner}/${context.repo.repo}/commit/${context.sha})</sub>`;
+            ${packageSections.length > 0 ? packageSections.join('\n') : '> No bundle files found to analyze.'}
+
+            ---
+
+            **Summary**
+            - Total packages analyzed: ${totalPackages}
+            - Total files: ${totalFiles}
+            - Dynamic imports: Prettier is loaded dynamically (not bundled)
+
+            **What's included**
+            - Core packages: svgfusion-core, svgfusion-utils, svgfusion-bundle
+            - Framework packages: svgfusion-react, svgfusion-vue  
+            - CLI & Browser: svgfusion-cli, svgfusion-browser
+            - Excluded: demo packages, docs, development tools
+
+            **Notes**
+            - Bundle sizes show the actual distributed code size
+            - Gzipped sizes reflect real-world network transfer
+            - Dynamic imports (prettier) don't affect bundle size
+            - All packages use modern ES modules + CommonJS
+
+            <details>
+            <summary>Workflow Details</summary>
+
+            - **Commit**: [\`${context.sha.substring(0, 7)}\`](https://github.com/${context.repo.owner}/${context.repo.repo}/commit/${context.sha})
+            - **Triggered by**: ${context.eventName}
+            - **Branch**: ${context.ref.replace('refs/heads/', '')}
+            - **Generated**: ${new Date().toISOString()}
+
+            </details>
+
+            ---
+            <sub>This comment updates automatically on new commits</sub>`;
 
             // Find existing comment from this bot
             const { data: comments } = await github.rest.issues.listComments({
@@ -139,7 +188,7 @@ jobs:
 
             const existingComment = comments.find(comment =>
               comment.user.login === 'github-actions[bot]' &&
-              comment.body.includes('📦 SVGFusion Bundle Size Report')
+              comment.body.includes('Bundle Size Report')
             );
 
             if (existingComment) {
