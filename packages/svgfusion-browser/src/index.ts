@@ -399,7 +399,7 @@ import {
   sanitizeComponentName,
   pascalCase,
   formatComponentName,
-} from 'svgfusion-utils/browser';
+} from 'svgfusion-utils';
 
 export {
   svgToComponentName,

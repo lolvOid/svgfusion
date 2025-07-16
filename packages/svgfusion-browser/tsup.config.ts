@@ -39,5 +39,11 @@ export default defineConfig({
     'assert',
     'v8',
     'util',
+    'os',
+    'chalk',
+    'commander',
+    'jsdom',
+    'zod',
+    'figlet',
   ],
 });

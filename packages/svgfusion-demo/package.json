@@ -7,11 +7,13 @@
   "type": "commonjs",
   "main": "index.js",
   "scripts": {
-    "start": "node index.js ",
+    "start": "node index.js all",
+    "install-all": "pnpm install-react && pnpm install-vue",
     "install-react": "cd demo-react && pnpm install",
     "install-vue": "cd demo-vue && pnpm install"
   },
   "dependencies": {
+    "svgfusion": "workspace:*",
     "svgfusion-core": "workspace:*",
     "svgfusion-react": "workspace:*",
     "svgfusion-vue": "workspace:*",

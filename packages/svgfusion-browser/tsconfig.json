@@ -16,7 +16,8 @@
       "@/*": ["src/*"]
     },
     "lib": ["ES2022", "DOM"],
-    "types": ["node", "jest"]
+    "types": ["node", "jest"],
+    "preserveSymlinks": true
   },
   "include": ["src/**/*", "tests/**/*"],
   "exclude": ["node_modules", "dist"]

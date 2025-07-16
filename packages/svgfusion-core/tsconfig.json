@@ -16,7 +16,8 @@
       "svgfusion-utils": ["../svgfusion-utils/src/index.ts"]
     },
     "lib": ["ES2022", "DOM"],
-    "types": ["node", "jest"]
+    "types": ["node", "jest"],
+    "preserveSymlinks": true
   },
   "include": [
     "src/**/*",

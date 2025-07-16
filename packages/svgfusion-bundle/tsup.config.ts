@@ -42,6 +42,23 @@ export default defineConfig([
     platform: 'browser',
     bundle: true,
     noExternal: ['svgfusion-browser'],
+    external: [
+      'fs',
+      'path',
+      'fs/promises',
+      'figlet',
+      'chalk',
+      'commander',
+      'jsdom',
+      'zod',
+      'os',
+      'util',
+      'process',
+      'assert',
+      'v8',
+      'module',
+      'url',
+    ],
     terserOptions: {
       output: {
         comments: false,

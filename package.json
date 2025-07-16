@@ -3,9 +3,6 @@
   "version": "1.0.0",
   "private": true,
   "description": "SVGFusion monorepo - Convert SVG files to React/Vue components",
-  "workspaces": [
-    "packages/*"
-  ],
   "packageManager": "pnpm@10.13.1",
   "keywords": [
     "svg",
