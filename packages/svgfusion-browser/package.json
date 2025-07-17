@@ -3,6 +3,9 @@
   "version": "1.0.0",
   "description": "Browser-optimized package for converting SVG files into React and Vue 3 components with TypeScript support and native SVG props inheritance.",
   "license": "MIT",
+  "publishConfig": {
+    "access": "public"
+  },
   "author": "lolvoid",
   "homepage": "https://svgfusion.netlify.app",
   "keywords": [

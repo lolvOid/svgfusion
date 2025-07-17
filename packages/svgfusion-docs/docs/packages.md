@@ -61,7 +61,6 @@ npm install svgfusion-browser
 **Features:**
 
 - Zero Node.js dependencies
-- Lightweight bundle (~15KB gzipped)
 - Real-time conversion
 - Framework support (React & Vue)
 - Perfect for online editors
@@ -100,7 +99,6 @@ npx svgfusion ./icons --output ./components
 | **CLI Support**  | ✅               | ✅                | ❌                |
 | **Node.js API**  | ✅               | ❌                | ❌                |
 | **Browser API**  | ✅               | ❌                | ✅                |
-| **Bundle Size**  | ~45KB            | ~25KB             | ~15KB             |
 | **Dependencies** | Full             | CLI optimized     | Zero runtime      |
 | **Use Case**     | Complete toolkit | Command-line only | Browser-only      |
 

@@ -23,10 +23,14 @@
     "release:cli": "pnpm --filter=svgfusion-cli run release",
     "release:browser": "pnpm --filter=svgfusion-browser run release",
     "release:all": "pnpm run release:bundle && pnpm run release:cli && pnpm run release:browser",
-    "prerelease:bundle": "pnpm --filter=svgfusion run release:dry",
-    "prerelease:cli": "pnpm --filter=svgfusion-cli run release:dry",
-    "prerelease:browser": "pnpm --filter=svgfusion-browser run release:dry",
-    "prerelease:all": "pnpm run prerelease:bundle && pnpm run prerelease:cli && pnpm run prerelease:browser"
+    "prerelease:bundle": "pnpm --filter=svgfusion run release",
+    "prerelease:cli": "pnpm --filter=svgfusion-cli run release",
+    "prerelease:browser": "pnpm --filter=svgfusion-browser run release",
+    "prerelease:all": "pnpm run prerelease:bundle && pnpm run prerelease:cli && pnpm run prerelease:browser",
+    "dry-run:bundle": "pnpm --filter=svgfusion run release:dry",
+    "dry-run:cli": "pnpm --filter=svgfusion-cli run release:dry",
+    "dry-run:browser": "pnpm --filter=svgfusion-browser run release:dry",
+    "dry-run:all": "pnpm run dry-run:bundle && pnpm run dry-run:cli && pnpm run dry-run:browser"
   },
   "devDependencies": {
     "@commitlint/cli": "^17.8.1",

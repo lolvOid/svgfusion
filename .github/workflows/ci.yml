@@ -150,7 +150,7 @@ jobs:
         with:
           node-version: '20.x'
           cache: 'pnpm'
-          registry-url: 'https://registry.npmjs.org'
+          registry-url: 'https://npm.pkg.github.com'
 
       - name: Cache pnpm store
         uses: actions/cache@v4
@@ -169,7 +169,8 @@ jobs:
       - name: Release beta svgfusion (bundle)
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+          NODE_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          SEMANTIC_RELEASE_REGISTRY: 'https://npm.pkg.github.com'
         run: pnpm run prerelease:all
 
       - name: Build documentation
