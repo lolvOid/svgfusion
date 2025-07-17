@@ -1,7 +1,7 @@
 {
   "name": "svgfusion",
   "version": "1.24.1",
-  "description": "A powerful CLI tool and library that converts SVG files into production-ready React and Vue 3 components with native SVG props inheritance, TypeScript support, and custom SVGFusion engine.",
+  "description": "Convert SVG files into blazing-fast React and Vue 3 components with automatic color extraction, full TypeScript support, and seamless integration into any modern workflow.",
   "type": "module",
   "main": "dist/index.js",
   "module": "dist/index.js",
@@ -51,14 +51,7 @@
   ],
   "author": "lolvoid",
   "license": "MIT",
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/lolvOid/svgfusion.git"
-  },
   "homepage": "https://svgfusion.netlify.app",
-  "bugs": {
-    "url": "https://github.com/lolvOid/svgfusion/issues"
-  },
   "scripts": {
     "build": "tsup && chmod +x dist/cli.cjs",
     "dev": "tsup --watch",
@@ -115,6 +108,7 @@
     "nodemon": "^3.1.10",
     "prettier": "^3.6.2",
     "semantic-release": "^24.2.6",
+    "semantic-release-monorepo": "^8.0.2",
     "ts-jest": "^29.4.0",
     "tsup": "^8.5.0",
     "typescript": "^5.6.2",

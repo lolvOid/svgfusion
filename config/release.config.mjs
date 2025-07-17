@@ -1,10 +1,15 @@
-// Semantic Release config
-const config = () => {
-  const packageName = 'svgfusion';
+const releaseConfig = name => {
+  const packageName = name;
 
   /** @type {import('semantic-release').Options} */
-  const semanticReleaseConfig = {
-    branches: ['main', { name: '*', prerelease: 'beta' }],
+  const config = {
+    branches: [
+      'main',
+      {
+        name: '*',
+        prerelease: 'beta',
+      },
+    ],
     plugins: [
       '@semantic-release/commit-analyzer',
       '@semantic-release/release-notes-generator',
@@ -21,27 +26,32 @@ const config = () => {
         },
       ],
       [
-        '@semantic-release/github',
+        '@semantic-release/git',
         {
           assets: [
+            'package.json',
+            'CHANGELOG.md',
             {
               path: 'dist/**/*',
               label: 'Built distribution',
             },
           ],
+          message: `chore(${packageName}): \${nextRelease.version} [skip ci]\n\n\${nextRelease.notes}`,
         },
       ],
       [
-        '@semantic-release/git',
+        '@semantic-release/github',
         {
-          assets: ['CHANGELOG.md', 'package.json', 'package-lock.json'],
-          message: `chore(release): \${nextRelease.version} [skip ci]\n\n\${nextRelease.notes}`,
+          labels: false,
+          releasedLabels: false,
         },
       ],
     ],
+    tagFormat: `${name}@\${version}`,
+    extends: ['semantic-release-monorepo'],
   };
 
-  return semanticReleaseConfig;
+  return config;
 };
 
-module.exports = config();
+export default releaseConfig;

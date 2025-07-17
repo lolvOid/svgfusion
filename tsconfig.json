@@ -1,0 +1,38 @@
+{
+  "compilerOptions": {
+    "target": "ES2020",
+    "module": "ESNext",
+    "moduleResolution": "node",
+    "strict": true,
+    "esModuleInterop": true,
+    "allowSyntheticDefaultImports": true,
+    "forceConsistentCasingInFileNames": true,
+    "skipLibCheck": true,
+    "resolveJsonModule": true,
+    "declaration": true,
+    "declarationMap": true,
+    "sourceMap": true,
+    "outDir": "./dist",
+    "rootDir": "./src",
+    "composite": true,
+    "incremental": true,
+    "allowJs": true
+  },
+  "references": [
+    { "path": "./packages/svgfusion-core" },
+    { "path": "./packages/svgfusion-utils" },
+    { "path": "./packages/svgfusion-react" },
+    { "path": "./packages/svgfusion-vue" },
+    { "path": "./packages/svgfusion-browser" },
+    { "path": "./packages/svgfusion-cli" },
+    { "path": "./packages/svgfusion-bundle" }
+  ],
+  "exclude": [
+    "node_modules",
+    "dist",
+    "coverage",
+    "build",
+    "packages/svgfusion-docs",
+    "packages/svgfusion-demo"
+  ]
+}

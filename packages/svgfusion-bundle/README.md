@@ -16,6 +16,19 @@ Convert SVG files into blazing-fast React and Vue 3 components with automatic co
 
 </div>
 
+## 📦 SVGFusion Packages
+
+SVGFusion is now available as a monorepo with specialized packages:
+
+- **[svgfusion](https://www.npmjs.com/package/svgfusion)** - Complete toolkit (this package)
+- **[svgfusion-cli](https://www.npmjs.com/package/svgfusion-cli)** - Command-line interface
+- **[svgfusion-browser](https://www.npmjs.com/package/svgfusion-browser)** - Browser-optimized package
+- **[svgfusion-core](https://www.npmjs.com/package/svgfusion-core)** - Core engine
+- **[svgfusion-react](https://www.npmjs.com/package/svgfusion-react)** - React utilities
+- **[svgfusion-vue](https://www.npmjs.com/package/svgfusion-vue)** - Vue utilities
+
+> **Note**: This package (`svgfusion`) includes everything you need. Install individual packages only if you need specific functionality.
+
 ## Features
 
 - **Advanced Transformations**: Comprehensive transformation options including color splitting, stroke width extraction, fixed stroke width, and fill/stroke normalization
@@ -604,7 +617,7 @@ Contributions are welcome! Please read [CONTRIBUTING.md](./CONTRIBUTING.md) for 
 
 See [CHANGELOG.md](./CHANGELOG.md) for details.
 
-### Browser Usage (New!)
+### Browser Usage
 
 SVGFusion now supports browser environments! Convert SVG strings to component code without writing files.
 

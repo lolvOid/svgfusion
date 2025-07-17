@@ -17,7 +17,9 @@
     },
     "lib": ["ES2022", "DOM"],
     "types": ["node", "jest"],
-    "preserveSymlinks": true
+    "preserveSymlinks": true,
+    "resolveJsonModule": true,
+    "composite": true
   },
   "include": ["src/**/*", "tests/**/*"],
   "exclude": ["node_modules", "dist"]

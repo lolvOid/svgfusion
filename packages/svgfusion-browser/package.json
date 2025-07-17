@@ -1,9 +1,24 @@
 {
   "name": "svgfusion-browser",
   "version": "1.0.0",
-  "description": "Browser component generator for SVGFusion",
+  "description": "Browser-optimized package for converting SVG files into React and Vue 3 components with TypeScript support and native SVG props inheritance.",
   "license": "MIT",
   "author": "lolvoid",
+  "homepage": "https://svgfusion.netlify.app",
+  "keywords": [
+    "svg",
+    "react",
+    "vue",
+    "vue3",
+    "component",
+    "converter",
+    "browser",
+    "jsx",
+    "tsx",
+    "typescript",
+    "frontend",
+    "icon"
+  ],
   "type": "module",
   "main": "dist/index.cjs",
   "module": "dist/index.js",
@@ -31,7 +46,9 @@
     "format": "prettier --write src/**/*.ts",
     "format:check": "prettier --check src/**/*.ts",
     "type-check": "tsc --noEmit",
-    "clean": "rm -rf dist"
+    "clean": "rm -rf dist",
+    "release": "semantic-release",
+    "release:dry": "semantic-release --dry-run"
   },
   "dependencies": {
     "svgfusion-core": "workspace:*",
@@ -44,9 +61,15 @@
     "@jest/globals": "^30.0.4",
     "@types/jest": "^30.0.0",
     "@types/node": "^20.0.0",
+    "@semantic-release/changelog": "^6.0.3",
+    "@semantic-release/git": "^10.0.1",
+    "@semantic-release/github": "^11.0.3",
+    "@semantic-release/npm": "^12.0.2",
     "eslint": "^9.31.0",
     "jest": "^30.0.4",
     "prettier": "^3.6.2",
+    "semantic-release": "^24.2.6",
+    "semantic-release-monorepo": "^8.0.2",
     "tsup": "^8.5.0",
     "typescript": "^5.0.0",
     "typescript-eslint": "^8.37.0"
