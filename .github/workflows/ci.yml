@@ -57,6 +57,9 @@ jobs:
       - name: Run linter
         run: pnpm run lint
 
+      - name: Build packages
+        run: pnpm run build
+
       - name: Run tests
         run: pnpm run test:coverage
 
