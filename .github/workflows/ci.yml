@@ -114,19 +114,7 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
-        run: pnpm exec --filter=svgfusion-bundle semantic-release
-
-      - name: Release svgfusion-cli
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
-        run: pnpm exec --filter=svgfusion-cli semantic-release
-
-      - name: Release svgfusion-browser
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
-        run: pnpm exec --filter=svgfusion-browser semantic-release
+        run: pnpm run release:all
 
       - name: Build documentation
         env:
@@ -182,19 +170,7 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
-        run: pnpm exec --filter=svgfusion-bundle semantic-release --pre-release
-
-      - name: Release beta svgfusion-cli
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
-        run: pnpm exec --filter=svgfusion-cli semantic-release --pre-release
-
-      - name: Release beta svgfusion-browser
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
-        run: pnpm exec --filter=svgfusion-browser semantic-release --pre-release
+        run: pnpm run prerelease:all
 
       - name: Build documentation
         env:
