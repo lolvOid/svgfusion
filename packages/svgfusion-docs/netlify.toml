@@ -1,7 +1,7 @@
 [build]
-  base = "docs"
-  publish = "build"
-  command = "pnpm install --frozen-lockfile && pnpm run build"
+  base = "packages/svgfusion-docs"
+  publish = "packages/svgfusion-docs/build"
+  command = "cd ../.. && pnpm install --frozen-lockfile && pnpm exec --filter=svgfusion-docs build"
 
 [build.environment]
   NODE_VERSION = "20"
@@ -40,11 +40,11 @@
 
 # PR preview context
 [context.deploy-preview]
-  command = "pnpm install --frozen-lockfile && pnpm run build"
+  command = "cd ../.. && pnpm install --frozen-lockfile && pnpm exec --filter=svgfusion-docs build"
 
 [context.branch-deploy]
-  command = "pnpm install --frozen-lockfile && pnpm run build"
+  command = "cd ../.. && pnpm install --frozen-lockfile && pnpm exec --filter=svgfusion-docs build"
 
 # Production context
 [context.production]
-  command = "pnpm install --frozen-lockfile && pnpm run build"
+  command = "cd ../.. && pnpm install --frozen-lockfile && pnpm exec --filter=svgfusion-docs build"
