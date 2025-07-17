@@ -5,10 +5,14 @@ const releaseConfig = name => {
   const config = {
     branches: [
       'main',
-      { name: 'refactor/**', prerelease: 'refactor' },
-      { name: 'feature/**', prerelease: 'feature' },
-      { name: 'fix/**', prerelease: 'fix' },
-      { name: 'chore/**', prerelease: 'chore' },
+      { name: 'next', prerelease: 'next' },
+      { name: 'beta', prerelease: 'beta' },
+      { name: 'alpha', prerelease: 'alpha' },
+      { name: 'canary', prerelease: 'canary' },
+      { name: 'feature/**', prerelease: 'beta' },
+      { name: 'refactor/**', prerelease: 'beta' },
+      { name: 'ci-**', prerelease: 'ci' },
+      { name: '**', prerelease: true },
     ],
     ci: false,
     dryRun: false,
