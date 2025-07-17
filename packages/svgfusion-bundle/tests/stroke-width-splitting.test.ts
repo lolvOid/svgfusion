@@ -129,9 +129,9 @@ describe('Stroke Width Splitting Feature', () => {
         VueGenerator
       );
 
-      expect(result.code).toContain("strokeWidth = '1'");
-      expect(result.code).toContain("strokeWidth2 = '2'");
-      expect(result.code).toContain("strokeWidth3 = '3'");
+      expect(result.code).toContain("strokeWidth: '1'");
+      expect(result.code).toContain("strokeWidth2: '2'");
+      expect(result.code).toContain("strokeWidth3: '3'");
     });
   });
 

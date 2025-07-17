@@ -32,6 +32,15 @@ export interface BrowserConversionResult extends ConversionResult {
   framework: 'react' | 'vue';
   typescript: boolean;
   dependencies: string[];
+  code: string;
+  filename: string;
+  componentName: string;
+  metadata: {
+    originalColors: string[];
+    originalStrokeWidths: string[];
+    optimizationApplied: boolean;
+    features: string[];
+  };
 }
 
 /**

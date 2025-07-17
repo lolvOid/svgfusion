@@ -311,6 +311,4 @@ export function runCli() {
   });
 }
 
-runCli();
-
 export default runCli;

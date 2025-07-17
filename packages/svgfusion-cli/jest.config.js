@@ -1,8 +1,8 @@
-export default {
+module.exports = {
   preset: 'ts-jest',
   testEnvironment: 'node',
   extensionsToTreatAsEsm: ['.ts'],
-  moduleNameMapping: {
+  moduleNameMapper: {
     '^(\\.{1,2}/.*)\\.js$': '$1',
   },
   transform: {
@@ -13,6 +13,7 @@ export default {
       },
     ],
   },
+  passWithNoTests: true,
   testMatch: ['**/__tests__/**/*.(t|j)s?(x)', '**/*.(test|spec).(t|j)s?(x)'],
   collectCoverageFrom: [
     'src/**/*.(t|j)s?(x)',

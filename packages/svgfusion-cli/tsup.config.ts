@@ -1,7 +1,7 @@
 import { defineConfig } from 'tsup';
 
 export default defineConfig({
-  entry: ['src/index.ts'],
+  entry: ['src/index.ts', 'src/main.ts'],
   format: ['cjs', 'esm'],
   dts: true,
   splitting: false,
@@ -17,7 +17,7 @@ export default defineConfig({
     'svgfusion-core',
     'svgfusion-utils',
     'svgfusion-react',
-    'svgfusion-vue'
+    'svgfusion-vue',
   ],
   external: ['commander', 'figlet'],
 });

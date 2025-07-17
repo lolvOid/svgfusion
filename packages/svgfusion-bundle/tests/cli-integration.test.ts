@@ -1,9 +1,19 @@
 import { execSync } from 'child_process';
 import { existsSync, rmSync, mkdirSync, readdirSync } from 'fs';
-import { join } from 'path';
+import { join, dirname } from 'path';
+import { fileURLToPath } from 'url';
 
-const EXAMPLES_DIR = join(__dirname, '..', 'svgfusion-demo', 'svgs');
-const NESTED_EXAMPLES_DIR = join(__dirname, '..', 'svgfusion-demo', 'svgs');
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = dirname(__filename);
+
+const EXAMPLES_DIR = join(__dirname, '..', '..', 'svgfusion-demo', 'svgs');
+const NESTED_EXAMPLES_DIR = join(
+  __dirname,
+  '..',
+  '..',
+  'svgfusion-demo',
+  'svgs'
+);
 const TEST_OUTPUT_DIR = join(__dirname, 'test-output');
 
 describe('CLI Integration Tests', () => {
@@ -38,7 +48,7 @@ describe('CLI Integration Tests', () => {
   });
 
   describe('CLI Usage Tests', () => {
-    const CLI_PATH = join(__dirname, '..', 'dist', 'cli.js');
+    const CLI_PATH = join(__dirname, '..', 'dist', 'cli.cjs');
 
     beforeEach(() => {
       // Build the CLI if it doesn't exist

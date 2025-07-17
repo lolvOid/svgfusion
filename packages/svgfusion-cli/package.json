@@ -36,7 +36,7 @@
     "README.md"
   ],
   "bin": {
-    "svgfusion-cli": "dist/index.js"
+    "svgfusion-cli": "dist/main.js"
   },
   "scripts": {
     "build": "tsup",
