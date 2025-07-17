@@ -172,6 +172,9 @@ jobs:
           NODE_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           SEMANTIC_RELEASE_REGISTRY: 'https://npm.pkg.github.com'
           GITHUB_EVENT_NAME: 'push'
+          GITHUB_REF: refs/heads/${{ github.head_ref }}
+          GITHUB_SHA: ${{ github.event.pull_request.head.sha }}
+          GITHUB_HEAD_REF: ${{ github.head_ref }}
         run: pnpm run prerelease:all
 
       - name: Build documentation
