@@ -110,7 +110,7 @@ jobs:
       - name: Build packages
         run: pnpm run build
 
-      - name: Release svgfusion (bundle)
+      - name: Release svgfusion
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
@@ -119,7 +119,7 @@ jobs:
       - name: Build documentation
         env:
           GOOGLE_SITE_VERIFICATION: ${{ secrets.GOOGLE_SITE_VERIFICATION }}
-        run: pnpm exec --filter=svgfusion-docs build
+        run: pnpm --filter=svgfusion-docs run build
 
       - name: Upload documentation artifacts
         uses: actions/upload-artifact@v4
@@ -175,7 +175,7 @@ jobs:
       - name: Build documentation
         env:
           GOOGLE_SITE_VERIFICATION: ${{ secrets.GOOGLE_SITE_VERIFICATION }}
-        run: pnpm exec --filter=svgfusion-docs build
+        run: pnpm --filter=svgfusion-docs run build
 
       - name: Upload documentation artifacts
         uses: actions/upload-artifact@v4
