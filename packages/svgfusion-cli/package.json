@@ -1,6 +1,6 @@
 {
   "name": "svgfusion-cli",
-  "version": "1.0.0",
+  "version": "1.0.0-refactor.1",
   "description": "Command-line interface for converting SVG files into React and Vue 3 components with TypeScript support and batch processing capabilities.",
   "license": "MIT",
   "publishConfig": {
