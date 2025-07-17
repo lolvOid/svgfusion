@@ -10,7 +10,7 @@
     "build": "pnpm -r --workspace-concurrency=1 --filter='!svgfusion-docs' --filter='!svgfusion-demo' build",
     "dev": "pnpm -r --parallel dev",
     "test": "pnpm -r --filter='!svgfusion-docs' --filter='!svgfusion-demo' test",
-    "test:coverage": "pnpm -r --filter='!svgfusion-docs' --filter='!svgfusion-demo' test:coverage",
+    "test:coverage": "pnpm -r --filter='svgfusion' run test:coverage",
     "test:watch": "pnpm -r --filter='!svgfusion-docs' --filter='!svgfusion-demo' test:watch",
     "lint": "pnpm -r --filter='!svgfusion-demo' lint",
     "lint:fix": "pnpm -r --filter='!svgfusion-demo' lint:fix",
