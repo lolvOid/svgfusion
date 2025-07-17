@@ -166,11 +166,12 @@ jobs:
       - name: Build packages
         run: pnpm run build
 
-      - name: Release beta svgfusion (bundle)
+      - name: Release beta svgfusion
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           NODE_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           SEMANTIC_RELEASE_REGISTRY: 'https://npm.pkg.github.com'
+          GITHUB_EVENT_NAME: 'push'
         run: pnpm run prerelease:all
 
       - name: Build documentation
