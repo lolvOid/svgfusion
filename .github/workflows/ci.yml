@@ -11,12 +11,6 @@ permissions:
 
 on:
   push:
-    branches:
-      - 'main'
-      - 'refactor/**'
-      - 'feature/**'
-      - 'fix/**'
-      - 'chore/**'
   pull_request:
     branches:
       - '**'
@@ -135,7 +129,7 @@ jobs:
     name: Release Beta
     runs-on: ubuntu-latest
     needs: [test]
-    if: github.event_name == 'pull_request' && github.event_name == 'push'
+    if: github.event_name == 'pull_request'
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
