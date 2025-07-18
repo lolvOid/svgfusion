@@ -75,7 +75,7 @@ jobs:
     name: Release
     runs-on: ubuntu-latest
     needs: [test]
-    if: github.event_name == 'push' && github.ref == 'refs/heads/main'
+    if: github.event_name == 'push' && github.head_ref == 'refs/heads/main'
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
@@ -130,7 +130,7 @@ jobs:
     name: Release Beta
     runs-on: ubuntu-latest
     needs: [test]
-    if: github.event_name == 'push' && github.ref != 'refs/heads/main'
+    if: github.event_name == 'push' && github.head_ref != 'refs/heads/main'
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
@@ -190,7 +190,7 @@ jobs:
     name: Production Deployment
     runs-on: ubuntu-latest
     needs: [release]
-    if: github.event_name == 'push' && github.ref == 'refs/heads/main'
+    if: github.event_name == 'push' && github.head_ref == 'refs/heads/main'
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
@@ -220,7 +220,7 @@ jobs:
     name: Preview Deployment
     runs-on: ubuntu-latest
     needs: [release_beta]
-    if: github.event_name == 'push' && github.ref != 'refs/heads/main'
+    if: github.event_name == 'push' && github.head_ref != 'refs/heads/main'
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
