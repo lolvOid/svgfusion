@@ -1,3 +1,10 @@
+# [svgfusion-v1.24.2-beta.1](https://github.com/lolvOid/svgfusion/compare/svgfusion@1.24.1...svgfusion@1.24.2-beta.1) (2025-07-18)
+
+
+### Bug Fixes
+
+* update CI conditions for release jobs and enhance release configuration for better branch handling ([be7d405](https://github.com/lolvOid/svgfusion/commit/be7d405aa00a3705776f5b4ef4e1c10091cd0abf))
+
 # svgfusion-v1.0.0-refactor.1 (2025-07-17)
 
 
