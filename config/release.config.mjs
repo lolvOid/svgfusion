@@ -1,6 +1,12 @@
 const releaseConfig = name => {
   const packageName = name;
 
+  const downloadableAssets = [
+    {
+      path: '*.zip',
+      label: `${packageName}-\${nextRelease.version}.zip`,
+    },
+  ];
   /** @type {import('semantic-release').Options} */
   const config = {
     branches: [
@@ -31,14 +37,7 @@ const releaseConfig = name => {
       [
         '@semantic-release/git',
         {
-          assets: [
-            'package.json',
-            'CHANGELOG.md',
-            {
-              path: 'dist/**/*',
-              label: 'Built distribution',
-            },
-          ],
+          assets: ['package.json', 'CHANGELOG.md'],
           message: `chore(${packageName}): \${nextRelease.version} [skip ci]\n\n\${nextRelease.notes}`,
         },
       ],
@@ -47,6 +46,7 @@ const releaseConfig = name => {
         {
           labels: false,
           releasedLabels: false,
+          assets: downloadableAssets,
         },
       ],
     ],
