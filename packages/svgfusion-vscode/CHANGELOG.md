@@ -1,3 +1,10 @@
+# [1.2.0](https://github.com/lolvOid/svgfusion/compare/svgfusion-vscode@1.1.0...svgfusion-vscode@1.2.0) (2025-07-19)
+
+
+### Features
+
+* update workspace dependency specifications to use caret (^) for versioning ([9aa74a9](https://github.com/lolvOid/svgfusion/commit/9aa74a916f1854709ec58e5507f87b7698e3bc0b))
+
 # [1.1.0](https://github.com/lolvOid/svgfusion/compare/svgfusion-vscode@1.0.1...svgfusion-vscode@1.1.0) (2025-07-19)
 
 
