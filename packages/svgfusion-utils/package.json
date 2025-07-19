@@ -37,7 +37,8 @@
     "format": "prettier --write src/**/*.ts",
     "format:check": "prettier --check src/**/*.ts",
     "type-check": "tsc --noEmit",
-    "clean": "rm -rf dist"
+    "clean": "rm -rf dist",
+    "release": "semantic-release"
   },
   "dependencies": {
     "chalk": "^5.0.0",

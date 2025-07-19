@@ -64,12 +64,13 @@
     "type-check": "tsc --noEmit",
     "clean": "rm -rf dist",
     "dev:docs": "cd docs && pnpm run start",
-    "build:docs": "cd docs && pnpm run build"
+    "build:docs": "cd docs && pnpm run build",
+    "release": "semantic-release"
   },
   "dependencies": {
     "colord": "^2.9.3",
     "jsdom": "^26.1.0",
-    "svgfusion-utils": "workspace:^",
+    "svgfusion-utils": "latest",
     "zod": "^4.0.5"
   },
   "devDependencies": {

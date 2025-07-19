@@ -59,10 +59,10 @@
   "dependencies": {
     "commander": "^11.1.0",
     "figlet": "^1.7.0",
-    "svgfusion-core": "workspace:^",
-    "svgfusion-utils": "workspace:^",
-    "svgfusion-react": "workspace:^",
-    "svgfusion-vue": "workspace:^"
+    "svgfusion-core": "latest",
+    "svgfusion-utils": "latest",
+    "svgfusion-react": "latest",
+    "svgfusion-vue": "latest"
   },
   "devDependencies": {
     "@eslint/js": "^9.31.0",

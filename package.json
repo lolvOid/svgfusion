@@ -23,7 +23,11 @@
     "release:vscode": "pnpm --filter=svgfusion-vscode run release",
     "release:cli": "pnpm --filter=svgfusion-cli run release",
     "release:browser": "pnpm --filter=svgfusion-browser run release",
-    "release:all": "pnpm run release:bundle && pnpm run release:vscode",
+    "release:react": "pnpm --filter=svgfusion-react run release",
+    "release:vue": "pnpm --filter=svgfusion-vue run release",
+    "release:utils": "pnpm --filter=svgfusion-utils run release",
+    "release:core": "pnpm --filter=svgfusion-core run release",
+    "release:all": "pnpm run release:bundle && pnpm run release:vscode && pnpm run release:cli && pnpm run release:browser && pnpm run release:react && pnpm run release:vue && pnpm run release:utils && pnpm run release:core",
     "svgfusion": "node packages/svgfusion-bundle/dist/cli.cjs"
   },
   "devDependencies": {

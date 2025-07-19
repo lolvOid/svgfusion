@@ -120,6 +120,26 @@ jobs:
           cd packages/svgfusion-cli/dist
           zip -r ../svgfusion-cli.zip .
 
+      - name: Create distribution svgfusion-react zip
+        run: |
+          cd packages/svgfusion-react/dist
+          zip -r ../svgfusion-react.zip .
+
+      - name: Create distribution svgfusion-vue zip
+        run: |
+          cd packages/svgfusion-vue/dist
+          zip -r ../svgfusion-vue.zip .
+
+      - name: Create distribution svgfusion-utils zip
+        run: |
+          cd packages/svgfusion-utils/dist
+          zip -r ../svgfusion-utils.zip .
+
+      - name: Create distribution svgfusion-core zip
+        run: |
+          cd packages/svgfusion-core/dist
+          zip -r ../svgfusion-core.zip .
+
       - name: Release svgfusion
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
@@ -190,6 +210,26 @@ jobs:
         run: |
           cd packages/svgfusion-cli/dist
           zip -r ../svgfusion-cli.zip .
+
+      - name: Create distribution svgfusion-react zip
+        run: |
+          cd packages/svgfusion-react/dist
+          zip -r ../svgfusion-react.zip .
+
+      - name: Create distribution svgfusion-vue zip
+        run: |
+          cd packages/svgfusion-vue/dist
+          zip -r ../svgfusion-vue.zip .
+
+      - name: Create distribution svgfusion-utils zip
+        run: |
+          cd packages/svgfusion-utils/dist
+          zip -r ../svgfusion-utils.zip .
+
+      - name: Create distribution svgfusion-core zip
+        run: |
+          cd packages/svgfusion-core/dist
+          zip -r ../svgfusion-core.zip .
 
       - name: Release beta svgfusion packages
         env:

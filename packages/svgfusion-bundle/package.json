@@ -83,12 +83,12 @@
     "jsdom": "^26.1.0",
     "zod": "^4.0.5",
     "figlet": "^1.7.0",
-    "svgfusion-cli": "workspace:^",
-    "svgfusion-utils": "workspace:^",
-    "svgfusion-core": "workspace:^",
-    "svgfusion-react": "workspace:^",
-    "svgfusion-vue": "workspace:^",
-    "svgfusion-browser": "workspace:^"
+    "svgfusion-cli": "latest",
+    "svgfusion-utils": "latest",
+    "svgfusion-core": "latest",
+    "svgfusion-react": "latest",
+    "svgfusion-vue": "latest",
+    "svgfusion-browser": "latest"
   },
   "devDependencies": {
     "@commitlint/cli": "^17.8.1",
