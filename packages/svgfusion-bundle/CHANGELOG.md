@@ -1,3 +1,10 @@
+# [1.33.0](https://github.com/lolvOid/svgfusion/compare/svgfusion@1.32.0...svgfusion@1.33.0) (2025-07-19)
+
+
+### Features
+
+* update workspace dependency specifiers to use '*' for all packages ([e2ede29](https://github.com/lolvOid/svgfusion/commit/e2ede290e45397d58f1eaabd3400b5faf293be2b))
+
 # [1.32.0](https://github.com/lolvOid/svgfusion/compare/svgfusion@1.31.0...svgfusion@1.32.0) (2025-07-19)
 
 
