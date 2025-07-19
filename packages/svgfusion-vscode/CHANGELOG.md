@@ -1,3 +1,13 @@
+# [1.3.0](https://github.com/lolvOid/svgfusion/compare/svgfusion-vscode@1.2.0...svgfusion-vscode@1.3.0) (2025-07-19)
+
+
+### Features
+
+* add semantic-release and related plugins to package.json for svgfusion packages ([09147a1](https://github.com/lolvOid/svgfusion/commit/09147a1ff83d23bcfb375f3a55375f16856fb3bc))
+* add zip creation steps for svgfusion-react, svgfusion-vue, svgfusion-utils, and svgfusion-core distributions ([3dfa935](https://github.com/lolvOid/svgfusion/commit/3dfa93558424c45f928a367e1adb472f5b59aea9))
+* **svgfusion-cmd:** implement CLI for converting SVG files to React/Vue components with TypeScript support ([5996f24](https://github.com/lolvOid/svgfusion/commit/5996f24ea547580bbab0a0638cc28f449d5eebc5))
+* update release steps and package dependencies to use workspace versioning ([cd1edd9](https://github.com/lolvOid/svgfusion/commit/cd1edd994325eccde34e464e2f5bebc0cbc225ac))
+
 # [1.2.0](https://github.com/lolvOid/svgfusion/compare/svgfusion-vscode@1.1.0...svgfusion-vscode@1.2.0) (2025-07-19)
 
 
