@@ -194,8 +194,7 @@ jobs:
       - name: Release beta svgfusion packages
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN_GIT }}
-          SEMANTIC_RELEASE_REGISTRY: 'https://npm.pkg.github.com'
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN_ }}
           IS_BETA_RELEASE: 'true'
           DEBUG: 'semantic-release:*'
         run: pnpm run release:all
