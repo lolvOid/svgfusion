@@ -14,7 +14,6 @@ const releaseConfig = name => {
       { name: 'next', prerelease: 'next' },
       { name: 'beta', prerelease: 'beta' },
       { name: 'alpha', prerelease: 'alpha' },
-      { name: 'feature/**', prerelease: 'beta' },
       { name: 'refactor/**', prerelease: 'beta' },
     ],
     ci: false,
