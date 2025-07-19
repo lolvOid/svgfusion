@@ -1,3 +1,10 @@
+# [1.29.0](https://github.com/lolvOid/svgfusion/compare/svgfusion@1.28.0...svgfusion@1.29.0) (2025-07-19)
+
+
+### Features
+
+* **svgfusion-vscode:** implement batch conversion options and update playground UI ([abbb4ce](https://github.com/lolvOid/svgfusion/commit/abbb4ce336a81732d44588b8a20700109a761258))
+
 # [1.28.0](https://github.com/lolvOid/svgfusion/compare/svgfusion@1.27.0...svgfusion@1.28.0) (2025-07-19)
 
 
