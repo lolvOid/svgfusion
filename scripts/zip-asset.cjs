@@ -8,7 +8,11 @@ if (!packageName) {
   process.exit(1);
 }
 
-const packageDir = path.resolve('packages', packageName);
+// Check if we're running from the package directory or root directory
+const packageDir = fs.existsSync('package.json') && 
+  JSON.parse(fs.readFileSync('package.json', 'utf-8')).name === packageName
+  ? process.cwd()
+  : path.resolve('packages', packageName);
 const distDir = path.join(packageDir, 'dist');
 
 if (!fs.existsSync(distDir)) {
