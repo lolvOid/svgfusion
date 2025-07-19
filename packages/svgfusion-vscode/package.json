@@ -132,6 +132,16 @@
           "default": "./src/components/icons",
           "description": "Output directory for generated components"
         },
+        "svgfusion.prefix": {
+          "type": "string",
+          "default": "",
+          "description": "Prefix to add to component names"
+        },
+        "svgfusion.suffix": {
+          "type": "string",
+          "default": "",
+          "description": "Suffix to add to component names"
+        },
         "svgfusion.react.memo": {
           "type": "boolean",
           "default": false,
@@ -231,6 +241,8 @@
     "format": "prettier --write src/**/*.ts",
     "format:check": "prettier --check src/**/*.ts",
     "type-check": "tsc --noEmit",
+    "release": "semantic-release",
+    "release:dry": "semantic-release --dry-run",
     "clean": "rm -rf dist *.vsix",
     "vscode:prepublish": "pnpm run build"
   },
@@ -242,6 +254,10 @@
   "devDependencies": {
     "@eslint/js": "^9.31.0",
     "@jest/globals": "^30.0.4",
+    "@semantic-release/changelog": "^6.0.3",
+    "@semantic-release/git": "^10.0.1",
+    "@semantic-release/github": "^11.0.3",
+    "@semantic-release/npm": "^12.0.2",
     "@types/jest": "^30.0.0",
     "@types/node": "^20.0.0",
     "@types/vscode": "^1.74.0",
@@ -249,6 +265,8 @@
     "eslint": "^9.31.0",
     "jest": "^30.0.4",
     "prettier": "^3.6.2",
+    "semantic-release": "^24.2.5",
+    "semantic-release-monorepo": "^8.0.2",
     "tsup": "^8.5.0",
     "typescript": "^5.6.2",
     "typescript-eslint": "^8.37.0"

@@ -23,7 +23,19 @@ export class ConfigManager {
   }
 
   getOutputDirectory(): string {
-    return this.config.get<string>('outputDirectory', './src/components/icons');
+    const outputDir = this.config.get<string>(
+      'outputDirectory',
+      './src/components/icons'
+    );
+    return outputDir || './src/components/icons';
+  }
+
+  getPrefix(): string {
+    return this.config.get<string>('prefix', '');
+  }
+
+  getSuffix(): string {
+    return this.config.get<string>('suffix', '');
   }
 
   // React specific options

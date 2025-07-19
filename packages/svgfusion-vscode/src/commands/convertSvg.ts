@@ -1,6 +1,6 @@
 import * as vscode from 'vscode';
 import * as path from 'path';
-import { SVGFusionBrowser } from 'svgfusion-browser';
+import { SVGFusionBrowser, svgToComponentName } from 'svgfusion-browser';
 import type { WorkspaceDetector } from '../utils/workspaceDetector';
 import { ConfigManager } from '../utils/configManager';
 
@@ -58,6 +58,8 @@ export class ConvertSvgCommand {
             framework: options.framework,
             typescript: options.typescript,
             componentName: options.componentName,
+            prefix: this.config.getPrefix(),
+            suffix: this.config.getSuffix(),
             ...this.config.getTransformationOptions(),
             ...this.getFrameworkSpecificOptions(options.framework),
           });
@@ -101,7 +103,11 @@ export class ConvertSvgCommand {
   ) {
     // Get component name from file
     const fileName = path.basename(svgUri.fsPath, '.svg');
-    const defaultComponentName = this.toPascalCase(fileName);
+    const defaultComponentName = svgToComponentName(
+      fileName,
+      this.config.getPrefix(),
+      this.config.getSuffix()
+    );
 
     const frameworkItems = [
       {
@@ -225,12 +231,5 @@ export class ConvertSvgCommand {
     // Open the created file
     const document = await vscode.workspace.openTextDocument(filePath);
     await vscode.window.showTextDocument(document);
-  }
-
-  private toPascalCase(str: string): string {
-    return str
-      .split(/[-_\s]+/)
-      .map(word => word.charAt(0).toUpperCase() + word.slice(1).toLowerCase())
-      .join('');
   }
 }

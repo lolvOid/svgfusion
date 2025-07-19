@@ -1,6 +1,6 @@
 import * as vscode from 'vscode';
 import * as path from 'path';
-import { SVGFusionBrowser } from 'svgfusion-browser';
+import { SVGFusionBrowser, svgToComponentName } from 'svgfusion-browser';
 import type { WorkspaceDetector } from '../utils/workspaceDetector';
 import { ConfigManager } from '../utils/configManager';
 
@@ -74,6 +74,7 @@ export class BatchConvertCommand {
               results.failed++;
               const errorMessage =
                 error instanceof Error ? error.message : 'Unknown error';
+              console.error(`BatchConvert Error for ${fileName}:`, error);
               results.errors.push(`${fileName}: ${errorMessage}`);
             }
           }
@@ -180,15 +181,31 @@ export class BatchConvertCommand {
     const svgText = Buffer.from(svgContent).toString('utf8');
 
     const fileName = path.basename(svgUri.fsPath, '.svg');
-    const componentName = this.toPascalCase(fileName);
+    const componentName = svgToComponentName(
+      fileName,
+      this.config.getPrefix(),
+      this.config.getSuffix()
+    );
+
+    if (!componentName) {
+      throw new Error(
+        `Unable to generate component name from file: ${fileName}`
+      );
+    }
 
     const result = await fusion.convert(svgText, {
       framework: options.framework,
       typescript: options.typescript,
       componentName,
+      prefix: this.config.getPrefix(),
+      suffix: this.config.getSuffix(),
       ...this.config.getTransformationOptions(),
       ...this.getFrameworkSpecificOptions(options.framework),
     });
+
+    if (!result || !result.code) {
+      throw new Error(`Conversion failed: No code generated for ${fileName}`);
+    }
 
     await this.saveComponent(svgUri, result, {
       ...options,
@@ -218,7 +235,20 @@ export class BatchConvertCommand {
       throw new Error('No workspace folder found');
     }
 
-    const outputPath = path.join(workspaceFolder.uri.fsPath, outputDir);
+    if (!outputDir) {
+      throw new Error('Output directory is not configured');
+    }
+
+    if (!options.componentName) {
+      throw new Error('Component name is required');
+    }
+
+    const workspacePath = workspaceFolder.uri.fsPath;
+    if (!workspacePath) {
+      throw new Error('Workspace path is undefined');
+    }
+
+    const outputPath = path.join(workspacePath, outputDir);
     const extension = options.typescript
       ? options.framework === 'react'
         ? '.tsx'
@@ -276,12 +306,5 @@ export class BatchConvertCommand {
   private getFileSize(_uri: vscode.Uri): string {
     // This is a simplified version - in real implementation you might want to get actual file size
     return 'Unknown';
-  }
-
-  private toPascalCase(str: string): string {
-    return str
-      .split(/[-_\s]+/)
-      .map(word => word.charAt(0).toUpperCase() + word.slice(1).toLowerCase())
-      .join('');
   }
 }
