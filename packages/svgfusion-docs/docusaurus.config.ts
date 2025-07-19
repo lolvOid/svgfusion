@@ -100,20 +100,7 @@ const config: Config = {
     locales: ['en'],
   },
 
-  scripts: [
-    {
-      src: 'https://cdnjs.buymeacoffee.com/1.0.0/widget.prod.min.js',
-      'data-name': 'BMC-Widget',
-      'data-cfasync': 'false',
-      'data-id': 'freddielin',
-      'data-description': 'Support SVGFusion development!',
-      'data-message': 'Help keep SVGFusion free and growing!',
-      'data-color': '#40DCA5',
-      'data-position': 'Right',
-      'data-x_margin': '18',
-      'data-y_margin': '18',
-    },
-  ],
+  scripts: [],
 
   presets: [
     [
