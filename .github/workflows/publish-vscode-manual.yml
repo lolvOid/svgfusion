@@ -1,0 +1,66 @@
+name: Publish VSCode Extension (Manual)
+
+on:
+  workflow_dispatch:
+    inputs:
+      version:
+        description: 'Version to publish (leave empty to use current version)'
+        required: false
+        type: string
+      pre_release:
+        description: 'Publish as pre-release'
+        required: false
+        type: boolean
+        default: false
+
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '18'
+
+      - name: Setup pnpm
+        uses: pnpm/action-setup@v4
+        with:
+          version: 10
+
+      - name: Install dependencies
+        run: pnpm install --frozen-lockfile
+
+      - name: Build all packages
+        run: pnpm run build
+
+      - name: Update version
+        if: github.event.inputs.version != ''
+        run: |
+          cd packages/svgfusion-vscode
+          npm version ${{ github.event.inputs.version }} --no-git-tag-version
+
+      - name: Package extension
+        run: |
+          cd packages/svgfusion-vscode
+          npx @vscode/vsce package --no-dependencies
+
+      - name: Publish to VS Marketplace
+        run: |
+          cd packages/svgfusion-vscode
+          if [ "${{ github.event.inputs.pre_release }}" = "true" ]; then
+            npx @vscode/vsce publish --packagePath *.vsix --pre-release --no-dependencies
+          else
+            npx @vscode/vsce publish --packagePath *.vsix --no-dependencies
+          fi
+        env:
+          VSCE_PAT: ${{ secrets.VSCE_PAT }}
+
+      - name: Upload VSIX artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: vscode-extension
+          path: packages/svgfusion-vscode/*.vsix

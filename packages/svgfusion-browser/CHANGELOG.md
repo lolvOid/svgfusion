@@ -1,11 +1,9 @@
-# svgfusion-browser-v1.0.0-refactor.1 (2025-07-17)
-
+# svgfusion-browser-v1.0.0(2025-07-17)
 
 ### Bug Fixes
 
 * update noExternal entries and add terserOptions for better bundling configuration ([e32d359](https://github.com/lolvOid/svgfusion/commit/e32d359f207c93e386af0fff4fec13f018180b50))
 * update package.json import statements in release configuration files for consistency ([e55d4c2](https://github.com/lolvOid/svgfusion/commit/e55d4c26c045ba4aa420709c47852c44d0ddcac4))
-
 
 ### Features
 

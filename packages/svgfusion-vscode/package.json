@@ -1,0 +1,262 @@
+{
+  "name": "svgfusion-vscode",
+  "displayName": "SVGFusion",
+  "description": "Convert SVG files to React/Vue components with ease",
+  "version": "1.0.0",
+  "publisher": "lolvoid",
+  "license": "MIT",
+  "author": "lolvoid",
+  "homepage": "https://svgfusion.netlify.app",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/lolvOid/svgfusion.git"
+  },
+  "bugs": {
+    "url": "https://github.com/lolvOid/svgfusion/issues"
+  },
+  "engines": {
+    "vscode": "^1.74.0",
+    "node": ">=18.0.0"
+  },
+  "categories": [
+    "Other",
+    "Snippets",
+    "Formatters"
+  ],
+  "keywords": [
+    "svg",
+    "react",
+    "vue",
+    "vue3",
+    "component",
+    "converter",
+    "typescript",
+    "jsx",
+    "tsx",
+    "icon",
+    "frontend",
+    "build-tool"
+  ],
+  "activationEvents": [
+    "onLanguage:xml",
+    "onFileSystem:svg"
+  ],
+  "main": "./dist/extension.js",
+  "contributes": {
+    "commands": [
+      {
+        "command": "svgfusion.convertSvg",
+        "title": "Convert to Component",
+        "category": "SVGFusion",
+        "icon": "$(symbol-file)"
+      },
+      {
+        "command": "svgfusion.batchConvert",
+        "title": "Batch Convert SVGs",
+        "category": "SVGFusion",
+        "icon": "$(folder-active)"
+      },
+      {
+        "command": "svgfusion.openPlayground",
+        "title": "Open Playground",
+        "category": "SVGFusion",
+        "icon": "$(play)"
+      },
+      {
+        "command": "svgfusion.showPreview",
+        "title": "Preview Component",
+        "category": "SVGFusion",
+        "icon": "$(eye)"
+      }
+    ],
+    "menus": {
+      "explorer/context": [
+        {
+          "command": "svgfusion.convertSvg",
+          "when": "resourceExtname == .svg",
+          "group": "svgfusion@1"
+        },
+        {
+          "command": "svgfusion.showPreview",
+          "when": "resourceExtname == .svg",
+          "group": "svgfusion@2"
+        }
+      ],
+      "editor/context": [
+        {
+          "command": "svgfusion.convertSvg",
+          "when": "resourceExtname == .svg",
+          "group": "svgfusion@1"
+        },
+        {
+          "command": "svgfusion.showPreview",
+          "when": "resourceExtname == .svg",
+          "group": "svgfusion@2"
+        }
+      ],
+      "commandPalette": [
+        {
+          "command": "svgfusion.convertSvg",
+          "when": "true"
+        },
+        {
+          "command": "svgfusion.batchConvert",
+          "when": "workspaceFolderCount > 0"
+        },
+        {
+          "command": "svgfusion.openPlayground",
+          "when": "true"
+        }
+      ]
+    },
+    "configuration": {
+      "title": "SVGFusion",
+      "properties": {
+        "svgfusion.framework": {
+          "type": "string",
+          "enum": [
+            "react",
+            "vue",
+            "auto"
+          ],
+          "default": "auto",
+          "description": "Default framework for conversion (auto-detects from package.json)"
+        },
+        "svgfusion.typescript": {
+          "type": "boolean",
+          "default": true,
+          "description": "Generate TypeScript components"
+        },
+        "svgfusion.outputDirectory": {
+          "type": "string",
+          "default": "./src/components/icons",
+          "description": "Output directory for generated components"
+        },
+        "svgfusion.react.memo": {
+          "type": "boolean",
+          "default": false,
+          "description": "Wrap React components with React.memo"
+        },
+        "svgfusion.react.forwardRef": {
+          "type": "boolean",
+          "default": false,
+          "description": "Add forwardRef to React components"
+        },
+        "svgfusion.vue.sfc": {
+          "type": "boolean",
+          "default": true,
+          "description": "Generate Vue Single File Components"
+        },
+        "svgfusion.vue.scriptSetup": {
+          "type": "boolean",
+          "default": true,
+          "description": "Use <script setup> syntax for Vue components"
+        },
+        "svgfusion.transformation.splitColors": {
+          "type": "boolean",
+          "default": true,
+          "description": "Enable color prop splitting"
+        },
+        "svgfusion.transformation.splitStrokeWidths": {
+          "type": "boolean",
+          "default": false,
+          "description": "Enable stroke width prop splitting"
+        },
+        "svgfusion.transformation.fixedStrokeWidth": {
+          "type": "boolean",
+          "default": false,
+          "description": "Use fixed stroke width"
+        },
+        "svgfusion.transformation.optimize": {
+          "type": "boolean",
+          "default": true,
+          "description": "Optimize SVG before conversion"
+        }
+      }
+    },
+    "viewsContainers": {
+      "activitybar": [
+        {
+          "id": "svgfusion",
+          "title": "SVGFusion",
+          "icon": "$(symbol-file)"
+        }
+      ]
+    },
+    "views": {
+      "svgfusion": [
+        {
+          "id": "svgfusion.svgExplorer",
+          "name": "SVG Files",
+          "when": "workspaceHasFolder"
+        }
+      ]
+    },
+    "keybindings": [
+      {
+        "command": "svgfusion.convertSvg",
+        "key": "cmd+shift+s",
+        "mac": "cmd+shift+s",
+        "win": "ctrl+shift+s",
+        "linux": "ctrl+shift+s",
+        "when": "resourceExtname == .svg"
+      },
+      {
+        "command": "svgfusion.openPlayground",
+        "key": "cmd+shift+p",
+        "mac": "cmd+shift+p",
+        "win": "ctrl+shift+p",
+        "linux": "ctrl+shift+p"
+      }
+    ]
+  },
+  "files": [
+    "dist",
+    "media",
+    "README.md",
+    "CHANGELOG.md",
+    "LICENSE.md"
+  ],
+  "scripts": {
+    "build": "tsup",
+    "dev": "tsup --watch",
+    "package": "npx @vscode/vsce package --no-dependencies",
+    "publish": "npx @vscode/vsce publish --no-dependencies",
+    "install-ext": "code --install-extension ./svgfusion-vscode-*.vsix",
+    "test": "jest",
+    "test:coverage": "jest --coverage",
+    "test:watch": "jest --watch",
+    "lint": "eslint src/**/*.ts",
+    "lint:fix": "eslint src/**/*.ts --fix",
+    "format": "prettier --write src/**/*.ts",
+    "format:check": "prettier --check src/**/*.ts",
+    "type-check": "tsc --noEmit",
+    "clean": "rm -rf dist *.vsix",
+    "vscode:prepublish": "pnpm run build"
+  },
+  "dependencies": {
+    "svgfusion-browser": "workspace:*",
+    "svgfusion-core": "workspace:*",
+    "svgfusion-utils": "workspace:*"
+  },
+  "devDependencies": {
+    "@eslint/js": "^9.31.0",
+    "@jest/globals": "^30.0.4",
+    "@types/jest": "^30.0.0",
+    "@types/node": "^20.0.0",
+    "@types/vscode": "^1.74.0",
+    "@vscode/vsce": "^3.6.0",
+    "eslint": "^9.31.0",
+    "jest": "^30.0.4",
+    "prettier": "^3.6.2",
+    "tsup": "^8.5.0",
+    "typescript": "^5.6.2",
+    "typescript-eslint": "^8.37.0"
+  },
+  "extensionDependencies": [],
+  "icon": "media/icon.png",
+  "galleryBanner": {
+    "color": "#1e1e1e",
+    "theme": "dark"
+  }
+}

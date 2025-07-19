@@ -16,6 +16,7 @@ const sidebars: SidebarsConfig = {
   tutorialSidebar: [
     'getting-started',
     'packages',
+    'vscode-extension',
     'cli-usage',
     'browser-api',
     'node-api',
