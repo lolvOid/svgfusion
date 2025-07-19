@@ -251,9 +251,9 @@
     "vscode:prepublish": "pnpm run build"
   },
   "dependencies": {
-    "svgfusion-dom": "workspace:^",
-    "svgfusion-core": "workspace:^",
-    "svgfusion-utils": "workspace:^"
+    "svgfusion-dom": "workspace:*",
+    "svgfusion-core": "workspace:*",
+    "svgfusion-utils": "workspace:*"
   },
   "devDependencies": {
     "@eslint/js": "^9.31.0",

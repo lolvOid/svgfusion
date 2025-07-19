@@ -13,10 +13,10 @@
     "install-vue": "cd demo-vue && pnpm install"
   },
   "dependencies": {
-    "svgfusion": "workspace:^",
-    "svgfusion-core": "workspace:^",
-    "svgfusion-react": "workspace:^",
-    "svgfusion-vue": "workspace:^",
-    "svgfusion-utils": "workspace:^"
+    "svgfusion": "workspace:*",
+    "svgfusion-core": "workspace:*",
+    "svgfusion-react": "workspace:*",
+    "svgfusion-vue": "workspace:*",
+    "svgfusion-utils": "workspace:*"
   }
 }

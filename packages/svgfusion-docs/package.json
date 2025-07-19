@@ -37,7 +37,7 @@
     "react": "^19.0.0",
     "react-dom": "^19.0.0",
     "react-resizable-panels": "^3.0.3",
-    "svgfusion-dom": "workspace:^",
+    "svgfusion-dom": "workspace:*",
     "zod": "^4.0.5"
   },
   "devDependencies": {
