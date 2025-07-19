@@ -16,8 +16,6 @@ const releaseConfig = name => {
       { name: 'alpha', prerelease: 'alpha' },
       { name: 'refactor/**', prerelease: 'beta' },
     ],
-    ci: false,
-    dryRun: false,
     plugins: [
       '@semantic-release/commit-analyzer',
       '@semantic-release/release-notes-generator',

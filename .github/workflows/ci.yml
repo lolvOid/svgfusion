@@ -108,6 +108,21 @@ jobs:
       - name: Build packages
         run: pnpm run build
 
+      - name: Create distribution svgfusion-bundle zip
+        run: |
+          cd packages/svgfusion-bundle/dist
+          zip -r ../svgfusion-bundle.zip .
+
+      - name: Create distribution svgfusion-browser zip
+        run: |
+          cd packages/svgfusion-browser/dist
+          zip -r ../svgfusion-browser.zip .
+
+      - name: Create distribution svgfusion-cli zip
+        run: |
+          cd packages/svgfusion-cli/dist
+          zip -r ../svgfusion-cli.zip .
+
       - name: Release svgfusion
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
@@ -164,20 +179,21 @@ jobs:
       - name: Build packages
         run: pnpm run build
 
-      - name: Create distribution zips
+      - name: Create distribution svgfusion-bundle zip
         run: |
-          COMMIT_SHORT="${{ github.sha }}"
-          COMMIT_SHORT=${COMMIT_SHORT:0:7}
+          cd packages/svgfusion-bundle/dist
+          zip -r ../svgfusion-bundle.zip .
 
-          packages=("svgfusion-bundle" "svgfusion-cli" "svgfusion-browser")
+      - name: Create distribution svgfusion-browser zip
+        run: |
+          cd packages/svgfusion-browser/dist
+          zip -r ../svgfusion-browser.zip .
 
-          for package in "${packages[@]}"; do
-            if [ -d "packages/$package/dist" ]; then
-              cd "packages/$package/dist"
-              zip -r "../${package}-${COMMIT_SHORT}.zip" .
-              cd - > /dev/null
-            fi
-          done
+      - name: Create distribution svgfusion-cli zip
+        run: |
+          cd packages/svgfusion-cli/dist
+          zip -r ../svgfusion-cli.zip .
+
       - name: Release beta svgfusion packages
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
