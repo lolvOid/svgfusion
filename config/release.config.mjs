@@ -48,7 +48,6 @@ const releaseConfig = name => {
       ],
     ],
     tagFormat: `${name}@\${version}`,
-    extends: ['semantic-release-monorepo'],
   };
 
   return config;
