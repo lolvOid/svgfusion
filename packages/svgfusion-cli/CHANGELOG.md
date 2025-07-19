@@ -1,3 +1,10 @@
+## [1.0.2](https://github.com/lolvOid/svgfusion/compare/svgfusion-cli@1.0.1...svgfusion-cli@1.0.2) (2025-07-19)
+
+
+### Bug Fixes
+
+* update package versions for svgfusion-browser, svgfusion-bundle, and svgfusion-cli ([3c299de](https://github.com/lolvOid/svgfusion/commit/3c299de4a5694ad80d8e16d23944590469fa62ab))
+
 # 1.0.0-beta.1 (2025-07-19)
 
 
