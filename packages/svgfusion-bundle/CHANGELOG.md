@@ -1,3 +1,24 @@
+# [1.25.0-beta.1](https://github.com/lolvOid/svgfusion/compare/svgfusion@1.24.2-beta.1...svgfusion@1.25.0-beta.1) (2025-07-19)
+
+
+### Bug Fixes
+
+* ci ([54f3d29](https://github.com/lolvOid/svgfusion/commit/54f3d29b789fca9d2c77cab38098ca0a90c4ec49))
+* downgrade semantic-release to version 24.2.5 and update .gitignore to include dist directory ([e62d9c0](https://github.com/lolvOid/svgfusion/commit/e62d9c045bc847656032e0b55b5ae049839d605b))
+* downgrade semantic-release to version 24.2.5 in package.json and pnpm-lock.yaml ([c1bedf8](https://github.com/lolvOid/svgfusion/commit/c1bedf802154a9e0833fc088d9f79e4f4215db6e))
+* remove Buy Me a Coffee widget script from Docusaurus config ([2618b14](https://github.com/lolvOid/svgfusion/commit/2618b14ec79b733dc1c914d5b3f48f0c910c7d85))
+* remove extends option for semantic-release-monorepo in release config ([7f0dad1](https://github.com/lolvOid/svgfusion/commit/7f0dad1061465ef92d8384217176076e7747ed1a))
+* remove unnecessary skip-step parameter from Jest coverage report action ([094f7fe](https://github.com/lolvOid/svgfusion/commit/094f7fea44c4dcd223378003da9f61209de7b378))
+* update NODE_AUTH_TOKEN secrets for release jobs and change registry URL to npmjs ([f3879ce](https://github.com/lolvOid/svgfusion/commit/f3879ced57a3fe7f7aa1f466c4669affba31176d))
+* update NODE_AUTH_TOKEN to use NPM_TOKEN for beta release ([3045626](https://github.com/lolvOid/svgfusion/commit/304562673375a408f49650686752f349dcba94d9))
+* update NODE_AUTH_TOKEN to use NPM_TOKEN_ for beta release ([456a24c](https://github.com/lolvOid/svgfusion/commit/456a24cfd7b1a38a75117ab2a3d411a95ba82508))
+* update release job conditions to trigger only on main branch and refine beta release step ([7e4c195](https://github.com/lolvOid/svgfusion/commit/7e4c195b00546a088288a9bf02a62fb0731c0eba))
+
+
+### Features
+
+* add distribution zip creation for svgfusion packages and update release configuration ([03069ab](https://github.com/lolvOid/svgfusion/commit/03069ab8bba00e4e63cd55ff26aa963a9eb2e266))
+
 # [svgfusion-v1.24.2-beta.1](https://github.com/lolvOid/svgfusion/compare/svgfusion@1.24.1...svgfusion@1.24.2-beta.1) (2025-07-18)
 
 

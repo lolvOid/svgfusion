@@ -1,6 +1,6 @@
 {
   "name": "svgfusion",
-  "version": "1.24.2-beta.1",
+  "version": "1.25.0-beta.1",
   "description": "Convert SVG files into blazing-fast React and Vue 3 components with automatic color extraction, full TypeScript support, and seamless integration into any modern workflow.",
   "type": "module",
   "publishConfig": {
