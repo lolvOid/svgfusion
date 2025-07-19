@@ -54,10 +54,10 @@
     "release:dry": "semantic-release --dry-run"
   },
   "dependencies": {
-    "svgfusion-core": "workspace:*",
-    "svgfusion-react": "workspace:*",
-    "svgfusion-utils": "workspace:*",
-    "svgfusion-vue": "workspace:*"
+    "svgfusion-core": "workspace:^",
+    "svgfusion-react": "workspace:^",
+    "svgfusion-utils": "workspace:^",
+    "svgfusion-vue": "workspace:^"
   },
   "devDependencies": {
     "@eslint/js": "^9.31.0",

@@ -1,23 +1,20 @@
 # [1.29.0](https://github.com/lolvOid/svgfusion/compare/svgfusion@1.28.0...svgfusion@1.29.0) (2025-07-19)
 
-
 ### Features
 
-* **svgfusion-vscode:** implement batch conversion options and update playground UI ([abbb4ce](https://github.com/lolvOid/svgfusion/commit/abbb4ce336a81732d44588b8a20700109a761258))
+- **svgfusion-vscode:** implement batch conversion options and update playground UI ([abbb4ce](https://github.com/lolvOid/svgfusion/commit/abbb4ce336a81732d44588b8a20700109a761258))
 
 # [1.28.0](https://github.com/lolvOid/svgfusion/compare/svgfusion@1.27.0...svgfusion@1.28.0) (2025-07-19)
 
-
 ### Features
 
-* **svgfusion-vscode:** enhance SVG conversion with prefix and suffix options, add release configuration ([5494feb](https://github.com/lolvOid/svgfusion/commit/5494feb641c76c2687718bff02d3c62c93d05739))
+- **svgfusion-vscode:** enhance SVG conversion with prefix and suffix options, add release configuration ([5494feb](https://github.com/lolvOid/svgfusion/commit/5494feb641c76c2687718bff02d3c62c93d05739))
 
 # [1.27.0](https://github.com/lolvOid/svgfusion/compare/svgfusion@1.26.0...svgfusion@1.27.0) (2025-07-19)
 
-
 ### Features
 
-* svgfusion-extension ([8b301ff](https://github.com/lolvOid/svgfusion/commit/8b301ffcc68ac3d7609feff385dca8dd7500b8fc))
+- svgfusion-extension ([8b301ff](https://github.com/lolvOid/svgfusion/commit/8b301ffcc68ac3d7609feff385dca8dd7500b8fc))
 
 # [svgfusion-v1.26.0](https://github.com/lolvOid/svgfusion/compare/svgfusion@1.25.2...svgfusion@1.26.0) (2025-07-19)
 

@@ -42,16 +42,16 @@ importers:
   packages/svgfusion-browser:
     dependencies:
       svgfusion-core:
-        specifier: workspace:*
+        specifier: workspace:^
         version: link:../svgfusion-core
       svgfusion-react:
-        specifier: workspace:*
+        specifier: workspace:^
         version: link:../svgfusion-react
       svgfusion-utils:
-        specifier: workspace:*
+        specifier: workspace:^
         version: link:../svgfusion-utils
       svgfusion-vue:
-        specifier: workspace:*
+        specifier: workspace:^
         version: link:../svgfusion-vue
     devDependencies:
       '@eslint/js':
@@ -118,22 +118,22 @@ importers:
         specifier: ^26.1.0
         version: 26.1.0
       svgfusion-browser:
-        specifier: workspace:*
+        specifier: workspace:^
         version: link:../svgfusion-browser
       svgfusion-cli:
-        specifier: workspace:*
+        specifier: workspace:^
         version: link:../svgfusion-cli
       svgfusion-core:
-        specifier: workspace:*
+        specifier: workspace:^
         version: link:../svgfusion-core
       svgfusion-react:
-        specifier: workspace:*
+        specifier: workspace:^
         version: link:../svgfusion-react
       svgfusion-utils:
-        specifier: workspace:*
+        specifier: workspace:^
         version: link:../svgfusion-utils
       svgfusion-vue:
-        specifier: workspace:*
+        specifier: workspace:^
         version: link:../svgfusion-vue
       zod:
         specifier: ^4.0.5
@@ -204,7 +204,7 @@ importers:
         version: 8.0.2(semantic-release@24.2.7(typescript@5.6.3))
       ts-jest:
         specifier: ^29.4.0
-        version: 29.4.0(@babel/core@7.28.0)(@jest/transform@30.0.4)(@jest/types@30.0.1)(babel-jest@30.0.4(@babel/core@7.28.0))(esbuild@0.25.6)(jest-util@30.0.2)(jest@30.0.4(@types/node@20.19.8)(ts-node@10.9.2(@types/node@20.19.8)(typescript@5.6.3)))(typescript@5.6.3)
+        version: 29.4.0(@babel/core@7.28.0)(@jest/transform@30.0.4)(@jest/types@30.0.1)(babel-jest@30.0.4(@babel/core@7.28.0))(jest-util@30.0.2)(jest@30.0.4(@types/node@20.19.8)(ts-node@10.9.2(@types/node@20.19.8)(typescript@5.6.3)))(typescript@5.6.3)
       tsup:
         specifier: ^8.5.0
         version: 8.5.0(jiti@1.21.7)(postcss@8.5.6)(typescript@5.6.3)(yaml@2.8.0)
@@ -224,16 +224,16 @@ importers:
         specifier: ^1.7.0
         version: 1.8.2
       svgfusion-core:
-        specifier: workspace:*
+        specifier: workspace:^
         version: link:../svgfusion-core
       svgfusion-react:
-        specifier: workspace:*
+        specifier: workspace:^
         version: link:../svgfusion-react
       svgfusion-utils:
-        specifier: workspace:*
+        specifier: workspace:^
         version: link:../svgfusion-utils
       svgfusion-vue:
-        specifier: workspace:*
+        specifier: workspace:^
         version: link:../svgfusion-vue
     devDependencies:
       '@eslint/js':
@@ -294,7 +294,7 @@ importers:
         specifier: ^26.1.0
         version: 26.1.0
       svgfusion-utils:
-        specifier: workspace:*
+        specifier: workspace:^
         version: link:../svgfusion-utils
       zod:
         specifier: ^4.0.5
@@ -347,7 +347,7 @@ importers:
         version: 24.2.7(typescript@5.6.3)
       ts-jest:
         specifier: ^29.4.0
-        version: 29.4.0(@babel/core@7.28.0)(@jest/transform@30.0.4)(@jest/types@30.0.1)(babel-jest@30.0.4(@babel/core@7.28.0))(esbuild@0.25.6)(jest-util@30.0.2)(jest@30.0.4(@types/node@20.19.8)(ts-node@10.9.2(@types/node@20.19.8)(typescript@5.6.3)))(typescript@5.6.3)
+        version: 29.4.0(@babel/core@7.28.0)(@jest/transform@30.0.4)(@jest/types@30.0.1)(babel-jest@30.0.4(@babel/core@7.28.0))(jest-util@30.0.2)(jest@30.0.4(@types/node@20.19.8)(ts-node@10.9.2(@types/node@20.19.8)(typescript@5.6.3)))(typescript@5.6.3)
       tsup:
         specifier: ^8.5.0
         version: 8.5.0(jiti@1.21.7)(postcss@8.5.6)(typescript@5.6.3)(yaml@2.8.0)
@@ -361,19 +361,19 @@ importers:
   packages/svgfusion-demo:
     dependencies:
       svgfusion:
-        specifier: workspace:*
+        specifier: workspace:^
         version: link:../svgfusion-bundle
       svgfusion-core:
-        specifier: workspace:*
+        specifier: workspace:^
         version: link:../svgfusion-core
       svgfusion-react:
-        specifier: workspace:*
+        specifier: workspace:^
         version: link:../svgfusion-react
       svgfusion-utils:
-        specifier: workspace:*
+        specifier: workspace:^
         version: link:../svgfusion-utils
       svgfusion-vue:
-        specifier: workspace:*
+        specifier: workspace:^
         version: link:../svgfusion-vue
 
   packages/svgfusion-docs:
@@ -433,7 +433,7 @@ importers:
         specifier: ^3.0.3
         version: 3.0.3(react-dom@19.1.0(react@19.1.0))(react@19.1.0)
       svgfusion-browser:
-        specifier: workspace:*
+        specifier: workspace:^
         version: link:../svgfusion-browser
       zod:
         specifier: ^4.0.5
@@ -470,10 +470,10 @@ importers:
         specifier: ^3.0.0
         version: 3.6.2
       svgfusion-core:
-        specifier: workspace:*
+        specifier: workspace:^
         version: link:../svgfusion-core
       svgfusion-utils:
-        specifier: workspace:*
+        specifier: workspace:^
         version: link:../svgfusion-utils
     devDependencies:
       '@eslint/js':
@@ -556,13 +556,13 @@ importers:
   packages/svgfusion-vscode:
     dependencies:
       svgfusion-browser:
-        specifier: workspace:*
+        specifier: workspace:^
         version: link:../svgfusion-browser
       svgfusion-core:
-        specifier: workspace:*
+        specifier: workspace:^
         version: link:../svgfusion-core
       svgfusion-utils:
-        specifier: workspace:*
+        specifier: workspace:^
         version: link:../svgfusion-utils
     devDependencies:
       '@eslint/js':
@@ -626,10 +626,10 @@ importers:
         specifier: ^3.0.0
         version: 3.6.2
       svgfusion-core:
-        specifier: workspace:*
+        specifier: workspace:^
         version: link:../svgfusion-core
       svgfusion-utils:
-        specifier: workspace:*
+        specifier: workspace:^
         version: link:../svgfusion-utils
     devDependencies:
       '@eslint/js':
@@ -15303,7 +15303,7 @@ snapshots:
       strip-json-comments: 3.1.1
     optionalDependencies:
       '@types/node': 20.19.8
-      ts-node: 10.9.2(@types/node@20.5.1)(typescript@5.6.3)
+      ts-node: 10.9.2(@types/node@20.19.8)(typescript@5.6.3)
     transitivePeerDependencies:
       - babel-plugin-macros
       - supports-color
@@ -18576,7 +18576,7 @@ snapshots:
 
   ts-interface-checker@0.1.13: {}
 
-  ts-jest@29.4.0(@babel/core@7.28.0)(@jest/transform@30.0.4)(@jest/types@30.0.1)(babel-jest@30.0.4(@babel/core@7.28.0))(esbuild@0.25.6)(jest-util@30.0.2)(jest@30.0.4(@types/node@20.19.8)(ts-node@10.9.2(@types/node@20.19.8)(typescript@5.6.3)))(typescript@5.6.3):
+  ts-jest@29.4.0(@babel/core@7.28.0)(@jest/transform@30.0.4)(@jest/types@30.0.1)(babel-jest@30.0.4(@babel/core@7.28.0))(jest-util@30.0.2)(jest@30.0.4(@types/node@20.19.8)(ts-node@10.9.2(@types/node@20.19.8)(typescript@5.6.3)))(typescript@5.6.3):
     dependencies:
       bs-logger: 0.2.6
       ejs: 3.1.10
@@ -18594,8 +18594,26 @@ snapshots:
       '@jest/transform': 30.0.4
       '@jest/types': 30.0.1
       babel-jest: 30.0.4(@babel/core@7.28.0)
-      esbuild: 0.25.6
       jest-util: 30.0.2
+
+  ts-node@10.9.2(@types/node@20.19.8)(typescript@5.6.3):
+    dependencies:
+      '@cspotcode/source-map-support': 0.8.1
+      '@tsconfig/node10': 1.0.11
+      '@tsconfig/node12': 1.0.11
+      '@tsconfig/node14': 1.0.3
+      '@tsconfig/node16': 1.0.4
+      '@types/node': 20.19.8
+      acorn: 8.15.0
+      acorn-walk: 8.3.4
+      arg: 4.1.3
+      create-require: 1.1.1
+      diff: 4.0.2
+      make-error: 1.3.6
+      typescript: 5.6.3
+      v8-compile-cache-lib: 3.0.1
+      yn: 3.1.1
+    optional: true
 
   ts-node@10.9.2(@types/node@20.5.1)(typescript@5.6.3):
     dependencies:
