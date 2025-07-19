@@ -19,6 +19,7 @@ const releaseConfig = name => ({
       '@semantic-release/exec',
       {
         prepareCmd: [
+          `pnpm --filter=${name} run build`,
           `node ${path.join(rootDir, 'scripts/refix-workspace-deps.cjs')} ${name}`,
           `node ${path.join(rootDir, 'scripts/zip-asset.cjs')} ${name}`,
         ].join(' && '),
