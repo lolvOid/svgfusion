@@ -1,3 +1,10 @@
+# [1.27.0](https://github.com/lolvOid/svgfusion/compare/svgfusion@1.26.0...svgfusion@1.27.0) (2025-07-19)
+
+
+### Features
+
+* svgfusion-extension ([8b301ff](https://github.com/lolvOid/svgfusion/commit/8b301ffcc68ac3d7609feff385dca8dd7500b8fc))
+
 # [svgfusion-v1.26.0](https://github.com/lolvOid/svgfusion/compare/svgfusion@1.25.2...svgfusion@1.26.0) (2025-07-19)
 
 ### Features
