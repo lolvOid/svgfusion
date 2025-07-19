@@ -482,6 +482,18 @@ importers:
       '@jest/globals':
         specifier: ^30.0.4
         version: 30.0.4
+      '@semantic-release/changelog':
+        specifier: ^6.0.3
+        version: 6.0.3(semantic-release@24.2.7(typescript@5.6.3))
+      '@semantic-release/git':
+        specifier: ^10.0.1
+        version: 10.0.1(semantic-release@24.2.7(typescript@5.6.3))
+      '@semantic-release/github':
+        specifier: ^11.0.3
+        version: 11.0.3(semantic-release@24.2.7(typescript@5.6.3))
+      '@semantic-release/npm':
+        specifier: ^12.0.2
+        version: 12.0.2(semantic-release@24.2.7(typescript@5.6.3))
       '@types/jest':
         specifier: ^30.0.0
         version: 30.0.0
@@ -494,6 +506,12 @@ importers:
       jest:
         specifier: ^30.0.4
         version: 30.0.4(@types/node@20.19.8)(ts-node@10.9.2(@types/node@20.19.8)(typescript@5.6.3))
+      semantic-release:
+        specifier: ^24.2.5
+        version: 24.2.7(typescript@5.6.3)
+      semantic-release-monorepo:
+        specifier: ^8.0.2
+        version: 8.0.2(semantic-release@24.2.7(typescript@5.6.3))
       tsup:
         specifier: ^8.5.0
         version: 8.5.0(jiti@1.21.7)(postcss@8.5.6)(typescript@5.6.3)(yaml@2.8.0)
@@ -525,6 +543,18 @@ importers:
       '@jest/globals':
         specifier: ^30.0.4
         version: 30.0.4
+      '@semantic-release/changelog':
+        specifier: ^6.0.3
+        version: 6.0.3(semantic-release@24.2.7(typescript@5.6.3))
+      '@semantic-release/git':
+        specifier: ^10.0.1
+        version: 10.0.1(semantic-release@24.2.7(typescript@5.6.3))
+      '@semantic-release/github':
+        specifier: ^11.0.3
+        version: 11.0.3(semantic-release@24.2.7(typescript@5.6.3))
+      '@semantic-release/npm':
+        specifier: ^12.0.2
+        version: 12.0.2(semantic-release@24.2.7(typescript@5.6.3))
       '@types/figlet':
         specifier: ^1.7.0
         version: 1.7.0
@@ -543,6 +573,12 @@ importers:
       prettier:
         specifier: ^3.6.2
         version: 3.6.2
+      semantic-release:
+        specifier: ^24.2.5
+        version: 24.2.7(typescript@5.6.3)
+      semantic-release-monorepo:
+        specifier: ^8.0.2
+        version: 8.0.2(semantic-release@24.2.7(typescript@5.6.3))
       tsup:
         specifier: ^8.5.0
         version: 8.5.0(jiti@1.21.7)(postcss@8.5.6)(typescript@5.6.3)(yaml@2.8.0)
@@ -638,6 +674,18 @@ importers:
       '@jest/globals':
         specifier: ^30.0.4
         version: 30.0.4
+      '@semantic-release/changelog':
+        specifier: ^6.0.3
+        version: 6.0.3(semantic-release@24.2.7(typescript@5.6.3))
+      '@semantic-release/git':
+        specifier: ^10.0.1
+        version: 10.0.1(semantic-release@24.2.7(typescript@5.6.3))
+      '@semantic-release/github':
+        specifier: ^11.0.3
+        version: 11.0.3(semantic-release@24.2.7(typescript@5.6.3))
+      '@semantic-release/npm':
+        specifier: ^12.0.2
+        version: 12.0.2(semantic-release@24.2.7(typescript@5.6.3))
       '@types/jest':
         specifier: ^30.0.0
         version: 30.0.0
@@ -650,6 +698,12 @@ importers:
       jest:
         specifier: ^30.0.4
         version: 30.0.4(@types/node@20.19.8)(ts-node@10.9.2(@types/node@20.19.8)(typescript@5.6.3))
+      semantic-release:
+        specifier: ^24.2.5
+        version: 24.2.7(typescript@5.6.3)
+      semantic-release-monorepo:
+        specifier: ^8.0.2
+        version: 8.0.2(semantic-release@24.2.7(typescript@5.6.3))
       tsup:
         specifier: ^8.5.0
         version: 8.5.0(jiti@1.21.7)(postcss@8.5.6)(typescript@5.6.3)(yaml@2.8.0)
