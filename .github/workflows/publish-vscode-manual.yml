@@ -12,11 +12,16 @@ on:
         required: false
         type: boolean
         default: false
+      update_version:
+        description: 'Update the version in package.json'
+        required: false
+        type: boolean
+        default: false
 
 jobs:
   publish:
     runs-on: ubuntu-latest
-    
+
     steps:
       - name: Checkout
         uses: actions/checkout@v4
@@ -36,7 +41,7 @@ jobs:
         run: pnpm run build
 
       - name: Update version
-        if: github.event.inputs.version != ''
+        if: github.event.inputs.version != '' && github.event.inputs.update_version == 'true'
         run: |
           cd packages/svgfusion-vscode
           npm version ${{ github.event.inputs.version }} --no-git-tag-version
