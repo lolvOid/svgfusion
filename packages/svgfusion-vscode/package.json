@@ -2,7 +2,7 @@
   "name": "svgfusion-vscode",
   "displayName": "SVGFusion",
   "description": "Convert SVG files to React/Vue components with ease",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "publisher": "lolvoid",
   "license": "MIT",
   "author": "lolvoid",
@@ -205,18 +205,25 @@
     "keybindings": [
       {
         "command": "svgfusion.convertSvg",
-        "key": "cmd+shift+s",
-        "mac": "cmd+shift+s",
-        "win": "ctrl+shift+s",
-        "linux": "ctrl+shift+s",
+        "key": "cmd+shift+f s",
+        "mac": "cmd+shift+f s",
+        "win": "ctrl+shift+f s",
+        "linux": "ctrl+shift+f s",
         "when": "resourceExtname == .svg"
       },
       {
+        "command": "svgfusion.batchConvert",
+        "key": "cmd+shift+f b",
+        "mac": "cmd+shift+f b",
+        "win": "ctrl+shift+f b",
+        "linux": "ctrl+shift+f b"
+      },
+      {
         "command": "svgfusion.openPlayground",
-        "key": "cmd+shift+p",
-        "mac": "cmd+shift+p",
-        "win": "ctrl+shift+p",
-        "linux": "ctrl+shift+p"
+        "key": "cmd+shift+f p",
+        "mac": "cmd+shift+f p",
+        "win": "ctrl+shift+f p",
+        "linux": "ctrl+shift+f p"
       }
     ]
   },

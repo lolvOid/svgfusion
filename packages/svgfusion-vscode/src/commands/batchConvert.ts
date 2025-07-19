@@ -166,16 +166,65 @@ export class BatchConvertCommand {
       return null;
     }
 
+    // Get output directory
+    const outputDirectory = await vscode.window.showInputBox({
+      prompt:
+        'Output directory for all components (relative to workspace root)',
+      value: this.config.getOutputDirectory(),
+      placeHolder: 'e.g., ./src/components/icons',
+      validateInput: value => {
+        if (!value || !value.trim()) {
+          return 'Output directory is required';
+        }
+        return null;
+      },
+    });
+
+    if (!outputDirectory) {
+      return null;
+    }
+
+    // Get prefix
+    const prefix = await vscode.window.showInputBox({
+      prompt: 'Component name prefix for all components (optional)',
+      value: this.config.getPrefix(),
+      placeHolder: 'e.g., Icon (leave empty for no prefix)',
+    });
+
+    if (prefix === undefined) {
+      return null;
+    }
+
+    // Get suffix
+    const suffix = await vscode.window.showInputBox({
+      prompt: 'Component name suffix for all components (optional)',
+      value: this.config.getSuffix(),
+      placeHolder: 'e.g., Icon (leave empty for no suffix)',
+    });
+
+    if (suffix === undefined) {
+      return null;
+    }
+
     return {
       framework: selectedFramework.framework,
       typescript: selectedType.typescript,
+      outputDirectory,
+      prefix: prefix || '',
+      suffix: suffix || '',
     };
   }
 
   private async convertSingleFile(
     svgUri: vscode.Uri,
     fusion: SVGFusionBrowser,
-    options: { framework: 'react' | 'vue'; typescript: boolean }
+    options: {
+      framework: 'react' | 'vue';
+      typescript: boolean;
+      outputDirectory: string;
+      prefix: string;
+      suffix: string;
+    }
   ) {
     const svgContent = await vscode.workspace.fs.readFile(svgUri);
     const svgText = Buffer.from(svgContent).toString('utf8');
@@ -183,8 +232,8 @@ export class BatchConvertCommand {
     const fileName = path.basename(svgUri.fsPath, '.svg');
     const componentName = svgToComponentName(
       fileName,
-      this.config.getPrefix(),
-      this.config.getSuffix()
+      options.prefix,
+      options.suffix
     );
 
     if (!componentName) {
@@ -197,8 +246,8 @@ export class BatchConvertCommand {
       framework: options.framework,
       typescript: options.typescript,
       componentName,
-      prefix: this.config.getPrefix(),
-      suffix: this.config.getSuffix(),
+      prefix: options.prefix,
+      suffix: options.suffix,
       ...this.config.getTransformationOptions(),
       ...this.getFrameworkSpecificOptions(options.framework),
     });
@@ -228,7 +277,7 @@ export class BatchConvertCommand {
   }
 
   private async saveComponent(svgUri: vscode.Uri, result: any, options: any) {
-    const outputDir = this.config.getOutputDirectory();
+    const outputDir = options.outputDirectory;
     const workspaceFolder = vscode.workspace.getWorkspaceFolder(svgUri);
 
     if (!workspaceFolder) {
