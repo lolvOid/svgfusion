@@ -1,3 +1,11 @@
+# [1.1.0](https://github.com/lolvOid/svgfusion/compare/svgfusion-cmd@1.0.0...svgfusion-cmd@1.1.0) (2025-07-19)
+
+
+### Features
+
+* add release configuration for svgfusion-core, svgfusion-react, and svgfusion-vue with dual registry support ([3c7aab3](https://github.com/lolvOid/svgfusion/commit/3c7aab3ea2028aa6795b73adbbeb615558663567))
+* update packages ([734b4b0](https://github.com/lolvOid/svgfusion/commit/734b4b0c66703402967326ba5a1ba8ffb556a7c4))
+
 # 1.0.0 (2025-07-19)
 
 
