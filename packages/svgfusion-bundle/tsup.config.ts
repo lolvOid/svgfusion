@@ -41,7 +41,11 @@ export default defineConfig([
     treeshake: true,
     platform: 'browser',
     bundle: true,
-    noExternal: ['svgfusion-browser'],
+    noExternal: [
+      'svgfusion-browser',
+      'svgfusion-core/browser',
+      'svgfusion-utils/browser',
+    ],
     external: [
       'fs',
       'path',

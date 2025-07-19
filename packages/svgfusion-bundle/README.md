@@ -14,15 +14,15 @@
 
 </div>
 
-## Features
+## What's Included
 
-- **React & Vue Support**: Generate components for both frameworks from the same SVG
-- **TypeScript Ready**: Full TypeScript support with proper type definitions
-- **Advanced Color Splitting**: Intelligent color extraction with fill/stroke optimization
-- **Stroke Width Splitting**: Extract stroke widths as component props
-- **Native SVG Props**: Components extend React.SVGProps and Vue SVGAttributes
-- **Batch Processing**: Convert entire directories of SVG files
-- **Browser Support**: Use directly in browsers with full feature support
+This package includes everything you need for SVG to component conversion:
+
+- **CLI Tool** - Convert SVG files from command line
+- **Node.js API** - Programmatic conversion in Node.js
+- **Module API** - Browser-compatible module for web apps
+- **React & Vue Support** - Generate components for both frameworks
+- **TypeScript Ready** - Full TypeScript support with proper types
 
 ## Installation
 
@@ -32,83 +32,61 @@ npm install svgfusion
 
 ## Quick Start
 
-### React Component
-
-```typescript
-import { convertSvgToReact } from 'svgfusion';
-
-const svgCode = `<svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>`;
-
-const result = await convertSvgToReact(svgCode, {
-  componentName: 'StarIcon',
-  typescript: true,
-  splitColors: true,
-});
-
-console.log(result.component);
-```
-
-### Vue Component
-
-```typescript
-import { convertSvgToVue } from 'svgfusion';
-
-const result = await convertSvgToVue(svgCode, {
-  componentName: 'StarIcon',
-  typescript: true,
-  splitColors: true,
-});
-
-console.log(result.component);
-```
-
 ### CLI Usage
 
-Coming soon! For now, clone the repository and use:
-
 ```bash
+# Clone the repository
 git clone https://github.com/lolvOid/svgfusion
 cd svgfusion
 pnpm install
+
+# Build first (required)
 pnpm build
-pnpm --filter=svgfusion-bundle exec svgfusion icon.svg --react --typescript
+
+# Use the CLI
+pnpm svgfusion icon.svg --framework react --output ./components
+pnpm svgfusion ./icons --framework vue --typescript --output ./components
 ```
 
-### Browser Usage
-
-```html
-<script type="module">
-  import {
-    convertSvgToReact,
-    convertSvgToVue,
-  } from 'https://cdn.jsdelivr.net/npm/svgfusion@1.25.2/+esm';
-
-  const svgCode = `<svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>`;
-
-  const result = await convertSvgToReact(svgCode, {
-    componentName: 'StarIcon',
-    typescript: true,
-  });
-
-  console.log(result.component);
-</script>
-```
-
-Or import the browser-optimized version:
+### Module Usage (Browser/Web Apps)
 
 ```javascript
-import { convertSvgToReact, convertSvgToVue } from 'svgfusion/browser';
-// No Node.js dependencies required
+import { convertToReact, convertToVue } from 'svgfusion/browser';
+
+const svgCode = `<svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>`;
+
+// React component
+const reactResult = await convertToReact(svgCode, {
+  componentName: 'StarIcon',
+  typescript: true,
+  splitColors: true,
+});
+
+// Vue component
+const vueResult = await convertToVue(svgCode, {
+  componentName: 'StarIcon',
+  typescript: true,
+  splitColors: true,
+});
+```
+
+### Node.js API
+
+```javascript
+import { SVGFusion } from 'svgfusion';
+
+const engine = new SVGFusion();
+const result = await engine.convert(svgContent, {
+  framework: 'react',
+  transformation: { splitColors: true },
+  generator: { typescript: true, componentName: 'MyIcon' },
+});
 ```
 
 ## Documentation
 
-- **[Full Documentation](https://svgfusion.netlify.app)** - Complete guides and API reference
-- **[Interactive Playground](https://svgfusion.netlify.app/playground)** - Try SVGFusion in your browser
-- **[CLI Reference](https://svgfusion.netlify.app/docs/cli-usage)** - Command-line documentation
-- **[API Reference](https://svgfusion.netlify.app/docs/api)** - Programmatic usage
-- **[Examples](https://svgfusion.netlify.app/docs/examples)** - Real-world use cases
+For complete guides, API reference, and examples visit [svgfusion.netlify.app](https://svgfusion.netlify.app)
 
 ## License
 
-MIT License - see [LICENSE](LICENSE) for details.
+MIT

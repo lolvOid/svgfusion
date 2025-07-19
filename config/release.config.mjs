@@ -14,7 +14,6 @@ const releaseConfig = name => {
       { name: 'next', prerelease: 'next' },
       { name: 'beta', prerelease: 'beta' },
       { name: 'alpha', prerelease: 'alpha' },
-      { name: 'refactor/**', prerelease: 'beta' },
     ],
     plugins: [
       '@semantic-release/commit-analyzer',
@@ -48,7 +47,7 @@ const releaseConfig = name => {
       ],
     ],
     tagFormat: `${name}@\${version}`,
-    extends: ['semantic-release-monorepo'],
+    // extends: ['semantic-release-monorepo'],
   };
 
   return config;
