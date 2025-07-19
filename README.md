@@ -12,34 +12,56 @@ Convert SVG files into blazing-fast React and Vue 3 components with automatic co
 [![React](https://img.shields.io/badge/React-20232A?style=flat&logo=react&logoColor=61DAFB)](https://reactjs.org/)
 [![Vue.js](https://img.shields.io/badge/Vue.js-35495E?style=flat&logo=vue.js&logoColor=4FC08D)](https://vuejs.org/)
 
-[Documentation](https://svgfusion.netlify.app) • [CLI Reference](https://svgfusion.netlify.app/docs/cli-usage) • [NPM](https://www.npmjs.com/package/svgfusion) • **[Try Interactive Playground](https://svgfusion.netlify.app/playground)**
+[Documentation](https://svgfusion.netlify.app) • [Packages Guide](https://svgfusion.netlify.app/docs/packages) • [NPM](https://www.npmjs.com/package/svgfusion) • **[Try Interactive Playground](https://svgfusion.netlify.app/playground)**
 
 </div>
 
-## Features
+## Quick Start
 
-- **Advanced Transformations**: Comprehensive transformation options including color splitting, stroke width extraction, fixed stroke width, and fill/stroke normalization
-- **Stroke Width Splitting**: Extract and convert stroke widths to props for responsive design
-- **Browser API**: Use SVGFusion directly in the browser with full feature support
-- **Smart Component Naming**: Automatic prefix/suffix handling with proper PascalCase conversion
-- **Advanced Color Splitting**: Intelligent color extraction with fill/stroke optimization
-- **Native SVG Props**: Generated components extend React.SVGProps\<SVGSVGElement\> and Vue SVGAttributes
-- **React & Vue Support**: Generate both React and Vue 3 components from the same SVG
-- **Complex SVG Support**: Handles gradients, masks, filters, patterns, and Figma exports
-- **TypeScript Ready**: Full TypeScript support with proper type definitions
-- **Batch Processing**: Convert entire directories of SVG files
-- **Production Ready**: Optimized output, error handling, and accessibility
-- **Simple CLI**: Direct, intuitive command structure
+```bash
+# Install globally
+npm install -g svgfusion
+
+# Convert SVG files to React components
+svgfusion ./icons --output ./components --framework react
+
+# Or use without installation
+npx svgfusion ./icons --output ./components --framework vue
+```
+
+## Available Packages
+
+SVGFusion is available as a monorepo with specialized packages for different use cases:
+
+| Package                                                                  | Description            | Installation                    | Use Case            |
+| ------------------------------------------------------------------------ | ---------------------- | ------------------------------- | ------------------- |
+| **[svgfusion](https://www.npmjs.com/package/svgfusion)**                 | Complete toolkit       | `npm install svgfusion`         | General usage       |
+| **[svgfusion-cli](https://www.npmjs.com/package/svgfusion-cli)**         | Command-line interface | `npm install -g svgfusion-cli`  | CLI-only usage      |
+| **[svgfusion-browser](https://www.npmjs.com/package/svgfusion-browser)** | Browser-optimized      | `npm install svgfusion-browser` | Web applications    |
+| **[svgfusion-core](https://www.npmjs.com/package/svgfusion-core)**       | Core engine            | `npm install svgfusion-core`    | Custom tooling      |
+| **[svgfusion-react](https://www.npmjs.com/package/svgfusion-react)**     | React utilities        | `npm install svgfusion-react`   | React-only projects |
+| **[svgfusion-vue](https://www.npmjs.com/package/svgfusion-vue)**         | Vue utilities          | `npm install svgfusion-vue`     | Vue-only projects   |
+
+> **Tip:** For most users, the main `svgfusion` package includes everything you need. Use specialized packages only if you need specific functionality.
+
+## Key Features
+
+- **Advanced Transformations**: Color splitting, stroke width extraction, and SVG optimization
+- **Framework Support**: Generate React and Vue 3 components with TypeScript support
+- **Browser & Node.js**: Works in both browser environments and Node.js
+- **Batch Processing**: Convert entire directories with watch mode support
+- **Production Ready**: Optimized output with proper error handling and accessibility
+- **Zero Configuration**: Works out of the box with sensible defaults
 
 ## Try It Live
 
-**Experience SVGFusion instantly in your browser!** - [**Launch Interactive Playground →**](https://svgfusion.dev/playground)
+**Experience SVGFusion instantly in your browser!** - [**Launch Interactive Playground →**](https://svgfusion.netlify.app/playground)
 
 Upload your SVG files, experiment with different options, and see the generated React/Vue components in real-time. No installation required!
 
-## Quick Start
+## Examples
 
-### Simple as One Command
+### CLI Usage
 
 ```bash
 # Convert all SVG files in a directory to React components
@@ -592,19 +614,7 @@ npm run lint      # Lint code
 npm run format    # Format code
 ```
 
-## License
-
-MIT © SVGFusion Contributors
-
-## Contributing
-
-Contributions are welcome! Please read [CONTRIBUTING.md](./CONTRIBUTING.md) for details.
-
-## Changelog
-
-See [CHANGELOG.md](./CHANGELOG.md) for details.
-
-### Browser Usage (New!)
+## Browser Usage (New!)
 
 SVGFusion now supports browser environments! Convert SVG strings to component code without writing files.
 
@@ -648,3 +658,11 @@ console.log(vueResult.code); // Generated Vue component code
 #### [Browser API Documentation](./docs/docs/browser-api.md)
 
 #### [Node API Documentation](./docs/docs/node-api.md)
+
+## License
+
+MIT © SVGFusion Contributors
+
+## Contributing
+
+Contributions are welcome! Please read [CONTRIBUTING.md](./CONTRIBUTING.md) for details.

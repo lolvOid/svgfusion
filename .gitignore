@@ -84,3 +84,5 @@ pids
 
 # Examples
 examples/components/*
+
+**/dist/**

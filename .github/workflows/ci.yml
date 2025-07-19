@@ -12,10 +12,9 @@ permissions:
 on:
   push:
     branches:
-      - 'main'
-  pull_request:
-    branches:
+      - main
       - '**'
+
 jobs:
   test:
     name: Test
@@ -41,6 +40,7 @@ jobs:
         with:
           node-version: ${{ matrix.node-version }}
           cache: 'pnpm'
+
       - name: Cache pnpm store
         uses: actions/cache@v4
         with:
@@ -55,26 +55,23 @@ jobs:
       - name: Run linter
         run: pnpm run lint
 
-      - name: Run type check
-        run: pnpm run type-check
+      - name: Build packages
+        run: pnpm run build
 
       - name: Run tests
         run: pnpm run test:coverage
-
       - name: Jest coverage report
-        if: github.event_name == 'pull_request' && matrix.node-version == '20.x'
         uses: ArtiomTr/jest-coverage-report-action@v2.3.1
         with:
           custom-title: Coverage report
-          skip-step: all
-          coverage-file: ./coverage/coverage-summary.json
-          base-coverage-file: ./coverage/coverage-summary.json
+          coverage-file: ./packages/svgfusion-bundle/coverage/coverage-summary.json
+          base-coverage-file: ./packages/svgfusion-bundle/coverage/coverage-summary.json
 
   release:
     name: Release
     runs-on: ubuntu-latest
     needs: [test]
-    if: github.event_name == 'push'
+    if: github.ref == 'refs/heads/main'
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
@@ -105,41 +102,53 @@ jobs:
       - name: Install dependencies
         run: pnpm install
 
-      - name: Build
+      - name: Build packages
         run: pnpm run build
 
-      - name: Release
+      - name: Create distribution svgfusion-bundle zip
+        run: |
+          cd packages/svgfusion-bundle/dist
+          zip -r ../svgfusion-bundle.zip .
+
+      - name: Create distribution svgfusion-browser zip
+        run: |
+          cd packages/svgfusion-browser/dist
+          zip -r ../svgfusion-browser.zip .
+
+      - name: Create distribution svgfusion-cli zip
+        run: |
+          cd packages/svgfusion-cli/dist
+          zip -r ../svgfusion-cli.zip .
+
+      - name: Release svgfusion
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
-        run: pnpm exec semantic-release
+        run: pnpm run release:all
 
       - name: Build documentation
         env:
           GOOGLE_SITE_VERIFICATION: ${{ secrets.GOOGLE_SITE_VERIFICATION }}
-        run: |
-          cd docs
-          pnpm install
-          pnpm run build
+        run: pnpm --filter=svgfusion-docs run build
 
       - name: Upload documentation artifacts
         uses: actions/upload-artifact@v4
         with:
           name: docs-artifacts
-          path: docs/build/
+          path: packages/svgfusion-docs/build/
 
   release_beta:
     name: Release Beta
     runs-on: ubuntu-latest
     needs: [test]
-    if: github.event_name == 'pull_request'
+    if: github.ref != 'refs/heads/main'
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
         with:
           fetch-depth: 0
           token: ${{ secrets.GITHUB_TOKEN }}
-          ref: ${{ github.head_ref }}
+          ref: ${{ github.head_ref || github.ref }}
 
       - name: Install pnpm
         uses: pnpm/action-setup@v3
@@ -164,34 +173,46 @@ jobs:
       - name: Install dependencies
         run: pnpm install
 
-      - name: Build
+      - name: Build packages
         run: pnpm run build
 
-      - name: Release beta
+      - name: Create distribution svgfusion-bundle zip
+        run: |
+          cd packages/svgfusion-bundle/dist
+          zip -r ../svgfusion-bundle.zip .
+
+      - name: Create distribution svgfusion-browser zip
+        run: |
+          cd packages/svgfusion-browser/dist
+          zip -r ../svgfusion-browser.zip .
+
+      - name: Create distribution svgfusion-cli zip
+        run: |
+          cd packages/svgfusion-cli/dist
+          zip -r ../svgfusion-cli.zip .
+
+      - name: Release beta svgfusion packages
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
-        run: pnpm exec semantic-release --pre-release
+        run: pnpm run release:all
 
       - name: Build documentation
         env:
           GOOGLE_SITE_VERIFICATION: ${{ secrets.GOOGLE_SITE_VERIFICATION }}
-        run: |
-          cd docs
-          pnpm install
-          pnpm run build
+        run: pnpm --filter=svgfusion-docs run build
 
       - name: Upload documentation artifacts
         uses: actions/upload-artifact@v4
         with:
           name: docs-artifacts
-          path: docs/build/
+          path: packages/svgfusion-docs/build/
 
   deploy:
     name: Production Deployment
     runs-on: ubuntu-latest
     needs: [release]
-    if: github.event_name == 'push' && github.ref == 'refs/heads/main'
+    if: github.ref == 'refs/heads/main'
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
@@ -200,12 +221,12 @@ jobs:
         uses: actions/download-artifact@v4
         with:
           name: docs-artifacts
-          path: docs/build/
+          path: packages/svgfusion-docs/build/
 
       - name: Deploy to Netlify (Production)
         uses: nwtgck/actions-netlify@v3.0
         with:
-          publish-dir: './docs/build'
+          publish-dir: './packages/svgfusion-docs/build'
           production-branch: main
           github-token: ${{ secrets.GITHUB_TOKEN }}
           deploy-message: 'Deploy from GitHub Actions - ${{ github.event.head_commit.message }}'
@@ -221,7 +242,7 @@ jobs:
     name: Preview Deployment
     runs-on: ubuntu-latest
     needs: [release_beta]
-    if: github.event_name == 'pull_request'
+    if: github.ref != 'refs/heads/main'
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
@@ -230,12 +251,12 @@ jobs:
         uses: actions/download-artifact@v4
         with:
           name: docs-artifacts
-          path: docs/build/
+          path: packages/svgfusion-docs/build/
 
       - name: Deploy to Netlify (Preview)
         uses: nwtgck/actions-netlify@v3.0
         with:
-          publish-dir: './docs/build'
+          publish-dir: './packages/svgfusion-docs/build'
           github-token: ${{ secrets.GITHUB_TOKEN }}
           deploy-message: 'Deploy PR #${{ github.event.number }} - ${{ github.event.pull_request.title }}'
           alias: 'preview-${{ github.event.number }}'
