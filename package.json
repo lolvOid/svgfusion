@@ -38,5 +38,19 @@
   },
   "engines": {
     "node": ">=18.0.0"
+  },
+  "overrides": {
+    "@semantic-release/github": {
+      "semantic-release": "^24.2.5"
+    },
+    "@semantic-release/git": {
+      "semantic-release": "^24.2.5"
+    },
+    "@semantic-release/npm": {
+      "semantic-release": "^24.2.5"
+    },
+    "semantic-release-monorepo": {
+      "semantic-release": "^24.2.5"
+    }
   }
 }
