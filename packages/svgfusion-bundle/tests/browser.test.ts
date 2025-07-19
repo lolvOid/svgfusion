@@ -3,7 +3,7 @@ import {
   convertToVue,
   extractColors,
   validateSvg,
-} from 'svgfusion-browser';
+} from 'svgfusion-dom';
 
 const testSvg = `<svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
   <path d="M12 2L2 7V17L12 22L22 17V7L12 2Z" fill="#3B82F6" stroke="#1E40AF" stroke-width="2"/>
@@ -220,7 +220,7 @@ describe('Browser API', () => {
   });
 
   test('supports batch conversion', async () => {
-    const { convertBatch } = await import('svgfusion-browser');
+    const { convertBatch } = await import('svgfusion-dom');
 
     const svgContents = [
       { content: testSvg, name: 'Icon1' },

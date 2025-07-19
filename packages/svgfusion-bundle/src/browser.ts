@@ -1,1 +1,1 @@
-export * from 'svgfusion-browser';
+export * from 'svgfusion-dom';

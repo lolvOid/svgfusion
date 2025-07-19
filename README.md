@@ -33,14 +33,14 @@ npx svgfusion ./icons --output ./components --framework vue
 
 SVGFusion is available as a monorepo with specialized packages for different use cases:
 
-| Package                                                                  | Description            | Installation                    | Use Case            |
-| ------------------------------------------------------------------------ | ---------------------- | ------------------------------- | ------------------- |
-| **[svgfusion](https://www.npmjs.com/package/svgfusion)**                 | Complete toolkit       | `npm install svgfusion`         | General usage       |
-| **[svgfusion-cli](https://www.npmjs.com/package/svgfusion-cli)**         | Command-line interface | `npm install -g svgfusion-cli`  | CLI-only usage      |
-| **[svgfusion-browser](https://www.npmjs.com/package/svgfusion-browser)** | Browser-optimized      | `npm install svgfusion-browser` | Web applications    |
-| **[svgfusion-core](https://www.npmjs.com/package/svgfusion-core)**       | Core engine            | `npm install svgfusion-core`    | Custom tooling      |
-| **[svgfusion-react](https://www.npmjs.com/package/svgfusion-react)**     | React utilities        | `npm install svgfusion-react`   | React-only projects |
-| **[svgfusion-vue](https://www.npmjs.com/package/svgfusion-vue)**         | Vue utilities          | `npm install svgfusion-vue`     | Vue-only projects   |
+| Package                                                              | Description            | Installation                   | Use Case            |
+| -------------------------------------------------------------------- | ---------------------- | ------------------------------ | ------------------- |
+| **[svgfusion](https://www.npmjs.com/package/svgfusion)**             | Complete toolkit       | `npm install svgfusion`        | General usage       |
+| **[svgfusion-cmd](https://www.npmjs.com/package/svgfusion-cmd)**     | Command-line interface | `npm install -g svgfusion-cmd` | CLI-only usage      |
+| **[svgfusion-dom](https://www.npmjs.com/package/svgfusion-dom)**     | Browser-optimized      | `npm install svgfusion-dom`    | Web applications    |
+| **[svgfusion-core](https://www.npmjs.com/package/svgfusion-core)**   | Core engine            | `npm install svgfusion-core`   | Custom tooling      |
+| **[svgfusion-react](https://www.npmjs.com/package/svgfusion-react)** | React utilities        | `npm install svgfusion-react`  | React-only projects |
+| **[svgfusion-vue](https://www.npmjs.com/package/svgfusion-vue)**     | Vue utilities          | `npm install svgfusion-vue`    | Vue-only projects   |
 
 > **Tip:** For most users, the main `svgfusion` package includes everything you need. Use specialized packages only if you need specific functionality.
 

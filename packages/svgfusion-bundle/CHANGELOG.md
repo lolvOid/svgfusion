@@ -39,7 +39,7 @@
 
 ### Bug Fixes
 
-- update package versions for svgfusion-browser, svgfusion-bundle, and svgfusion-cli ([3c299de](https://github.com/lolvOid/svgfusion/commit/3c299de4a5694ad80d8e16d23944590469fa62ab))
+- update package versions for svgfusion-dom, svgfusion-bundle, and svgfusion-cmd ([3c299de](https://github.com/lolvOid/svgfusion/commit/3c299de4a5694ad80d8e16d23944590469fa62ab))
 
 # 1.0.0 (2025-07-19)
 
@@ -123,7 +123,7 @@
 ### Bug Fixes
 
 - update CI conditions for release jobs and enhance release configuration for better branch handling ([be7d405](https://github.com/lolvOid/svgfusion/commit/be7d405aa00a3705776f5b4ef4e1c10091cd0abf))
-- update versioning in package.json files for svgfusion and svgfusion-cli ([9349d05](https://github.com/lolvOid/svgfusion/commit/9349d05f4410f7b27064a5275d61a5945cadba39))
+- update versioning in package.json files for svgfusion and svgfusion-cmd ([9349d05](https://github.com/lolvOid/svgfusion/commit/9349d05f4410f7b27064a5275d61a5945cadba39))
 
 # svgfusion-v1.0.0-refactor.1 (2025-07-17)
 
@@ -135,7 +135,7 @@
 ### Features
 
 - add browser-specific entry point and component generators for React and Vue ([73e6109](https://github.com/lolvOid/svgfusion/commit/73e6109d5d41100778356873ff246d4599e2c93f))
-- enhance svgfusion-cli with TypeScript support and batch processing capabilities ([db3b5d9](https://github.com/lolvOid/svgfusion/commit/db3b5d9902967c58f7a152a04ccfc873b7d7b60b))
+- enhance svgfusion-cmd with TypeScript support and batch processing capabilities ([db3b5d9](https://github.com/lolvOid/svgfusion/commit/db3b5d9902967c58f7a152a04ccfc873b7d7b60b))
 - monorepo initial ([8629b78](https://github.com/lolvOid/svgfusion/commit/8629b7879e4100da1c72e6b52bb8123584687062))
 - update bundling configuration and add figlet dependency ([bd6a23d](https://github.com/lolvOid/svgfusion/commit/bd6a23d525bfe72efb21fdde349cfe97e66e4ade))
 - update CI configuration and package settings for dual registry support and public access ([f873e21](https://github.com/lolvOid/svgfusion/commit/f873e21e58753a989fb101b96e886ea6b0bc4e1c))

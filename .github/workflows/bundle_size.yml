@@ -44,10 +44,10 @@ jobs:
             "svgfusion-core"
             "svgfusion-react" 
             "svgfusion-vue"
-            "svgfusion-cli"
+            "svgfusion-cmd"
             "svgfusion-utils"
             "svgfusion-bundle"
-            "svgfusion-browser"
+            "svgfusion-dom"
           )
 
           # Function to format bytes

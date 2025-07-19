@@ -10,23 +10,23 @@
 ## Installation
 
 ```bash
-npm install svgfusion-browser
+npm install svgfusion-dom
 # or
-yarn add svgfusion-browser
+yarn add svgfusion-dom
 # or
-pnpm add svgfusion-browser
+pnpm add svgfusion-dom
 ```
 
 ## CDN Usage
 
 ```html
-<script src="https://unpkg.com/svgfusion-browser@latest/dist/index.umd.js"></script>
+<script src="https://unpkg.com/svgfusion-dom@latest/dist/index.umd.js"></script>
 ```
 
 ## Quick Start
 
 ```javascript
-import { convertSvg } from 'svgfusion-browser';
+import { convertSvg } from 'svgfusion-dom';
 
 // Convert SVG to React component
 const svgContent = `<svg viewBox="0 0 24 24">...</svg>`;
@@ -53,7 +53,7 @@ console.log(reactComponent); // Generated component code
 ### Basic Conversion
 
 ```javascript
-import { convertSvg, SvgFusionOptions } from 'svgfusion-browser';
+import { convertSvg, SvgFusionOptions } from 'svgfusion-dom';
 
 const options = {
   framework: 'react', // or 'vue'
@@ -104,7 +104,7 @@ const vueComponent = convertSvg(svgContent, vueOptions);
 ### Batch Conversion
 
 ```javascript
-import { convertMultiple } from 'svgfusion-browser';
+import { convertMultiple } from 'svgfusion-dom';
 
 const svgFiles = [
   { name: 'home', content: '<svg>...</svg>' },
@@ -171,7 +171,7 @@ interface SvgFusionOptions {
 <!DOCTYPE html>
 <html>
   <head>
-    <script src="https://unpkg.com/svgfusion-browser@latest/dist/index.umd.js"></script>
+    <script src="https://unpkg.com/svgfusion-dom@latest/dist/index.umd.js"></script>
   </head>
   <body>
     <textarea id="svg-input" placeholder="Paste SVG here..."></textarea>
@@ -195,7 +195,7 @@ interface SvgFusionOptions {
 ### React Playground Integration
 
 ```jsx
-import { convertSvg } from 'svgfusion-browser';
+import { convertSvg } from 'svgfusion-dom';
 import { useState } from 'react';
 
 function SvgConverter() {
@@ -238,7 +238,7 @@ function SvgConverter() {
 
 <script setup>
 import { ref } from 'vue';
-import { convertSvg } from 'svgfusion-browser';
+import { convertSvg } from 'svgfusion-dom';
 
 const svgInput = ref('');
 const output = ref('');

@@ -47,7 +47,7 @@ export class PlaygroundCommand {
           case 'convert':
             try {
               // Import SVGFusionBrowser dynamically to avoid issues
-              const { SVGFusionBrowser } = await import('svgfusion-browser');
+              const { SVGFusionBrowser } = await import('svgfusion-dom');
               const fusion = new SVGFusionBrowser();
 
               const result = await fusion.convert(message.svg, {

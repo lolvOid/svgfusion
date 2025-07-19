@@ -5,22 +5,22 @@
 ## Installation
 
 ```bash
-npm install -g svgfusion-cli
+npm install -g svgfusion-cmd
 # or
-npx svgfusion-cli
+npx svgfusion-cmd
 ```
 
 ## Quick Start
 
 ```bash
 # Convert single SVG to React component
-svgfusion-cli input.svg --output ./components --framework react
+svgfusion-cmd input.svg --output ./components --framework react
 
 # Batch convert all SVGs in a directory
-svgfusion-cli ./icons --output ./components --framework vue --typescript
+svgfusion-cmd ./icons --output ./components --framework vue --typescript
 
 # Watch mode for development
-svgfusion-cli ./icons --output ./components --watch
+svgfusion-cmd ./icons --output ./components --watch
 ```
 
 ## Features
@@ -41,16 +41,16 @@ svgfusion-cli ./icons --output ./components --watch
 
 ```bash
 # Convert single file
-svgfusion-cli icon.svg --framework react --output ./components
+svgfusion-cmd icon.svg --framework react --output ./components
 
 # Convert directory
-svgfusion-cli ./icons --framework vue --output ./src/components
+svgfusion-cmd ./icons --framework vue --output ./src/components
 
 # With TypeScript
-svgfusion-cli ./icons --framework react --typescript --output ./components
+svgfusion-cmd ./icons --framework react --typescript --output ./components
 
 # Watch mode
-svgfusion-cli ./icons --framework react --watch --output ./components
+svgfusion-cmd ./icons --framework react --watch --output ./components
 ```
 
 ### Options
@@ -140,7 +140,7 @@ defineProps<Props>();
 
 ```bash
 # Convert with custom naming
-svgfusion-cli ./icons --framework react --typescript \
+svgfusion-cmd ./icons --framework react --typescript \
   --output ./components \
   --naming "Icon{name}" \
   --case PascalCase
@@ -151,8 +151,8 @@ svgfusion-cli ./icons --framework react --typescript \
 ```json
 {
   "scripts": {
-    "icons:build": "svgfusion-cli ./assets/icons --framework react --typescript --output ./src/components/icons",
-    "icons:watch": "svgfusion-cli ./assets/icons --framework react --typescript --output ./src/components/icons --watch"
+    "icons:build": "svgfusion-cmd ./assets/icons --framework react --typescript --output ./src/components/icons",
+    "icons:watch": "svgfusion-cmd ./assets/icons --framework react --typescript --output ./src/components/icons --watch"
   }
 }
 ```

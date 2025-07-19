@@ -29,14 +29,14 @@ npm install svgfusion
 
 ### **For Specialized Usage**
 
-#### `svgfusion-cli` - Command Line Interface
+#### `svgfusion-cmd` - Command Line Interface
 
 Standalone CLI tool for converting SVG files with batch processing capabilities.
 
 ```bash
-npm install -g svgfusion-cli
+npm install -g svgfusion-cmd
 # or
-npx svgfusion-cli
+npx svgfusion-cmd
 ```
 
 **Features:**
@@ -50,12 +50,12 @@ npx svgfusion-cli
 
 **Use when:** You only need command-line SVG conversion or CI/CD integration.
 
-#### `svgfusion-browser` - Browser Package
+#### `svgfusion-dom` - Browser Package
 
 Browser-optimized package for client-side conversion with zero Node.js dependencies.
 
 ```bash
-npm install svgfusion-browser
+npm install svgfusion-dom
 ```
 
 **Features:**
@@ -84,23 +84,23 @@ npx svgfusion ./icons --output ./components
 
 ### Choosing the Right Package
 
-| Use Case             | Recommended Package | Installation                    |
-| -------------------- | ------------------- | ------------------------------- |
-| **General usage**    | `svgfusion`         | `npm install svgfusion`         |
-| **CLI only**         | `svgfusion-cli`     | `npm install -g svgfusion-cli`  |
-| **Browser/Web apps** | `svgfusion-browser` | `npm install svgfusion-browser` |
+| Use Case             | Recommended Package | Installation                   |
+| -------------------- | ------------------- | ------------------------------ |
+| **General usage**    | `svgfusion`         | `npm install svgfusion`        |
+| **CLI only**         | `svgfusion-cmd`     | `npm install -g svgfusion-cmd` |
+| **Browser/Web apps** | `svgfusion-dom`     | `npm install svgfusion-dom`    |
 
 ---
 
 ## Package Comparison
 
-| Feature          | svgfusion        | svgfusion-cli     | svgfusion-browser |
-| ---------------- | ---------------- | ----------------- | ----------------- |
-| **CLI Support**  | ✅               | ✅                | ❌                |
-| **Node.js API**  | ✅               | ❌                | ❌                |
-| **Browser API**  | ✅               | ❌                | ✅                |
-| **Dependencies** | Full             | CLI optimized     | Zero runtime      |
-| **Use Case**     | Complete toolkit | Command-line only | Browser-only      |
+| Feature          | svgfusion        | svgfusion-cmd     | svgfusion-dom |
+| ---------------- | ---------------- | ----------------- | ------------- |
+| **CLI Support**  | ✅               | ✅                | ❌            |
+| **Node.js API**  | ✅               | ❌                | ❌            |
+| **Browser API**  | ✅               | ❌                | ✅            |
+| **Dependencies** | Full             | CLI optimized     | Zero runtime  |
+| **Use Case**     | Complete toolkit | Command-line only | Browser-only  |
 
 ---
 
@@ -117,8 +117,8 @@ Use for full feature access including CLI, Node.js API, and browser support.
 ### With CLI Only
 
 ```bash
-npm install -g svgfusion-cli
-npx svgfusion-cli ./icons --output ./components
+npm install -g svgfusion-cmd
+npx svgfusion-cmd ./icons --output ./components
 ```
 
 Perfect for build processes and CI/CD workflows.
@@ -126,7 +126,7 @@ Perfect for build processes and CI/CD workflows.
 ### With Browser Only
 
 ```bash
-npm install svgfusion-browser
+npm install svgfusion-dom
 ```
 
 Ideal for web applications and online editors with minimal bundle impact.

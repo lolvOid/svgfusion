@@ -38,7 +38,7 @@
 * update example directory paths in CLI integration tests ([5de5f04](https://github.com/lolvOid/svgfusion/commit/5de5f045953cafcd53e1c0da551d343fa583d296))
 * update npm version badge in README to use shield style ([665349c](https://github.com/lolvOid/svgfusion/commit/665349c2bbd2e07203420ef958baf4ea77681d01))
 * update npm version badge in README to use standard style ([1e4e4b7](https://github.com/lolvOid/svgfusion/commit/1e4e4b7b6e7ddd4f2f2b5d9c0f3a24d5de8f4124))
-* update package versions for svgfusion-browser, svgfusion-bundle, and svgfusion-cli ([3c299de](https://github.com/lolvOid/svgfusion/commit/3c299de4a5694ad80d8e16d23944590469fa62ab))
+* update package versions for svgfusion-dom, svgfusion-bundle, and svgfusion-cmd ([3c299de](https://github.com/lolvOid/svgfusion/commit/3c299de4a5694ad80d8e16d23944590469fa62ab))
 * update publishConfig to include registry URL and remove repository and bugs fields ([148eca3](https://github.com/lolvOid/svgfusion/commit/148eca38daecf47dbb85288524c5e519f609fed2))
 * Update README and package description for clarity; remove obsolete browser API documentation ([189ffc7](https://github.com/lolvOid/svgfusion/commit/189ffc77eeb4d9ab6c7ad34e435e85e75366e110))
 * update release:all script to only run release:bundle ([65a6195](https://github.com/lolvOid/svgfusion/commit/65a61952a7954916bd1972e358b82f75f3e25da1))

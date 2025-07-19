@@ -1,6 +1,6 @@
 #!/usr/bin/env node
 
-import { runCli } from 'svgfusion-cli';
+import { runCli } from 'svgfusion-cmd';
 
 async function main() {
   try {

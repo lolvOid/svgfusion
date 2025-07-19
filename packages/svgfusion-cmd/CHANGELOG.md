@@ -1,4 +1,4 @@
-# [1.1.0](https://github.com/lolvOid/svgfusion/compare/svgfusion-cli@1.0.2...svgfusion-cli@1.1.0) (2025-07-19)
+# [1.1.0](https://github.com/lolvOid/svgfusion/compare/svgfusion-cmd@1.0.2...svgfusion-cmd@1.1.0) (2025-07-19)
 
 
 ### Bug Fixes
@@ -17,12 +17,12 @@
 * update release steps and package dependencies to use workspace versioning ([cd1edd9](https://github.com/lolvOid/svgfusion/commit/cd1edd994325eccde34e464e2f5bebc0cbc225ac))
 * update workspace dependency specifications to use caret (^) for versioning ([9aa74a9](https://github.com/lolvOid/svgfusion/commit/9aa74a916f1854709ec58e5507f87b7698e3bc0b))
 
-## [1.0.2](https://github.com/lolvOid/svgfusion/compare/svgfusion-cli@1.0.1...svgfusion-cli@1.0.2) (2025-07-19)
+## [1.0.2](https://github.com/lolvOid/svgfusion/compare/svgfusion-cmd@1.0.1...svgfusion-cmd@1.0.2) (2025-07-19)
 
 
 ### Bug Fixes
 
-* update package versions for svgfusion-browser, svgfusion-bundle, and svgfusion-cli ([3c299de](https://github.com/lolvOid/svgfusion/commit/3c299de4a5694ad80d8e16d23944590469fa62ab))
+* update package versions for svgfusion-dom, svgfusion-bundle, and svgfusion-cmd ([3c299de](https://github.com/lolvOid/svgfusion/commit/3c299de4a5694ad80d8e16d23944590469fa62ab))
 
 # 1.0.0-beta.1 (2025-07-19)
 
@@ -79,7 +79,7 @@
 * update release and prerelease scripts to use pnpm run for consistency ([0fa7a7d](https://github.com/lolvOid/svgfusion/commit/0fa7a7dd9f2f4983fcfeafe695aac8d1ecb77ad5))
 * update release configuration to support multiple prerelease branches and adjust CI settings ([23326fa](https://github.com/lolvOid/svgfusion/commit/23326fa54efb9b88fea7adabc58c10aca00ce722))
 * update release job conditions to trigger only on main branch and refine beta release step ([7e4c195](https://github.com/lolvOid/svgfusion/commit/7e4c195b00546a088288a9bf02a62fb0731c0eba))
-* update versioning in package.json files for svgfusion and svgfusion-cli ([9349d05](https://github.com/lolvOid/svgfusion/commit/9349d05f4410f7b27064a5275d61a5945cadba39))
+* update versioning in package.json files for svgfusion and svgfusion-cmd ([9349d05](https://github.com/lolvOid/svgfusion/commit/9349d05f4410f7b27064a5275d61a5945cadba39))
 
 
 ### Features
@@ -108,7 +108,7 @@
 * enhance bundle size report with total sizes and detailed file breakdown ([ce4acfe](https://github.com/lolvOid/svgfusion/commit/ce4acfef62afdd420663ca5e949d0da0f7ad1a77))
 * enhance React and Vue generators to support size prop and improve SVG attribute handling ([fb42c3d](https://github.com/lolvOid/svgfusion/commit/fb42c3d6a95abb77124c7015875ce71c2fa563ae))
 * Enhance SEO with metadata, structured data, and robots.txt ([f006db0](https://github.com/lolvOid/svgfusion/commit/f006db040c1a748986303544858f3b0daef5aa51))
-* enhance svgfusion-cli with TypeScript support and batch processing capabilities ([db3b5d9](https://github.com/lolvOid/svgfusion/commit/db3b5d9902967c58f7a152a04ccfc873b7d7b60b))
+* enhance svgfusion-cmd with TypeScript support and batch processing capabilities ([db3b5d9](https://github.com/lolvOid/svgfusion/commit/db3b5d9902967c58f7a152a04ccfc873b7d7b60b))
 * export generateIndexFile and BatchConverter from respective modules ([5f6fbfa](https://github.com/lolvOid/svgfusion/commit/5f6fbfa47847be60089e015d5300640a98de7c31))
 * Implement stroke width splitting feature for SVG components ([bfe3194](https://github.com/lolvOid/svgfusion/commit/bfe3194c9dd865029e8365918468053e951e33ea))
 * initialize Vue demo project with Vite, Tailwind CSS, and TypeScript ([d301841](https://github.com/lolvOid/svgfusion/commit/d3018411eff881d25185533faea61b6e9bbef995))
@@ -127,26 +127,26 @@
 * Update README with improved feature list and intro ([736736b](https://github.com/lolvOid/svgfusion/commit/736736be0d15ed2a0050f94e8b603e1c487f56eb))
 * version change ([a575f38](https://github.com/lolvOid/svgfusion/commit/a575f388daf67a947ca77cf337dd5ca8a2d40081))
 
-# svgfusion-cli-v1.0.0-beta.1 (2025-07-18)
+# svgfusion-cmd-v1.0.0-beta.1 (2025-07-18)
 
 
 ### Bug Fixes
 
 * update package.json import statements in release configuration files for consistency ([e55d4c2](https://github.com/lolvOid/svgfusion/commit/e55d4c26c045ba4aa420709c47852c44d0ddcac4))
-* update versioning in package.json files for svgfusion and svgfusion-cli ([9349d05](https://github.com/lolvOid/svgfusion/commit/9349d05f4410f7b27064a5275d61a5945cadba39))
+* update versioning in package.json files for svgfusion and svgfusion-cmd ([9349d05](https://github.com/lolvOid/svgfusion/commit/9349d05f4410f7b27064a5275d61a5945cadba39))
 
 
 ### Features
 
 * add browser-specific entry point and component generators for React and Vue ([73e6109](https://github.com/lolvOid/svgfusion/commit/73e6109d5d41100778356873ff246d4599e2c93f))
-* enhance svgfusion-cli with TypeScript support and batch processing capabilities ([db3b5d9](https://github.com/lolvOid/svgfusion/commit/db3b5d9902967c58f7a152a04ccfc873b7d7b60b))
+* enhance svgfusion-cmd with TypeScript support and batch processing capabilities ([db3b5d9](https://github.com/lolvOid/svgfusion/commit/db3b5d9902967c58f7a152a04ccfc873b7d7b60b))
 * monorepo initial ([8629b78](https://github.com/lolvOid/svgfusion/commit/8629b7879e4100da1c72e6b52bb8123584687062))
 * update bundling configuration and add figlet dependency ([bd6a23d](https://github.com/lolvOid/svgfusion/commit/bd6a23d525bfe72efb21fdde349cfe97e66e4ade))
 * update CI configuration and package settings for dual registry support and public access ([f873e21](https://github.com/lolvOid/svgfusion/commit/f873e21e58753a989fb101b96e886ea6b0bc4e1c))
 * update CLI structure and configuration for improved module handling and entry points ([ba610f2](https://github.com/lolvOid/svgfusion/commit/ba610f280123d74b552760c14c24b67d97a807c3))
 * update package versions and enhance bundling configuration ([a430971](https://github.com/lolvOid/svgfusion/commit/a430971f755e87d97753ceea0d46de12bd402f65))
 
-# svgfusion-cli-v1.0.0-refactor.1 (2025-07-17)
+# svgfusion-cmd-v1.0.0-refactor.1 (2025-07-17)
 
 
 ### Bug Fixes
@@ -157,7 +157,7 @@
 ### Features
 
 * add browser-specific entry point and component generators for React and Vue ([73e6109](https://github.com/lolvOid/svgfusion/commit/73e6109d5d41100778356873ff246d4599e2c93f))
-* enhance svgfusion-cli with TypeScript support and batch processing capabilities ([db3b5d9](https://github.com/lolvOid/svgfusion/commit/db3b5d9902967c58f7a152a04ccfc873b7d7b60b))
+* enhance svgfusion-cmd with TypeScript support and batch processing capabilities ([db3b5d9](https://github.com/lolvOid/svgfusion/commit/db3b5d9902967c58f7a152a04ccfc873b7d7b60b))
 * monorepo initial ([8629b78](https://github.com/lolvOid/svgfusion/commit/8629b7879e4100da1c72e6b52bb8123584687062))
 * update bundling configuration and add figlet dependency ([bd6a23d](https://github.com/lolvOid/svgfusion/commit/bd6a23d525bfe72efb21fdde349cfe97e66e4ade))
 * update CI configuration and package settings for dual registry support and public access ([f873e21](https://github.com/lolvOid/svgfusion/commit/f873e21e58753a989fb101b96e886ea6b0bc4e1c))

@@ -12,7 +12,7 @@ export default defineConfig({
   platform: 'node',
   external: ['vscode'],
   bundle: true,
-  noExternal: ['svgfusion-browser', 'svgfusion-core', 'svgfusion-utils'],
+  noExternal: ['svgfusion-dom', 'svgfusion-core', 'svgfusion-utils'],
   outDir: 'dist',
   shims: true,
 });

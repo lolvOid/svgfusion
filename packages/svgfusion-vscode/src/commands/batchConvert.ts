@@ -1,6 +1,6 @@
 import * as vscode from 'vscode';
 import * as path from 'path';
-import { SVGFusionBrowser, svgToComponentName } from 'svgfusion-browser';
+import { SVGFusionBrowser, svgToComponentName } from 'svgfusion-dom';
 import type { WorkspaceDetector } from '../utils/workspaceDetector';
 import { ConfigManager } from '../utils/configManager';
 

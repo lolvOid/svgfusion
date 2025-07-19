@@ -19,7 +19,7 @@ import {
   validateSvg,
   sanitizeComponentName,
   svgToComponentName,
-} from 'svgfusion-browser';
+} from 'svgfusion-dom';
 import { z } from 'zod';
 import { DEFAULT_SVG } from './defaultSvg';
 

@@ -110,15 +110,15 @@ jobs:
           cd packages/svgfusion-bundle/dist
           zip -r ../svgfusion-bundle.zip .
 
-      - name: Create distribution svgfusion-browser zip
+      - name: Create distribution svgfusion-dom zip
         run: |
-          cd packages/svgfusion-browser/dist
-          zip -r ../svgfusion-browser.zip .
+          cd packages/svgfusion-dom/dist
+          zip -r ../svgfusion-dom.zip .
 
-      - name: Create distribution svgfusion-cli zip
+      - name: Create distribution svgfusion-cmd zip
         run: |
-          cd packages/svgfusion-cli/dist
-          zip -r ../svgfusion-cli.zip .
+          cd packages/svgfusion-cmd/dist
+          zip -r ../svgfusion-cmd.zip .
 
       - name: Create distribution svgfusion-react zip
         run: |
@@ -209,15 +209,15 @@ jobs:
           cd packages/svgfusion-bundle/dist
           zip -r ../svgfusion-bundle.zip .
 
-      - name: Create distribution svgfusion-browser zip
+      - name: Create distribution svgfusion-dom zip
         run: |
-          cd packages/svgfusion-browser/dist
-          zip -r ../svgfusion-browser.zip .
+          cd packages/svgfusion-dom/dist
+          zip -r ../svgfusion-dom.zip .
 
-      - name: Create distribution svgfusion-cli zip
+      - name: Create distribution svgfusion-cmd zip
         run: |
-          cd packages/svgfusion-cli/dist
-          zip -r ../svgfusion-cli.zip .
+          cd packages/svgfusion-cmd/dist
+          zip -r ../svgfusion-cmd.zip .
 
       - name: Create distribution svgfusion-react zip
         run: |
