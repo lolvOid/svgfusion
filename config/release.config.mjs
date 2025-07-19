@@ -1,4 +1,7 @@
-import { resolve } from 'path';
+import path from 'path';
+
+const __dirname = path.dirname(new URL(import.meta.url).pathname);
+const rootDir = path.resolve(__dirname, '..');
 
 const releaseConfig = name => ({
   branches: [
@@ -16,10 +19,8 @@ const releaseConfig = name => ({
       '@semantic-release/exec',
       {
         prepareCmd: [
-          // 1) replace workspace:* versions
-          `node ${resolve('scripts/refix-workspace-deps.cjs')} ${name}`,
-          // 2) zip dist folder
-          `node ${resolve('scripts/zip-asset.cjs')} ${name}`,
+          `node ${path.join(rootDir, 'scripts/refix-workspace-deps.cjs')} ${name}`,
+          `node ${path.join(rootDir, 'scripts/zip-asset.cjs')} ${name}`,
         ].join(' && '),
       },
     ],
