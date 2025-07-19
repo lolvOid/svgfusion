@@ -1,3 +1,22 @@
+# [1.1.0](https://github.com/lolvOid/svgfusion/compare/svgfusion-cli@1.0.2...svgfusion-cli@1.1.0) (2025-07-19)
+
+
+### Bug Fixes
+
+* update release:all script to only run release:bundle ([65a6195](https://github.com/lolvOid/svgfusion/commit/65a61952a7954916bd1972e358b82f75f3e25da1))
+
+
+### Features
+
+* add semantic-release and related plugins to package.json for svgfusion packages ([09147a1](https://github.com/lolvOid/svgfusion/commit/09147a1ff83d23bcfb375f3a55375f16856fb3bc))
+* add support for semantic-release-monorepo in release configuration ([168a808](https://github.com/lolvOid/svgfusion/commit/168a8086cb49b1fde7b4699ac355ddde63c0d793))
+* add zip creation steps for svgfusion-react, svgfusion-vue, svgfusion-utils, and svgfusion-core distributions ([3dfa935](https://github.com/lolvOid/svgfusion/commit/3dfa93558424c45f928a367e1adb472f5b59aea9))
+* svgfusion-extension ([8b301ff](https://github.com/lolvOid/svgfusion/commit/8b301ffcc68ac3d7609feff385dca8dd7500b8fc))
+* **svgfusion-vscode:** enhance SVG conversion with prefix and suffix options, add release configuration ([5494feb](https://github.com/lolvOid/svgfusion/commit/5494feb641c76c2687718bff02d3c62c93d05739))
+* **svgfusion-vscode:** implement batch conversion options and update playground UI ([abbb4ce](https://github.com/lolvOid/svgfusion/commit/abbb4ce336a81732d44588b8a20700109a761258))
+* update release steps and package dependencies to use workspace versioning ([cd1edd9](https://github.com/lolvOid/svgfusion/commit/cd1edd994325eccde34e464e2f5bebc0cbc225ac))
+* update workspace dependency specifications to use caret (^) for versioning ([9aa74a9](https://github.com/lolvOid/svgfusion/commit/9aa74a916f1854709ec58e5507f87b7698e3bc0b))
+
 ## [1.0.2](https://github.com/lolvOid/svgfusion/compare/svgfusion-cli@1.0.1...svgfusion-cli@1.0.2) (2025-07-19)
 
 
