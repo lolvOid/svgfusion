@@ -1,3 +1,10 @@
+## [1.25.2](https://github.com/lolvOid/svgfusion/compare/svgfusion@1.25.1...svgfusion@1.25.2) (2025-07-19)
+
+
+### Bug Fixes
+
+* update release:all script to only run release:bundle ([65a6195](https://github.com/lolvOid/svgfusion/commit/65a61952a7954916bd1972e358b82f75f3e25da1))
+
 ## [1.25.1](https://github.com/lolvOid/svgfusion/compare/svgfusion@1.25.0...svgfusion@1.25.1) (2025-07-19)
 
 
