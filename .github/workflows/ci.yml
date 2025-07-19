@@ -105,41 +105,6 @@ jobs:
       - name: Build packages
         run: pnpm run build
 
-      - name: Create distribution svgfusion-bundle zip
-        run: |
-          cd packages/svgfusion-bundle/dist
-          zip -r ../svgfusion-bundle.zip .
-
-      - name: Create distribution svgfusion-dom zip
-        run: |
-          cd packages/svgfusion-dom/dist
-          zip -r ../svgfusion-dom.zip .
-
-      - name: Create distribution svgfusion-cmd zip
-        run: |
-          cd packages/svgfusion-cmd/dist
-          zip -r ../svgfusion-cmd.zip .
-
-      - name: Create distribution svgfusion-react zip
-        run: |
-          cd packages/svgfusion-react/dist
-          zip -r ../svgfusion-react.zip .
-
-      - name: Create distribution svgfusion-vue zip
-        run: |
-          cd packages/svgfusion-vue/dist
-          zip -r ../svgfusion-vue.zip .
-
-      - name: Create distribution svgfusion-utils zip
-        run: |
-          cd packages/svgfusion-utils/dist
-          zip -r ../svgfusion-utils.zip .
-
-      - name: Create distribution svgfusion-core zip
-        run: |
-          cd packages/svgfusion-core/dist
-          zip -r ../svgfusion-core.zip .
-
       - name: Release packages in dependency order
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
@@ -203,41 +168,6 @@ jobs:
 
       - name: Build packages
         run: pnpm run build
-
-      - name: Create distribution svgfusion-bundle zip
-        run: |
-          cd packages/svgfusion-bundle/dist
-          zip -r ../svgfusion-bundle.zip .
-
-      - name: Create distribution svgfusion-dom zip
-        run: |
-          cd packages/svgfusion-dom/dist
-          zip -r ../svgfusion-dom.zip .
-
-      - name: Create distribution svgfusion-cmd zip
-        run: |
-          cd packages/svgfusion-cmd/dist
-          zip -r ../svgfusion-cmd.zip .
-
-      - name: Create distribution svgfusion-react zip
-        run: |
-          cd packages/svgfusion-react/dist
-          zip -r ../svgfusion-react.zip .
-
-      - name: Create distribution svgfusion-vue zip
-        run: |
-          cd packages/svgfusion-vue/dist
-          zip -r ../svgfusion-vue.zip .
-
-      - name: Create distribution svgfusion-utils zip
-        run: |
-          cd packages/svgfusion-utils/dist
-          zip -r ../svgfusion-utils.zip .
-
-      - name: Create distribution svgfusion-core zip
-        run: |
-          cd packages/svgfusion-core/dist
-          zip -r ../svgfusion-core.zip .
 
       - name: Release beta packages in dependency order
         env:

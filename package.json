@@ -58,5 +58,8 @@
     "semantic-release-monorepo": {
       "semantic-release": "^24.2.5"
     }
+  },
+  "dependencies": {
+    "archiver": "^7.0.1"
   }
 }
