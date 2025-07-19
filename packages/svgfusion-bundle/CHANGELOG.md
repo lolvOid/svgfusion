@@ -1,3 +1,10 @@
+# [svgfusion-v1.26.0](https://github.com/lolvOid/svgfusion/compare/svgfusion@1.25.2...svgfusion@1.26.0) (2025-07-19)
+
+
+### Features
+
+* add support for semantic-release-monorepo in release configuration ([168a808](https://github.com/lolvOid/svgfusion/commit/168a8086cb49b1fde7b4699ac355ddde63c0d793))
+
 ## [1.25.2](https://github.com/lolvOid/svgfusion/compare/svgfusion@1.25.1...svgfusion@1.25.2) (2025-07-19)
 
 
