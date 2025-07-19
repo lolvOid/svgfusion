@@ -1,3 +1,10 @@
+# [1.28.0](https://github.com/lolvOid/svgfusion/compare/svgfusion@1.27.0...svgfusion@1.28.0) (2025-07-19)
+
+
+### Features
+
+* **svgfusion-vscode:** enhance SVG conversion with prefix and suffix options, add release configuration ([5494feb](https://github.com/lolvOid/svgfusion/commit/5494feb641c76c2687718bff02d3c62c93d05739))
+
 # [1.27.0](https://github.com/lolvOid/svgfusion/compare/svgfusion@1.26.0...svgfusion@1.27.0) (2025-07-19)
 
 
