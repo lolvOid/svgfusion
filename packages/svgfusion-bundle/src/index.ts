@@ -1,12 +1,73 @@
-// Direct re-exports - all from core
-export * from 'svgfusion-core';
+// Re-exports from core (main exports, avoid color utils since they're duplicated)
+export {
+  SVGFusion,
+  SVGParser,
+  SVGTransformer,
+  ComponentGenerator,
+  generateIndexFile,
+  generateReadmeContent,
+  extractColors,
+  extractColorsWithElementMapping,
+  replaceColorsWithProps,
+  replaceCurrentColorWithVariables,
+  generateColorProps,
+  generateDefaultColors,
+} from 'svgfusion-core';
+export type {
+  SVGFusionOptions,
+  ConversionResult,
+  SVGElement,
+  SVGAst,
+  ParsedColor,
+  TransformationOptions,
+  StrokeWidthMapping,
+  ColorMapping,
+  TransformationResult,
+  GeneratorOptions,
+  ComponentResult,
+  IndexGenerationOptions,
+  ColorInfo,
+  BatchConversionOptions,
+  BatchConversionResult,
+  Framework,
+  ConversionError,
+  ConversionOptions,
+  ReactConversionOptions,
+  VueConversionOptions,
+} from 'svgfusion-core';
 
 // Direct re-exports - all from framework generators
 export * from 'svgfusion-react';
 export * from 'svgfusion-vue';
 
-// Direct re-exports - all from Node.js utilities
-export * from 'svgfusion-utils';
+// Re-exports from utils (only non-color utilities to avoid duplicates)
+export {
+  prettierConfig,
+  pascalCase,
+  camelCase,
+  toReactProp,
+  svgToComponentName,
+  sanitizeComponentName,
+  formatComponentName,
+  ansiColors,
+  createBanner,
+  readSvgFile,
+  writeSvgFile,
+  writeComponentFile,
+  readSvgDirectory,
+  ensureDirectoryExists,
+  ensureDir,
+  getFileExtension,
+  getComponentFilename,
+  validateDuplicateNames,
+  formatDuplicateErrors,
+  generateConflictResolutions,
+} from 'svgfusion-utils';
+export type {
+  Colors,
+  DuplicateNameInfo,
+  DuplicateValidationResult,
+} from 'svgfusion-utils';
 
 // Import only what we need for convenience functions
 import { ConversionResult, SVGFusion, SVGFusionOptions } from 'svgfusion-core';

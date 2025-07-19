@@ -15,7 +15,7 @@ export default defineConfig([
     minify: true,
     treeshake: true,
     platform: 'neutral',
-    external: ['prettier', 'jsdom'],
+    external: ['prettier', 'jsdom', 'svgfusion-utils'],
   },
   // Browser build
   {
@@ -27,17 +27,17 @@ export default defineConfig([
     clean: false,
     target: 'es2020',
     outDir: 'dist',
-    outExtension: (ctx) => ({
+    outExtension: ctx => ({
       js: ctx.format === 'cjs' ? '.js' : '.mjs',
     }),
     shims: true,
     minify: true,
     treeshake: true,
     platform: 'browser',
-    external: ['prettier'],
+    external: ['prettier', 'jsdom', 'svgfusion-utils'],
     define: {
-      'window': 'globalThis',
-      'DOMParser': 'globalThis.DOMParser',
+      window: 'globalThis',
+      DOMParser: 'globalThis.DOMParser',
     },
   },
 ]);

@@ -12,5 +12,5 @@ export default defineConfig({
   platform: 'neutral',
   treeshake: true,
   shims: true,
-  external: ['svgfusion-core', 'prettier'],
+  external: ['svgfusion-core', 'svgfusion-utils', 'prettier'],
 });
