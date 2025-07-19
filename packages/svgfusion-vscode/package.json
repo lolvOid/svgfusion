@@ -7,13 +7,6 @@
   "license": "MIT",
   "author": "lolvoid",
   "homepage": "https://svgfusion.netlify.app",
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/lolvOid/svgfusion.git"
-  },
-  "bugs": {
-    "url": "https://github.com/lolvOid/svgfusion/issues"
-  },
   "engines": {
     "vscode": "^1.74.0",
     "node": ">=18.0.0"
@@ -35,7 +28,11 @@
     "tsx",
     "icon",
     "frontend",
-    "build-tool"
+    "build-tool",
+    "svgfusion",
+    "code-generation",
+    "optimization",
+    "batch-processing"
   ],
   "activationEvents": [
     "onLanguage:xml",
@@ -205,25 +202,25 @@
     "keybindings": [
       {
         "command": "svgfusion.convertSvg",
-        "key": "cmd+shift+f s",
-        "mac": "cmd+shift+f s",
-        "win": "ctrl+shift+f s",
-        "linux": "ctrl+shift+f s",
+        "key": "cmd+shift+k s",
+        "mac": "cmd+shift+k s",
+        "win": "ctrl+shift+k s",
+        "linux": "ctrl+shift+k s",
         "when": "resourceExtname == .svg"
       },
       {
         "command": "svgfusion.batchConvert",
-        "key": "cmd+shift+f b",
-        "mac": "cmd+shift+f b",
-        "win": "ctrl+shift+f b",
-        "linux": "ctrl+shift+f b"
+        "key": "cmd+shift+k b",
+        "mac": "cmd+shift+k b",
+        "win": "ctrl+shift+k b",
+        "linux": "ctrl+shift+k b"
       },
       {
         "command": "svgfusion.openPlayground",
-        "key": "cmd+shift+f p",
-        "mac": "cmd+shift+f p",
-        "win": "ctrl+shift+f p",
-        "linux": "ctrl+shift+f p"
+        "key": "cmd+shift+k p",
+        "mac": "cmd+shift+k p",
+        "win": "ctrl+shift+k p",
+        "linux": "ctrl+shift+k p"
       }
     ]
   },

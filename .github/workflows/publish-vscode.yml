@@ -1,8 +1,6 @@
 name: Publish VSCode Extension
 
 on:
-  release:
-    types: [published]
   push:
     tags:
       - 'svgfusion-vscode@*'
@@ -10,9 +8,7 @@ on:
 jobs:
   publish:
     runs-on: ubuntu-latest
-    if: |
-      (github.event_name == 'release' && startsWith(github.event.release.tag_name, 'svgfusion-vscode@')) ||
-      (github.event_name == 'push' && startsWith(github.ref, 'refs/tags/svgfusion-vscode@'))
+    if: startsWith(github.ref, 'refs/tags/svgfusion-vscode@')
 
     steps:
       - name: Checkout

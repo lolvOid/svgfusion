@@ -140,11 +140,19 @@ jobs:
           cd packages/svgfusion-core/dist
           zip -r ../svgfusion-core.zip .
 
-      - name: Release svgfusion
+      - name: Release packages in dependency order
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
-        run: pnpm run release:all
+        run: |
+          pnpm run release:utils
+          pnpm run release:core
+          pnpm run release:cli
+          pnpm run release:browser
+          pnpm run release:react
+          pnpm run release:vue
+          pnpm run release:bundle
+          pnpm run release:vscode
 
       - name: Build documentation
         env:
@@ -231,11 +239,19 @@ jobs:
           cd packages/svgfusion-core/dist
           zip -r ../svgfusion-core.zip .
 
-      - name: Release beta svgfusion packages
+      - name: Release beta packages in dependency order
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
-        run: pnpm run release:all
+        run: |
+          pnpm run release:utils
+          pnpm run release:core
+          pnpm run release:cli
+          pnpm run release:browser
+          pnpm run release:react
+          pnpm run release:vue
+          pnpm run release:bundle
+          pnpm run release:vscode
 
       - name: Build documentation
         env:

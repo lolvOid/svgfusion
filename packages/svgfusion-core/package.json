@@ -42,14 +42,7 @@
   ],
   "author": "lolvoid",
   "license": "MIT",
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/lolvOid/svgfusion.git"
-  },
   "homepage": "https://svgfusion.netlify.app",
-  "bugs": {
-    "url": "https://github.com/lolvOid/svgfusion/issues"
-  },
   "scripts": {
     "build": "tsup",
     "dev": "tsup --watch",
@@ -70,7 +63,7 @@
   "dependencies": {
     "colord": "^2.9.3",
     "jsdom": "^26.1.0",
-    "svgfusion-utils": "latest",
+    "svgfusion-utils": "workspace:^",
     "zod": "^4.0.5"
   },
   "devDependencies": {
