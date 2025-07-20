@@ -1,3 +1,11 @@
+## [1.2.1](https://github.com/lolvOid/svgfusion/compare/svgfusion-vue@1.2.0...svgfusion-vue@1.2.1) (2025-07-20)
+
+
+### Bug Fixes
+
+* pnpm packaege build steps ([fb6e1e8](https://github.com/lolvOid/svgfusion/commit/fb6e1e8e1f74f0ce208beb2cb53fcae61a3317f6))
+* update workspace dependency specifications and improve package handling in scripts ([c5f814c](https://github.com/lolvOid/svgfusion/commit/c5f814c9ec8dab66fbb33969c5a50ba146b2c729))
+
 # [1.2.0](https://github.com/lolvOid/svgfusion/compare/svgfusion-vue@1.1.0...svgfusion-vue@1.2.0) (2025-07-20)
 
 
