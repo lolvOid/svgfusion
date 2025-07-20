@@ -1,3 +1,10 @@
+## [1.2.2](https://github.com/lolvOid/svgfusion/compare/svgfusion-react@1.2.1...svgfusion-react@1.2.2) (2025-07-20)
+
+
+### Bug Fixes
+
+* update package dependencies to use workspace references and adjust CI sleep durations ([31cc4e1](https://github.com/lolvOid/svgfusion/commit/31cc4e12997066fac8a196fcff97558407a76f9b))
+
 ## [1.2.1](https://github.com/lolvOid/svgfusion/compare/svgfusion-react@1.2.0...svgfusion-react@1.2.1) (2025-07-20)
 
 
