@@ -1,6 +1,6 @@
 {
   "name": "svgfusion-vue",
-  "version": "1.2.3",
+  "version": "1.2.4",
   "description": "Vue component generator for SVGFusion",
   "license": "MIT",
   "author": "lolvoid",
