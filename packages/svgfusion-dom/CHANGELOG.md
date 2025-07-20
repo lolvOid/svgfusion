@@ -1,3 +1,10 @@
+# [1.4.0](https://github.com/lolvOid/svgfusion/compare/svgfusion-dom@1.3.4...svgfusion-dom@1.4.0) (2025-07-20)
+
+
+### Features
+
+* update README and documentation for improved clarity and usage examples ([8f4e026](https://github.com/lolvOid/svgfusion/commit/8f4e026dfc42140fde684862274a9ab66920a12f))
+
 ## [1.3.4](https://github.com/lolvOid/svgfusion/compare/svgfusion-dom@1.3.3...svgfusion-dom@1.3.4) (2025-07-20)
 
 
