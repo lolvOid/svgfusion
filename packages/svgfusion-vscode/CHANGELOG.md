@@ -1,3 +1,10 @@
+## [1.6.3](https://github.com/lolvOid/svgfusion/compare/svgfusion-vscode@1.6.2...svgfusion-vscode@1.6.3) (2025-07-20)
+
+
+### Bug Fixes
+
+* **svgfusion:** update dependencies to latest versions ([d44d0de](https://github.com/lolvOid/svgfusion/commit/d44d0de5491f8475fe9f49fe270216877a402074))
+
 ## [1.6.2](https://github.com/lolvOid/svgfusion/compare/svgfusion-vscode@1.6.1...svgfusion-vscode@1.6.2) (2025-07-20)
 
 
