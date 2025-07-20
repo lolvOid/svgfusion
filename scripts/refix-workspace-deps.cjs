@@ -54,8 +54,4 @@ const pkg = JSON.parse(JSON.stringify(originalPkg)); // Deep copy
 
 // Write the fixed package.json for npm publishing
 fs.writeFileSync(pkgPath, JSON.stringify(pkg, null, 2));
-console.log(`✅ ${target}/package.json updated`);
-
-// Store original for restoration after release
-const originalPkgPath = pkgPath + '.workspace-backup';
-fs.writeFileSync(originalPkgPath, JSON.stringify(originalPkg, null, 2));
+console.log(`✅ ${target}/package.json updated (will be restored via git after release)`);

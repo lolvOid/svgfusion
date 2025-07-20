@@ -111,12 +111,19 @@ jobs:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
         run: |
           pnpm run release:utils
+          sleep 30
           pnpm run release:core
+          sleep 30
           pnpm run release:cli
+          sleep 15
           pnpm run release:browser
+          sleep 15
           pnpm run release:react
+          sleep 15
           pnpm run release:vue
+          sleep 15
           pnpm run release:bundle
+          sleep 30
           pnpm run release:vscode
 
       - name: Build documentation
@@ -175,12 +182,19 @@ jobs:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
         run: |
           pnpm run release:utils
+          sleep 30
           pnpm run release:core
+          sleep 30
           pnpm run release:cli
+          sleep 15
           pnpm run release:browser
+          sleep 15
           pnpm run release:react
+          sleep 15
           pnpm run release:vue
+          sleep 15
           pnpm run release:bundle
+          sleep 30
           pnpm run release:vscode
 
       - name: Build documentation
