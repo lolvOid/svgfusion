@@ -1,3 +1,22 @@
+# [1.34.0](https://github.com/lolvOid/svgfusion/compare/svgfusion@1.33.0...svgfusion@1.34.0) (2025-07-20)
+
+
+### Bug Fixes
+
+* comment out build and release steps in CI workflow ([5ffa291](https://github.com/lolvOid/svgfusion/commit/5ffa2914a39f0a4d0543e0990dc8d307251037a3))
+* improve package directory resolution in zip-asset script ([7604f85](https://github.com/lolvOid/svgfusion/commit/7604f85edc3df26d1157276cfc8336644e675417))
+* pnpm packaege build steps ([fb6e1e8](https://github.com/lolvOid/svgfusion/commit/fb6e1e8e1f74f0ce208beb2cb53fcae61a3317f6))
+* remove zip creation steps from CI workflow ([8b2bf6d](https://github.com/lolvOid/svgfusion/commit/8b2bf6db178bd5d888e62286d250bac5fa5e8c48))
+* uncomment build and release steps in CI workflow ([37abc51](https://github.com/lolvOid/svgfusion/commit/37abc517fabccc871b348e3820c9290481ffad36))
+* update path resolution for scripts in release configuration ([2136879](https://github.com/lolvOid/svgfusion/commit/2136879cae3cc04e9a00f42ca586f2363df9d797))
+* update workspace dependency specifications and improve package handling in scripts ([c5f814c](https://github.com/lolvOid/svgfusion/commit/c5f814c9ec8dab66fbb33969c5a50ba146b2c729))
+
+
+### Features
+
+* add restore workspace dependencies script and update package versions ([b4118ba](https://github.com/lolvOid/svgfusion/commit/b4118baf216fd52ea290d64a435b47c716d511b7))
+* add zip-asset script for packaging project distributions ([5041b0e](https://github.com/lolvOid/svgfusion/commit/5041b0e8b1754f7717c9b2d9475a6b719a49f958))
+
 # [1.33.0](https://github.com/lolvOid/svgfusion/compare/svgfusion@1.32.0...svgfusion@1.33.0) (2025-07-19)
 
 ### Features
