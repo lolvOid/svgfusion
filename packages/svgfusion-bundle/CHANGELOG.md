@@ -1,34 +1,30 @@
 # [1.33.0](https://github.com/lolvOid/svgfusion/compare/svgfusion@1.32.0...svgfusion@1.33.0) (2025-07-19)
 
-
 ### Features
 
-* update workspace dependency specifiers to use '*' for all packages ([e2ede29](https://github.com/lolvOid/svgfusion/commit/e2ede290e45397d58f1eaabd3400b5faf293be2b))
+- update workspace dependency specifiers to use '\*' for all packages ([e2ede29](https://github.com/lolvOid/svgfusion/commit/e2ede290e45397d58f1eaabd3400b5faf293be2b))
 
 # [1.32.0](https://github.com/lolvOid/svgfusion/compare/svgfusion@1.31.0...svgfusion@1.32.0) (2025-07-19)
 
-
 ### Features
 
-* add release configuration for svgfusion-core, svgfusion-react, and svgfusion-vue with dual registry support ([3c7aab3](https://github.com/lolvOid/svgfusion/commit/3c7aab3ea2028aa6795b73adbbeb615558663567))
-* update packages ([734b4b0](https://github.com/lolvOid/svgfusion/commit/734b4b0c66703402967326ba5a1ba8ffb556a7c4))
+- add release configuration for svgfusion-core, svgfusion-react, and svgfusion-vue with dual registry support ([3c7aab3](https://github.com/lolvOid/svgfusion/commit/3c7aab3ea2028aa6795b73adbbeb615558663567))
+- update packages ([734b4b0](https://github.com/lolvOid/svgfusion/commit/734b4b0c66703402967326ba5a1ba8ffb556a7c4))
 
 # [1.31.0](https://github.com/lolvOid/svgfusion/compare/svgfusion@1.30.0...svgfusion@1.31.0) (2025-07-19)
 
-
 ### Features
 
-* add semantic-release and related plugins to package.json for svgfusion packages ([09147a1](https://github.com/lolvOid/svgfusion/commit/09147a1ff83d23bcfb375f3a55375f16856fb3bc))
-* add zip creation steps for svgfusion-react, svgfusion-vue, svgfusion-utils, and svgfusion-core distributions ([3dfa935](https://github.com/lolvOid/svgfusion/commit/3dfa93558424c45f928a367e1adb472f5b59aea9))
-* **svgfusion-cmd:** implement CLI for converting SVG files to React/Vue components with TypeScript support ([5996f24](https://github.com/lolvOid/svgfusion/commit/5996f24ea547580bbab0a0638cc28f449d5eebc5))
-* update release steps and package dependencies to use workspace versioning ([cd1edd9](https://github.com/lolvOid/svgfusion/commit/cd1edd994325eccde34e464e2f5bebc0cbc225ac))
+- add semantic-release and related plugins to package.json for svgfusion packages ([09147a1](https://github.com/lolvOid/svgfusion/commit/09147a1ff83d23bcfb375f3a55375f16856fb3bc))
+- add zip creation steps for svgfusion-react, svgfusion-vue, svgfusion-utils, and svgfusion-core distributions ([3dfa935](https://github.com/lolvOid/svgfusion/commit/3dfa93558424c45f928a367e1adb472f5b59aea9))
+- **svgfusion-cmd:** implement CLI for converting SVG files to React/Vue components with TypeScript support ([5996f24](https://github.com/lolvOid/svgfusion/commit/5996f24ea547580bbab0a0638cc28f449d5eebc5))
+- update release steps and package dependencies to use workspace versioning ([cd1edd9](https://github.com/lolvOid/svgfusion/commit/cd1edd994325eccde34e464e2f5bebc0cbc225ac))
 
 # [1.30.0](https://github.com/lolvOid/svgfusion/compare/svgfusion@1.29.0...svgfusion@1.30.0) (2025-07-19)
 
-
 ### Features
 
-* update workspace dependency specifications to use caret (^) for versioning ([9aa74a9](https://github.com/lolvOid/svgfusion/commit/9aa74a916f1854709ec58e5507f87b7698e3bc0b))
+- update workspace dependency specifications to use caret (^) for versioning ([9aa74a9](https://github.com/lolvOid/svgfusion/commit/9aa74a916f1854709ec58e5507f87b7698e3bc0b))
 
 # [1.29.0](https://github.com/lolvOid/svgfusion/compare/svgfusion@1.28.0...svgfusion@1.29.0) (2025-07-19)
 

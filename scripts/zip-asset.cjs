@@ -8,11 +8,18 @@ if (!packageName) {
   process.exit(1);
 }
 
+// Map package names to their actual folder names
+const packageFolderMap = {
+  'svgfusion': 'svgfusion-bundle'
+};
+
+const folderName = packageFolderMap[packageName] || packageName;
+
 // Check if we're running from the package directory or root directory
 const packageDir = fs.existsSync('package.json') && 
   JSON.parse(fs.readFileSync('package.json', 'utf-8')).name === packageName
   ? process.cwd()
-  : path.resolve('packages', packageName);
+  : path.resolve('packages', folderName);
 const distDir = path.join(packageDir, 'dist');
 
 if (!fs.existsSync(distDir)) {

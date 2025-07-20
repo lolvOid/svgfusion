@@ -3,7 +3,7 @@ const path = require('path');
 const { execSync } = require('child_process');
 
 const packagesDir = path.resolve(__dirname, '../packages');
-const target = process.argv[2]; // e.g., 'a'
+const target = process.argv[2]; // e.g., 'svgfusion'
 
 if (!target) {
   console.error(
@@ -21,7 +21,15 @@ const getPublishedVersion = pkgName => {
   }
 };
 
-const pkgPath = path.join(packagesDir, target, 'package.json');
+// Map package names to their actual folder names
+const packageFolderMap = {
+  'svgfusion': 'svgfusion-bundle'
+};
+
+const folderName = packageFolderMap[target] || target;
+console.log(`Target: ${target}, Folder: ${folderName}`);
+const pkgPath = path.join(packagesDir, folderName, 'package.json');
+console.log(`Looking for package.json at: ${pkgPath}`);
 const originalPkg = JSON.parse(fs.readFileSync(pkgPath, 'utf-8'));
 const pkg = JSON.parse(JSON.stringify(originalPkg)); // Deep copy
 
