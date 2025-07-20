@@ -54,13 +54,12 @@ const releaseConfig = name => ({
         ],
       },
     ],
-
-    [
-      '@semantic-release/exec',
-      {
-        successCmd: `node ${path.join(rootDir, 'scripts/restore-workspace-deps.cjs')} ${name}`,
-      },
-    ],
+    // [
+    //   '@semantic-release/exec',
+    //   {
+    //     successCmd: `node ${path.join(rootDir, 'scripts/restore-workspace-deps.cjs')} ${name}`,
+    //   },
+    // ],
   ],
   tagFormat: `${name}@\${version}`,
 });
