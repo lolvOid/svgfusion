@@ -22,7 +22,8 @@ const getPublishedVersion = pkgName => {
 };
 
 const pkgPath = path.join(packagesDir, target, 'package.json');
-const pkg = JSON.parse(fs.readFileSync(pkgPath, 'utf-8'));
+const originalPkg = JSON.parse(fs.readFileSync(pkgPath, 'utf-8'));
+const pkg = JSON.parse(JSON.stringify(originalPkg)); // Deep copy
 
 ['dependencies', 'devDependencies', 'peerDependencies'].forEach(depType => {
   const deps = pkg[depType];
@@ -43,5 +44,10 @@ const pkg = JSON.parse(fs.readFileSync(pkgPath, 'utf-8'));
   }
 });
 
+// Write the fixed package.json for npm publishing
 fs.writeFileSync(pkgPath, JSON.stringify(pkg, null, 2));
 console.log(`✅ ${target}/package.json updated`);
+
+// Store original for restoration after release
+const originalPkgPath = pkgPath + '.workspace-backup';
+fs.writeFileSync(originalPkgPath, JSON.stringify(originalPkg, null, 2));
