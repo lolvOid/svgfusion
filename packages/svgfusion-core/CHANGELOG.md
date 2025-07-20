@@ -1,3 +1,15 @@
+# [1.3.0](https://github.com/lolvOid/svgfusion/compare/svgfusion-core@1.2.0...svgfusion-core@1.3.0) (2025-07-20)
+
+
+### Bug Fixes
+
+* uncomment build and release steps in CI workflow ([37abc51](https://github.com/lolvOid/svgfusion/commit/37abc517fabccc871b348e3820c9290481ffad36))
+
+
+### Features
+
+* add restore workspace dependencies script and update package versions ([b4118ba](https://github.com/lolvOid/svgfusion/commit/b4118baf216fd52ea290d64a435b47c716d511b7))
+
 # [1.2.0](https://github.com/lolvOid/svgfusion/compare/svgfusion-core@1.1.0...svgfusion-core@1.2.0) (2025-07-19)
 
 
