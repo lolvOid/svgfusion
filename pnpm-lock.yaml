@@ -170,17 +170,17 @@ importers:
         specifier: ^1.7.0
         version: 1.8.2
       svgfusion-core:
-        specifier: 1.3.2
-        version: 1.3.2
+        specifier: workspace:*
+        version: link:../svgfusion-core
       svgfusion-react:
-        specifier: 1.2.1
-        version: 1.2.1(prettier@3.6.2)
+        specifier: workspace:*
+        version: link:../svgfusion-react
       svgfusion-utils:
-        specifier: 1.1.2
-        version: 1.1.2
+        specifier: workspace:*
+        version: link:../svgfusion-utils
       svgfusion-vue:
-        specifier: 1.2.1
-        version: 1.2.1(prettier@3.6.2)
+        specifier: workspace:*
+        version: link:../svgfusion-vue
     devDependencies:
       '@eslint/js':
         specifier: ^9.31.0
@@ -243,8 +243,8 @@ importers:
         specifier: ^26.1.0
         version: 26.1.0
       svgfusion-utils:
-        specifier: 1.1.2
-        version: 1.1.2
+        specifier: workspace:*
+        version: link:../svgfusion-utils
       zod:
         specifier: ^4.0.5
         version: 4.0.5
@@ -422,14 +422,14 @@ importers:
         specifier: 1.3.2
         version: 1.3.2
       svgfusion-react:
-        specifier: 1.2.1
-        version: 1.2.1(prettier@3.6.2)
+        specifier: workspace:*
+        version: link:../svgfusion-react
       svgfusion-utils:
-        specifier: 1.1.2
-        version: 1.1.2
+        specifier: workspace:*
+        version: link:../svgfusion-utils
       svgfusion-vue:
-        specifier: 1.2.1
-        version: 1.2.1(prettier@3.6.2)
+        specifier: workspace:*
+        version: link:../svgfusion-vue
     devDependencies:
       '@eslint/js':
         specifier: ^9.31.0
@@ -489,11 +489,11 @@ importers:
         specifier: ^3.0.0
         version: 3.6.2
       svgfusion-core:
-        specifier: 1.3.2
-        version: 1.3.2
+        specifier: workspace:*
+        version: link:../svgfusion-core
       svgfusion-utils:
-        specifier: 1.1.2
-        version: 1.1.2
+        specifier: workspace:*
+        version: link:../svgfusion-utils
     devDependencies:
       '@eslint/js':
         specifier: 9.31.0
@@ -617,14 +617,14 @@ importers:
   packages/svgfusion-vscode:
     dependencies:
       svgfusion-core:
-        specifier: 1.3.1
-        version: 1.3.1
+        specifier: workspace:*
+        version: link:../svgfusion-core
       svgfusion-dom:
-        specifier: 1.3.1
-        version: 1.3.1(prettier@3.6.2)
+        specifier: workspace:*
+        version: link:../svgfusion-dom
       svgfusion-utils:
-        specifier: 1.1.1
-        version: 1.1.1
+        specifier: workspace:*
+        version: link:../svgfusion-utils
     devDependencies:
       '@eslint/js':
         specifier: ^9.31.0
@@ -690,11 +690,11 @@ importers:
         specifier: ^3.0.0
         version: 3.6.2
       svgfusion-core:
-        specifier: 1.3.2
-        version: 1.3.2
+        specifier: workspace:*
+        version: link:../svgfusion-core
       svgfusion-utils:
-        specifier: 1.1.2
-        version: 1.1.2
+        specifier: workspace:*
+        version: link:../svgfusion-utils
     devDependencies:
       '@eslint/js':
         specifier: 9.31.0

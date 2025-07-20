@@ -21,8 +21,10 @@ try {
   // Read current package.json (with new version from semantic-release)
   const pkg = JSON.parse(fs.readFileSync(pkgPath, 'utf-8'));
   
-  // List of internal dependencies that should use workspace:*
+  // List of all internal svgfusion packages that should use workspace:*
   const internalDeps = [
+    'svgfusion',        // Published name of svgfusion-bundle
+    'svgfusion-bundle', // Folder name 
     'svgfusion-core',
     'svgfusion-utils', 
     'svgfusion-cmd',
@@ -31,22 +33,30 @@ try {
     'svgfusion-dom'
   ];
   
+  let hasChanges = false;
+  
   // Restore workspace references for internal dependencies only
   ['dependencies', 'devDependencies', 'peerDependencies'].forEach(depType => {
     const deps = pkg[depType];
     if (!deps) return;
     
     for (const dep of internalDeps) {
-      if (deps[dep]) {
+      if (deps[dep] && !deps[dep].startsWith('workspace:')) {
+        const oldVersion = deps[dep];
         deps[dep] = 'workspace:*';
-        console.log(`[${target}] ${dep}@${deps[dep]} → workspace:*`);
+        console.log(`[${target}] ${dep}@${oldVersion} → workspace:*`);
+        hasChanges = true;
       }
     }
   });
   
-  // Write back with workspace references but keep the new version
-  fs.writeFileSync(pkgPath, JSON.stringify(pkg, null, 2));
-  console.log(`✅ ${target}/package.json dependencies restored to workspace format (version preserved)`);
+  if (hasChanges) {
+    // Write back with workspace references but keep the new version
+    fs.writeFileSync(pkgPath, JSON.stringify(pkg, null, 2));
+    console.log(`✅ ${target}/package.json dependencies restored to workspace format (version preserved)`);
+  } else {
+    console.log(`ℹ️ No workspace dependencies to restore for ${target}`);
+  }
 } catch (error) {
   console.error(`❌ Failed to restore ${target}/package.json:`, error.message);
   process.exit(1);
