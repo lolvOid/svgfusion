@@ -2,7 +2,7 @@
   "name": "svgfusion-vscode",
   "displayName": "SVGFusion",
   "description": "Convert SVG files to React/Vue components with ease",
-  "version": "1.6.0",
+  "version": "1.6.1",
   "publisher": "lolvoid",
   "license": "MIT",
   "author": "lolvoid",
