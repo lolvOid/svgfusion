@@ -114,14 +114,14 @@ jobs:
           sleep 30
           pnpm run release:core
           sleep 30
-          pnpm run release:cli
-          sleep 15
-          pnpm run release:browser
-          sleep 15
           pnpm run release:react
-          sleep 15
+          sleep 30
           pnpm run release:vue
-          sleep 15
+          sleep 30
+          pnpm run release:cli
+          sleep 30
+          pnpm run release:browser
+          sleep 30
           pnpm run release:bundle
           sleep 30
           pnpm run release:vscode
@@ -185,14 +185,14 @@ jobs:
           sleep 30
           pnpm run release:core
           sleep 30
-          pnpm run release:cli
-          sleep 15
-          pnpm run release:browser
-          sleep 15
           pnpm run release:react
-          sleep 15
+          sleep 30
           pnpm run release:vue
-          sleep 15
+          sleep 30
+          pnpm run release:cli
+          sleep 30
+          pnpm run release:browser
+          sleep 30
           pnpm run release:bundle
           sleep 30
           pnpm run release:vscode
