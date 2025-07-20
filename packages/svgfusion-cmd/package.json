@@ -1,6 +1,6 @@
 {
   "name": "svgfusion-cmd",
-  "version": "1.3.1",
+  "version": "1.3.2",
   "description": "Command-line interface for converting SVG files into React and Vue 3 components with TypeScript support and batch processing capabilities.",
   "license": "MIT",
   "publishConfig": {
@@ -59,10 +59,10 @@
   "dependencies": {
     "commander": "^11.1.0",
     "figlet": "^1.7.0",
-    "svgfusion-core": "workspace:*",
-    "svgfusion-react": "workspace:*",
-    "svgfusion-utils": "workspace:*",
-    "svgfusion-vue": "workspace:*"
+    "svgfusion-core": "1.3.2",
+    "svgfusion-react": "1.2.1",
+    "svgfusion-utils": "1.1.2",
+    "svgfusion-vue": "1.2.1"
   },
   "devDependencies": {
     "@eslint/js": "^9.31.0",
