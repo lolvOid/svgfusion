@@ -1,3 +1,12 @@
+## [1.3.3](https://github.com/lolvOid/svgfusion/compare/svgfusion-dom@1.3.2...svgfusion-dom@1.3.3) (2025-07-20)
+
+
+### Bug Fixes
+
+* **ci:** adjust release sequence and sleep durations for better stability ([a0ce760](https://github.com/lolvOid/svgfusion/commit/a0ce7605f0a26288852592b4a67fb017d5f78358))
+* update package dependencies to use workspace references ([31acbc3](https://github.com/lolvOid/svgfusion/commit/31acbc37214d3e97550b21beb274b116793610ae))
+* update package versions in pnpm-lock.yaml and add banner to tsup.config.ts ([67fedb2](https://github.com/lolvOid/svgfusion/commit/67fedb2eb512213aebd527118c0334b3a2dbb785))
+
 ## [1.3.2](https://github.com/lolvOid/svgfusion/compare/svgfusion-dom@1.3.1...svgfusion-dom@1.3.2) (2025-07-20)
 
 

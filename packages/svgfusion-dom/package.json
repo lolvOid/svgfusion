@@ -1,6 +1,6 @@
 {
   "name": "svgfusion-dom",
-  "version": "1.3.2",
+  "version": "1.3.3",
   "description": "Browser-optimized package for converting SVG files into React and Vue 3 components with TypeScript support and native SVG props inheritance.",
   "license": "MIT",
   "publishConfig": {
@@ -55,9 +55,9 @@
   },
   "dependencies": {
     "svgfusion-core": "1.3.2",
-    "svgfusion-react": "workspace:*",
-    "svgfusion-utils": "workspace:*",
-    "svgfusion-vue": "workspace:*"
+    "svgfusion-react": "1.2.3",
+    "svgfusion-utils": "1.1.3",
+    "svgfusion-vue": "1.2.3"
   },
   "devDependencies": {
     "@eslint/js": "^9.31.0",
