@@ -1,3 +1,10 @@
+# [1.7.0](https://github.com/lolvOid/svgfusion/compare/svgfusion-vscode@1.6.3...svgfusion-vscode@1.7.0) (2025-07-20)
+
+
+### Features
+
+* update README and documentation for improved clarity and usage examples ([8f4e026](https://github.com/lolvOid/svgfusion/commit/8f4e026dfc42140fde684862274a9ab66920a12f))
+
 ## [1.6.3](https://github.com/lolvOid/svgfusion/compare/svgfusion-vscode@1.6.2...svgfusion-vscode@1.6.3) (2025-07-20)
 
 
