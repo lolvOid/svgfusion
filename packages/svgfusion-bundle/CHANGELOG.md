@@ -1,3 +1,10 @@
+## [1.34.3](https://github.com/lolvOid/svgfusion/compare/svgfusion@1.34.2...svgfusion@1.34.3) (2025-07-20)
+
+
+### Bug Fixes
+
+* **svgfusion:** update dependencies to latest versions ([d44d0de](https://github.com/lolvOid/svgfusion/commit/d44d0de5491f8475fe9f49fe270216877a402074))
+
 ## [1.34.2](https://github.com/lolvOid/svgfusion/compare/svgfusion@1.34.1...svgfusion@1.34.2) (2025-07-20)
 
 
