@@ -7,7 +7,16 @@
   "author": "lolvoid",
   "license": "MIT",
   "scripts": {
-    "build": "pnpm -r --workspace-concurrency=1 --filter='!svgfusion-docs' --filter='!svgfusion-demo' build",
+    "build:utils": "pnpm --filter=svgfusion-utils run build",
+    "build:core": "pnpm --filter=svgfusion-core run build",
+    "build:react": "pnpm --filter=svgfusion-react run build",
+    "build:vue": "pnpm --filter=svgfusion-vue run build",
+    "build:browser": "pnpm --filter=svgfusion-dom run build",
+    "build:cli": "pnpm --filter=svgfusion-cmd run build",
+    "build:vscode": "pnpm --filter=svgfusion-vscode run build",
+    "build:bundle": "pnpm --filter=svgfusion run build",
+    "build": "pnpm run build:utils && pnpm run build:core && pnpm run build:react && pnpm run build:vue && pnpm run build:browser && pnpm run build:cli && pnpm run build:vscode && pnpm run build:bundle",
+    "dev:utils": "pnpm --filter=svgfusion-utils run dev",
     "dev": "pnpm -r --parallel dev",
     "test": "pnpm -r --filter='!svgfusion-docs' --filter='!svgfusion-demo' test",
     "test:coverage": "pnpm --filter=svgfusion run test:coverage",
@@ -27,7 +36,7 @@
     "release:vue": "pnpm --filter=svgfusion-vue run release",
     "release:utils": "pnpm --filter=svgfusion-utils run release",
     "release:core": "pnpm --filter=svgfusion-core run release",
-    "release:all": "pnpm run release:bundle && pnpm run release:vscode && pnpm run release:cli && pnpm run release:browser && pnpm run release:react && pnpm run release:vue && pnpm run release:utils && pnpm run release:core",
+    "release:all": "pnpm run release:utils && pnpm run release:core && pnpm run release:react && pnpm run release:vue && pnpm run release:browser && pnpm run release:cli && pnpm run release:vscode && pnpm run release:bundle",
     "svgfusion": "node packages/svgfusion-bundle/dist/cli.cjs"
   },
   "devDependencies": {
