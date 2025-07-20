@@ -2,6 +2,8 @@
 
 SVGFusion is available as three main packages designed for different use cases.
 
+> **Note**: The main `svgfusion` package on npm is built from the `svgfusion-bundle` folder in the monorepo. This is the complete toolkit that most users should install.
+
 ## Package Overview
 
 ### **For General Usage**
@@ -65,8 +67,12 @@ npm install svgfusion-dom
 - Framework support (React & Vue)
 - Perfect for online editors
 - CDN support
+- Streamlined API (`convertSvg()`)
+- Smaller bundle size
 
-**Use when:** Building web applications, online editors, or playgrounds.
+**Use when:** Building web applications, online editors, or playgrounds where bundle size matters.
+
+**API Difference:** Uses `convertSvg()` instead of separate `convertToReact()`/`convertToVue()` functions.
 
 ---
 
@@ -94,13 +100,15 @@ npx svgfusion ./icons --output ./components
 
 ## Package Comparison
 
-| Feature          | svgfusion        | svgfusion-cmd     | svgfusion-dom |
-| ---------------- | ---------------- | ----------------- | ------------- |
-| **CLI Support**  | ✅               | ✅                | ❌            |
-| **Node.js API**  | ✅               | ❌                | ❌            |
-| **Browser API**  | ✅               | ❌                | ✅            |
-| **Dependencies** | Full             | CLI optimized     | Zero runtime  |
-| **Use Case**     | Complete toolkit | Command-line only | Browser-only  |
+| Feature            | svgfusion                 | svgfusion-cmd          | svgfusion-dom          |
+| ------------------ | ------------------------- | ---------------------- | ---------------------- |
+| **CLI Support**    | `npx svgfusion`           | `npx svgfusion-cmd`    | ❌                     |
+| **Node.js API**    | ✅                        | ❌                     | ❌                     |
+| **Browser API**    | `svgfusion/browser`       | ❌                     | `convertSvg()`         |
+| **Bundle Size**    | Largest                   | CLI optimized          | Smallest               |
+| **Dependencies**   | Full                      | CLI optimized          | Zero runtime           |
+| **Use Case**       | Complete toolkit          | Command-line only      | Browser-only           |
+| **Package Source** | `svgfusion-bundle` folder | `svgfusion-cmd` folder | `svgfusion-dom` folder |
 
 ---
 
@@ -130,3 +138,63 @@ npm install svgfusion-dom
 ```
 
 Ideal for web applications and online editors with minimal bundle impact.
+
+---
+
+## Browser Usage Comparison
+
+When building web applications, you have two options for browser usage:
+
+### Option 1: Main Package (`svgfusion/browser`)
+
+```bash
+npm install svgfusion
+```
+
+```javascript
+import { convertToReact, convertToVue } from 'svgfusion/browser';
+
+const reactCode = await convertToReact(svgContent, options);
+const vueCode = await convertToVue(svgContent, options);
+```
+
+**Pros:**
+
+- Full feature parity with Node.js version
+- Separate functions for React and Vue
+- Same API as other SVGFusion tools
+
+**Cons:**
+
+- Larger bundle size
+- Includes Node.js-specific code
+
+### Option 2: Dedicated Package (`svgfusion-dom`)
+
+```bash
+npm install svgfusion-dom
+```
+
+```javascript
+import { convertSvg } from 'svgfusion-dom';
+
+const reactCode = await convertSvg(svgContent, {
+  framework: 'react',
+  ...options,
+});
+const vueCode = await convertSvg(svgContent, { framework: 'vue', ...options });
+```
+
+**Pros:**
+
+- Optimized for browser usage
+- Smaller bundle size
+- Zero Node.js dependencies
+- Streamlined API
+
+**Cons:**
+
+- Different API than other SVGFusion tools
+- Browser-only functionality
+
+**Recommendation:** Use `svgfusion-dom` for new web projects where bundle size matters. Use `svgfusion/browser` when you need consistency with Node.js APIs or are migrating existing code.

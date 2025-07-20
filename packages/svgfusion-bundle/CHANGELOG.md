@@ -1,44 +1,39 @@
 ## [1.34.3](https://github.com/lolvOid/svgfusion/compare/svgfusion@1.34.2...svgfusion@1.34.3) (2025-07-20)
 
-
 ### Bug Fixes
 
-* **svgfusion:** update dependencies to latest versions ([d44d0de](https://github.com/lolvOid/svgfusion/commit/d44d0de5491f8475fe9f49fe270216877a402074))
+- **svgfusion:** update dependencies to latest versions ([d44d0de](https://github.com/lolvOid/svgfusion/commit/d44d0de5491f8475fe9f49fe270216877a402074))
 
 ## [1.34.2](https://github.com/lolvOid/svgfusion/compare/svgfusion@1.34.1...svgfusion@1.34.2) (2025-07-20)
 
-
 ### Bug Fixes
 
-* **ci:** adjust release sequence and sleep durations for better stability ([a0ce760](https://github.com/lolvOid/svgfusion/commit/a0ce7605f0a26288852592b4a67fb017d5f78358))
-* update package dependencies to use workspace references ([31acbc3](https://github.com/lolvOid/svgfusion/commit/31acbc37214d3e97550b21beb274b116793610ae))
-* update package versions in pnpm-lock.yaml and add banner to tsup.config.ts ([67fedb2](https://github.com/lolvOid/svgfusion/commit/67fedb2eb512213aebd527118c0334b3a2dbb785))
+- **ci:** adjust release sequence and sleep durations for better stability ([a0ce760](https://github.com/lolvOid/svgfusion/commit/a0ce7605f0a26288852592b4a67fb017d5f78358))
+- update package dependencies to use workspace references ([31acbc3](https://github.com/lolvOid/svgfusion/commit/31acbc37214d3e97550b21beb274b116793610ae))
+- update package versions in pnpm-lock.yaml and add banner to tsup.config.ts ([67fedb2](https://github.com/lolvOid/svgfusion/commit/67fedb2eb512213aebd527118c0334b3a2dbb785))
 
 ## [1.34.1](https://github.com/lolvOid/svgfusion/compare/svgfusion@1.34.0...svgfusion@1.34.1) (2025-07-20)
 
-
 ### Bug Fixes
 
-* update package dependencies to use workspace references and adjust CI sleep durations ([31cc4e1](https://github.com/lolvOid/svgfusion/commit/31cc4e12997066fac8a196fcff97558407a76f9b))
+- update package dependencies to use workspace references and adjust CI sleep durations ([31cc4e1](https://github.com/lolvOid/svgfusion/commit/31cc4e12997066fac8a196fcff97558407a76f9b))
 
 # [1.34.0](https://github.com/lolvOid/svgfusion/compare/svgfusion@1.33.0...svgfusion@1.34.0) (2025-07-20)
 
-
 ### Bug Fixes
 
-* comment out build and release steps in CI workflow ([5ffa291](https://github.com/lolvOid/svgfusion/commit/5ffa2914a39f0a4d0543e0990dc8d307251037a3))
-* improve package directory resolution in zip-asset script ([7604f85](https://github.com/lolvOid/svgfusion/commit/7604f85edc3df26d1157276cfc8336644e675417))
-* pnpm packaege build steps ([fb6e1e8](https://github.com/lolvOid/svgfusion/commit/fb6e1e8e1f74f0ce208beb2cb53fcae61a3317f6))
-* remove zip creation steps from CI workflow ([8b2bf6d](https://github.com/lolvOid/svgfusion/commit/8b2bf6db178bd5d888e62286d250bac5fa5e8c48))
-* uncomment build and release steps in CI workflow ([37abc51](https://github.com/lolvOid/svgfusion/commit/37abc517fabccc871b348e3820c9290481ffad36))
-* update path resolution for scripts in release configuration ([2136879](https://github.com/lolvOid/svgfusion/commit/2136879cae3cc04e9a00f42ca586f2363df9d797))
-* update workspace dependency specifications and improve package handling in scripts ([c5f814c](https://github.com/lolvOid/svgfusion/commit/c5f814c9ec8dab66fbb33969c5a50ba146b2c729))
-
+- comment out build and release steps in CI workflow ([5ffa291](https://github.com/lolvOid/svgfusion/commit/5ffa2914a39f0a4d0543e0990dc8d307251037a3))
+- improve package directory resolution in zip-asset script ([7604f85](https://github.com/lolvOid/svgfusion/commit/7604f85edc3df26d1157276cfc8336644e675417))
+- pnpm packaege build steps ([fb6e1e8](https://github.com/lolvOid/svgfusion/commit/fb6e1e8e1f74f0ce208beb2cb53fcae61a3317f6))
+- remove zip creation steps from CI workflow ([8b2bf6d](https://github.com/lolvOid/svgfusion/commit/8b2bf6db178bd5d888e62286d250bac5fa5e8c48))
+- uncomment build and release steps in CI workflow ([37abc51](https://github.com/lolvOid/svgfusion/commit/37abc517fabccc871b348e3820c9290481ffad36))
+- update path resolution for scripts in release configuration ([2136879](https://github.com/lolvOid/svgfusion/commit/2136879cae3cc04e9a00f42ca586f2363df9d797))
+- update workspace dependency specifications and improve package handling in scripts ([c5f814c](https://github.com/lolvOid/svgfusion/commit/c5f814c9ec8dab66fbb33969c5a50ba146b2c729))
 
 ### Features
 
-* add restore workspace dependencies script and update package versions ([b4118ba](https://github.com/lolvOid/svgfusion/commit/b4118baf216fd52ea290d64a435b47c716d511b7))
-* add zip-asset script for packaging project distributions ([5041b0e](https://github.com/lolvOid/svgfusion/commit/5041b0e8b1754f7717c9b2d9475a6b719a49f958))
+- add restore workspace dependencies script and update package versions ([b4118ba](https://github.com/lolvOid/svgfusion/commit/b4118baf216fd52ea290d64a435b47c716d511b7))
+- add zip-asset script for packaging project distributions ([5041b0e](https://github.com/lolvOid/svgfusion/commit/5041b0e8b1754f7717c9b2d9475a6b719a49f958))
 
 # [1.33.0](https://github.com/lolvOid/svgfusion/compare/svgfusion@1.32.0...svgfusion@1.33.0) (2025-07-19)
 

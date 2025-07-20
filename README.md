@@ -19,30 +19,42 @@ Convert SVG files into blazing-fast React and Vue 3 components with automatic co
 ## Quick Start
 
 ```bash
-# Install globally
+# Using main package (includes all features)
+npx svgfusion ./icons --output ./components --framework react
+
+# Or install globally
 npm install -g svgfusion
+svgfusion ./icons --output ./components --framework vue
 
-# Convert SVG files to React components
-svgfusion ./icons --output ./components --framework react
-
-# Or use without installation
-npx svgfusion ./icons --output ./components --framework vue
+# For CLI-only usage (smaller download)
+npx svgfusion-cmd ./icons --output ./components --framework react
 ```
 
 ## Available Packages
 
 SVGFusion is available as a monorepo with specialized packages for different use cases:
 
-| Package                                                              | Description            | Installation                   | Use Case            |
-| -------------------------------------------------------------------- | ---------------------- | ------------------------------ | ------------------- |
-| **[svgfusion](https://www.npmjs.com/package/svgfusion)**             | Complete toolkit       | `npm install svgfusion`        | General usage       |
-| **[svgfusion-cmd](https://www.npmjs.com/package/svgfusion-cmd)**     | Command-line interface | `npm install -g svgfusion-cmd` | CLI-only usage      |
-| **[svgfusion-dom](https://www.npmjs.com/package/svgfusion-dom)**     | Browser-optimized      | `npm install svgfusion-dom`    | Web applications    |
-| **[svgfusion-core](https://www.npmjs.com/package/svgfusion-core)**   | Core engine            | `npm install svgfusion-core`   | Custom tooling      |
-| **[svgfusion-react](https://www.npmjs.com/package/svgfusion-react)** | React utilities        | `npm install svgfusion-react`  | React-only projects |
-| **[svgfusion-vue](https://www.npmjs.com/package/svgfusion-vue)**     | Vue utilities          | `npm install svgfusion-vue`    | Vue-only projects   |
+| Package                                                              | Description            | Installation                   | CLI Usage               | Use Case            |
+| -------------------------------------------------------------------- | ---------------------- | ------------------------------ | ----------------------- | ------------------- |
+| **[svgfusion](https://www.npmjs.com/package/svgfusion)**             | Complete toolkit       | `npm install svgfusion`        | `npx svgfusion`         | General usage       |
+| **[svgfusion-cmd](https://www.npmjs.com/package/svgfusion-cmd)**     | Command-line interface | `npm install -g svgfusion-cmd` | `npx svgfusion-cmd`     | CLI-only usage      |
+| **[svgfusion-dom](https://www.npmjs.com/package/svgfusion-dom)**     | Browser-optimized      | `npm install svgfusion-dom`    | N/A (browser only)      | Web applications    |
+| **[svgfusion-core](https://www.npmjs.com/package/svgfusion-core)**   | Core engine            | `npm install svgfusion-core`   | N/A (programmatic only) | Custom tooling      |
+| **[svgfusion-react](https://www.npmjs.com/package/svgfusion-react)** | React utilities        | `npm install svgfusion-react`  | N/A (programmatic only) | React-only projects |
+| **[svgfusion-vue](https://www.npmjs.com/package/svgfusion-vue)**     | Vue utilities          | `npm install svgfusion-vue`    | N/A (programmatic only) | Vue-only projects   |
 
 > **Tip:** For most users, the main `svgfusion` package includes everything you need. Use specialized packages only if you need specific functionality.
+
+## CLI Options
+
+Choose the right CLI option for your needs:
+
+| Command             | Package       | Size        | When to Use                          |
+| ------------------- | ------------- | ----------- | ------------------------------------ |
+| `npx svgfusion`     | svgfusion     | Full bundle | General usage, includes all features |
+| `npx svgfusion-cmd` | svgfusion-cmd | Smaller     | CLI-only usage, faster downloads     |
+
+Both commands support the same CLI options and features. The difference is package size and dependencies.
 
 ## Key Features
 
@@ -621,7 +633,7 @@ SVGFusion now supports browser environments! Convert SVG strings to component co
 **Try the Interactive Playground**: [svgfusion.netlify.app/playground](https://svgfusion.netlify.app/playground)
 
 ```javascript
-import { convertToReact, convertToVue } from 'svgfusion/browser';
+import { convertToReact, convertToVue } from 'svgfusion-dom';
 
 const svgContent = `<svg viewBox="0 0 24 24"><path fill="#3B82F6" d="..."/></svg>`;
 

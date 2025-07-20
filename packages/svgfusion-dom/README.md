@@ -20,22 +20,74 @@ pnpm add svgfusion-dom
 ## CDN Usage
 
 ```html
-<script src="https://unpkg.com/svgfusion-dom@latest/dist/index.umd.js"></script>
+<script type="module">
+  import svgfusionDom from 'https://cdn.jsdelivr.net/npm/svgfusion-dom@1.3.4/+esm';
+</script>
 ```
 
 ## Quick Start
 
 ```javascript
-import { convertSvg } from 'svgfusion-dom';
+import { convertToReact } from 'svgfusion-dom';
 
 // Convert SVG to React component
 const svgContent = `<svg viewBox="0 0 24 24">...</svg>`;
-const reactComponent = convertSvg(svgContent, {
-  framework: 'react',
+const reactComponent = await convertToReact(svgContent, {
   typescript: true,
 });
 
-console.log(reactComponent); // Generated component code
+console.log(reactComponent.code); // Generated component code
+```
+
+## TypeScript Usage
+
+```typescript
+import {
+  convertToReact,
+  convertToVue,
+  type BrowserConversionOptions,
+  type BrowserConversionResult,
+} from 'svgfusion-dom';
+
+// Type-safe React conversion
+const reactOptions: BrowserConversionOptions = {
+  framework: 'react',
+  typescript: true,
+  componentName: 'MyIcon',
+  memo: true,
+  forwardRef: true,
+};
+
+const reactResult: BrowserConversionResult = await convertToReact(
+  svgContent,
+  reactOptions
+);
+
+// Type-safe Vue conversion
+const vueResult: BrowserConversionResult = await convertToVue(svgContent, {
+  typescript: true,
+  sfc: true,
+  scriptSetup: true,
+});
+```
+
+### Available Types
+
+```typescript
+// Core types
+type BrowserConversionOptions
+type BrowserConversionResult
+type SVGFusionOptions
+type ConversionResult
+
+// Framework-specific
+type ReactGeneratorOptions
+type VueGeneratorOptions
+
+// Functions
+convertToReact, convertToVue, convertBatch
+extractColors, validateSvg
+SVGFusionBrowser
 ```
 
 ## Features
@@ -53,58 +105,63 @@ console.log(reactComponent); // Generated component code
 ### Basic Conversion
 
 ```javascript
-import { convertSvg, SvgFusionOptions } from 'svgfusion-dom';
+import { convertToReact, convertToVue } from 'svgfusion-dom';
 
-const options = {
-  framework: 'react', // or 'vue'
+// React component
+const reactResult = await convertToReact(svgContent, {
   typescript: true,
   componentName: 'MyIcon',
-  template: 'functional',
-};
+});
+
+// Vue component
+const vueResult = await convertToVue(svgContent, {
+  typescript: true,
+  componentName: 'MyIcon',
+  sfc: true,
+  scriptSetup: true,
+//
 
 const svgContent = `
   <svg viewBox="0 0 24 24" fill="currentColor">
     <path d="M12 3l8 8v10h-6v-6H10v6H4V11l8-8z" />
   </svg>
 `;
-
-const componentCode = convertSvg(svgContent, options);
 ```
 
 ### React Component Generation
 
 ```javascript
-const reactOptions = {
-  framework: 'react',
+import { convertToReact } from 'svgfusion-dom';
+
+const reactResult = await convertToReact(svgContent, {
   typescript: true,
   componentName: 'HomeIcon',
-  template: 'functional',
-  propsInterface: true,
-};
+  memo: true,
+  forwardRef: true,
+});
 
-const reactComponent = convertSvg(svgContent, reactOptions);
-// Returns: Complete React component with TypeScript interfaces
+console.log(reactResult.code); // Complete React component with TypeScript
 ```
 
 ### Vue Component Generation
 
 ```javascript
-const vueOptions = {
-  framework: 'vue',
+import { convertToVue } from 'svgfusion-dom';
+
+const vueResult = await convertToVue(svgContent, {
   typescript: true,
   componentName: 'HomeIcon',
-  template: 'composition',
+  sfc: true,
   scriptSetup: true,
-};
+});
 
-const vueComponent = convertSvg(svgContent, vueOptions);
-// Returns: Complete Vue 3 component with Composition API
+console.log(vueResult.code); // Complete Vue 3 component with Composition API
 ```
 
 ### Batch Conversion
 
 ```javascript
-import { convertMultiple } from 'svgfusion-dom';
+import { convertBatch } from 'svgfusion-dom';
 
 const svgFiles = [
   { name: 'home', content: '<svg>...</svg>' },
@@ -112,7 +169,7 @@ const svgFiles = [
   { name: 'settings', content: '<svg>...</svg>' },
 ];
 
-const components = convertMultiple(svgFiles, {
+const components = await convertBatch(svgFiles, {
   framework: 'react',
   typescript: true,
 });
@@ -122,44 +179,69 @@ const components = convertMultiple(svgFiles, {
 
 ## API Reference
 
-### `convertSvg(svgContent, options)`
+### `convertToReact(svgContent, options?)`
 
-Converts a single SVG string to a component.
+Converts SVG to React component.
 
 **Parameters:**
 
 - `svgContent` (string): The SVG content to convert
-- `options` (SvgFusionOptions): Conversion options
+- `options` (BrowserConversionOptions): Conversion options
 
-**Returns:** String containing the generated component code
+**Returns:** `Promise<BrowserConversionResult>`
 
-### `convertMultiple(svgFiles, options)`
+### `convertToVue(svgContent, options?)`
+
+Converts SVG to Vue component.
+
+**Parameters:**
+
+- `svgContent` (string): The SVG content to convert
+- `options` (BrowserConversionOptions): Conversion options
+
+**Returns:** `Promise<BrowserConversionResult>`
+
+### `convertBatch(svgContents, options)`
 
 Converts multiple SVG files to components.
 
 **Parameters:**
 
-- `svgFiles` (Array): Array of `{ name, content }` objects
-- `options` (SvgFusionOptions): Conversion options
+- `svgContents` (Array): Array of `{ content: string, name: string }` objects
+- `options` (BrowserConversionOptions): Conversion options
 
-**Returns:** Array of generated component objects
+**Returns:** `Promise<BrowserConversionResult[]>`
 
-### Options Interface
+### `extractColors(svgContent)`
+
+Extracts unique colors from SVG content.
+
+**Returns:** `string[]`
+
+### `validateSvg(svgContent)`
+
+Validates SVG content structure.
+
+**Returns:** `{ valid: boolean, errors: string[] }`
+
+### Types Interface
 
 ```typescript
-interface SvgFusionOptions {
+interface BrowserConversionOptions {
   framework: 'react' | 'vue';
   typescript?: boolean;
   componentName?: string;
-  template?: 'functional' | 'class' | 'composition';
-  propsInterface?: boolean;
-  scriptSetup?: boolean; // Vue 3 only
-  naming?: 'PascalCase' | 'camelCase' | 'kebab-case';
-  transforms?: {
-    removeIds?: boolean;
-    addDisplayName?: boolean;
-    optimizePaths?: boolean;
-  };
+  prefix?: string;
+  suffix?: string;
+  splitColors?: boolean;
+  splitStrokeWidths?: boolean;
+  fixedStrokeWidth?: boolean;
+  normalizeFillStroke?: boolean;
+  memo?: boolean; // React only
+  forwardRef?: boolean; // React only
+  sfc?: boolean; // Vue only
+  scriptSetup?: boolean; // Vue only
+  optimize?: boolean;
 }
 ```
 
@@ -255,7 +337,6 @@ const handleConvert = () => {
 
 ## Bundle Information
 
-- **Size**: ~15KB gzipped
 - **Format**: UMD, ESM, CJS
 - **Browser Support**: Modern browsers (ES2020+)
 - **Dependencies**: Zero runtime dependencies
