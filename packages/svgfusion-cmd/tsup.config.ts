@@ -20,4 +20,7 @@ export default defineConfig({
     'svgfusion-vue',
   ],
   external: ['commander', 'figlet'],
+  banner: {
+    js: '#!/usr/bin/env node',
+  },
 });
