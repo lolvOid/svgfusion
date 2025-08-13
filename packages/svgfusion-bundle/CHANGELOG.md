@@ -1,3 +1,15 @@
+# [1.36.0](https://github.com/lolvOid/svgfusion/compare/svgfusion@1.35.0...svgfusion@1.36.0) (2025-08-13)
+
+
+### Bug Fixes
+
+* **svgfusion:** update icon component size handling to default to '24' when not specified ([befd9bd](https://github.com/lolvOid/svgfusion/commit/befd9bdc4684e2adf9a896a9a79fafd87fd1bea4))
+
+
+### Features
+
+* **svgfusion:** update package dependencies to use workspace references and enhance SVG parsing capabilities ([8864563](https://github.com/lolvOid/svgfusion/commit/8864563a8cf2ea6dd5233ce57fcb7d0f2049e1e0))
+
 # [1.35.0](https://github.com/lolvOid/svgfusion/compare/svgfusion@1.34.3...svgfusion@1.35.0) (2025-07-20)
 
 ### Features
