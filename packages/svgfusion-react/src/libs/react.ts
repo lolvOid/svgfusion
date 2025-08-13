@@ -290,7 +290,7 @@ export class ReactGenerator extends ComponentGenerator {
     const colorDefaults = this.generateColorDefaults(colorMappings);
     const strokeWidthDefaults =
       this.generateStrokeWidthDefaults(strokeWidthMappings);
-    const sizeDefault = 'size = "24"';
+    const sizeDefault = 'size = ""';
     const isFixedStrokeWidthDefault = metadata.features.includes(
       'fixed-stroke-width'
     )
@@ -337,10 +337,13 @@ export class ReactGenerator extends ComponentGenerator {
         .map(child => this.elementToJsx(child, 1))
         .join('\n');
 
+      // Get viewBox dimensions as fallback
+      const viewBoxDimensions = this.getViewBoxDimensions(result.ast);
+
       return `const ${componentName} = (${customPropsDestructure}: ${propsType}${refType}) => {
   const computedSize = {
-    width: svgProps.width || size,
-    height: svgProps.height || size
+    width: svgProps.width || size || '${viewBoxDimensions.width}',
+    height: svgProps.height || size || '${viewBoxDimensions.height}'
   };
   
   return (
@@ -363,11 +366,17 @@ ${childrenJsx}
         .map(child => this.elementToJsx(child, 1))
         .join('\n');
 
+      // Get viewBox dimensions as fallback
+      const viewBoxDimensions = this.getViewBoxDimensions(result.ast);
+
       return `const ${componentName} = (${customPropsDestructure}) => {
-  const computedSize = size ? { width: size, height: size } : {};
+  const computedSize = {
+    width: svgProps.width || size || '${viewBoxDimensions.width}',
+    height: svgProps.height || size || '${viewBoxDimensions.height}'
+  };
   
   return (
-    <svg ${rootAttributes}{...computedSize} {...svgProps}>
+    <svg ${rootAttributes}{...svgProps} {...computedSize}>
       ${titleElement}
       ${descElement}
 ${childrenJsx}
@@ -644,6 +653,42 @@ ${childrenJsx}
     }
 
     return jsxAttributes;
+  }
+
+  /**
+   * Get viewBox dimensions as fallback values
+   */
+  private getViewBoxDimensions(ast: {
+    width?: string;
+    height?: string;
+    viewBox?: string;
+  }): { width: string; height: string } {
+    const { width: originalWidth, height: originalHeight, viewBox } = ast;
+
+    // Use original SVG dimensions if available
+    if (originalWidth && originalHeight) {
+      return {
+        width: originalWidth,
+        height: originalHeight,
+      };
+    }
+
+    // Extract dimensions from viewBox
+    if (viewBox) {
+      const viewBoxParts = viewBox.split(' ');
+      if (viewBoxParts.length === 4) {
+        return {
+          width: viewBoxParts[2],
+          height: viewBoxParts[3],
+        };
+      }
+    }
+
+    // Default fallback
+    return {
+      width: '24',
+      height: '24',
+    };
   }
 
   /**

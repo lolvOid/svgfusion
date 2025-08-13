@@ -1,9 +1,8 @@
 # [1.35.0](https://github.com/lolvOid/svgfusion/compare/svgfusion@1.34.3...svgfusion@1.35.0) (2025-07-20)
 
-
 ### Features
 
-* update README and documentation for improved clarity and usage examples ([8f4e026](https://github.com/lolvOid/svgfusion/commit/8f4e026dfc42140fde684862274a9ab66920a12f))
+- update README and documentation for improved clarity and usage examples ([8f4e026](https://github.com/lolvOid/svgfusion/commit/8f4e026dfc42140fde684862274a9ab66920a12f))
 
 ## [1.34.3](https://github.com/lolvOid/svgfusion/compare/svgfusion@1.34.2...svgfusion@1.34.3) (2025-07-20)
 

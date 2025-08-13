@@ -64,20 +64,20 @@ importers:
         specifier: 1.3.3
         version: 1.3.3(prettier@3.6.2)
       svgfusion-core:
-        specifier: 1.3.3
-        version: 1.3.3
+        specifier: workspace:*
+        version: link:../svgfusion-core
       svgfusion-dom:
-        specifier: 1.3.3
-        version: 1.3.3(prettier@3.6.2)
+        specifier: workspace:*
+        version: link:../svgfusion-dom
       svgfusion-react:
-        specifier: 1.2.3
-        version: 1.2.3(prettier@3.6.2)
+        specifier: workspace:*
+        version: link:../svgfusion-react
       svgfusion-utils:
-        specifier: 1.1.3
-        version: 1.1.3
+        specifier: workspace:*
+        version: link:../svgfusion-utils
       svgfusion-vue:
-        specifier: 1.2.3
-        version: 1.2.3(prettier@3.6.2)
+        specifier: workspace:*
+        version: link:../svgfusion-vue
       zod:
         specifier: ^4.0.5
         version: 4.0.5
@@ -170,17 +170,17 @@ importers:
         specifier: ^1.7.0
         version: 1.8.2
       svgfusion-core:
-        specifier: 1.3.3
-        version: 1.3.3
+        specifier: workspace:*
+        version: link:../svgfusion-core
       svgfusion-react:
-        specifier: 1.2.3
-        version: 1.2.3(prettier@3.6.2)
+        specifier: workspace:*
+        version: link:../svgfusion-react
       svgfusion-utils:
-        specifier: 1.1.3
-        version: 1.1.3
+        specifier: workspace:*
+        version: link:../svgfusion-utils
       svgfusion-vue:
-        specifier: 1.2.3
-        version: 1.2.3(prettier@3.6.2)
+        specifier: workspace:*
+        version: link:../svgfusion-vue
     devDependencies:
       '@eslint/js':
         specifier: ^9.31.0
@@ -243,8 +243,8 @@ importers:
         specifier: ^26.1.0
         version: 26.1.0
       svgfusion-utils:
-        specifier: 1.1.3
-        version: 1.1.3
+        specifier: workspace:*
+        version: link:../svgfusion-utils
       zod:
         specifier: ^4.0.5
         version: 4.0.5
@@ -419,17 +419,17 @@ importers:
   packages/svgfusion-dom:
     dependencies:
       svgfusion-core:
-        specifier: 1.3.2
-        version: 1.3.2
+        specifier: workspace:*
+        version: link:../svgfusion-core
       svgfusion-react:
-        specifier: 1.2.3
-        version: 1.2.3(prettier@3.6.2)
+        specifier: workspace:*
+        version: link:../svgfusion-react
       svgfusion-utils:
-        specifier: 1.1.3
-        version: 1.1.3
+        specifier: workspace:*
+        version: link:../svgfusion-utils
       svgfusion-vue:
-        specifier: 1.2.3
-        version: 1.2.3(prettier@3.6.2)
+        specifier: workspace:*
+        version: link:../svgfusion-vue
     devDependencies:
       '@eslint/js':
         specifier: ^9.31.0
@@ -489,11 +489,11 @@ importers:
         specifier: ^3.0.0
         version: 3.6.2
       svgfusion-core:
-        specifier: 1.3.3
-        version: 1.3.3
+        specifier: workspace:*
+        version: link:../svgfusion-core
       svgfusion-utils:
-        specifier: 1.1.3
-        version: 1.1.3
+        specifier: workspace:*
+        version: link:../svgfusion-utils
     devDependencies:
       '@eslint/js':
         specifier: 9.31.0
@@ -690,11 +690,11 @@ importers:
         specifier: ^3.0.0
         version: 3.6.2
       svgfusion-core:
-        specifier: 1.3.3
-        version: 1.3.3
+        specifier: workspace:*
+        version: link:../svgfusion-core
       svgfusion-utils:
-        specifier: 1.1.3
-        version: 1.1.3
+        specifier: workspace:*
+        version: link:../svgfusion-utils
     devDependencies:
       '@eslint/js':
         specifier: 9.31.0
@@ -10301,7 +10301,7 @@ snapshots:
       '@types/node': 20.5.1
       chalk: 4.1.2
       cosmiconfig: 8.3.6(typescript@5.6.3)
-      cosmiconfig-typescript-loader: 4.4.0(@types/node@20.5.1)(cosmiconfig@8.3.6(typescript@5.6.3))(ts-node@10.9.2(@types/node@20.19.9)(typescript@5.6.3))(typescript@5.6.3)
+      cosmiconfig-typescript-loader: 4.4.0(@types/node@20.5.1)(cosmiconfig@8.3.6(typescript@5.6.3))(ts-node@10.9.2(@types/node@20.5.1)(typescript@5.6.3))(typescript@5.6.3)
       lodash.isplainobject: 4.0.6
       lodash.merge: 4.6.2
       lodash.uniq: 4.5.0
@@ -13870,7 +13870,7 @@ snapshots:
 
   core-util-is@1.0.3: {}
 
-  cosmiconfig-typescript-loader@4.4.0(@types/node@20.5.1)(cosmiconfig@8.3.6(typescript@5.6.3))(ts-node@10.9.2(@types/node@20.19.9)(typescript@5.6.3))(typescript@5.6.3):
+  cosmiconfig-typescript-loader@4.4.0(@types/node@20.5.1)(cosmiconfig@8.3.6(typescript@5.6.3))(ts-node@10.9.2(@types/node@20.5.1)(typescript@5.6.3))(typescript@5.6.3):
     dependencies:
       '@types/node': 20.5.1
       cosmiconfig: 8.3.6(typescript@5.6.3)

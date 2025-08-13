@@ -160,7 +160,7 @@ ${style ? `<style scoped>\n${style}\n</style>` : ''}`;
       .map(child => this.elementToVueTemplate(child, 2))
       .join('\n');
 
-    return `  <svg${rootAttributes} v-bind="$attrs" :width="computedWidth" :height="computedHeight">
+    return `  <svg${rootAttributes} v-bind="$attrs" :width="computedSize.width" :height="computedSize.height">
     <title v-if="props.title" :id="props.titleId">{{ props.title }}</title>
     <desc v-if="props.desc" :id="props.descId">{{ props.desc }}</desc>
 ${children}
@@ -328,12 +328,12 @@ ${children}
       lines.push("  style: { type: Object, default: '' },");
       lines.push("  width: { type: [String, Number], default: '' },");
       lines.push("  height: { type: [String, Number], default: '' },");
-      lines.push('  size: { type: [String, Number], default: "24" },');
+      lines.push('  size: { type: [String, Number], default: "" },');
     }
 
     // Add size defaults for TypeScript
     if (this.vueOptions.typescript) {
-      lines.push('  size: "24",');
+      lines.push('  size: "",');
     }
 
     // Add color defaults
@@ -380,12 +380,16 @@ ${children}
 
     lines.push('});');
     lines.push('');
+    // Add computed size with simplified fallback logic
+    const viewBoxDimensions = this.getViewBoxDimensions(result.ast);
+    lines.push(`const computedSize = computed(() => ({`);
     lines.push(
-      'const computedWidth = computed(() => props.width || props.size);'
+      `  width: props.width || props.size || '${viewBoxDimensions.width}',`
     );
     lines.push(
-      'const computedHeight = computed(() => props.height || props.size);'
+      `  height: props.height || props.size || '${viewBoxDimensions.height}'`
     );
+    lines.push(`}));`);
 
     return lines.join('\n');
   }
@@ -411,7 +415,7 @@ ${children}
     lines.push("    style: { type: Object, default: '' },");
     lines.push("    width: { type: [String, Number], default: '' },");
     lines.push("    height: { type: [String, Number], default: '' },");
-    lines.push('    size: { type: [String, Number], default: "24" },');
+    lines.push('    size: { type: [String, Number], default: "" },');
 
     // Add color props
     colorMappings.forEach(mapping => {
@@ -443,13 +447,17 @@ ${children}
 
     lines.push('  },');
     lines.push('  setup(props) {');
+    // Add computed size with simplified fallback logic
+    const viewBoxDimensions = this.getViewBoxDimensions(result.ast);
+    lines.push(`    const computedSize = computed(() => ({`);
     lines.push(
-      '    const computedWidth = computed(() => props.width || props.size);'
+      `      width: props.width || props.size || '${viewBoxDimensions.width}',`
     );
     lines.push(
-      '    const computedHeight = computed(() => props.height || props.size);'
+      `      height: props.height || props.size || '${viewBoxDimensions.height}'`
     );
-    lines.push('    return { computedWidth, computedHeight };');
+    lines.push(`    }));`);
+    lines.push('    return { computedSize };');
     lines.push('  },');
     lines.push('});');
 
@@ -475,7 +483,7 @@ ${children}
     lines.push("    style: { type: Object, default: '' },");
     lines.push("    width: { type: [String, Number], default: '' },");
     lines.push("    height: { type: [String, Number], default: '' },");
-    lines.push('    size: { type: [String, Number], default: "24" },');
+    lines.push('    size: { type: [String, Number], default: "" },');
 
     // Add color props
     colorMappings.forEach(mapping => {
@@ -507,16 +515,58 @@ ${children}
 
     lines.push('  },');
     lines.push('  computed: {');
-    lines.push('    computedWidth() {');
-    lines.push('      return this.width || this.size;');
-    lines.push('    },');
-    lines.push('    computedHeight() {');
-    lines.push('      return this.height || this.size;');
+    // Add computed size with simplified fallback logic
+    const viewBoxDimensions = this.getViewBoxDimensions(result.ast);
+    lines.push('    computedSize() {');
+    lines.push('      return {');
+    lines.push(
+      `        width: this.width || this.size || '${viewBoxDimensions.width}',`
+    );
+    lines.push(
+      `        height: this.height || this.size || '${viewBoxDimensions.height}'`
+    );
+    lines.push('      };');
     lines.push('    },');
     lines.push('  },');
     lines.push('};');
 
     return lines.join('\n');
+  }
+
+  /**
+   * Get viewBox dimensions as fallback values
+   */
+  private getViewBoxDimensions(ast: {
+    width?: string;
+    height?: string;
+    viewBox?: string;
+  }): { width: string; height: string } {
+    const { width: originalWidth, height: originalHeight, viewBox } = ast;
+
+    // Use original SVG dimensions if available
+    if (originalWidth && originalHeight) {
+      return {
+        width: originalWidth,
+        height: originalHeight,
+      };
+    }
+
+    // Extract dimensions from viewBox
+    if (viewBox) {
+      const viewBoxParts = viewBox.split(' ');
+      if (viewBoxParts.length === 4) {
+        return {
+          width: viewBoxParts[2],
+          height: viewBoxParts[3],
+        };
+      }
+    }
+
+    // Default fallback
+    return {
+      width: '24',
+      height: '24',
+    };
   }
 
   /**
