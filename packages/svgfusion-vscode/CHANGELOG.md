@@ -1,3 +1,10 @@
+# [1.9.0](https://github.com/lolvOid/svgfusion/compare/svgfusion-vscode@1.8.0...svgfusion-vscode@1.9.0) (2025-08-14)
+
+
+### Features
+
+* **svgfusion:** update dependencies to use workspace references and add filter removal feature ([882e9b9](https://github.com/lolvOid/svgfusion/commit/882e9b9877ee26ba863e5874d4b60125a37e0c24))
+
 # [1.8.0](https://github.com/lolvOid/svgfusion/compare/svgfusion-vscode@1.7.0...svgfusion-vscode@1.8.0) (2025-08-13)
 
 
