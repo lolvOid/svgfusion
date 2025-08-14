@@ -13,6 +13,7 @@ export interface ConversionOptions {
   removeComments?: boolean;
   removeDuplicates?: boolean;
   minifyPaths?: boolean;
+  removeFilters?: boolean;
   // Legacy support
   isFixedStrokeWidth?: boolean;
 }

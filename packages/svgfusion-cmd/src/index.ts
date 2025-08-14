@@ -42,6 +42,7 @@ export interface CliOptions {
   accessibility?: boolean;
   removeComments?: boolean;
   removeDuplicates?: boolean;
+  removeFilters?: boolean;
   forwardRef?: boolean;
   memo?: boolean;
   minifyPaths?: boolean;
@@ -75,6 +76,7 @@ async function convertSvgFile(
         fixedStrokeWidth: options.fixedStrokeWidth,
         normalizeFillStroke: options.normalizeFillStroke,
         accessibility: true,
+        removeFilters: options.removeFilters,
       },
       generator: {
         prefix: options.prefix || '',
@@ -268,6 +270,7 @@ async function main() {
       '--normalize-fill-stroke',
       'Normalize fill and stroke attributes for consistency'
     )
+    .option('--remove-filters', 'Remove filter elements from defs')
     .addHelpText(
       'after',
       `

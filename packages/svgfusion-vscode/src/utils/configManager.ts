@@ -69,6 +69,10 @@ export class ConfigManager {
     return this.config.get<boolean>('transformation.fixedStrokeWidth', false);
   }
 
+  getRemoveFilters(): boolean {
+    return this.config.get<boolean>('transformation.removeFilters', false);
+  }
+
   getOptimize(): boolean {
     return this.config.get<boolean>('transformation.optimize', true);
   }
@@ -78,6 +82,7 @@ export class ConfigManager {
       splitColors: this.getSplitColors(),
       splitStrokeWidths: this.getSplitStrokeWidths(),
       fixedStrokeWidth: this.getFixedStrokeWidth(),
+      removeFilters: this.getRemoveFilters(),
       optimize: this.getOptimize(),
     };
   }

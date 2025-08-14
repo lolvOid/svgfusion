@@ -21,6 +21,7 @@ export interface BrowserConversionOptions extends SVGFusionOptions {
   splitStrokeWidths?: boolean;
   fixedStrokeWidth?: boolean;
   normalizeFillStroke?: boolean;
+  removeFilters?: boolean;
   memo?: boolean;
   forwardRef?: boolean;
   sfc?: boolean; // For Vue Single File Components
@@ -70,6 +71,7 @@ export class SVGFusionBrowser {
       splitStrokeWidths = false,
       fixedStrokeWidth = false,
       normalizeFillStroke = false,
+      removeFilters = false,
       memo = true,
       forwardRef = true,
       sfc = true,
@@ -85,6 +87,7 @@ export class SVGFusionBrowser {
         splitStrokeWidths,
         fixedStrokeWidth,
         normalizeFillStroke,
+        removeFilters,
         optimize,
         accessibility: true,
       },

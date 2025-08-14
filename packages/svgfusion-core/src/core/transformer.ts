@@ -9,6 +9,7 @@ import { StrokeFixingFeature } from '../features/stroke-fixing';
 import { StrokeWidthSplittingFeature } from '../features/stroke-width-splitting';
 import { AccessibilityFeature } from '../features/accessibility';
 import { FillStrokeNormalization } from '../features/fill-stroke-normalization';
+import { applyFilterRemoval } from '../features/filter-removal';
 
 export interface TransformationOptions {
   optimize?: boolean;
@@ -20,6 +21,7 @@ export interface TransformationOptions {
   removeComments?: boolean;
   removeDuplicates?: boolean;
   minifyPaths?: boolean;
+  removeFilters?: boolean;
 }
 
 export interface StrokeWidthMapping {
@@ -67,10 +69,11 @@ export class SVGTransformer {
       removeComments = true,
       removeDuplicates = true,
       minifyPaths = false,
+      removeFilters = false,
     } = options;
 
     // Create a deep copy to avoid mutating the original AST
-    const transformedAst = this.deepCloneAst(ast);
+    let transformedAst = this.deepCloneAst(ast);
     const features: string[] = [];
     let colorMappings: ColorMapping[] = [];
     let strokeWidthMappings: StrokeWidthMapping[] = [];
@@ -113,6 +116,12 @@ export class SVGTransformer {
     if (accessibility) {
       this.applyAccessibility(transformedAst);
       features.push('accessibility');
+    }
+
+    // Apply filter removal
+    if (removeFilters) {
+      transformedAst = applyFilterRemoval(transformedAst, { removeFilters });
+      features.push('remove-filters');
     }
 
     return {

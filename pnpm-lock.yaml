@@ -61,8 +61,8 @@ importers:
         specifier: ^26.1.0
         version: 26.1.0
       svgfusion-cmd:
-        specifier: 1.3.3
-        version: 1.3.3(prettier@3.6.2)
+        specifier: workspace:*
+        version: link:../svgfusion-cmd
       svgfusion-core:
         specifier: workspace:*
         version: link:../svgfusion-core
@@ -8284,11 +8284,6 @@ packages:
 
   svg-parser@2.0.4:
     resolution: {integrity: sha512-e4hG1hRwoOdRb37cIMSgzNsxyzKfayW6VOflrwvR+/bzrkyxY/31WkbgnQpgtrNp1SdpJvpUAGTa/ZoiPNDuRQ==}
-
-  svgfusion-cmd@1.3.3:
-    resolution: {integrity: sha512-l/AsKh/hdzTyxkM/eh5Q2A+ML7KxEkmtbZfUdurQi2F7l7tsKfm3d7kvRmabHt2+r5d9cAVlyBHczbMYVj7pgw==}
-    engines: {node: '>=18.0.0'}
-    hasBin: true
 
   svgfusion-core@1.3.2:
     resolution: {integrity: sha512-6zDQGAQ3T1Jm46spH0CF59+oYhKTz+mwDbiiRxsAO25y9BqxcF3lQkxqDb4F2OKJIXUBubloxGPROnC+POTw5Q==}
@@ -18744,21 +18739,6 @@ snapshots:
   supports-preserve-symlinks-flag@1.0.0: {}
 
   svg-parser@2.0.4: {}
-
-  svgfusion-cmd@1.3.3(prettier@3.6.2):
-    dependencies:
-      commander: 11.1.0
-      figlet: 1.8.2
-      svgfusion-core: 1.3.3
-      svgfusion-react: 1.2.3(prettier@3.6.2)
-      svgfusion-utils: 1.1.3
-      svgfusion-vue: 1.2.3(prettier@3.6.2)
-    transitivePeerDependencies:
-      - bufferutil
-      - canvas
-      - prettier
-      - supports-color
-      - utf-8-validate
 
   svgfusion-core@1.3.2:
     dependencies:

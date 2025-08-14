@@ -38,6 +38,7 @@ interface PlaygroundOptions {
   sfc: boolean;
   scriptSetup: boolean;
   extractColors: boolean;
+  removeFilters: boolean;
 }
 
 // Zod validation schema for component naming
@@ -75,6 +76,7 @@ const DEFAULT_OPTIONS: PlaygroundOptions = {
   sfc: true,
   scriptSetup: true,
   extractColors: false,
+  removeFilters: false,
 };
 
 // Helper function to format conversion time
@@ -200,6 +202,7 @@ export default function Playground() {
           optimize: true,
           memo: false,
           forwardRef: false,
+          removeFilters: false,
         });
         const endTime = performance.now();
         const duration = endTime - startTime;
@@ -415,6 +418,7 @@ export default function Playground() {
       splitStrokeWidths: opts.splitStrokeWidths,
       fixedStrokeWidth: opts.fixedStrokeWidth,
       normalizeFillStroke: opts.normalizeFillStroke,
+      removeFilters: opts.removeFilters,
       optimize: true,
       ...(opts.framework === 'react' && {
         memo: opts.memo,
@@ -1030,6 +1034,11 @@ export default function Playground() {
                     label: 'Normalize Fill/Stroke',
                     tooltip:
                       'Normalize fill and stroke attributes for consistency',
+                  },
+                  {
+                    key: 'removeFilters',
+                    label: 'Remove Filters',
+                    tooltip: 'Remove filters from the SVG',
                   },
                   ...(options.framework === 'react'
                     ? [
