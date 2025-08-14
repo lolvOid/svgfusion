@@ -1,3 +1,10 @@
+# [1.5.0](https://github.com/lolvOid/svgfusion/compare/svgfusion-react@1.4.0...svgfusion-react@1.5.0) (2025-08-14)
+
+
+### Features
+
+* **svgfusion:** update dependencies to use workspace references and add filter removal feature ([882e9b9](https://github.com/lolvOid/svgfusion/commit/882e9b9877ee26ba863e5874d4b60125a37e0c24))
+
 # [1.4.0](https://github.com/lolvOid/svgfusion/compare/svgfusion-react@1.3.0...svgfusion-react@1.4.0) (2025-08-13)
 
 
