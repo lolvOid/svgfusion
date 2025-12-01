@@ -396,6 +396,10 @@ ${childrenJsx}
       exports.push(`const ForwardRef = forwardRef(${componentName});`);
       if (this.reactOptions.memo) {
         exports.push('const Memo = memo(ForwardRef);');
+        // Add displayName for named exports
+        if (this.reactOptions.namedExport) {
+          exports.push(`Memo.displayName = '${componentName}';`);
+        }
         if (this.reactOptions.exportDefault) {
           exports.push('export default Memo;');
         }
@@ -403,6 +407,10 @@ ${childrenJsx}
           exports.push(`export { Memo as ${componentName} };`);
         }
       } else {
+        // Add displayName for named exports
+        if (this.reactOptions.namedExport) {
+          exports.push(`ForwardRef.displayName = '${componentName}';`);
+        }
         if (this.reactOptions.exportDefault) {
           exports.push('export default ForwardRef;');
         }
@@ -412,6 +420,10 @@ ${childrenJsx}
       }
     } else if (this.reactOptions.memo) {
       exports.push(`const Memo = memo(${componentName});`);
+      // Add displayName for named exports
+      if (this.reactOptions.namedExport) {
+        exports.push(`Memo.displayName = '${componentName}';`);
+      }
       if (this.reactOptions.exportDefault) {
         exports.push('export default Memo;');
       }
@@ -419,6 +431,10 @@ ${childrenJsx}
         exports.push(`export { Memo as ${componentName} };`);
       }
     } else {
+      // Add displayName for named exports
+      if (this.reactOptions.namedExport) {
+        exports.push(`${componentName}.displayName = '${componentName}';`);
+      }
       if (this.reactOptions.exportDefault) {
         exports.push(`export default ${componentName};`);
       }
@@ -477,9 +493,17 @@ ${childrenJsx}
           return;
         }
 
+        // Skip class/className - should be passed via svgProps instead
+        if (key === 'class' || key === 'className') {
+          return;
+        }
+
+        // Convert HTML attribute to React prop (class -> className)
+        const jsxKey = toReactProp(key);
+
         // Handle special attributes that need JSX formatting
         if (
-          key === 'aria-labelledby' &&
+          jsxKey === 'aria-labelledby' &&
           typeof value === 'string' &&
           value.includes('{')
         ) {
@@ -488,7 +512,7 @@ ${childrenJsx}
           attributes.push(`aria-labelledby={\`${jsxValue}\`}`);
         } else {
           // eslint-disable-next-line @typescript-eslint/no-base-to-string
-          attributes.push(`${key}="${value}"`);
+          attributes.push(`${jsxKey}="${value}"`);
         }
       }
     });

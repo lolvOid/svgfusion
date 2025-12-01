@@ -35,6 +35,7 @@ interface PlaygroundOptions {
   normalizeFillStroke: boolean;
   memo: boolean;
   forwardRef: boolean;
+  namedExport: boolean;
   sfc: boolean;
   scriptSetup: boolean;
   extractColors: boolean;
@@ -73,6 +74,7 @@ const DEFAULT_OPTIONS: PlaygroundOptions = {
   memo: false,
   normalizeFillStroke: false,
   forwardRef: false,
+  namedExport: false,
   sfc: true,
   scriptSetup: true,
   extractColors: false,
@@ -423,6 +425,7 @@ export default function Playground() {
       ...(opts.framework === 'react' && {
         memo: opts.memo,
         forwardRef: opts.forwardRef,
+        namedExport: opts.namedExport,
       }),
       ...(opts.framework === 'vue' && {
         sfc: opts.sfc,
@@ -1052,6 +1055,12 @@ export default function Playground() {
                           key: 'forwardRef',
                           label: 'Forward Ref',
                           tooltip: 'Enable ref forwarding to the SVG element',
+                        },
+                        {
+                          key: 'namedExport',
+                          label: 'Named Export + displayName',
+                          tooltip:
+                            'Use named exports and add displayName for better DevTools debugging',
                         },
                       ]
                     : [

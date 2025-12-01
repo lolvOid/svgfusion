@@ -24,6 +24,8 @@ export interface BrowserConversionOptions extends SVGFusionOptions {
   removeFilters?: boolean;
   memo?: boolean;
   forwardRef?: boolean;
+  namedExport?: boolean;
+  exportDefault?: boolean;
   sfc?: boolean; // For Vue Single File Components
   scriptSetup?: boolean; // For Vue <script setup>
   optimize?: boolean;
@@ -74,6 +76,8 @@ export class SVGFusionBrowser {
       removeFilters = false,
       memo = true,
       forwardRef = true,
+      namedExport = false,
+      exportDefault = true,
       sfc = true,
       scriptSetup = true,
       optimize = true,
@@ -100,8 +104,8 @@ export class SVGFusionBrowser {
               suffix,
               memo,
               forwardRef,
-              exportDefault: true,
-              namedExport: false,
+              namedExport,
+              exportDefault,
             } as ReactGeneratorOptions)
           : ({
               typescript,

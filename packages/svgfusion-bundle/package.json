@@ -85,7 +85,7 @@
     "svgfusion-cmd": "1.6.0",
     "svgfusion-core": "1.6.0",
     "svgfusion-dom": "1.6.0",
-    "svgfusion-react": "1.5.0",
+    "svgfusion-react": "workspace:*",
     "svgfusion-utils": "1.4.0",
     "svgfusion-vue": "1.5.0",
     "zod": "^4.0.5"

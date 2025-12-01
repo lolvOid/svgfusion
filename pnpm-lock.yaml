@@ -61,23 +61,23 @@ importers:
         specifier: ^26.1.0
         version: 26.1.0
       svgfusion-cmd:
-        specifier: workspace:*
-        version: link:../svgfusion-cmd
+        specifier: 1.6.0
+        version: 1.6.0(prettier@3.6.2)
       svgfusion-core:
-        specifier: workspace:*
-        version: link:../svgfusion-core
+        specifier: 1.6.0
+        version: 1.6.0
       svgfusion-dom:
-        specifier: workspace:*
-        version: link:../svgfusion-dom
+        specifier: 1.6.0
+        version: 1.6.0(prettier@3.6.2)
       svgfusion-react:
         specifier: workspace:*
         version: link:../svgfusion-react
       svgfusion-utils:
-        specifier: workspace:*
-        version: link:../svgfusion-utils
+        specifier: 1.4.0
+        version: 1.4.0
       svgfusion-vue:
-        specifier: workspace:*
-        version: link:../svgfusion-vue
+        specifier: 1.5.0
+        version: 1.5.0(prettier@3.6.2)
       zod:
         specifier: ^4.0.5
         version: 4.0.5
@@ -170,17 +170,17 @@ importers:
         specifier: ^1.7.0
         version: 1.8.2
       svgfusion-core:
-        specifier: workspace:*
-        version: link:../svgfusion-core
+        specifier: 1.6.0
+        version: 1.6.0
       svgfusion-react:
         specifier: workspace:*
         version: link:../svgfusion-react
       svgfusion-utils:
-        specifier: workspace:*
-        version: link:../svgfusion-utils
+        specifier: 1.4.0
+        version: 1.4.0
       svgfusion-vue:
-        specifier: workspace:*
-        version: link:../svgfusion-vue
+        specifier: 1.5.0
+        version: 1.5.0(prettier@3.6.2)
     devDependencies:
       '@eslint/js':
         specifier: ^9.31.0
@@ -243,8 +243,8 @@ importers:
         specifier: ^26.1.0
         version: 26.1.0
       svgfusion-utils:
-        specifier: workspace:*
-        version: link:../svgfusion-utils
+        specifier: 1.4.0
+        version: 1.4.0
       zod:
         specifier: ^4.0.5
         version: 4.0.5
@@ -419,17 +419,17 @@ importers:
   packages/svgfusion-dom:
     dependencies:
       svgfusion-core:
-        specifier: workspace:*
-        version: link:../svgfusion-core
+        specifier: 1.6.0
+        version: 1.6.0
       svgfusion-react:
         specifier: workspace:*
         version: link:../svgfusion-react
       svgfusion-utils:
-        specifier: workspace:*
-        version: link:../svgfusion-utils
+        specifier: 1.4.0
+        version: 1.4.0
       svgfusion-vue:
-        specifier: workspace:*
-        version: link:../svgfusion-vue
+        specifier: 1.5.0
+        version: 1.5.0(prettier@3.6.2)
     devDependencies:
       '@eslint/js':
         specifier: ^9.31.0
@@ -489,11 +489,11 @@ importers:
         specifier: ^3.0.0
         version: 3.6.2
       svgfusion-core:
-        specifier: workspace:*
-        version: link:../svgfusion-core
+        specifier: 1.6.0
+        version: 1.6.0
       svgfusion-utils:
-        specifier: workspace:*
-        version: link:../svgfusion-utils
+        specifier: 1.4.0
+        version: 1.4.0
     devDependencies:
       '@eslint/js':
         specifier: 9.31.0
@@ -690,11 +690,11 @@ importers:
         specifier: ^3.0.0
         version: 3.6.2
       svgfusion-core:
-        specifier: workspace:*
-        version: link:../svgfusion-core
+        specifier: 1.6.0
+        version: 1.6.0
       svgfusion-utils:
-        specifier: workspace:*
-        version: link:../svgfusion-utils
+        specifier: 1.4.0
+        version: 1.4.0
     devDependencies:
       '@eslint/js':
         specifier: 9.31.0
@@ -8285,6 +8285,11 @@ packages:
   svg-parser@2.0.4:
     resolution: {integrity: sha512-e4hG1hRwoOdRb37cIMSgzNsxyzKfayW6VOflrwvR+/bzrkyxY/31WkbgnQpgtrNp1SdpJvpUAGTa/ZoiPNDuRQ==}
 
+  svgfusion-cmd@1.6.0:
+    resolution: {integrity: sha512-BrINiszhmf6LWtDsLBkIZkzlhfkVlJUmhl4JuwngG0ggP2jTRfSAghUKZAQnbwwxZr+D+w+x9mJ6btD4ObIHLw==}
+    engines: {node: '>=18.0.0'}
+    hasBin: true
+
   svgfusion-core@1.3.2:
     resolution: {integrity: sha512-6zDQGAQ3T1Jm46spH0CF59+oYhKTz+mwDbiiRxsAO25y9BqxcF3lQkxqDb4F2OKJIXUBubloxGPROnC+POTw5Q==}
     engines: {node: '>=18.0.0'}
@@ -8293,12 +8298,29 @@ packages:
     resolution: {integrity: sha512-wWm5HhaoFQagJ19cKypxQF2ueDB6qoNdJsLgGZLv5KS/pFQPqnHr/hJk9TE25eW6Ojh7P9489pHP29t/84oNEQ==}
     engines: {node: '>=18.0.0'}
 
+  svgfusion-core@1.6.0:
+    resolution: {integrity: sha512-pR8dYtYFhrv3bWITl5owzoYGxj9e/EyxeaYEY8ia3U4XV1sSpTSaY4Rh7G+7wlyxj0ZLnRLFUewaecOcb6nN+g==}
+    engines: {node: '>=18.0.0'}
+
   svgfusion-dom@1.3.3:
     resolution: {integrity: sha512-13XiD1bWaRuRJABnO4ZQwhkiSjDJJf3JhnqIUzj51xsqznbb1ZCOXZuNGgA7ENRcMty8/U6rtkReZ69lcj+tEg==}
     engines: {node: '>=18.0.0'}
 
+  svgfusion-dom@1.6.0:
+    resolution: {integrity: sha512-mLf3vbL1IdJSHCKzya7+a/sw4uD8hJ/aFs73LKVtywEK5Pvf1Hfi66DUQOphaQ1ugnMiebvzDOg+dTOdCFrpeg==}
+    engines: {node: '>=18.0.0'}
+
   svgfusion-react@1.2.3:
     resolution: {integrity: sha512-Bz/iK7ErW2X7Y7AXzXKpgHfp++akz5+UFYAOvqItl6rzmhl9ABoqyMgYX5RDECWDF7aPQqvSvduxjSgJIas26A==}
+    engines: {node: '>=18.0.0'}
+    peerDependencies:
+      prettier: ^3.0.0
+    peerDependenciesMeta:
+      prettier:
+        optional: true
+
+  svgfusion-react@1.5.0:
+    resolution: {integrity: sha512-7ruaQ9E9ZQhh31Nw/5fU2tj3yNuX70yfyO1FCR2eSTYBQeEaCrebOd9rPNLDNnSY2Srcl4eBoM/GlT5c7P/TdQ==}
     engines: {node: '>=18.0.0'}
     peerDependencies:
       prettier: ^3.0.0
@@ -8314,8 +8336,21 @@ packages:
     resolution: {integrity: sha512-oUTcM+X9kt4xm/X1GafmC+Y6xdkSJovt8Kv09vcw0NsMTRfxgMUY6O7FASbbe2RYF+xhNSc5ZB0Gi/2ZsjvTFQ==}
     engines: {node: '>=18.0.0'}
 
+  svgfusion-utils@1.4.0:
+    resolution: {integrity: sha512-pLyhhE2xOndFWPLpNu5UwiQ0M9sNN/NCN9zF1F/lM8dH7mRKSv0oJlrhvFTUt4oHqeqQUXKzlKpvRi17g1eQLw==}
+    engines: {node: '>=18.0.0'}
+
   svgfusion-vue@1.2.3:
     resolution: {integrity: sha512-glc2+FH3smOYQgXSdy/jkVkTCcT4CC8cASDYNihDlmQ7fA5hpvL8tnifxMhwfke0Jt6zKpEdn2Ni9klyDc/8aQ==}
+    engines: {node: '>=18.0.0'}
+    peerDependencies:
+      prettier: ^3.0.0
+    peerDependenciesMeta:
+      prettier:
+        optional: true
+
+  svgfusion-vue@1.5.0:
+    resolution: {integrity: sha512-+bkG3C8EgfosqnsgTaEyXtryu9c3EBonOJHJJlWuqqJ27IHs3T2nmUtplqO1q8jr9RFBn5/10NIm7QJH8PqEbg==}
     engines: {node: '>=18.0.0'}
     peerDependencies:
       prettier: ^3.0.0
@@ -18740,6 +18775,21 @@ snapshots:
 
   svg-parser@2.0.4: {}
 
+  svgfusion-cmd@1.6.0(prettier@3.6.2):
+    dependencies:
+      commander: 11.1.0
+      figlet: 1.8.2
+      svgfusion-core: 1.6.0
+      svgfusion-react: 1.5.0(prettier@3.6.2)
+      svgfusion-utils: 1.4.0
+      svgfusion-vue: 1.5.0(prettier@3.6.2)
+    transitivePeerDependencies:
+      - bufferutil
+      - canvas
+      - prettier
+      - supports-color
+      - utf-8-validate
+
   svgfusion-core@1.3.2:
     dependencies:
       colord: 2.9.3
@@ -18764,6 +18814,18 @@ snapshots:
       - supports-color
       - utf-8-validate
 
+  svgfusion-core@1.6.0:
+    dependencies:
+      colord: 2.9.3
+      jsdom: 26.1.0
+      svgfusion-utils: 1.4.0
+      zod: 4.0.5
+    transitivePeerDependencies:
+      - bufferutil
+      - canvas
+      - supports-color
+      - utf-8-validate
+
   svgfusion-dom@1.3.3(prettier@3.6.2):
     dependencies:
       svgfusion-core: 1.3.2
@@ -18777,10 +18839,35 @@ snapshots:
       - supports-color
       - utf-8-validate
 
+  svgfusion-dom@1.6.0(prettier@3.6.2):
+    dependencies:
+      svgfusion-core: 1.6.0
+      svgfusion-react: 1.5.0(prettier@3.6.2)
+      svgfusion-utils: 1.4.0
+      svgfusion-vue: 1.5.0(prettier@3.6.2)
+    transitivePeerDependencies:
+      - bufferutil
+      - canvas
+      - prettier
+      - supports-color
+      - utf-8-validate
+
   svgfusion-react@1.2.3(prettier@3.6.2):
     dependencies:
       svgfusion-core: 1.3.3
       svgfusion-utils: 1.1.3
+    optionalDependencies:
+      prettier: 3.6.2
+    transitivePeerDependencies:
+      - bufferutil
+      - canvas
+      - supports-color
+      - utf-8-validate
+
+  svgfusion-react@1.5.0(prettier@3.6.2):
+    dependencies:
+      svgfusion-core: 1.6.0
+      svgfusion-utils: 1.4.0
     optionalDependencies:
       prettier: 3.6.2
     transitivePeerDependencies:
@@ -18803,10 +18890,29 @@ snapshots:
       commander: 11.1.0
       figlet: 1.8.2
 
+  svgfusion-utils@1.4.0:
+    dependencies:
+      chalk: 5.4.1
+      colord: 2.9.3
+      commander: 11.1.0
+      figlet: 1.8.2
+
   svgfusion-vue@1.2.3(prettier@3.6.2):
     dependencies:
       svgfusion-core: 1.3.3
       svgfusion-utils: 1.1.3
+    optionalDependencies:
+      prettier: 3.6.2
+    transitivePeerDependencies:
+      - bufferutil
+      - canvas
+      - supports-color
+      - utf-8-validate
+
+  svgfusion-vue@1.5.0(prettier@3.6.2):
+    dependencies:
+      svgfusion-core: 1.6.0
+      svgfusion-utils: 1.4.0
     optionalDependencies:
       prettier: 3.6.2
     transitivePeerDependencies:
