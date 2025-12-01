@@ -1,3 +1,10 @@
+## [1.5.1](https://github.com/lolvOid/svgfusion/compare/svgfusion-vue@1.5.0...svgfusion-vue@1.5.1) (2025-12-01)
+
+
+### Bug Fixes
+
+* **svgfusion:** update package dependencies and enhance Playground options ([0b4afad](https://github.com/lolvOid/svgfusion/commit/0b4afad7b6683388f4b5c186dd4b782f9a3c5849))
+
 # [1.5.0](https://github.com/lolvOid/svgfusion/compare/svgfusion-vue@1.4.0...svgfusion-vue@1.5.0) (2025-08-14)
 
 
