@@ -55,7 +55,7 @@
   },
   "dependencies": {
     "svgfusion-core": "1.6.0",
-    "svgfusion-react": "1.5.1",
+    "svgfusion-react": "workspace:*",
     "svgfusion-utils": "1.4.0",
     "svgfusion-vue": "1.5.0"
   },

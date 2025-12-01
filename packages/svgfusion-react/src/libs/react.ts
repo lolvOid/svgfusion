@@ -396,10 +396,8 @@ ${childrenJsx}
       exports.push(`const ForwardRef = forwardRef(${componentName});`);
       if (this.reactOptions.memo) {
         exports.push('const Memo = memo(ForwardRef);');
-        // Add displayName for named exports
-        if (this.reactOptions.namedExport) {
-          exports.push(`Memo.displayName = '${componentName}';`);
-        }
+        // Always add displayName for better DevTools
+        exports.push(`Memo.displayName = '${componentName}';`);
         if (this.reactOptions.exportDefault) {
           exports.push('export default Memo;');
         }
@@ -407,10 +405,8 @@ ${childrenJsx}
           exports.push(`export { Memo as ${componentName} };`);
         }
       } else {
-        // Add displayName for named exports
-        if (this.reactOptions.namedExport) {
-          exports.push(`ForwardRef.displayName = '${componentName}';`);
-        }
+        // Always add displayName for better DevTools
+        exports.push(`ForwardRef.displayName = '${componentName}';`);
         if (this.reactOptions.exportDefault) {
           exports.push('export default ForwardRef;');
         }
@@ -420,10 +416,8 @@ ${childrenJsx}
       }
     } else if (this.reactOptions.memo) {
       exports.push(`const Memo = memo(${componentName});`);
-      // Add displayName for named exports
-      if (this.reactOptions.namedExport) {
-        exports.push(`Memo.displayName = '${componentName}';`);
-      }
+      // Always add displayName for better DevTools
+      exports.push(`Memo.displayName = '${componentName}';`);
       if (this.reactOptions.exportDefault) {
         exports.push('export default Memo;');
       }
@@ -431,10 +425,8 @@ ${childrenJsx}
         exports.push(`export { Memo as ${componentName} };`);
       }
     } else {
-      // Add displayName for named exports
-      if (this.reactOptions.namedExport) {
-        exports.push(`${componentName}.displayName = '${componentName}';`);
-      }
+      // Always add displayName for better DevTools
+      exports.push(`${componentName}.displayName = '${componentName}';`);
       if (this.reactOptions.exportDefault) {
         exports.push(`export default ${componentName};`);
       }
