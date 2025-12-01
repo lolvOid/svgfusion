@@ -1,3 +1,10 @@
+## [1.5.2](https://github.com/lolvOid/svgfusion/compare/svgfusion-vue@1.5.1...svgfusion-vue@1.5.2) (2025-12-01)
+
+
+### Bug Fixes
+
+* **svgfusion:** update svgfusion-react dependency to workspace references ([d82f33c](https://github.com/lolvOid/svgfusion/commit/d82f33c1a599e71b28306e94b0f5658c42a39b46))
+
 ## [1.5.1](https://github.com/lolvOid/svgfusion/compare/svgfusion-vue@1.5.0...svgfusion-vue@1.5.1) (2025-12-01)
 
 
