@@ -40,6 +40,7 @@
     "svgfusion": "node packages/svgfusion-bundle/dist/cli.cjs"
   },
   "devDependencies": {
+    "@anolilab/semantic-release-pnpm": "^3.2.2",
     "@commitlint/cli": "^17.8.1",
     "@commitlint/config-conventional": "^17.8.1",
     "@eslint/js": "^9.31.0",

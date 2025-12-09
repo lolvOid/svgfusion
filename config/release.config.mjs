@@ -27,9 +27,10 @@ const releaseConfig = name => ({
     ],
 
     [
-      '@semantic-release/npm',
+      '@anolilab/semantic-release-pnpm', // Use pnpm for publishing (handles workspace:* automatically)
       {
         npmPublish: true,
+        registry: process.env.SEMANTIC_RELEASE_REGISTRY || 'https://registry.npmjs.org',
       },
     ],
 
@@ -54,12 +55,6 @@ const releaseConfig = name => ({
         ],
       },
     ],
-    // [
-    //   '@semantic-release/exec',
-    //   {
-    //     successCmd: `node ${path.join(rootDir, 'scripts/restore-workspace-deps.cjs')} ${name}`,
-    //   },
-    // ],
   ],
   tagFormat: `${name}@\${version}`,
 });
