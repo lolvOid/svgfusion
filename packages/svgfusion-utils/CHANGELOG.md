@@ -1,3 +1,10 @@
+## [1.5.1](https://github.com/lolvOid/svgfusion/compare/svgfusion-utils@1.5.0...svgfusion-utils@1.5.1) (2025-12-09)
+
+
+### Bug Fixes
+
+* update package dependencies to use workspace references ([f74c37e](https://github.com/lolvOid/svgfusion/commit/f74c37e9868ce1cf90bd0b675c5563092fad5410))
+
 # [1.5.0](https://github.com/lolvOid/svgfusion/compare/svgfusion-utils@1.4.2...svgfusion-utils@1.5.0) (2025-12-09)
 
 
