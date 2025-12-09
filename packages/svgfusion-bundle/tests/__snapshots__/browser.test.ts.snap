@@ -52,6 +52,7 @@ const SimpleIcon = ({
   );
 };
 
+SimpleIcon.displayName = 'SimpleIcon';
 export default SimpleIcon;
 "
 `;
@@ -159,6 +160,7 @@ const BasicIcon = (
 
 const ForwardRef = forwardRef(BasicIcon);
 const Memo = memo(ForwardRef);
+Memo.displayName = 'BasicIcon';
 export default Memo;
 "
 `;
@@ -239,6 +241,7 @@ const TestIcon = (
 
 const ForwardRef = forwardRef(TestIcon);
 const Memo = memo(ForwardRef);
+Memo.displayName = 'TestIcon';
 export default Memo;
 "
 `;
@@ -417,6 +420,7 @@ const Icon1 = (
 
 const ForwardRef = forwardRef(Icon1);
 const Memo = memo(ForwardRef);
+Memo.displayName = 'Icon1';
 export default Memo;
 ",
     "componentName": "Icon1",
@@ -472,6 +476,7 @@ const Icon2 = (
 
 const ForwardRef = forwardRef(Icon2);
 const Memo = memo(ForwardRef);
+Memo.displayName = 'Icon2';
 export default Memo;
 ",
     "componentName": "Icon2",
