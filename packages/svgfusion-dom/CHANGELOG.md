@@ -1,3 +1,11 @@
+# [1.7.0](https://github.com/lolvOid/svgfusion/compare/svgfusion-dom@1.6.2...svgfusion-dom@1.7.0) (2025-12-09)
+
+
+### Features
+
+*  for update package dependencies to use workspace references ([4145736](https://github.com/lolvOid/svgfusion/commit/414573657f7ce884708467e38801bf532c9dbfce))
+* add display names to memoized components in snapshots ([5ce33a9](https://github.com/lolvOid/svgfusion/commit/5ce33a9b6da7e130a16cb537808dd2406d06c531))
+
 ## [1.6.2](https://github.com/lolvOid/svgfusion/compare/svgfusion-dom@1.6.1...svgfusion-dom@1.6.2) (2025-12-01)
 
 
