@@ -2,7 +2,7 @@
 
 ![SVGFusion CLI](https://i.ibb.co/mfRb84x/cli.png)
 
-The SVGFusion CLI provides a simple yet powerful interface for converting SVG files to React and Vue components with advanced features like split colors and duplicate validation.
+The SVGFusion CLI provides a simple yet powerful interface for converting SVG files to React, Vue, and React Native components with advanced features like split colors and duplicate validation.
 
 ## Installation
 
@@ -24,6 +24,9 @@ svgfusion ./icons --output ./components
 
 # Convert to Vue components with TypeScript
 svgfusion ./icons --framework vue --typescript --output ./src/components
+
+# Convert to React Native components (uses react-native-svg)
+svgfusion ./icons --framework react-native --typescript --output ./src/components
 
 # Advanced: Split colors for Custom CSS Class
 svgfusion ./icons --split-colors --prefix Icon --output ./components
@@ -78,11 +81,14 @@ svgfusion ./icons -o ./components
 
 ### -f, --framework `<framework>`
 
-Choose the target framework: `react` or `vue`.
+Choose the target framework: `react`, `vue`, or `react-native`.
 
 ```bash
 svgfusion ./icons -f vue
+svgfusion ./icons -f react-native
 ```
+
+The `react-native` target emits components backed by [`react-native-svg`](https://github.com/software-mansion/react-native-svg), which must be installed in the consuming project.
 
 **Default:** `react`
 
@@ -410,6 +416,37 @@ IconStar.displayName = 'IconStar';
 export default IconStar;
 export { IconStar };
 ```
+
+### React Native Components
+
+Generated React Native components include:
+
+- TypeScript support (when `-t` flag is used)
+- `react-native-svg` primitives (`Svg`, `Path`, `Circle`, `G`, etc.) instead of raw SVG tags
+- `memo` and `forwardRef` wrappers (configurable)
+- Native props pass-through via spread
+- Color/stroke prop splitting (when the corresponding flags are used)
+
+#### Basic Example
+
+```tsx
+import { memo, forwardRef, Ref } from 'react';
+import Svg, { Path, SvgProps } from 'react-native-svg';
+
+const IconStar = memo(
+  forwardRef<Svg, SvgProps>((props, ref) => (
+    <Svg ref={ref} viewBox="0 0 24 24" {...props}>
+      <Path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" />
+    </Svg>
+  ))
+);
+
+IconStar.displayName = 'IconStar';
+export default IconStar;
+export { IconStar };
+```
+
+> Consuming projects must install `react-native-svg` (>= 12.0.0). Works with both Expo and bare React Native workflows.
 
 ### Vue Components
 

@@ -3,7 +3,7 @@
 
 # SVGFusion Browser
 
-🌐 Browser-optimized package for converting SVG files into React and Vue 3 components with TypeScript support and native SVG props inheritance.
+Browser-optimized package for converting SVG files into React, Vue 3, and React Native components with TypeScript support and native SVG props inheritance.
 
 </div>
 
@@ -45,6 +45,7 @@ console.log(reactComponent.code); // Generated component code
 import {
   convertToReact,
   convertToVue,
+  convertToReactNative,
   type BrowserConversionOptions,
   type BrowserConversionResult,
 } from 'svgfusion-dom';
@@ -69,6 +70,15 @@ const vueResult: BrowserConversionResult = await convertToVue(svgContent, {
   sfc: true,
   scriptSetup: true,
 });
+
+// Type-safe React Native conversion (requires react-native-svg in the consuming app)
+const rnResult: BrowserConversionResult = await convertToReactNative(
+  svgContent,
+  {
+    typescript: true,
+    componentName: 'MyIcon',
+  }
+);
 ```
 
 ### Available Types
@@ -83,9 +93,10 @@ type ConversionResult
 // Framework-specific
 type ReactGeneratorOptions
 type VueGeneratorOptions
+type ReactNativeGeneratorOptions
 
 // Functions
-convertToReact, convertToVue, convertBatch
+convertToReact, convertToVue, convertToReactNative, convertBatch
 extractColors, validateSvg
 SVGFusionBrowser
 ```
@@ -94,7 +105,7 @@ SVGFusionBrowser
 
 - **Browser Native** - Works directly in the browser without Node.js
 - **Lightweight** - Optimized bundle size for web applications
-- **Framework Support** - React and Vue 3 components
+- **Framework Support** - React, Vue 3, and React Native components
 - **TypeScript Ready** - Generate components with full type support
 - **Real-time Conversion** - Perfect for online editors and playgrounds
 - **Zero Dependencies** - Standalone browser library

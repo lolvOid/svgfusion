@@ -1,6 +1,6 @@
 # Node API
 
-SVGFusion provides a simple Node API for converting SVG files into React and Vue components.
+SVGFusion provides a simple Node API for converting SVG files into React, Vue, and React Native components.
 
 ## Installation
 
@@ -21,7 +21,7 @@ const fusion = new SVGFusion();
 const svgContent = `<svg viewBox="0 0 24 24"><path fill="#FF0000" d="..."/></svg>`;
 
 const result = await fusion.convert(svgContent, {
-  framework: 'react', // or 'vue'
+  framework: 'react', // 'react' | 'vue' | 'react-native'
   transformation: {
     splitColors: true,
   },
@@ -38,7 +38,7 @@ console.log(result.code);
 
 #### Framework Options
 
-- `framework`: Target framework ('react' | 'vue')
+- `framework`: Target framework (`'react'` | `'vue'` | `'react-native'`)
 
 #### Transformation Options
 
@@ -98,6 +98,17 @@ const result = await engine.convert(svgContent, {
 });
 ```
 
+### React Native Component
+
+```typescript
+const result = await engine.convert(svgContent, {
+  framework: 'react-native',
+  generator: { componentName: 'StarIcon', typescript: true },
+});
+```
+
+The consuming project must have `react-native-svg` installed. Works with Expo and bare React Native projects.
+
 ### Color Splitting
 
 ```typescript
@@ -139,7 +150,23 @@ const result = await convertToVue(svgContent, {
 });
 ```
 
-Both convenience functions now support automatic hyphen separators when using prefix/suffix combinations, generating component names like `UI-Star-Component` that are converted to proper PascalCase (e.g., `UIStarComponent`).
+### convertToReactNative
+
+```typescript
+import { convertToReactNative } from 'svgfusion';
+
+const result = await convertToReactNative(svgContent, {
+  generator: {
+    componentName: 'StarIcon',
+    typescript: true,
+  },
+  transformation: { splitColors: true },
+});
+```
+
+The output uses `react-native-svg` primitives. Make sure `react-native-svg` is installed in the consuming project.
+
+All three convenience functions support automatic hyphen separators when using prefix/suffix combinations, generating component names like `UI-Star-Component` that are converted to proper PascalCase (e.g., `UIStarComponent`).
 
 ## Component Naming
 
@@ -246,7 +273,7 @@ interface ConversionResult {
   componentName: string;
   metadata: {
     originalColors?: string[];
-    framework: 'react' | 'vue';
+    framework: 'react' | 'vue' | 'react-native';
   };
 }
 ```
@@ -255,7 +282,7 @@ interface ConversionResult {
 
 ```typescript
 interface SVGFusionOptions {
-  framework: 'react' | 'vue';
+  framework: 'react' | 'vue' | 'react-native';
   transformation?: {
     splitColors?: boolean;
     fixedStrokeWidth?: boolean;
@@ -263,8 +290,8 @@ interface SVGFusionOptions {
   generator?: {
     componentName?: string;
     typescript?: boolean;
-    memo?: boolean; // React only
-    forwardRef?: boolean; // React only
+    memo?: boolean; // React and React Native
+    forwardRef?: boolean; // React and React Native
     scriptSetup?: boolean; // Vue only
   };
 }

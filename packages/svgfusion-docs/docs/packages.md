@@ -21,7 +21,7 @@ npm install svgfusion
 - CLI functionality
 - Node.js API
 - Browser API
-- React and Vue 3 support
+- React, Vue 3, and React Native support
 - TypeScript definitions
 - All transformation features
 
@@ -45,7 +45,7 @@ npx svgfusion-cmd
 
 - Batch processing
 - Watch mode
-- Framework support (React & Vue)
+- Framework support (React, Vue, and React Native)
 - TypeScript generation
 - Configuration files
 - Production-ready workflow
@@ -64,7 +64,7 @@ npm install svgfusion-dom
 
 - Zero Node.js dependencies
 - Real-time conversion
-- Framework support (React & Vue)
+- Framework support (React, Vue, and React Native)
 - Perfect for online editors
 - CDN support
 - Streamlined API (`convertSvg()`)
@@ -72,7 +72,27 @@ npm install svgfusion-dom
 
 **Use when:** Building web applications, online editors, or playgrounds where bundle size matters.
 
-**API Difference:** Uses `convertSvg()` instead of separate `convertToReact()`/`convertToVue()` functions.
+**API Difference:** Uses `convertSvg()` instead of separate `convertToReact()`/`convertToVue()`/`convertToReactNative()` functions.
+
+#### `svgfusion-react-native` - React Native Generator
+
+Standalone package that emits React Native components backed by [react-native-svg](https://github.com/software-mansion/react-native-svg).
+
+```bash
+npm install svgfusion-react-native
+```
+
+**Features:**
+
+- React Native component generation via `react-native-svg`
+- TypeScript support
+- `memo` and `forwardRef` wrappers
+- Works on both Expo and bare React Native workflows
+- Shares the same transformation pipeline as the React/Vue generators
+
+**Use when:** You only need React Native output and want to avoid pulling in the web-focused generators.
+
+> Most users should install `svgfusion` (the bundle) instead — it already re-exports `ReactNativeGenerator` and the `convertToReactNative()` helper.
 
 ---
 
@@ -90,11 +110,12 @@ npx svgfusion ./icons --output ./components
 
 ### Choosing the Right Package
 
-| Use Case             | Recommended Package | Installation                   |
-| -------------------- | ------------------- | ------------------------------ |
-| **General usage**    | `svgfusion`         | `npm install svgfusion`        |
-| **CLI only**         | `svgfusion-cmd`     | `npm install -g svgfusion-cmd` |
-| **Browser/Web apps** | `svgfusion-dom`     | `npm install svgfusion-dom`    |
+| Use Case              | Recommended Package      | Installation                         |
+| --------------------- | ------------------------ | ------------------------------------ |
+| **General usage**     | `svgfusion`              | `npm install svgfusion`              |
+| **CLI only**          | `svgfusion-cmd`          | `npm install -g svgfusion-cmd`       |
+| **Browser/Web apps**  | `svgfusion-dom`          | `npm install svgfusion-dom`          |
+| **React Native only** | `svgfusion-react-native` | `npm install svgfusion-react-native` |
 
 ---
 
@@ -138,6 +159,14 @@ npm install svgfusion-dom
 ```
 
 Ideal for web applications and online editors with minimal bundle impact.
+
+### With React Native Only
+
+```bash
+npm install svgfusion-react-native
+```
+
+Pulls in only the React Native generator. Requires `react-native-svg` as a peer dependency.
 
 ---
 

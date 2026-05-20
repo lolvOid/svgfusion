@@ -1,6 +1,6 @@
 # Getting Started
 
-SVGFusion is a powerful Node.js CLI tool and library that transforms SVG files into production-ready React and Vue 3 components with complex SVG support, TypeScript integration, and automatic optimization.
+SVGFusion is a powerful Node.js CLI tool and library that transforms SVG files into production-ready React, Vue 3, and React Native components with complex SVG support, TypeScript integration, and automatic optimization.
 
 ## Installation
 
@@ -40,6 +40,12 @@ Convert all SVG files in a directory to Vue components:
 
 ```bash
 svgfusion ./icons --framework vue --output ./components
+```
+
+Convert SVG files to React Native components (uses `react-native-svg`):
+
+```bash
+svgfusion ./icons --framework react-native --output ./components
 ```
 
 Enable color splitting for custom color props:
@@ -83,11 +89,17 @@ const vueResult = await engine.convert(svgContent, {
   framework: 'vue',
   generator: { componentName: 'MyIcon' },
 });
+
+// Convert to React Native (requires react-native-svg)
+const rnResult = await engine.convert(svgContent, {
+  framework: 'react-native',
+  generator: { componentName: 'MyIcon', typescript: true },
+});
 ```
 
 ## Key Features
 
-- **React & Vue 3 Support** - Generate components for both frameworks
+- **React, Vue 3, and React Native Support** - Generate components for all three frameworks
 - **TypeScript Ready** - Full TypeScript support with proper typing
 - **Complex SVG Support** - Handles gradients, masks, filters, and Figma exports
 - **Color Splitting** - Extract individual color props with smart fill/stroke handling

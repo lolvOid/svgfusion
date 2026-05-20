@@ -3,7 +3,7 @@
 
 # SVGFusion
 
-**Convert SVG files into React and Vue 3 components**
+**Convert SVG files into React, Vue 3, and React Native components**
 
 [![npm version](https://img.shields.io/npm/v/svgfusion)](https://www.npmjs.com/package/svgfusion)
 [![TypeScript](https://img.shields.io/badge/TypeScript-007ACC?style=flat&logo=typescript&logoColor=white)](https://www.typescriptlang.org/)
@@ -21,7 +21,7 @@ This package includes everything you need for SVG to component conversion:
 - **CLI Tool** - Convert SVG files from command line
 - **Node.js API** - Programmatic conversion in Node.js
 - **Module API** - Browser-compatible module for web apps
-- **React & Vue Support** - Generate components for both frameworks
+- **React, Vue, and React Native Support** - Generate components for all three frameworks
 - **TypeScript Ready** - Full TypeScript support with proper types
 
 ## Installation
@@ -46,12 +46,17 @@ pnpm build
 # Use the CLI
 pnpm svgfusion icon.svg --framework react --output ./components
 pnpm svgfusion ./icons --framework vue --typescript --output ./components
+pnpm svgfusion ./icons --framework react-native --typescript --output ./components
 ```
 
 ### Module Usage (Browser/Web Apps)
 
 ```javascript
-import { convertToReact, convertToVue } from 'svgfusion/browser';
+import {
+  convertToReact,
+  convertToVue,
+  convertToReactNative,
+} from 'svgfusion/browser';
 
 const svgCode = `<svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>`;
 
@@ -67,6 +72,12 @@ const vueResult = await convertToVue(svgCode, {
   componentName: 'StarIcon',
   typescript: true,
   splitColors: true,
+});
+
+// React Native component (requires react-native-svg in the consuming app)
+const rnResult = await convertToReactNative(svgCode, {
+  componentName: 'StarIcon',
+  typescript: true,
 });
 ```
 

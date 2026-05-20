@@ -3,9 +3,9 @@
 
 # SVGFusion
 
-**SVGs to React & Vue 3 Components**
+**SVGs to React, Vue 3, and React Native Components**
 
-Convert SVG files into blazing-fast React and Vue 3 components with automatic color extraction, full TypeScript support, and seamless integration into any modern workflow.
+Convert SVG files into blazing-fast React, Vue 3, and React Native components with automatic color extraction, full TypeScript support, and seamless integration into any modern workflow.
 
 [![npm version](https://img.shields.io/npm/v/svgfusion)](https://www.npmjs.com/package/svgfusion)
 [![TypeScript](https://img.shields.io/badge/TypeScript-007ACC?style=flat&logo=typescript&logoColor=white)](https://www.typescriptlang.org/)
@@ -34,14 +34,15 @@ npx svgfusion-cmd ./icons --output ./components --framework react
 
 SVGFusion is available as a monorepo with specialized packages for different use cases:
 
-| Package                                                              | Description            | Installation                   | CLI Usage               | Use Case            |
-| -------------------------------------------------------------------- | ---------------------- | ------------------------------ | ----------------------- | ------------------- |
-| **[svgfusion](https://www.npmjs.com/package/svgfusion)**             | Complete toolkit       | `npm install svgfusion`        | `npx svgfusion`         | General usage       |
-| **[svgfusion-cmd](https://www.npmjs.com/package/svgfusion-cmd)**     | Command-line interface | `npm install -g svgfusion-cmd` | `npx svgfusion-cmd`     | CLI-only usage      |
-| **[svgfusion-dom](https://www.npmjs.com/package/svgfusion-dom)**     | Browser-optimized      | `npm install svgfusion-dom`    | N/A (browser only)      | Web applications    |
-| **[svgfusion-core](https://www.npmjs.com/package/svgfusion-core)**   | Core engine            | `npm install svgfusion-core`   | N/A (programmatic only) | Custom tooling      |
-| **[svgfusion-react](https://www.npmjs.com/package/svgfusion-react)** | React utilities        | `npm install svgfusion-react`  | N/A (programmatic only) | React-only projects |
-| **[svgfusion-vue](https://www.npmjs.com/package/svgfusion-vue)**     | Vue utilities          | `npm install svgfusion-vue`    | N/A (programmatic only) | Vue-only projects   |
+| Package                                                                            | Description            | Installation                         | CLI Usage               | Use Case                   |
+| ---------------------------------------------------------------------------------- | ---------------------- | ------------------------------------ | ----------------------- | -------------------------- |
+| **[svgfusion](https://www.npmjs.com/package/svgfusion)**                           | Complete toolkit       | `npm install svgfusion`              | `npx svgfusion`         | General usage              |
+| **[svgfusion-cmd](https://www.npmjs.com/package/svgfusion-cmd)**                   | Command-line interface | `npm install -g svgfusion-cmd`       | `npx svgfusion-cmd`     | CLI-only usage             |
+| **[svgfusion-dom](https://www.npmjs.com/package/svgfusion-dom)**                   | Browser-optimized      | `npm install svgfusion-dom`          | N/A (browser only)      | Web applications           |
+| **[svgfusion-core](https://www.npmjs.com/package/svgfusion-core)**                 | Core engine            | `npm install svgfusion-core`         | N/A (programmatic only) | Custom tooling             |
+| **[svgfusion-react](https://www.npmjs.com/package/svgfusion-react)**               | React generator        | `npm install svgfusion-react`        | N/A (programmatic only) | React-only projects        |
+| **[svgfusion-vue](https://www.npmjs.com/package/svgfusion-vue)**                   | Vue generator          | `npm install svgfusion-vue`          | N/A (programmatic only) | Vue-only projects          |
+| **[svgfusion-react-native](https://www.npmjs.com/package/svgfusion-react-native)** | React Native generator | `npm install svgfusion-react-native` | N/A (programmatic only) | React Native-only projects |
 
 > **Tip:** For most users, the main `svgfusion` package includes everything you need. Use specialized packages only if you need specific functionality.
 
@@ -59,7 +60,7 @@ Both commands support the same CLI options and features. The difference is packa
 ## Key Features
 
 - **Advanced Transformations**: Color splitting, stroke width extraction, and SVG optimization
-- **Framework Support**: Generate React and Vue 3 components with TypeScript support
+- **Framework Support**: Generate React, Vue 3, and React Native components with TypeScript support
 - **Browser & Node.js**: Works in both browser environments and Node.js
 - **Batch Processing**: Convert entire directories with watch mode support
 - **Production Ready**: Optimized output with proper error handling and accessibility
@@ -141,6 +142,9 @@ svgfusion ./icons --output ./components
 # Convert to Vue 3 components
 svgfusion ./icons --output ./components --framework vue
 
+# Convert to React Native components (uses react-native-svg)
+svgfusion ./icons --output ./components --framework react-native
+
 # Single file conversion with TypeScript
 svgfusion ./star.svg --output ./components --typescript
 
@@ -170,7 +174,7 @@ Arguments:
 
 Options:
   -o, --output <dir>           Output directory for generated components (default: "./components")
-  -f, --framework <framework>  Target framework: react or vue (default: "react")
+  -f, --framework <framework>  Target framework: react, vue, or react-native (default: "react")
   --typescript                 Generate TypeScript components (default: true)
   --javascript                 Generate JavaScript components
   --split-colors               Enable color splitting feature
@@ -235,7 +239,7 @@ const engine = new SVGFusion();
 const svgContent = `<svg viewBox="0 0 24 24"><path fill="#FF0000" stroke="#00FF00" d="..."/></svg>`;
 
 const result = await engine.convert(svgContent, {
-  framework: 'react', // or 'vue'
+  framework: 'react', // 'react' | 'vue' | 'react-native'
   transformation: { splitColors: true },
   generator: { componentName: 'MyIcon', typescript: true },
 });
@@ -659,7 +663,7 @@ console.log(vueResult.code); // Generated Vue component code
 **Browser Features:**
 
 - All conversion features (color splitting, stroke fixing, etc.)
-- React and Vue component generation
+- React, Vue, and React Native component generation
 - TypeScript support
 - Batch conversion
 - Color extraction and validation

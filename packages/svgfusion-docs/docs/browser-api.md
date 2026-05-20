@@ -15,6 +15,7 @@ Both `svgfusion/browser` and `svgfusion-dom` are designed for easy development a
 import {
   convertToReact,
   convertToVue,
+  convertToReactNative,
   extractColors,
   validateSvg,
   SVGFusionBrowser,
@@ -22,6 +23,7 @@ import {
   type BrowserConversionResult,
   type ReactGeneratorOptions,
   type VueGeneratorOptions,
+  type ReactNativeGeneratorOptions,
 } from 'svgfusion/browser';
 
 // For browser-optimized usage (smaller bundle)
@@ -52,13 +54,14 @@ type ConversionResult
 // Framework-specific
 type ReactGeneratorOptions
 type VueGeneratorOptions
+type ReactNativeGeneratorOptions
 
 // Utility functions
 formatComponentName, pascalCase, sanitizeComponentName, svgToComponentName
 
 // Classes and functions
 SVGFusionBrowser
-convertToReact, convertToVue, convertBatch
+convertToReact, convertToVue, convertToReactNative, convertBatch
 extractColors, validateSvg
 ```
 
@@ -243,6 +246,17 @@ Converts SVG to Vue component string.
 
 **Returns:** `Promise<BrowserConversionResult>`
 
+### `convertToReactNative(svgContent, options)`
+
+Converts SVG to a React Native component string backed by `react-native-svg`.
+
+**Parameters:**
+
+- `svgContent` (string): SVG content to convert
+- `options` (BrowserConversionOptions): Conversion options
+
+**Returns:** `Promise<BrowserConversionResult>`
+
 ### `convertBatch(svgContents, options)`
 
 Converts multiple SVGs to components.
@@ -288,7 +302,7 @@ Main configuration interface for browser conversions:
 
 ```typescript
 interface BrowserConversionOptions extends SVGFusionOptions {
-  framework: 'react' | 'vue';
+  framework: 'react' | 'vue' | 'react-native';
   typescript?: boolean;
   componentName?: string;
   prefix?: string;
@@ -314,7 +328,7 @@ interface BrowserConversionResult extends ConversionResult {
   code: string;
   componentName: string;
   filename: string;
-  framework: 'react' | 'vue';
+  framework: 'react' | 'vue' | 'react-native';
   typescript: boolean;
   dependencies: string[];
   metadata: {
@@ -360,7 +374,7 @@ Base configuration interface:
 
 ```typescript
 interface SVGFusionOptions {
-  framework: 'react' | 'vue';
+  framework: 'react' | 'vue' | 'react-native';
   transformation?: TransformationOptions;
   generator?: GeneratorOptions;
 }
@@ -476,14 +490,18 @@ type PascalCase<T extends string> = string;
 type CamelCase<T extends string> = string;
 
 // Framework discrimination
-type FrameworkOptions<T extends 'react' | 'vue'> = T extends 'react'
-  ? ReactGeneratorOptions
-  : VueGeneratorOptions;
+type FrameworkOptions<T extends 'react' | 'vue' | 'react-native'> =
+  T extends 'react'
+    ? ReactGeneratorOptions
+    : T extends 'react-native'
+      ? ReactNativeGeneratorOptions
+      : VueGeneratorOptions;
 
 // Result type based on framework
-type FrameworkResult<T extends 'react' | 'vue'> = BrowserConversionResult & {
-  framework: T;
-};
+type FrameworkResult<T extends 'react' | 'vue' | 'react-native'> =
+  BrowserConversionResult & {
+    framework: T;
+  };
 ```
 
 ## API Type Examples
@@ -612,7 +630,7 @@ import type {
 
 ```typescript
 // Framework types
-type FrameworkType = 'react' | 'vue';
+type FrameworkType = 'react' | 'vue' | 'react-native';
 
 // Color types
 type ColorType = 'fill' | 'stroke' | 'stop-color';

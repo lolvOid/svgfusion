@@ -1,6 +1,6 @@
 # SVGFusion CLI
 
-🚀 Command-line interface for converting SVG files into production-ready React and Vue 3 components with TypeScript support and batch processing capabilities.
+Command-line interface for converting SVG files into production-ready React, Vue 3, and React Native components with TypeScript support and batch processing capabilities.
 
 ## Installation
 
@@ -19,6 +19,9 @@ svgfusion-cmd input.svg --output ./components --framework react
 # Batch convert all SVGs in a directory
 svgfusion-cmd ./icons --output ./components --framework vue --typescript
 
+# Convert SVGs to React Native components (uses react-native-svg)
+svgfusion-cmd ./icons --output ./components --framework react-native --typescript
+
 # Watch mode for development
 svgfusion-cmd ./icons --output ./components --watch
 ```
@@ -27,7 +30,7 @@ svgfusion-cmd ./icons --output ./components --watch
 
 - **Batch Processing** - Convert entire directories of SVG files
 - **Fast & Efficient** - Optimized for large-scale conversions
-- **Framework Support** - React and Vue 3 components
+- **Framework Support** - React, Vue 3, and React Native components
 - **TypeScript Ready** - Generate .tsx/.ts files with full type support
 - **Watch Mode** - Automatically convert files on changes
 - **Customizable** - Extensive configuration options
@@ -55,15 +58,15 @@ svgfusion-cmd ./icons --framework react --watch --output ./components
 
 ### Options
 
-| Option         | Alias | Description                   | Default    |
-| -------------- | ----- | ----------------------------- | ---------- |
-| `--framework`  | `-f`  | Target framework (react, vue) | `react`    |
-| `--output`     | `-o`  | Output directory              | `./output` |
-| `--typescript` | `-t`  | Generate TypeScript files     | `false`    |
-| `--watch`      | `-w`  | Watch for file changes        | `false`    |
-| `--config`     | `-c`  | Configuration file path       | -          |
-| `--help`       | `-h`  | Show help                     | -          |
-| `--version`    | `-v`  | Show version                  | -          |
+| Option         | Alias | Description                                 | Default    |
+| -------------- | ----- | ------------------------------------------- | ---------- |
+| `--framework`  | `-f`  | Target framework (react, vue, react-native) | `react`    |
+| `--output`     | `-o`  | Output directory                            | `./output` |
+| `--typescript` | `-t`  | Generate TypeScript files                   | `false`    |
+| `--watch`      | `-w`  | Watch for file changes                      | `false`    |
+| `--config`     | `-c`  | Configuration file path                     | -          |
+| `--help`       | `-h`  | Show help                                   | -          |
+| `--version`    | `-v`  | Show version                                | -          |
 
 ### Configuration File
 
