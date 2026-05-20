@@ -62,7 +62,7 @@
   },
   "devDependencies": {
     "@eslint/js": "^9.31.0",
-    "@jest/globals": "^30.0.4",
+    "@jest/globals": "^30.4.1",
     "@semantic-release/changelog": "^6.0.3",
     "@semantic-release/exec": "^7.1.0",
     "@semantic-release/git": "^10.0.1",
@@ -71,13 +71,13 @@
     "@types/jest": "^30.0.0",
     "@types/node": "^20.0.0",
     "eslint": "^9.31.0",
-    "jest": "^30.0.4",
-    "prettier": "^3.6.2",
+    "jest": "^30.4.2",
+    "prettier": "^3.8.3",
     "semantic-release": "^24.2.5",
     "semantic-release-monorepo": "^8.0.2",
-    "tsup": "^8.5.0",
+    "tsup": "^8.5.1",
     "typescript": "^5.0.0",
-    "typescript-eslint": "^8.37.0"
+    "typescript-eslint": "^8.59.4"
   },
   "engines": {
     "node": ">=18.0.0"
