@@ -62,7 +62,7 @@
   },
   "dependencies": {
     "colord": "^2.9.3",
-    "jsdom": "^26.1.0",
+    "jsdom": "^29.1.1",
     "svgfusion-utils": "workspace:*",
     "zod": "^4.0.5"
   },

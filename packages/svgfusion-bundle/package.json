@@ -81,7 +81,7 @@
     "chalk": "^5.0.0",
     "commander": "^11.0.0",
     "figlet": "^1.7.0",
-    "jsdom": "^26.1.0",
+    "jsdom": "^29.1.1",
     "svgfusion-cmd": "workspace:*",
     "svgfusion-core": "workspace:*",
     "svgfusion-dom": "workspace:*",
