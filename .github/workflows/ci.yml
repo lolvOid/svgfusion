@@ -118,6 +118,8 @@ jobs:
           sleep 30
           pnpm run release:vue
           sleep 30
+          pnpm run release:react-native
+          sleep 30
           pnpm run release:cli
           sleep 30
           pnpm run release:browser
@@ -188,6 +190,8 @@ jobs:
           pnpm run release:react
           sleep 30
           pnpm run release:vue
+          sleep 30
+          pnpm run release:react-native
           sleep 30
           pnpm run release:cli
           sleep 30

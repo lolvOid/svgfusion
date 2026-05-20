@@ -42,8 +42,9 @@ jobs:
           # Define packages to analyze
           packages=(
             "svgfusion-core"
-            "svgfusion-react" 
+            "svgfusion-react"
             "svgfusion-vue"
+            "svgfusion-react-native"
             "svgfusion-cmd"
             "svgfusion-utils"
             "svgfusion-bundle"
