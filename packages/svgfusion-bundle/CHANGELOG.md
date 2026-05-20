@@ -1,3 +1,10 @@
+# [1.40.0](https://github.com/lolvOid/svgfusion/compare/svgfusion@1.39.0...svgfusion@1.40.0) (2026-05-20)
+
+
+### Features
+
+* add support for React Native components in SVGFusion in docs ([7d3f46c](https://github.com/lolvOid/svgfusion/commit/7d3f46c8eb09e05d7fe3a92c99b553640d52e527))
+
 # [1.39.0](https://github.com/lolvOid/svgfusion/compare/svgfusion@1.38.1...svgfusion@1.39.0) (2026-05-20)
 
 
