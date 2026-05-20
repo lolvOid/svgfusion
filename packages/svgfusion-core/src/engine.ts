@@ -8,7 +8,7 @@ import { SVGTransformer, TransformationOptions } from './core/transformer';
 import { GeneratorOptions } from './core/generator';
 
 export interface SVGFusionOptions {
-  framework: 'react' | 'vue';
+  framework: 'react' | 'vue' | 'react-native';
   transformation?: TransformationOptions;
   generator?: GeneratorOptions;
 }

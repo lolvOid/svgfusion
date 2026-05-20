@@ -10,6 +10,7 @@ import {
 import { resolve, basename, extname, join } from 'path';
 import { Framework, SVGFusion, SVGFusionOptions } from 'svgfusion-core';
 import { ReactGenerator } from 'svgfusion-react';
+import { ReactNativeGenerator } from 'svgfusion-react-native';
 import { createBanner, ansiColors } from 'svgfusion-utils';
 import { VueGenerator } from 'svgfusion-vue';
 
@@ -90,8 +91,12 @@ async function convertSvgFile(
 
     // Convert SVG
     const fusion = new SVGFusion();
-    const generator =
-      options.framework === 'react' ? ReactGenerator : VueGenerator;
+    const generators = {
+      react: ReactGenerator,
+      vue: VueGenerator,
+      'react-native': ReactNativeGenerator,
+    } as const;
+    const generator = generators[options.framework] ?? ReactGenerator;
     const result = await fusion.convert(svgContent, fusionOptions, generator);
 
     // Determine output directory
@@ -236,7 +241,7 @@ async function main() {
   program
     .name('svgfusion')
     .description(
-      'Transform SVG files into production-ready React/Vue components'
+      'Transform SVG files into production-ready React, Vue, or React Native components'
     )
     .version('2.0.0')
     .argument('<input>', 'SVG file or directory to convert')
@@ -247,7 +252,7 @@ async function main() {
     )
     .option(
       '-f, --framework <framework>',
-      'Target framework: react or vue',
+      'Target framework: react, vue, or react-native',
       'react'
     )
     .option('--typescript', 'Generate TypeScript components')
@@ -279,6 +284,7 @@ Examples:
   $ svgfusion icon.svg                                    # Convert single file
   $ svgfusion ./icons --output ./components               # Convert directory
   $ svgfusion ./icons --framework vue --typescript        # Vue with TypeScript
+  $ svgfusion ./icons --framework react-native            # React Native (react-native-svg)
   $ svgfusion ./icons --prefix Icon --suffix Component    # Add prefix/suffix
   $ svgfusion ./icons --split-colors --fixed-stroke-width # Advanced features
   $ svgfusion ./icons --recursive --index                 # Recursive with index

@@ -86,6 +86,7 @@
     "svgfusion-core": "workspace:*",
     "svgfusion-dom": "workspace:*",
     "svgfusion-react": "workspace:*",
+    "svgfusion-react-native": "workspace:*",
     "svgfusion-utils": "workspace:*",
     "svgfusion-vue": "workspace:*",
     "zod": "^4.0.5"

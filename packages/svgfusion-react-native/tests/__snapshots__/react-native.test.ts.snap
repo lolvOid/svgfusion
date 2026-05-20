@@ -1,0 +1,249 @@
+// Jest Snapshot v1, https://jestjs.io/docs/snapshot-testing
+
+exports[`React Native Generator Snapshot Tests should match snapshot for JavaScript component 1`] = `
+"import React, { forwardRef, memo } from 'react';
+import { Desc, Path, Svg, Title } from 'react-native-svg';
+
+const TestIcon = ({ title, titleId, desc, descId, size, ...svgProps }) => {
+  const computedSize = {
+    width: svgProps.width || size || 24,
+    height: svgProps.height || size || 24,
+  };
+
+  return (
+    <Svg
+      xmlns="http://www.w3.org/2000/svg"
+      viewBox="0 0 24 24"
+      role="img"
+      aria-labelledby={[titleId, descId].filter(Boolean).join(' ')}
+      {...svgProps}
+      {...computedSize}
+    >
+      {title ? <Title id={titleId}>{title}</Title> : null}
+      {desc ? <Desc id={descId}>{desc}</Desc> : null}
+      <Path
+        d="M12 2L2 7V17L12 22L22 17V7L12 2Z"
+        fill="#ff0000"
+        stroke="#0000ff"
+      />
+    </Svg>
+  );
+};
+
+const ForwardRef = forwardRef(TestIcon);
+const Memo = memo(ForwardRef);
+Memo.displayName = 'TestIcon';
+export { Memo };
+export default Memo;
+"
+`;
+
+exports[`React Native Generator Snapshot Tests should match snapshot for basic TypeScript component 1`] = `
+"import React, { Ref, forwardRef, memo } from 'react';
+import { Desc, Path, Svg, Title } from 'react-native-svg';
+
+interface TestIconProps
+  extends Omit<React.ComponentProps<typeof Svg>, 'width' | 'height'> {
+  title?: string;
+  titleId?: string;
+  desc?: string;
+  descId?: string;
+  size?: string | number;
+}
+
+const TestIcon = (
+  { title, titleId, desc, descId, size, ...svgProps }: TestIconProps,
+  ref: Ref<Svg>
+) => {
+  const computedSize = {
+    width: svgProps.width || size || 24,
+    height: svgProps.height || size || 24,
+  };
+
+  return (
+    <Svg
+      ref={ref}
+      xmlns="http://www.w3.org/2000/svg"
+      viewBox="0 0 24 24"
+      role="img"
+      aria-labelledby={[titleId, descId].filter(Boolean).join(' ')}
+      {...svgProps}
+      {...computedSize}
+    >
+      {title ? <Title id={titleId}>{title}</Title> : null}
+      {desc ? <Desc id={descId}>{desc}</Desc> : null}
+      <Path
+        d="M12 2L2 7V17L12 22L22 17V7L12 2Z"
+        fill="#ff0000"
+        stroke="#0000ff"
+      />
+    </Svg>
+  );
+};
+
+const ForwardRef = forwardRef(TestIcon);
+const Memo = memo(ForwardRef);
+Memo.displayName = 'TestIcon';
+export { Memo };
+export default Memo;
+"
+`;
+
+exports[`React Native Generator Snapshot Tests should match snapshot for component with all features 1`] = `
+"import React, { Ref, forwardRef, memo } from 'react';
+import {
+  Circle,
+  Desc,
+  Ellipse,
+  Line,
+  Path,
+  Rect,
+  Svg,
+  Title,
+} from 'react-native-svg';
+
+interface ComplexIconProps
+  extends Omit<React.ComponentProps<typeof Svg>, 'width' | 'height'> {
+  title?: string;
+  titleId?: string;
+  desc?: string;
+  descId?: string;
+  size?: string | number;
+  color?: string;
+  color2?: string;
+  color3?: string;
+  color4?: string;
+  color5?: string;
+  color6?: string;
+  color7?: string;
+  color8?: string;
+  strokeWidth?: string | number;
+  strokeWidth2?: string | number;
+  strokeWidth3?: string | number;
+  isFixedStrokeWidth?: boolean;
+}
+
+const ComplexIcon = (
+  {
+    title,
+    titleId,
+    desc,
+    descId,
+    size,
+    color = 'black',
+    color2 = 'blue',
+    color3 = 'green',
+    color4 = 'orange',
+    color5 = 'pink',
+    color6 = 'purple',
+    color7 = 'red',
+    color8 = 'yellow',
+    strokeWidth = '1',
+    strokeWidth2 = '2',
+    strokeWidth3 = '3',
+    isFixedStrokeWidth = true,
+    ...svgProps
+  }: ComplexIconProps,
+  ref: Ref<Svg>
+) => {
+  const computedSize = {
+    width: svgProps.width || size || 24,
+    height: svgProps.height || size || 24,
+  };
+
+  return (
+    <Svg
+      ref={ref}
+      xmlns="http://www.w3.org/2000/svg"
+      viewBox="0 0 24 24"
+      role="img"
+      aria-labelledby={[titleId, descId].filter(Boolean).join(' ')}
+      {...svgProps}
+      {...computedSize}
+    >
+      {title ? <Title id={titleId}>{title}</Title> : null}
+      {desc ? <Desc id={descId}>{desc}</Desc> : null}
+      <Path
+        strokeWidth={strokeWidth2}
+        d="M12 2L2 7V17L12 22L22 17V7L12 2Z"
+        fill={color7}
+        stroke={color2}
+        vectorEffect="non-scaling-stroke"
+      />
+      <Circle
+        cx={12}
+        cy={12}
+        r={4}
+        strokeWidth={strokeWidth}
+        fill={color3}
+        stroke={color8}
+        vectorEffect="non-scaling-stroke"
+      />
+      <Rect
+        x={8}
+        y={8}
+        width={8}
+        height={8}
+        style="stroke-width: {strokeWidth3}; fill: {color6};"
+        stroke={color4}
+        fill="none"
+        vectorEffect="non-scaling-stroke"
+      />
+      <Line
+        x1={0}
+        y1={0}
+        x2={24}
+        y2={24}
+        stroke={color}
+        fill="none"
+        vectorEffect="non-scaling-stroke"
+      />
+      <Ellipse
+        cx={12}
+        cy={12}
+        rx={6}
+        ry={4}
+        fill={color5}
+        stroke="none"
+        vectorEffect="non-scaling-stroke"
+      />
+    </Svg>
+  );
+};
+
+const ForwardRef = forwardRef(ComplexIcon);
+const Memo = memo(ForwardRef);
+Memo.displayName = 'ComplexIcon';
+export { Memo };
+export default Memo;
+"
+`;
+
+exports[`React Native Generator Snapshot Tests should match snapshot for component with all features 2`] = `
+{
+  "features": [
+    "optimization",
+    "split-colors",
+    "split-stroke-widths",
+    "fixed-stroke-width",
+    "accessibility",
+  ],
+  "hasClassAttributes": false,
+  "optimizationApplied": true,
+  "originalColors": [
+    "black",
+    "blue",
+    "green",
+    "orange",
+    "pink",
+    "purple",
+    "red",
+    "yellow",
+  ],
+  "originalStrokeWidths": [
+    "1",
+    "2",
+    "3",
+  ],
+}
+`;

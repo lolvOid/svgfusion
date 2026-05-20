@@ -80,4 +80,4 @@ export interface ConversionError {
   stack?: string;
 }
 
-export type Framework = 'react' | 'vue';
+export type Framework = 'react' | 'vue' | 'react-native';

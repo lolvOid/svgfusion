@@ -9,10 +9,14 @@ import {
   ConversionResult,
 } from 'svgfusion-core/browser';
 import { ReactGenerator, ReactGeneratorOptions } from 'svgfusion-react';
+import {
+  ReactNativeGenerator,
+  ReactNativeGeneratorOptions,
+} from 'svgfusion-react-native';
 import { VueGenerator, VueGeneratorOptions } from 'svgfusion-vue';
 
 export interface BrowserConversionOptions extends SVGFusionOptions {
-  framework: 'react' | 'vue';
+  framework: 'react' | 'vue' | 'react-native';
   typescript?: boolean;
   componentName?: string;
   prefix?: string;
@@ -32,7 +36,7 @@ export interface BrowserConversionOptions extends SVGFusionOptions {
 }
 
 export interface BrowserConversionResult extends ConversionResult {
-  framework: 'react' | 'vue';
+  framework: 'react' | 'vue' | 'react-native';
   typescript: boolean;
   dependencies: string[];
   code: string;
@@ -96,18 +100,8 @@ export class SVGFusionBrowser {
         accessibility: true,
       },
       generator:
-        framework === 'react'
+        framework === 'vue'
           ? ({
-              typescript,
-              componentName,
-              prefix,
-              suffix,
-              memo,
-              forwardRef,
-              namedExport,
-              exportDefault,
-            } as ReactGeneratorOptions)
-          : ({
               typescript,
               componentName,
               prefix,
@@ -116,13 +110,35 @@ export class SVGFusionBrowser {
               scriptSetup,
               composition: true,
               exportDefault: true,
-            } as VueGeneratorOptions),
+            } as VueGeneratorOptions)
+          : framework === 'react-native'
+            ? ({
+                typescript,
+                componentName,
+                prefix,
+                suffix,
+                memo,
+                forwardRef,
+                namedExport,
+                exportDefault,
+              } as ReactNativeGeneratorOptions)
+            : ({
+                typescript,
+                componentName,
+                prefix,
+                suffix,
+                memo,
+                forwardRef,
+                namedExport,
+                exportDefault,
+              } as ReactGeneratorOptions),
     };
 
     // Convert using the engine
     const generators = {
       react: ReactGenerator,
       vue: VueGenerator,
+      'react-native': ReactNativeGenerator,
     };
     const result = await this.engine.convert(
       svgContent,
@@ -356,7 +372,10 @@ export class SVGFusionBrowser {
   /**
    * Get import path from filename
    */
-  private getImportPath(filename: string, framework: 'react' | 'vue'): string {
+  private getImportPath(
+    filename: string,
+    framework: 'react' | 'vue' | 'react-native'
+  ): string {
     if (framework === 'vue' && filename.endsWith('.vue')) {
       return filename;
     }
@@ -379,6 +398,14 @@ export async function convertToVue(
 ): Promise<BrowserConversionResult> {
   const browser = new SVGFusionBrowser();
   return browser.convert(svgContent, { ...options, framework: 'vue' });
+}
+
+export async function convertToReactNative(
+  svgContent: string,
+  options: Omit<BrowserConversionOptions, 'framework'> = {}
+): Promise<BrowserConversionResult> {
+  const browser = new SVGFusionBrowser();
+  return browser.convert(svgContent, { ...options, framework: 'react-native' });
 }
 
 export async function convertBatch(

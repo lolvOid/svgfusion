@@ -39,6 +39,7 @@ export type {
 // Direct re-exports - all from framework generators
 export * from 'svgfusion-react';
 export * from 'svgfusion-vue';
+export * from 'svgfusion-react-native';
 
 // Re-exports from utils (only non-color utilities to avoid duplicates)
 export {
@@ -73,6 +74,7 @@ export type {
 import { ConversionResult, SVGFusion, SVGFusionOptions } from 'svgfusion-core';
 import { ReactGenerator } from 'svgfusion-react';
 import { VueGenerator } from 'svgfusion-vue';
+import { ReactNativeGenerator } from 'svgfusion-react-native';
 
 // Export convenience functions
 export async function convertToReact(
@@ -96,5 +98,17 @@ export async function convertToVue(
     svgContent,
     { ...options, framework: 'vue' },
     VueGenerator
+  );
+}
+
+export async function convertToReactNative(
+  svgContent: string,
+  options: Omit<SVGFusionOptions, 'framework'> = {}
+): Promise<ConversionResult> {
+  const fusion = new SVGFusion();
+  return fusion.convert(
+    svgContent,
+    { ...options, framework: 'react-native' },
+    ReactNativeGenerator
   );
 }
