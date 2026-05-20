@@ -1,3 +1,15 @@
+# [1.39.0](https://github.com/lolvOid/svgfusion/compare/svgfusion@1.38.1...svgfusion@1.39.0) (2026-05-20)
+
+
+### Bug Fixes
+
+* Update webpack version constraints in package.json and pnpm-lock.yaml ([9de2b89](https://github.com/lolvOid/svgfusion/commit/9de2b89e98a03c3f79fd3411057329dfa05aa684))
+
+
+### Features
+
+* **svgfusion-react-native:** add React Native support for SVGFusion ([de34970](https://github.com/lolvOid/svgfusion/commit/de34970085b49934804e3a44f3cf6d421763271e))
+
 ## [1.38.1](https://github.com/lolvOid/svgfusion/compare/svgfusion@1.38.0...svgfusion@1.38.1) (2025-12-09)
 
 
