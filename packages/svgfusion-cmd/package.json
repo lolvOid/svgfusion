@@ -57,7 +57,7 @@
     "release:dry": "semantic-release --dry-run"
   },
   "dependencies": {
-    "commander": "^11.1.0",
+    "commander": "^14.0.3",
     "figlet": "^1.7.0",
     "svgfusion-core": "workspace:*",
     "svgfusion-react": "workspace:*",

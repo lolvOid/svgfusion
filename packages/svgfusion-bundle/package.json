@@ -79,7 +79,7 @@
   },
   "dependencies": {
     "chalk": "^5.0.0",
-    "commander": "^11.0.0",
+    "commander": "^14.0.3",
     "figlet": "^1.7.0",
     "jsdom": "^26.1.0",
     "svgfusion-cmd": "workspace:*",
