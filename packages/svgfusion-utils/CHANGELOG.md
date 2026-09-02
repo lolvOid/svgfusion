@@ -1,3 +1,10 @@
+## [1.7.2](https://github.com/lolvOid/svgfusion/compare/svgfusion-utils@1.7.1...svgfusion-utils@1.7.2) (2026-09-02)
+
+
+### Bug Fixes
+
+* update @babel/core and js-yaml version constraints in package.json and pnpm-lock.yaml ([6ea37ad](https://github.com/lolvOid/svgfusion/commit/6ea37ad94127738bef3a50c84b323eead763a673))
+
 ## [1.7.1](https://github.com/lolvOid/svgfusion/compare/svgfusion-utils@1.7.0...svgfusion-utils@1.7.1) (2026-09-02)
 
 
