@@ -1,3 +1,10 @@
+## [1.7.3](https://github.com/lolvOid/svgfusion/compare/svgfusion-utils@1.7.2...svgfusion-utils@1.7.3) (2026-09-02)
+
+
+### Bug Fixes
+
+* update version constraints for various dependencies in package.json and pnpm-lock.yaml ([9540455](https://github.com/lolvOid/svgfusion/commit/954045566338aabc7bf78fc807f270818e5d1916))
+
 ## [1.7.2](https://github.com/lolvOid/svgfusion/compare/svgfusion-utils@1.7.1...svgfusion-utils@1.7.2) (2026-09-02)
 
 
