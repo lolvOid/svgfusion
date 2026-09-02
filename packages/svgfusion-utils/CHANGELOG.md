@@ -1,3 +1,10 @@
+## [1.7.1](https://github.com/lolvOid/svgfusion/compare/svgfusion-utils@1.7.0...svgfusion-utils@1.7.1) (2026-09-02)
+
+
+### Bug Fixes
+
+* vulnerabilities ([98b3a9a](https://github.com/lolvOid/svgfusion/commit/98b3a9af41fb0b53e55f96af8dcbb61879df6c35))
+
 # [1.7.0](https://github.com/lolvOid/svgfusion/compare/svgfusion-utils@1.6.0...svgfusion-utils@1.7.0) (2026-05-20)
 
 
