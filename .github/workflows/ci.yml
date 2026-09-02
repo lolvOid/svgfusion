@@ -228,7 +228,7 @@ jobs:
           path: packages/svgfusion-docs/build/
 
       - name: Deploy to Netlify (Production)
-        uses: nwtgck/actions-netlify@v3.0
+        uses: nwtgck/actions-netlify@v4.0
         with:
           publish-dir: './packages/svgfusion-docs/build'
           production-branch: main
@@ -258,7 +258,7 @@ jobs:
           path: packages/svgfusion-docs/build/
 
       - name: Deploy to Netlify (Preview)
-        uses: nwtgck/actions-netlify@v3.0
+        uses: nwtgck/actions-netlify@v4.0
         with:
           publish-dir: './packages/svgfusion-docs/build'
           github-token: ${{ secrets.GITHUB_TOKEN }}
