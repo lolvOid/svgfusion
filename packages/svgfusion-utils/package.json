@@ -42,7 +42,7 @@
   },
   "dependencies": {
     "chalk": "^5.0.0",
-    "colord": "^2.9.3",
+    "colord": "^2.9.4",
     "commander": "^11.0.0",
     "figlet": "^1.8.1"
   },

@@ -61,7 +61,7 @@
     "release": "semantic-release"
   },
   "dependencies": {
-    "colord": "^2.9.3",
+    "colord": "^2.9.4",
     "jsdom": "^26.1.0",
     "svgfusion-utils": "workspace:*",
     "zod": "^4.0.5"
