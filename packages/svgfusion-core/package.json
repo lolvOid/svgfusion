@@ -61,10 +61,10 @@
     "release": "semantic-release"
   },
   "dependencies": {
-    "colord": "^2.9.3",
+    "colord": "^2.10.0",
     "jsdom": "^26.1.0",
     "svgfusion-utils": "workspace:*",
-    "zod": "^4.0.5"
+    "zod": "^4.6.4"
   },
   "devDependencies": {
     "@eslint/js": "9.31.0",
