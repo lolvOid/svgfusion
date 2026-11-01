@@ -89,7 +89,7 @@
     "svgfusion-react-native": "workspace:*",
     "svgfusion-utils": "workspace:*",
     "svgfusion-vue": "workspace:*",
-    "zod": "^4.0.5"
+    "zod": "^4.6.6"
   },
   "devDependencies": {
     "@commitlint/cli": "^17.8.1",

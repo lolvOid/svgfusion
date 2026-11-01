@@ -38,7 +38,7 @@
     "react-dom": "^19.0.0",
     "react-resizable-panels": "^3.0.3",
     "svgfusion-dom": "workspace:*",
-    "zod": "^4.0.5"
+    "zod": "^4.6.6"
   },
   "devDependencies": {
     "@docusaurus/module-type-aliases": "3.8.1",
